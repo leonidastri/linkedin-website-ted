@@ -35,11 +35,11 @@
   <div class="bgimg">
     <br> <br> <br>
     <div align="center" class ="register-container">
-      <form class="form-signin">
+      <form class="form-signin" action="/user.do" method="post" id="registerForm">
         <h3> Get started - it's free. </h3>
         <hr>
           <div class="form-group">
-            <label> <input class="form-control" id="emailAddress" name="emailAddress"
+            <label> <input class="form-control" id="email" name="email"
               placeholder="Email Address" type="email"
               validatorMessage="Maximum length is 100 characters"
               required="true" requiredMessage="Please insert an email address">
