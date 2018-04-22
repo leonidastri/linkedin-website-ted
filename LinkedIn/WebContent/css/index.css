@@ -1,0 +1,18 @@
+.bgimg {
+    background-image: url('../index.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.register-container {
+	width: 450px;
+	margin: 20px auto auto;
+	border: 1px solid #000;
+	padding: 20px;
+	background-color: lightgrey;
+}
+
+.form-group {
+	width: 300px;
+}
+i
