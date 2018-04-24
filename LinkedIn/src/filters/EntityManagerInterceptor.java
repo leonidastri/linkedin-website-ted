@@ -19,7 +19,7 @@ import jpautils.EntityManagerHelper;
 @WebFilter("/EntityManagerInterceptor")
 public class EntityManagerInterceptor implements Filter {
 
-	/**
+    /**
      * Default constructor. 
      */
     public EntityManagerInterceptor() {
@@ -59,5 +59,5 @@ public class EntityManagerInterceptor implements Filter {
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
-	
+
 }

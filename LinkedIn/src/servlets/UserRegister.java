@@ -43,6 +43,7 @@ public class UserRegister extends HttpServlet {
         	String firstName = request.getParameter("firstName");
         	String lastName = request.getParameter("lastName");
         	String phoneNumber = request.getParameter("phoneNumber");
+        	System.out.println("A");
         	
         	User user = new User();
         	user.setEmail(email);
@@ -51,15 +52,17 @@ public class UserRegister extends HttpServlet {
             	user.setFirstName(firstName);
             	user.setLastName(lastName);
             	user.setPhoneNumber(phoneNumber);
+            	System.out.println("B");
             	
             	// TODO: may need checking
             	em.getTransaction().begin();
                 em.persist(user);
                 em.getTransaction().commit();
+            	System.out.println("C");
                 
                 List<User> userList = em.createQuery("SELECT u FROM user u", User.class).getResultList();
                 request.setAttribute("users", userList);
-                request.getRequestDispatcher(redirect).forward(request, response);
+            	System.out.println("D");
         	}
         	else {
         		redirect = "signup_error.jsp";
@@ -71,6 +74,8 @@ public class UserRegister extends HttpServlet {
                 em.getTransaction().rollback();
             em.close();
         }
+        
+        request.getRequestDispatcher(redirect).forward(request, response);
 	}
 
 	/**

@@ -6,13 +6,19 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class EntityManagerHelper {
-
+	
 	private static final EntityManagerFactory emf; 
     private static final ThreadLocal<EntityManager> threadLocal;
 
     static {
-        emf = Persistence.createEntityManagerFactory("JPAWebExample");      
-        threadLocal = new ThreadLocal<EntityManager>();
+    	try {
+	        emf = Persistence.createEntityManagerFactory("LinkedIn");      
+	        threadLocal = new ThreadLocal<EntityManager>();
+    	}
+    	catch (Throwable t) {
+    	    System.out.println(t);
+    	    throw t;
+    	  }
     }
 
     public static EntityManager getEntityManager() {
@@ -51,6 +57,6 @@ public class EntityManagerHelper {
 
     public static void commit() {
         getEntityManager().getTransaction().commit();
-    }
-	
+    } 
+
 }
