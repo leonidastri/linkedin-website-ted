@@ -35,7 +35,7 @@
   <div class="bgimg">
     <br> <br> <br>
     <div align="center" class ="register-container">
-      <form class="form-signin" action="/user.do" method="post" id="registerForm">
+      <form class="form-signin" action="/UserRegister" method="post" id="registerForm">
         <h3> Get started - it's free. </h3>
         <hr>
           <div class="form-group">

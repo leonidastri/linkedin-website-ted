@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +19,7 @@ import model.User;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/userRegister")
+@WebServlet("/UserRegister")
 public class UserRegister extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -33,6 +34,8 @@ public class UserRegister extends HttpServlet {
            (EntityManagerFactory)getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
         
+        String redirect = "/user.jsp";
+        
         try {
         	String email = request.getParameter("email");
         	String password = request.getParameter("password");
@@ -43,10 +46,24 @@ public class UserRegister extends HttpServlet {
         	
         	User user = new User();
         	user.setEmail(email);
-        	
-        	em.getTransaction().begin();
-            em.persist(user);
-            em.getTransaction().commit();
+        	if (password.equals(confirmPassword)) {
+        		user.setPasswordHashed(password);	// TODO: hash
+            	user.setFirstName(firstName);
+            	user.setLastName(lastName);
+            	user.setPhoneNumber(phoneNumber);
+            	
+            	// TODO: may need checking
+            	em.getTransaction().begin();
+                em.persist(user);
+                em.getTransaction().commit();
+                
+                List<User> userList = em.createQuery("SELECT u FROM user u", User.class).getResultList();
+                request.setAttribute("users", userList);
+                request.getRequestDispatcher(redirect).forward(request, response);
+        	}
+        	else {
+        		redirect = "signup_error.jsp";
+        	}
         }
         finally {
         	 // Close the database connection:

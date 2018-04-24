@@ -9,6 +9,17 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>UserRegister</servlet-name>
+    <servlet-class>servlets.UserRegister</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+     <servlet-name>UserRegister</servlet-name>
+     <url-pattern>/UserRegister</url-pattern>
+  </servlet-mapping>
+  
   <!-- listener>
     <description>EntityManagerFactory Listener</description>
     <listener-class>jpautils.EntityManagerFactoryListener</listener-class>
