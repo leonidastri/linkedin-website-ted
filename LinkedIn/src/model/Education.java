@@ -16,7 +16,7 @@ public class Education implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String userID;
+	private String educationID;
 
 	@Column(name="education_description")
 	private String educationDescription;
@@ -32,20 +32,20 @@ public class Education implements Serializable {
 	@Column(name="education_to")
 	private Date educationTo;
 
-	//bi-directional one-to-one association to User
-	@OneToOne
+	//bi-directional many-to-one association to User
+	@ManyToOne
 	@JoinColumn(name="userID")
 	private User user;
 
 	public Education() {
 	}
 
-	public String getUserID() {
-		return this.userID;
+	public String getEducationID() {
+		return this.educationID;
 	}
 
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setEducationID(String educationID) {
+		this.educationID = educationID;
 	}
 
 	public String getEducationDescription() {

@@ -15,24 +15,24 @@ public class Skill implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String userID;
+	private String skillID;
 
 	private String skill;
 
-	//bi-directional one-to-one association to User
-	@OneToOne
+	//bi-directional many-to-one association to User
+	@ManyToOne
 	@JoinColumn(name="userID")
 	private User user;
 
 	public Skill() {
 	}
 
-	public String getUserID() {
-		return this.userID;
+	public String getSkillID() {
+		return this.skillID;
 	}
 
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setSkillID(String skillID) {
+		this.skillID = skillID;
 	}
 
 	public String getSkill() {

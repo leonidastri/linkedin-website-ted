@@ -27,14 +27,18 @@ public class Listing implements Serializable {
 
 	private String title;
 
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="listings1")
-	private List<User> users;
+	//bi-directional many-to-one association to LikeListing
+	@OneToMany(mappedBy="listing")
+	private List<LikeListing> likeListings;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="userID")
 	private User user;
+
+	//bi-directional many-to-many association to User
+	@ManyToMany(mappedBy="listings2")
+	private List<User> users;
 
 	public Listing() {
 	}
@@ -71,12 +75,26 @@ public class Listing implements Serializable {
 		this.title = title;
 	}
 
-	public List<User> getUsers() {
-		return this.users;
+	public List<LikeListing> getLikeListings() {
+		return this.likeListings;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setLikeListings(List<LikeListing> likeListings) {
+		this.likeListings = likeListings;
+	}
+
+	public LikeListing addLikeListing(LikeListing likeListing) {
+		getLikeListings().add(likeListing);
+		likeListing.setListing(this);
+
+		return likeListing;
+	}
+
+	public LikeListing removeLikeListing(LikeListing likeListing) {
+		getLikeListings().remove(likeListing);
+		likeListing.setListing(null);
+
+		return likeListing;
 	}
 
 	public User getUser() {
@@ -85,6 +103,14 @@ public class Listing implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

@@ -3,8 +3,11 @@
 	<persistence-unit name="LinkedIn" transaction-type="RESOURCE_LOCAL">
 		<class>model.Article</class>
 		<class>model.Comment</class>
+		<class>model.Connection</class>
 		<class>model.Education</class>
 		<class>model.Job</class>
+		<class>model.LikeArticle</class>
+		<class>model.LikeListing</class>
 		<class>model.Listing</class>
 		<class>model.Message</class>
 		<class>model.Skill</class>

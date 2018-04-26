@@ -38,9 +38,13 @@ public class Article implements Serializable {
 	@JoinColumn(name="authorID")
 	private User user;
 
-	//bi-directional one-to-one association to Comment
-	@OneToOne(mappedBy="article")
-	private Comment comment;
+	//bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy="article")
+	private List<Comment> comments;
+
+	//bi-directional many-to-one association to LikeArticle
+	@OneToMany(mappedBy="article")
+	private List<LikeArticle> likeArticles;
 
 	//bi-directional many-to-many association to User
 	@ManyToMany(mappedBy="articles2")
@@ -105,12 +109,48 @@ public class Article implements Serializable {
 		this.user = user;
 	}
 
-	public Comment getComment() {
-		return this.comment;
+	public List<Comment> getComments() {
+		return this.comments;
 	}
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public Comment addComment(Comment comment) {
+		getComments().add(comment);
+		comment.setArticle(this);
+
+		return comment;
+	}
+
+	public Comment removeComment(Comment comment) {
+		getComments().remove(comment);
+		comment.setArticle(null);
+
+		return comment;
+	}
+
+	public List<LikeArticle> getLikeArticles() {
+		return this.likeArticles;
+	}
+
+	public void setLikeArticles(List<LikeArticle> likeArticles) {
+		this.likeArticles = likeArticles;
+	}
+
+	public LikeArticle addLikeArticle(LikeArticle likeArticle) {
+		getLikeArticles().add(likeArticle);
+		likeArticle.setArticle(this);
+
+		return likeArticle;
+	}
+
+	public LikeArticle removeLikeArticle(LikeArticle likeArticle) {
+		getLikeArticles().remove(likeArticle);
+		likeArticle.setArticle(null);
+
+		return likeArticle;
 	}
 
 	public List<User> getUsers() {

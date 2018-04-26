@@ -16,7 +16,7 @@ public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String articleID;
+	private String commentID;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="pub_date")
@@ -24,8 +24,8 @@ public class Comment implements Serializable {
 
 	private String text;
 
-	//bi-directional one-to-one association to Article
-	@OneToOne
+	//bi-directional many-to-one association to Article
+	@ManyToOne
 	@JoinColumn(name="articleID")
 	private Article article;
 
@@ -37,12 +37,12 @@ public class Comment implements Serializable {
 	public Comment() {
 	}
 
-	public String getArticleID() {
-		return this.articleID;
+	public String getCommentID() {
+		return this.commentID;
 	}
 
-	public void setArticleID(String articleID) {
-		this.articleID = articleID;
+	public void setCommentID(String commentID) {
+		this.commentID = commentID;
 	}
 
 	public Date getPubDate() {
