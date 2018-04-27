@@ -15,7 +15,7 @@
 		@SuppressWarnings("unchecked")
 		List<User> users = (List<User>)request.getAttribute("users");
         for (User user : users) { %>
-        	<li> <%= user %> </li> <%
+        	<li> <%= user.getEmail() %> </li> <%
         }
     %>
     </ol><hr>

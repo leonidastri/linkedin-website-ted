@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
 		Query query = em.createQuery("SELECT u FROM User u", User.class);
 		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();  
-		em.getTransaction().commit();
+//		em.getTransaction().commit();
         return users;
 	}
 
@@ -33,8 +33,8 @@ public class UserDAOImpl implements UserDAO {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 //		em.getTransaction().begin();
 		em.persist(user);
-		em.getTransaction().commit();
-		em.flush();
+//		em.getTransaction().commit();
+//		em.flush();
 
    	 // Close the database connection:
 //		if (em.getTransaction().isActive())
