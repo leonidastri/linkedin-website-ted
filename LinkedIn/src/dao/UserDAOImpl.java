@@ -20,9 +20,10 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<User> list() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createNamedQuery("User.findAll");
+		Query query = em.createQuery("SELECT u FROM User u", User.class);
 		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();  
+		em.getTransaction().commit();
         return users;
 	}
 
@@ -30,7 +31,15 @@ public class UserDAOImpl implements UserDAO {
 	public void create(User user) 
 	{
 		EntityManager em = EntityManagerHelper.getEntityManager();
+//		em.getTransaction().begin();
 		em.persist(user);
+		em.getTransaction().commit();
+		em.flush();
+
+   	 // Close the database connection:
+//		if (em.getTransaction().isActive())
+//			em.getTransaction().rollback();
+//		em.close();
 	}
 	
 }

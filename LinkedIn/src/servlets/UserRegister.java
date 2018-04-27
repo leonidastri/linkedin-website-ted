@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,14 +30,25 @@ public class UserRegister extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Obtain a database connection:
-        EntityManagerFactory emf =
-           (EntityManagerFactory)getServletContext().getAttribute("emf");
-        EntityManager em = emf.createEntityManager();
+//        EntityManagerFactory emf =
+//           (EntityManagerFactory)getServletContext().getAttribute("emf");
+//        EntityManager em = emf.createEntityManager();
+		RequestDispatcher disp = getServletContext().getRequestDispatcher("/SearchResults.jsp");
+		String id = request.getParameter("id");
+		UserDAO dao = new UserDAOImpl();
         
         String redirect = "/user.jsp";
         
-        try {
+//        try {
         	String email = request.getParameter("email");
         	String password = request.getParameter("password");
         	String confirmPassword = request.getParameter("confirmPassword");
@@ -48,41 +60,40 @@ public class UserRegister extends HttpServlet {
         	User user = new User();
         	user.setEmail(email);
         	if (password.equals(confirmPassword)) {
+//        		user.setUserID("1");
         		user.setPasswordHashed(password);	// TODO: hash
             	user.setFirstName(firstName);
             	user.setLastName(lastName);
+            	user.setEmail(email);
             	user.setPhoneNumber(phoneNumber);
+            	// TODO: add photo_path cv_path
+            	user.setPhotoPath("");
+            	user.setCvPath("");
             	System.out.println("B");
             	
             	// TODO: may need checking
-            	em.getTransaction().begin();
-                em.persist(user);
-                em.getTransaction().commit();
+//            	em.getTransaction().begin();
+//                em.persist(user);
+//                em.getTransaction().commit();
+            	dao.create(user);
             	System.out.println("C");
                 
-                List<User> userList = em.createQuery("SELECT u FROM user u", User.class).getResultList();
-                request.setAttribute("users", userList);
+//                List<User> users = em.createQuery("SELECT u FROM user u", User.class).getResultList();
+            	List<User> users = dao.list();
+                request.setAttribute("users", users);
             	System.out.println("D");
         	}
         	else {
         		redirect = "signup_error.jsp";
         	}
-        }
-        finally {
+//        }
+//        finally {
         	 // Close the database connection:
-            if (em.getTransaction().isActive())
-                em.getTransaction().rollback();
-            em.close();
-        }
+//            if (em.getTransaction().isActive())
+//                em.getTransaction().rollback();
+//            em.close();
+//        }
         
         request.getRequestDispatcher(redirect).forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 }
