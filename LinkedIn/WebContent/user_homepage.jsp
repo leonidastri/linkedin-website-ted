@@ -9,6 +9,7 @@
 <title>User homepage</title>
 </head>
 <body>
-	<p>Hello <%= user.firstName() %>!</p>
+	<% User user = (User) request.getAttribute("user"); %>
+	<p>Hello <%= user.getFirstName() %>!</p>
 </body>
 </html>

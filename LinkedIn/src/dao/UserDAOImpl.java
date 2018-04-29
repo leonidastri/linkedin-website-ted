@@ -30,8 +30,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User login(String email, String pass) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT u FROM User u WHERE u.email = :email and u.password_hashed = :pass", User.class)
-						.setParameter("email", email).setParameter("pass", pass);
+		Query query = em.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "' and u.passwordHashed = '" + pass + "'");
 		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();
 		
