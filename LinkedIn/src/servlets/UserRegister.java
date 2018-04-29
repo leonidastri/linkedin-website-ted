@@ -3,9 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +22,6 @@ public class UserRegister extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
     
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -42,8 +38,6 @@ public class UserRegister extends HttpServlet {
 //        EntityManagerFactory emf =
 //           (EntityManagerFactory)getServletContext().getAttribute("emf");
 //        EntityManager em = emf.createEntityManager();
-		RequestDispatcher disp = getServletContext().getRequestDispatcher("/SearchResults.jsp");
-		String id = request.getParameter("id");
 		UserDAO dao = new UserDAOImpl();
         
         String redirect = "/user.jsp";

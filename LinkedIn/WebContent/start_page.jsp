@@ -22,10 +22,16 @@
     <div class="col-md-2"></div>
     <div class="col-md-6">
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="email" placeholder="email">
-          <input class="form-control mr-sm-2" type="password" placeholder="password">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign-in</button>
+        <form class="form-inline my-2 my-lg-0" action="UserLogin" method="post" id="loginForm">
+          <input class="form-control mr-sm-2" id="email" name="email"
+              placeholder="Email Address" type="email"
+              validatorMessage="Maximum length is 100 characters"
+              required="true" requiredMessage="Please insert an email address" >
+          <input class="form-control mr-sm-2" id="password" name="password"
+              placeholder="Password" type="password"
+              validatorMessage="Maximum length is 30 characters"
+              required="true" requiredMessage="Please insert a password" >
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-in</button>
         </form>
       </div>
     </div>
