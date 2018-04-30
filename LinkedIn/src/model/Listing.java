@@ -36,10 +36,6 @@ public class Listing implements Serializable {
 	@JoinColumn(name="userID")
 	private User user;
 
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="listings2")
-	private List<User> users;
-
 	public Listing() {
 	}
 
@@ -103,14 +99,6 @@ public class Listing implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public List<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 }

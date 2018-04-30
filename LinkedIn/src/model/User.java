@@ -16,6 +16,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String userID;
 
 	@Column(name="cv_path")
@@ -40,7 +41,7 @@ public class User implements Serializable {
 
 	//bi-directional many-to-one association to Article
 	@OneToMany(mappedBy="user")
-	private List<Article> articles1;
+	private List<Article> articles;
 
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="user")
@@ -72,7 +73,7 @@ public class User implements Serializable {
 
 	//bi-directional many-to-one association to Listing
 	@OneToMany(mappedBy="user")
-	private List<Listing> listings1;
+	private List<Listing> listings;
 
 	//bi-directional many-to-one association to Message
 	@OneToMany(mappedBy="user1")
@@ -85,49 +86,6 @@ public class User implements Serializable {
 	//bi-directional many-to-one association to Skill
 	@OneToMany(mappedBy="user")
 	private List<Skill> skills;
-
-	//bi-directional many-to-many association to Article
-	@ManyToMany
-	@JoinTable(
-		name="like_article"
-		, joinColumns={
-			@JoinColumn(name="userID")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="articleID")
-			}
-		)
-	private List<Article> articles2;
-
-	//bi-directional many-to-many association to Listing
-	@ManyToMany
-	@JoinTable(
-		name="like_listing"
-		, joinColumns={
-			@JoinColumn(name="userID")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="listingID")
-			}
-		)
-	private List<Listing> listings2;
-
-	//bi-directional many-to-many association to User
-	@ManyToMany
-	@JoinTable(
-		name="connection"
-		, joinColumns={
-			@JoinColumn(name="userID_2")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="userID_1")
-			}
-		)
-	private List<User> users1;
-
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="users1")
-	private List<User> users2;
 
 	public User() {
 	}
@@ -196,26 +154,26 @@ public class User implements Serializable {
 		this.photoPath = photoPath;
 	}
 
-	public List<Article> getArticles1() {
-		return this.articles1;
+	public List<Article> getArticles() {
+		return this.articles;
 	}
 
-	public void setArticles1(List<Article> articles1) {
-		this.articles1 = articles1;
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 
-	public Article addArticles1(Article articles1) {
-		getArticles1().add(articles1);
-		articles1.setUser(this);
+	public Article addArticle(Article article) {
+		getArticles().add(article);
+		article.setUser(this);
 
-		return articles1;
+		return article;
 	}
 
-	public Article removeArticles1(Article articles1) {
-		getArticles1().remove(articles1);
-		articles1.setUser(null);
+	public Article removeArticle(Article article) {
+		getArticles().remove(article);
+		article.setUser(null);
 
-		return articles1;
+		return article;
 	}
 
 	public List<Comment> getComments() {
@@ -372,26 +330,26 @@ public class User implements Serializable {
 		return likeListing;
 	}
 
-	public List<Listing> getListings1() {
-		return this.listings1;
+	public List<Listing> getListings() {
+		return this.listings;
 	}
 
-	public void setListings1(List<Listing> listings1) {
-		this.listings1 = listings1;
+	public void setListings(List<Listing> listings) {
+		this.listings = listings;
 	}
 
-	public Listing addListings1(Listing listings1) {
-		getListings1().add(listings1);
-		listings1.setUser(this);
+	public Listing addListing(Listing listing) {
+		getListings().add(listing);
+		listing.setUser(this);
 
-		return listings1;
+		return listing;
 	}
 
-	public Listing removeListings1(Listing listings1) {
-		getListings1().remove(listings1);
-		listings1.setUser(null);
+	public Listing removeListing(Listing listing) {
+		getListings().remove(listing);
+		listing.setUser(null);
 
-		return listings1;
+		return listing;
 	}
 
 	public List<Message> getMessages1() {
@@ -458,38 +416,6 @@ public class User implements Serializable {
 		skill.setUser(null);
 
 		return skill;
-	}
-
-	public List<Article> getArticles2() {
-		return this.articles2;
-	}
-
-	public void setArticles2(List<Article> articles2) {
-		this.articles2 = articles2;
-	}
-
-	public List<Listing> getListings2() {
-		return this.listings2;
-	}
-
-	public void setListings2(List<Listing> listings2) {
-		this.listings2 = listings2;
-	}
-
-	public List<User> getUsers1() {
-		return this.users1;
-	}
-
-	public void setUsers1(List<User> users1) {
-		this.users1 = users1;
-	}
-
-	public List<User> getUsers2() {
-		return this.users2;
-	}
-
-	public void setUsers2(List<User> users2) {
-		this.users2 = users2;
 	}
 
 }

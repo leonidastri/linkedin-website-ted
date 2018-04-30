@@ -60,7 +60,7 @@ public class UserRegister extends HttpServlet {
         	User user = new User();
         	user.setEmail(email);
         	if (password.equals(confirmPassword)) {
-//        		user.setUserID("1");
+        		//user.setUserID("6");
         		user.setPasswordHashed(password);	// TODO: hash
             	user.setFirstName(firstName);
             	user.setLastName(lastName);

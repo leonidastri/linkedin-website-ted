@@ -46,10 +46,6 @@ public class Article implements Serializable {
 	@OneToMany(mappedBy="article")
 	private List<LikeArticle> likeArticles;
 
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="articles2")
-	private List<User> users;
-
 	public Article() {
 	}
 
@@ -151,14 +147,6 @@ public class Article implements Serializable {
 		likeArticle.setArticle(null);
 
 		return likeArticle;
-	}
-
-	public List<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 }
