@@ -7,6 +7,8 @@ import model.User;
 public interface UserDAO {
 
 	public User find(long id);
+	
+	public User find(String email);
 
     public List<User> list();
     

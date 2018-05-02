@@ -54,28 +54,34 @@ public class UserRegister extends HttpServlet {
         	User user = new User();
         	user.setEmail(email);
         	if (password.equals(confirmPassword)) {
-        		//user.setUserID("6");
-        		user.setPasswordHashed(password);	// TODO: hash
-            	user.setFirstName(firstName);
-            	user.setLastName(lastName);
-            	user.setEmail(email);
-            	user.setPhoneNumber(phoneNumber);
-            	// TODO: add photo_path cv_path
-            	user.setPhotoPath("");
-            	user.setCvPath("");
-            	System.out.println("B");
-            	
-            	// TODO: may need checking
-//            	em.getTransaction().begin();
-//                em.persist(user);
-//                em.getTransaction().commit();
-            	dao.create(user);
-            	System.out.println("C");
-                
-//                List<User> users = em.createQuery("SELECT u FROM user u", User.class).getResultList();
-            	List<User> users = dao.list();
-                request.setAttribute("users", users);
-            	System.out.println("D");
+        		User temp = dao.find(email);
+        		if (temp == null) {
+        			//user.setUserID("6");
+            		user.setPasswordHashed(password);	// TODO: hash
+                	user.setFirstName(firstName);
+                	user.setLastName(lastName);
+                	user.setEmail(email);
+                	user.setPhoneNumber(phoneNumber);
+                	// TODO: add photo_path cv_path
+                	user.setPhotoPath("");
+                	user.setCvPath("");
+                	System.out.println("B");
+                	
+                	// TODO: may need checking
+//                	em.getTransaction().begin();
+//                    em.persist(user);
+//                    em.getTransaction().commit();
+                	dao.create(user);
+                	System.out.println("C");
+                    
+//                    List<User> users = em.createQuery("SELECT u FROM user u", User.class).getResultList();
+                	List<User> users = dao.list();
+                    request.setAttribute("users", users);
+                	System.out.println("D");
+        		}
+        		else {
+        			redirect = "signup_error.jsp";
+        		}
         	}
         	else {
         		redirect = "signup_error.jsp";

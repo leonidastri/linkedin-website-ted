@@ -16,6 +16,23 @@ public class UserDAOImpl implements UserDAO {
 		User user = em.find(User.class, id); 
         return user;
 	}
+	
+	@Override
+	public User find(String email) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "'");
+		@SuppressWarnings("unchecked")
+		List<User> users = query.getResultList();
+		
+		if (users.size() == 1) {
+			System.out.println("find email A");
+			return users.get(0);
+		}
+		else {
+			System.out.println("find email B");
+			return null;
+		}
+	}
 
 	@Override
 	public List<User> list() {
