@@ -10,16 +10,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- servlet>
-  	<servlet-name>UserRegister</servlet-name>
-    <servlet-class>servlets.UserRegister</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-     <servlet-name>UserRegister</servlet-name>
-     <url-pattern>/UserRegister</url-pattern>
-  </servlet-mapping -->
-  
   <listener>
     <description>EntityManagerFactory Listener</description>
     <listener-class>jpautils.EntityManagerFactoryListener</listener-class>
@@ -33,47 +23,13 @@
     <url-pattern>*</url-pattern>
   </filter-mapping>
   
-  <!-- servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
-  <context-param>
-    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
-    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-    <param-value>client</param-value>
-  </context-param>
-  <context-param>
-    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-    <param-value>resources.application</param-value>
-  </context-param>
-  <listener>
-    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-  </listener -->
-  
-  <!-- servlet>
-    <description>Apache CXF Endpoint</description>
-    <display-name>cxf</display-name>
-    <servlet-name>cxf</servlet-name>
-    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>cxf</servlet-name>
-    <url-pattern>/services/*</url-pattern>
-  </servlet-mapping>
-  <session-config>
-    <session-timeout>60</session-timeout>
-  </session-config>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>WEB-INF/cxf-beans.xml</param-value>
-  </context-param>
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>linkedin</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
 </web-app>
