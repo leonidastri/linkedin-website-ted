@@ -48,23 +48,17 @@ public class UserLogin extends HttpServlet {
 		}
 		else {
 			PasswordAuthentication pa = new PasswordAuthentication();
+			System.out.println(user.getPasswordHashed());
 			if (pa.authenticate(password, user.getPasswordHashed())) {
 				request.setAttribute("user", user);
+				
+				if (user.getEmail().equals("admin@linkedin.com"))
+					redirect = "/admin_homepage.jsp";
 			}
 			else {
 				redirect = "login_error.jsp";
 			}
 		}
-    
-    	
-//    	User user = dao.login(email, password);
-//    	
-//    	if (user == null) {
-//    		redirect = "login_error.jsp";
-//    	}
-//    	else {
-//    		request.setAttribute("user", user);
-//    	}
         
         request.getRequestDispatcher(redirect).forward(request, response);
 	}

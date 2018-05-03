@@ -243,6 +243,14 @@ CREATE TABLE IF NOT EXISTS `linkedin_db`.`message` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Add Admin -- username : admin , password : admin
+-- -----------------------------------------------------
+LOCK TABLES `user` WRITE;
+INSERT INTO `user` VALUES (1,'$31$16$EUfdXHWUrhIrFqjJIfQsHjKTgHfi9CCokX4DyyAlk7E','Admin','Admin','admin@linkedin.com','6900000000','','');
+UNLOCK TABLES;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
