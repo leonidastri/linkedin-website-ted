@@ -8,5 +8,11 @@
 </head>
 <body>
 
+	  <br> <br> <br>
+	  <div align="center">
+	    <h1> Sign up Error </h1>
+	    <p> Something went wrong while trying to sign up. Get back to <a href="./start_page.jsp"> start</a> page. </p>
+	  </div>
+	  
 </body>
 </html>
