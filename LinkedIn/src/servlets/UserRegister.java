@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import jpautils.PasswordAuthentication;
 import model.User;
 
 
@@ -56,8 +57,11 @@ public class UserRegister extends HttpServlet {
         	if (password.equals(confirmPassword)) {
         		User temp = dao.find(email);
         		if (temp == null) {
+        			PasswordAuthentication pa = new PasswordAuthentication();
+        			@SuppressWarnings("deprecation")
+					String passwordHashed = pa.hash(password);
         			//user.setUserID("6");
-            		user.setPasswordHashed(password);	// TODO: hash
+            		user.setPasswordHashed(passwordHashed);	// TODO: hash
                 	user.setFirstName(firstName);
                 	user.setLastName(lastName);
                 	user.setEmail(email);

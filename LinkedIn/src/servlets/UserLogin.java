@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import jpautils.PasswordAuthentication;
 import model.User;
 
 /**
@@ -31,6 +32,7 @@ public class UserLogin extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDAO dao = new UserDAOImpl();
         
@@ -39,14 +41,30 @@ public class UserLogin extends HttpServlet {
         String email = request.getParameter("email");
     	String password = request.getParameter("password");
     	
-    	User user = dao.login(email, password);
+    	User user = dao.find(email);
     	
     	if (user == null) {
-    		redirect = "login_error.jsp";
-    	}
-    	else {
-    		request.setAttribute("user", user);
-    	}
+			redirect = "login_error.jsp";
+		}
+		else {
+			PasswordAuthentication pa = new PasswordAuthentication();
+			if (pa.authenticate(password, user.getPasswordHashed())) {
+				request.setAttribute("user", user);
+			}
+			else {
+				redirect = "login_error.jsp";
+			}
+		}
+    
+    	
+//    	User user = dao.login(email, password);
+//    	
+//    	if (user == null) {
+//    		redirect = "login_error.jsp";
+//    	}
+//    	else {
+//    		request.setAttribute("user", user);
+//    	}
         
         request.getRequestDispatcher(redirect).forward(request, response);
 	}
