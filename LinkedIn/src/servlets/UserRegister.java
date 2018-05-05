@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
@@ -40,6 +41,7 @@ public class UserRegister extends HttpServlet {
 //           (EntityManagerFactory)getServletContext().getAttribute("emf");
 //        EntityManager em = emf.createEntityManager();
 		UserDAO dao = new UserDAOImpl();
+		HttpSession session = request.getSession();
         
         String redirect = "/user.jsp";
         
@@ -85,10 +87,12 @@ public class UserRegister extends HttpServlet {
         		}
         		else {
         			redirect = "signup_error.jsp";
+        			session.setAttribute("errorMsg", "email already exists");
         		}
         	}
         	else {
         		redirect = "signup_error.jsp";
+    			session.setAttribute("errorMsg", "passwords do not match");
         	}
 //        }
 //        finally {
