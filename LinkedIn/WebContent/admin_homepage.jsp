@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="model.User"%>
+<%@page import="java.util.*,model.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +34,10 @@
 	<!--  HOMEPAGE BODY -->
 	<% User user = (User) request.getAttribute("user"); %>
 	<p>Hello admin <%= user.getFirstName() %>!</p>
-	
+
+	<form method="get" action="AdminManagement"><input type="submit"
+    	value="Get Report"></form>
+    
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

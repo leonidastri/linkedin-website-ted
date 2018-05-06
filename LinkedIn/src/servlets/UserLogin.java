@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,7 +56,9 @@ public class UserLogin extends HttpServlet {
 				request.setAttribute("user", user);
 				
 				if (user.getEmail().equals("admin@linkedin.com")) {
-					redirect = "/admin_homepage.jsp";
+					List<User> users = dao.list();
+                    request.setAttribute("users", users);
+                    redirect = "/admin_homepage.jsp";
 					session.setAttribute("isAdmin", true);
 				}
 			}
