@@ -101,9 +101,6 @@
     <div class="container" >
       <div class=row>
         <div class="col-md-4"></div>
-        <!-- <div class="col-md-2">
-        <img src="../images/ika_logo.png" style="width:120px;" alt="logo" >
-      </div> -->
       <div class="col-md-2">
         <h4>About Us</h4>
         <a href="#"><p style="margin-bottom: 3px;">About</p></a>

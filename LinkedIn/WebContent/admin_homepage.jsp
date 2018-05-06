@@ -9,7 +9,7 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Admin homepage</title>
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-  	<link rel="stylesheet" href="./css/start_page.css">
+  	<link rel="stylesheet" href="./css/admin_homepage.css">
 </head>
 <body>
 
@@ -32,13 +32,53 @@
   	</nav>
 
 	<!--  HOMEPAGE BODY -->
-	<% User user = (User) request.getAttribute("user"); %>
-	<p>Hello admin <%= user.getFirstName() %>!</p>
-
-	<form method="get" action="AdminManagement"><input type="submit"
-    	value="Get Report"></form>
+	<br> <br> <br>
+	<div align="center" class ="register-container">
+		<% User user = (User) request.getAttribute("user"); %>
+		<h1> Hello <%= user.getFirstName() %>!</h1>
+	
+		<br>
+		<h3> Show list of users </h3>
+		<form method="get" action="AdminManagement"><input type="submit"
+    	value="Show users"></form>
+    </div>
+    	
+    <br> <br> <br> <br>
     
-	<!-- Bootstrap core JavaScript
+	<!-- FOOTER -->
+  <footer class="footer" style="background-color: lightgrey;padding-top: 50px;">
+    <div class="container" >
+      <div class=row>
+        <div class="col-md-4"></div>
+      <div class="col-md-2">
+        <h4>About Us</h4>
+        <a href="#"><p style="margin-bottom: 3px;">About</p></a>
+        <a href="#"><p style="margin-bottom: 3px;">News</p></a>
+        <a href="#"><p style="margin-bottom: 3px;">Services</p></a>
+        <a href="#"><p style="margin-bottom: 3px;">FAQ</p></a>
+      </div>
+      <div class="col-md-2">
+        <h4>Contact Us</h4>
+        <p>tel  : 210 8898985 <br/>
+          fax: 210 8898900 <br/>
+          email: tm39@li.com</p>
+        </div>
+        <div class="col-md-4"></div>
+
+      </div>  <br>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <!--Footer Bottom-->
+              <p class="text-center">&copy; Copyright 2018 - University of Athens Di.  All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
