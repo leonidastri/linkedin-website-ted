@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pagination In Servlets - www.javaworkspace.com</title>
+<title>Manage Users</title>
 </head>
 <body>
  
-<h1>Pagination In Servlets</h1>
+<h1>Users</h1>
  
 <%
 	@SuppressWarnings("unchecked")

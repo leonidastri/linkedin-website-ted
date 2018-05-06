@@ -36,7 +36,7 @@
 	<p>Hello admin <%= user.getFirstName() %>!</p>
 
 	<form method="get" action="AdminManagement"><input type="submit"
-    	value="Get Report"></form>
+    	value="Get Users Report"></form>
     
 	<!-- Bootstrap core JavaScript
     ================================================== -->
