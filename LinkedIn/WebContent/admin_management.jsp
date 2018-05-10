@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.*,model.User"%>
 
 <html>
@@ -35,42 +34,34 @@
 	<h1>Users</h1>
 	 
 	<%
-		@SuppressWarnings("unchecked")
-		List<User> users = (List<User>)request.getAttribute("users");
 		int numberOfPages = (int) request.getAttribute("numberOfPages");
 	%>
-	 
-	<table border="1">
-	    <tr bgcolor="orange">
-	        <td><strong>User email</strong></td>
-	    </tr>
-	    <%
-	    	for (User user : users) {
-	    %>
-	    	<tr>
-	       	<%= user.getEmail() %>
-	        </tr>
-	    <%
-	        }
-	    %>
-	 
+	
+	<table class="table table-sm">
+	  <thead>
 	    <tr>
-	        <td colspan="4" align="right">
-	        <form method="get" action="AdminManagement">
-	        <table>
-	            <tr>
-	                <%
-	                    for (int i = 1; i <= numberOfPages; i++) {
-	                %>
-	                <td><a href="AdminManagement?pageNumber=<%=i%>"><%=i%></a></td>
-	                <%
-	                    }
-	                %>
-	            </tr>
-	        </table>
-	        </form>
-	        </td>
+	      <th><strong>User email</strong></th>
 	    </tr>
+	  </thead>
+	  <tbody>
+	  
+	 <c:forEach var="user" items="${users}">
+                <tr>
+                    <td><a href=/user.do?action=getSpecificUser&idOfUser=${user.userID}>${user.email}</a></td>
+                </tr>
+	</c:forEach>
+	    	<tr>
+	    	<td>
+			<%
+				for (int i = 1; i <= numberOfPages; i++) {
+				%>
+	            	<a href="AdminManagement?pageNumber=<%=i%>"><%=i%></a>
+	            <%
+	            }
+			%>
+			</td>
+			</tr>
+		</tbody>
 	</table>
 
 	<!-- Bootstrap core JavaScript

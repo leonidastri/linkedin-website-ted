@@ -39,8 +39,7 @@
 	
 		<br>
 		<h3> Show list of users </h3>
-		<form method="get" action="AdminManagement"><input type="submit"
-    	value="Show users"></form>
+		<form><a href="/AdminManagement.do">Show all users</a></form>
     </div>
     	
     <br> <br> <br> <br>

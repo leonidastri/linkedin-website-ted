@@ -31,49 +31,58 @@ public class AdminManagement extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		if ((boolean) session.getAttribute("isAdmin")) {
-			int page = 1;
-	        int numberOfPages;
-	        int usersPerPage = 5;
-	        
-	        List<User> users = dao.list();
-	        
-	        String pageNumberValue = request.getParameter("pageNumber");
-	 
-	        if (pageNumberValue != null) {
-	            try {
-	                page = Integer.parseInt(pageNumberValue);
-	                System.out.println("Page Number:" + page);
-	            } catch (NumberFormatException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        
-	        int offset = usersPerPage * (page - 1);
-	        
-	        List<User> tempUsers = new ArrayList<User>();
-	        int to = offset + usersPerPage;
-	        if( offset > users.size() )
-	            offset = users.size();
-	        if( to > users.size() )
-	            to = users.size();
-	        for( int i = offset; i < to; i++) {
-	            tempUsers.add(users.get(i));
-	            //System.out.println(tempUsers.get(i));
-	        }
-	        
-	        request.setAttribute("users", tempUsers);
-	        
-	        numberOfPages = users.size() / usersPerPage;
-	        if( users.size() % usersPerPage != 0 ) {
-	            numberOfPages = numberOfPages + 1;
-	        }
-	        
-	        request.setAttribute("numberOfPages", numberOfPages);
-		}
-		else {
-			redirect = "/access_error.jsp";
-		}
+		/*if ((boolean) session.getAttribute("isAdmin")) {
+			switch (request.getParameter("action") ) {
+				case "getSpecificUser":
+					long idOfUser = Long.parseLong(request.getParameter("idOfUser"));
+					User user = dao.find(idOfUser);
+					request.setAttribute("user", user);
+					redirect = "/user_profile.jsp";
+					break;
+				case "getAllUsers":*/
+					int page = 1;
+			        int numberOfPages;
+			        int usersPerPage = 5;
+			        
+			        List<User> users = dao.list();
+			        
+			        String pageNumberValue = request.getParameter("pageNumber");
+			 
+			        if (pageNumberValue != null) {
+			            try {
+			                page = Integer.parseInt(pageNumberValue);
+			                System.out.println("Page Number:" + page);
+			            } catch (NumberFormatException e) {
+			                e.printStackTrace();
+			            }
+			        }
+			        
+			        int offset = usersPerPage * (page - 1);
+			        
+			        List<User> tempUsers = new ArrayList<User>();
+			        int to = offset + usersPerPage;
+			        if( offset > users.size() )
+			            offset = users.size();
+			        if( to > users.size() )
+			            to = users.size();
+			        for( int i = offset; i < to; i++) {
+			            tempUsers.add(users.get(i));
+			            //System.out.println(tempUsers.get(i));
+			        }
+			        
+			        request.setAttribute("users", tempUsers);
+			        
+			        numberOfPages = users.size() / usersPerPage;
+			        if( users.size() % usersPerPage != 0 ) {
+			            numberOfPages = numberOfPages + 1;
+			        }
+			        
+			        request.setAttribute("numberOfPages", numberOfPages);
+	/*		        break;
+			    	default:
+			    	redirect = "/access_error.jsp";
+			}
+		}*/
         
         request.getRequestDispatcher(redirect).forward(request, response);
 	}
