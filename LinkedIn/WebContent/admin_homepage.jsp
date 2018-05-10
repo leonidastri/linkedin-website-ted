@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.*,model.User"%>
 
 <!DOCTYPE html>
@@ -39,7 +38,7 @@
 	
 		<br>
 		<h3> Show list of users </h3>
-		<form><a href="/AdminManagement.do">Show all users</a></form>
+		<a href="AdminManagement?action=getAllUsers"> Show Users </a>
     </div>
     	
     <br> <br> <br> <br>

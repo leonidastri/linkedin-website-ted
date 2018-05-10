@@ -32,10 +32,6 @@
 	<!--  MANAGEMENT PAGE BODY -->
  
 	<h1>Users</h1>
-	 
-	<%
-		int numberOfPages = (int) request.getAttribute("numberOfPages");
-	%>
 	
 	<table class="table table-sm">
 	  <thead>
@@ -47,18 +43,12 @@
 	  
 	 <c:forEach var="user" items="${users}">
                 <tr>
-                    <td><a href=/user.do?action=getSpecificUser&idOfUser=${user.userID}>${user.email}</a></td>
+                    <td><a href="AdminManagement?action=getSpecificUser&email=${user.email}">${user.email}</a></td>
                 </tr>
 	</c:forEach>
 	    	<tr>
 	    	<td>
-			<%
-				for (int i = 1; i <= numberOfPages; i++) {
-				%>
-	            	<a href="AdminManagement?pageNumber=<%=i%>"><%=i%></a>
-	            <%
-	            }
-			%>
+	    	 <%@ include file="./pagination.jsp" %>
 			</td>
 			</tr>
 		</tbody>

@@ -5,18 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User Insertion Debugging</title>
+<title>Specific User</title>
 </head>
 <body>
 
 	<hr><ol> 
-	<%
-		@SuppressWarnings("unchecked")
-		List<User> users = (List<User>)request.getAttribute("users");
-        for (User user : users) { %>
-        	<li> <%= user.getEmail() %> </li> <%
-        }
-    %>
+	 <li> ${user.userID} </li>
+	 <li> ${user.firstName} </li>
+	 <li> ${user.lastName} </li>
+	 <li> ${user.email} </li>
+	 <li> ${user.phoneNumber} </li>
     </ol><hr>
 
 </body>
