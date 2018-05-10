@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.*,model.User"%>
 
 <html>
@@ -33,44 +32,27 @@
 	<!--  MANAGEMENT PAGE BODY -->
  
 	<h1>Users</h1>
-	 
-	<%
-		@SuppressWarnings("unchecked")
-		List<User> users = (List<User>)request.getAttribute("users");
-		int numberOfPages = (int) request.getAttribute("numberOfPages");
-	%>
-	 
-	<table border="1">
-	    <tr bgcolor="orange">
-	        <td><strong>User email</strong></td>
-	    </tr>
-	    <%
-	    	for (User user : users) {
-	    %>
-	    	<tr>
-	       	<%= user.getEmail() %>
-	        </tr>
-	    <%
-	        }
-	    %>
-	 
+	
+	<table class="table table-condensed">
+	  <thead>
 	    <tr>
-	        <td colspan="4" align="right">
-	        <form method="get" action="AdminManagement">
-	        <table>
-	            <tr>
-	                <%
-	                    for (int i = 1; i <= numberOfPages; i++) {
-	                %>
-	                <td><a href="AdminManagement?pageNumber=<%=i%>"><%=i%></a></td>
-	                <%
-	                    }
-	                %>
-	            </tr>
-	        </table>
-	        </form>
-	        </td>
+	      <th><strong>User email</strong></th>
 	    </tr>
+	  </thead>
+	  <tbody>
+	  
+	 <c:forEach var="user" items="${users}">
+                <tr>
+                    <td> <a href="AdminManagement?action=getSpecificUser&email=${user.email}">${user.email}</a></td>
+                	<td> <input type="checkbox" name="${checkBoxes}" value="${user.email}"> </td>
+                </tr>
+	</c:forEach>
+	    	<tr>
+	    	<td>
+	    	 <%@ include file="./pagination.jsp" %>
+			</td>
+			</tr>
+		</tbody>
 	</table>
 
 	<!-- Bootstrap core JavaScript

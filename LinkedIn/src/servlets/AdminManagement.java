@@ -32,47 +32,77 @@ public class AdminManagement extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if ((boolean) session.getAttribute("isAdmin")) {
-			int page = 1;
-	        int numberOfPages;
-	        int usersPerPage = 5;
-	        
-	        List<User> users = dao.list();
-	        
-	        String pageNumberValue = request.getParameter("pageNumber");
-	 
-	        if (pageNumberValue != null) {
-	            try {
-	                page = Integer.parseInt(pageNumberValue);
-	                System.out.println("Page Number:" + page);
-	            } catch (NumberFormatException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        
-	        int offset = usersPerPage * (page - 1);
-	        
-	        List<User> tempUsers = new ArrayList<User>();
-	        int to = offset + usersPerPage;
-	        if( offset > users.size() )
-	            offset = users.size();
-	        if( to > users.size() )
-	            to = users.size();
-	        for( int i = offset; i < to; i++) {
-	            tempUsers.add(users.get(i));
-	            //System.out.println(tempUsers.get(i));
-	        }
-	        
-	        request.setAttribute("users", tempUsers);
-	        
-	        numberOfPages = users.size() / usersPerPage;
-	        if( users.size() % usersPerPage != 0 ) {
-	            numberOfPages = numberOfPages + 1;
-	        }
-	        
-	        request.setAttribute("numberOfPages", numberOfPages);
-		}
-		else {
-			redirect = "/access_error.jsp";
+			switch (request.getParameter("action") ) {
+				case "getSpecificUser":
+					String email = request.getParameter("email");
+					System.out.println("id " + email);
+					User user = dao.find(email);
+					request.setAttribute("user", user);
+					redirect = "/user_information.jsp";
+					break;
+				case "getAllUsers":
+					int currentPage = 1;
+			        String previousPage = null, nextPage = null;
+			        int usersPerPage = 5;
+			        int numberOfPages;
+			        List<User> users = dao.list();
+			        List<Integer> checkBoxes = new ArrayList<Integer>();
+			        
+			        String pageNumberValue = request.getParameter("pageNumber");
+			    
+			        if (pageNumberValue != null) {
+			            try {
+			                currentPage = Integer.parseInt(pageNumberValue);
+			                String a = request.getParameter("checkBoxes");
+			                	System.out.println(a);
+			                System.out.println("Page Number:" + currentPage);
+			            } catch (NumberFormatException e) {
+			                e.printStackTrace();
+			            }
+			        }
+			        	
+			        numberOfPages = users.size() / usersPerPage;
+			        if( numberOfPages % usersPerPage != 0 )
+			        	numberOfPages++;
+			        
+			        int offset = usersPerPage * (currentPage - 1);
+			        
+			        List<User> tempUsers = new ArrayList<User>();
+			        int to = offset + usersPerPage;
+			        if( offset > users.size() )
+			            offset = users.size();
+			        if( to > users.size() )
+			            to = users.size();
+			        for( int i = offset; i < to; i++) {
+			            tempUsers.add(users.get(i));
+			            checkBoxes.add(0);
+			            //System.out.println(tempUsers.get(i));
+			        }
+			        
+			        request.setAttribute("users", tempUsers);
+			        
+			        if( currentPage > 1 && currentPage < numberOfPages) {
+			        	previousPage = "AdminManagement?action=getAllUsers&pageNumber=" + (currentPage-1);
+			        	nextPage = "AdminManagement?action=getAllUsers&pageNumber=" + (currentPage+1);
+			        } else if( currentPage == 1 ) {
+			        	previousPage = null;
+			        	nextPage = "AdminManagement?action=getAllUsers&pageNumber=" + (currentPage+1);
+			        } else {
+			        	previousPage = "AdminManagement?action=getAllUsers&pageNumber=" + (currentPage-1);
+			        	nextPage = null;
+			        }
+			        
+			        //System.out.println(previousPage);
+			        //System.out.println(nextPage);
+			        
+			        request.setAttribute("checkBoxes",checkBoxes);
+			        request.setAttribute("previousPage", previousPage);
+			        request.setAttribute("nextPage", nextPage);
+			        
+			        break;
+			    	default:
+			    	redirect = "/access_error.jsp";
+			}
 		}
         
         request.getRequestDispatcher(redirect).forward(request, response);
