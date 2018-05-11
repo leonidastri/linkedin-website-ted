@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,7 @@ public class AdminManagement extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDAO dao = new UserDAOImpl();
         String redirect = "/admin_management.jsp";
@@ -46,19 +48,22 @@ public class AdminManagement extends HttpServlet {
 			        int usersPerPage = 5;
 			        int numberOfPages;
 			        List<User> users = dao.list();
-			        List<Integer> checkBoxes = new ArrayList<Integer>();
-			        
+			        List<User> tempUsers = new ArrayList<User>();
+			        Vector<Boolean> checked = new Vector<Boolean>(users.size());
+			        Vector<Boolean> tempChecked = new Vector<Boolean>(usersPerPage);
 			        String pageNumberValue = request.getParameter("pageNumber");
 			    
 			        if (pageNumberValue != null) {
 			            try {
 			                currentPage = Integer.parseInt(pageNumberValue);
-			                String a = request.getParameter("checkBoxes");
-			                	System.out.println(a);
+			                tempChecked = (Vector<Boolean>)request.getAttribute("tempChecked");
 			                System.out.println("Page Number:" + currentPage);
 			            } catch (NumberFormatException e) {
 			                e.printStackTrace();
 			            }
+			        } else {
+			        	for(int i = 0; i < usersPerPage; i++ )
+				        	tempChecked.addElement(false);
 			        }
 			        	
 			        numberOfPages = users.size() / usersPerPage;
@@ -67,7 +72,6 @@ public class AdminManagement extends HttpServlet {
 			        
 			        int offset = usersPerPage * (currentPage - 1);
 			        
-			        List<User> tempUsers = new ArrayList<User>();
 			        int to = offset + usersPerPage;
 			        if( offset > users.size() )
 			            offset = users.size();
@@ -75,7 +79,6 @@ public class AdminManagement extends HttpServlet {
 			            to = users.size();
 			        for( int i = offset; i < to; i++) {
 			            tempUsers.add(users.get(i));
-			            checkBoxes.add(0);
 			            //System.out.println(tempUsers.get(i));
 			        }
 			        
@@ -94,13 +97,16 @@ public class AdminManagement extends HttpServlet {
 			        
 			        //System.out.println(previousPage);
 			        //System.out.println(nextPage);
+			        for(int i = 0; i < usersPerPage; i++ )
+			        	System.out.println(tempChecked.get(i));
 			        
-			        request.setAttribute("checkBoxes",checkBoxes);
+			        session.setAttribute("tempChecked",tempChecked);
+			        request.setAttribute("usersPerPage", usersPerPage);
 			        request.setAttribute("previousPage", previousPage);
 			        request.setAttribute("nextPage", nextPage);
 			        
 			        break;
-			    	default:
+			    default:
 			    	redirect = "/access_error.jsp";
 			}
 		}
