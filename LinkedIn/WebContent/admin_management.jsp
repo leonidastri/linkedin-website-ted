@@ -41,10 +41,10 @@
 	  </thead>
 	  <tbody>
 	  
-	 <c:forEach var="user" items="${users}">
+	 <c:forEach var="i" begin="0" end="${userPerPage}" step="1">
                 <tr>
-                    <td> <a href="AdminManagement?action=getSpecificUser&email=${user.email}">${user.email}</a></td>
-                	<td> <input type="checkbox" name="${checkBoxes}" value="${user.email}"> </td>
+                    <td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).email}">${users.get(i).email}</a></td>
+                	<td> <input type="checkbox" name="${tempChecked.get(i)}"> </td>
                 </tr>
 	</c:forEach>
 	    	<tr>
