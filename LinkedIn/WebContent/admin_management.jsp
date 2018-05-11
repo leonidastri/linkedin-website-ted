@@ -41,12 +41,12 @@
 	  </thead>
 	  <tbody>
 	  
-	 <c:forEach var="i" begin="0" end="${userPerPage}" step="1">
-                <tr>
-                    <td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).email}">${users.get(i).email}</a></td>
-                	<td> <input type="checkbox" name="${tempChecked.get(i)}"> </td>
-                </tr>
-	</c:forEach>
+	 <c:forEach var="i" begin="0" end="${usersPerPage-1}" step="1">
+     	<tr>
+        	<td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
+            <td> <input type="checkbox" name="${tempChecked.get(i)}"> </td>
+        </tr>
+	 </c:forEach>
 	    	<tr>
 	    	<td>
 	    	 <%@ include file="./pagination.jsp" %>

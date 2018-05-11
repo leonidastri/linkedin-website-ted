@@ -49,23 +49,33 @@ public class AdminManagement extends HttpServlet {
 			        int numberOfPages;
 			        List<User> users = dao.list();
 			        List<User> tempUsers = new ArrayList<User>();
+			        
 			        Vector<Boolean> checked = new Vector<Boolean>(users.size());
 			        Vector<Boolean> tempChecked = new Vector<Boolean>(usersPerPage);
 			        String pageNumberValue = request.getParameter("pageNumber");
+			        
+			        for (int i = 0; i < users.size(); i++)
+			        	checked.addElement(false);
 			    
 			        if (pageNumberValue != null) {
 			            try {
 			                currentPage = Integer.parseInt(pageNumberValue);
-			                tempChecked = (Vector<Boolean>)request.getAttribute("tempChecked");
+			                if (request.getAttribute("tempChecked") != null && !request.getAttribute("tempChecked").equals(""))
+			                	tempChecked = (Vector<Boolean>)request.getAttribute("tempChecked");
 			                System.out.println("Page Number:" + currentPage);
 			            } catch (NumberFormatException e) {
 			                e.printStackTrace();
 			            }
-			        } else {
-			        	for(int i = 0; i < usersPerPage; i++ )
+			        } 
+//			        else {
+//			        	for(int i = 0; i < usersPerPage; i++)
+//				        	tempChecked.addElement(false);
+//			        }
+			        
+			        if (tempChecked.size() == 0)
+			        	for(int i = 0; i < usersPerPage; i++)
 				        	tempChecked.addElement(false);
-			        }
-			        	
+			        
 			        numberOfPages = users.size() / usersPerPage;
 			        if( numberOfPages % usersPerPage != 0 )
 			        	numberOfPages++;
@@ -97,7 +107,8 @@ public class AdminManagement extends HttpServlet {
 			        
 			        //System.out.println(previousPage);
 			        //System.out.println(nextPage);
-			        for(int i = 0; i < usersPerPage; i++ )
+			        System.out.println(tempChecked.size());
+			        for(int i = 0; i < tempChecked.size(); i++ )
 			        	System.out.println(tempChecked.get(i));
 			        
 			        session.setAttribute("tempChecked",tempChecked);

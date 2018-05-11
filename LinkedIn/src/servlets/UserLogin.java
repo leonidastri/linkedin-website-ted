@@ -57,6 +57,7 @@ public class UserLogin extends HttpServlet {
 				
 				if (user.getEmail().equals("admin@linkedin.com")) {
 					List<User> users = dao.list();
+					/* debugging */
                     request.setAttribute("users", users);
                     redirect = "/admin_homepage.jsp";
 					session.setAttribute("isAdmin", true);
