@@ -33,7 +33,7 @@
  
 	<h1>Users</h1>
 	
-	<table class="table table-sm">
+	<table class="table table-condensed">
 	  <thead>
 	    <tr>
 	      <th><strong>User email</strong></th>
@@ -43,7 +43,8 @@
 	  
 	 <c:forEach var="user" items="${users}">
                 <tr>
-                    <td><a href="AdminManagement?action=getSpecificUser&email=${user.email}">${user.email}</a></td>
+                    <td> <a href="AdminManagement?action=getSpecificUser&email=${user.email}">${user.email}</a></td>
+                	<td> <input type="checkbox" name="${checkBoxes}" value="${user.email}"> </td>
                 </tr>
 	</c:forEach>
 	    	<tr>

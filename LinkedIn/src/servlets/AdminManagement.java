@@ -46,12 +46,15 @@ public class AdminManagement extends HttpServlet {
 			        int usersPerPage = 5;
 			        int numberOfPages;
 			        List<User> users = dao.list();
+			        List<Integer> checkBoxes = new ArrayList<Integer>();
 			        
 			        String pageNumberValue = request.getParameter("pageNumber");
-			 
+			    
 			        if (pageNumberValue != null) {
 			            try {
 			                currentPage = Integer.parseInt(pageNumberValue);
+			                String a = request.getParameter("checkBoxes");
+			                	System.out.println(a);
 			                System.out.println("Page Number:" + currentPage);
 			            } catch (NumberFormatException e) {
 			                e.printStackTrace();
@@ -72,6 +75,7 @@ public class AdminManagement extends HttpServlet {
 			            to = users.size();
 			        for( int i = offset; i < to; i++) {
 			            tempUsers.add(users.get(i));
+			            checkBoxes.add(0);
 			            //System.out.println(tempUsers.get(i));
 			        }
 			        
@@ -91,6 +95,7 @@ public class AdminManagement extends HttpServlet {
 			        //System.out.println(previousPage);
 			        //System.out.println(nextPage);
 			        
+			        request.setAttribute("checkBoxes",checkBoxes);
 			        request.setAttribute("previousPage", previousPage);
 			        request.setAttribute("nextPage", nextPage);
 			        
