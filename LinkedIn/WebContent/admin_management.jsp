@@ -41,19 +41,26 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-		 <c:forEach var="i" begin="0" end="${usersPerPage-1}" step="1">
-	     	<tr>
-	        	<td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
-	            <td>
-	            	<input type="checkbox" name="checkList${i}" value="${users.get(i).getEmail()}" <c:if test="${tempChecked.get(i) == true}"> checked="checked"</c:if> > 
-	         	</td>
-	        </tr>
-		 </c:forEach>
+		<c:if test="${users.size() != 0}">
+			<c:forEach var="i" begin="0" end="${users.size()-1}" step="1">
+		     	<tr>
+		        	<td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
+		            <td>
+		            	<input type="checkbox" name="checkList${i}" value="${users.get(i).getEmail()}" <c:if test="${tempChecked.get(i) == true}"> checked="checked"</c:if> > 
+		         	</td>
+		        </tr>
+			</c:forEach>
 	    	<tr>
 	    	<td>
 	    	 <%@ include file="./pagination.jsp" %>
 			</td>
 			</tr>
+		</c:if>
+		<c:if test="${users.size() == 0 and not empty previousPage}">
+            <div class="row">
+                Last page. <a href="${previousPage}">Previous page</a>
+            </div>
+        </c:if>
 		</tbody>
 	</table>
 	

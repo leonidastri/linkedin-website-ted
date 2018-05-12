@@ -60,6 +60,8 @@ public class AdminManagement extends HttpServlet {
 			        if (pageNumberValue != null) {
 			            try {
 			                currentPage = Integer.parseInt(pageNumberValue);
+			                if (request.getAttribute("checked") != null && !request.getAttribute("checked").equals(""))
+			                	tempChecked = (Vector<Boolean>)request.getAttribute("checked");
 			                if (request.getAttribute("tempChecked") != null && !request.getAttribute("tempChecked").equals(""))
 			                	tempChecked = (Vector<Boolean>)request.getAttribute("tempChecked");
 			                System.out.println("Page Number:" + currentPage);
@@ -111,6 +113,7 @@ public class AdminManagement extends HttpServlet {
 			        for(int i = 0; i < tempChecked.size(); i++ )
 			        	System.out.println(tempChecked.get(i));
 			        
+			        session.setAttribute("checked", checked);
 			        session.setAttribute("tempChecked",tempChecked);
 			        request.setAttribute("usersPerPage", usersPerPage);
 			        request.setAttribute("previousPage", previousPage);
