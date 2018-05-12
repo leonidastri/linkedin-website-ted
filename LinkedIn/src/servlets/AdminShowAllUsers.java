@@ -83,6 +83,7 @@ public class AdminShowAllUsers extends HttpServlet {
 	        	for( int i = 0; i < usersPerPage; i++ ) {
 	        		if( request.getParameter("checkList"+i) != null ) {
 	        			System.out.println(request.getParameter("checkList"+i));
+	        			System.out.println("1st");
 	        			checked.add(offset+i,true);
 
 	    	            System.out.println(offset+i);
@@ -103,6 +104,7 @@ public class AdminShowAllUsers extends HttpServlet {
 	            System.out.println(checked.get(i));
 	            if( checked.get(i) ) {
 	            	System.out.println("ccc");
+        			System.out.println("2nd");
 		            tempChecked.add(i-offset,true);
 	            }
 	            System.out.println("BBB");

@@ -33,7 +33,7 @@
  
 	<h1>Users</h1>
 
- 	<form action = "AdminShowAllUsers?pageNumber=${currentPage}" method = "POST">
+ 	<form id="a_form" action="AdminShowAllUsers?pageNumber=${currentPage}" method="POST">
 	<table class="table table-condensed">
 	  <thead>
 	    <tr>
@@ -64,9 +64,9 @@
 		</tbody>
 	</table>
 	
-	 <input type = "submit" value = "Add" />
-	 </form>
-
+	<input type="submit" value="Save choices" />
+	</form>
+	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
