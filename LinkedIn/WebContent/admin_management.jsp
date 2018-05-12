@@ -46,7 +46,7 @@
 		     	<tr>
 		        	<td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
 		            <td>
-		            	<input type="checkbox" name="checkList${i}" value="${users.get(i).getEmail()}" <c:if test="${tempChecked.get(i) == true}"> checked="checked"</c:if> > 
+		            	<input type="checkbox" name="checkList" value="${users.get(i).getEmail()}" <c:if test="${tempChecked.get(i) == true}"> checked="checked"</c:if> > 
 		         	</td>
 		        </tr>
 			</c:forEach>
