@@ -67,48 +67,53 @@ public class AdminShowAllUsers extends HttpServlet {
 	                e.printStackTrace();
 	            }
 	        }
-
-	        
-	        if (tempChecked.size() == 0)
-	        	for(int i = 0; i < usersPerPage; i++)
-		        	tempChecked.addElement(false);
 	        
 	        numberOfPages = users.size() / usersPerPage;
 	        if( numberOfPages % usersPerPage != 0 )
 	        	numberOfPages++;
 	        
 	        int offset = usersPerPage * (currentPage - 1);
+	        int found = 0;
 	        
-	        if( pageNumberValue != null ) {
-	        	for( int i = 0; i < usersPerPage; i++ ) {
-	        		if( request.getParameter("checkList"+i) != null ) {
-	        			System.out.println(request.getParameter("checkList"+i));
-	        			System.out.println("1st");
-	        			checked.add(offset+i,true);
-
-	    	            System.out.println(offset+i);
-	    	            System.out.println(checked.get(offset+i));
+	        String[] checkList = request.getParameterValues("checkList");
+	        if( pageNumberValue != null && checkList != null ) {
+	        	System.out.println(checkList.length);
+	        	for(int i = 0; i < usersPerPage; i++ ) {
+	        		found = 0;
+	        		if( i < users.size() ) {
+	        			for( int j = 0; j < checkList.length; j++ ) {
+	        				if( users.get(offset+i).getEmail().equals(checkList[j]) ) {
+	        					checked.set(offset+i,true);
+	        					found = 1;
+	        				}
+	        			}
+	        			
+	        			if( found == 0 ) {
+	        				checked.set(offset+i,false);
+	        			}
 	        		}
 	        	}
 	        }
 	        
+	        for( int i = 0; i < users.size(); i++) {
+	        	System.out.println(i + " " + checked.get(i));
+	        }
+	        
+	        //System.out.println("Page");
 	        int to = offset + usersPerPage;
 	        if( offset > users.size() )
 	            offset = users.size();
 	        if( to > users.size() )
 	            to = users.size();
 	        for( int i = offset; i < to; i++) {
+	        	
 	            tempUsers.add(users.get(i));
 	            
-	            System.out.println("AAA");
-	            System.out.println(checked.get(i));
 	            if( checked.get(i) ) {
-	            	System.out.println("ccc");
-        			System.out.println("2nd");
-		            tempChecked.add(i-offset,true);
+		            tempChecked.set(i-offset,true);
+	            } else {
+	            	tempChecked.set(i-offset,false);
 	            }
-	            System.out.println("BBB");
-	            System.out.println(tempChecked.get(i-offset));
 	        }
 	        
 	        request.setAttribute("users", tempUsers);
@@ -124,9 +129,6 @@ public class AdminShowAllUsers extends HttpServlet {
 	        	nextPage = null;
 	        }
 	        
-	        //System.out.println(previousPage);
-	        //System.out.println(nextPage);
-
 	        redirect = "/admin_management.jsp";
 	        session.setAttribute("tempChecked",tempChecked);
 	        request.setAttribute("usersPerPage", usersPerPage);
