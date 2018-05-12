@@ -32,7 +32,8 @@
 	<!--  MANAGEMENT PAGE BODY -->
  
 	<h1>Users</h1>
-	
+
+ 	<form action = "AdminShowAllUsers?pageNumber=${currentPage}" method = "POST">
 	<table class="table table-condensed">
 	  <thead>
 	    <tr>
@@ -40,13 +41,14 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  
-	 <c:forEach var="i" begin="0" end="${usersPerPage-1}" step="1">
-     	<tr>
-        	<td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
-            <td> <input type="checkbox" name="${tempChecked.get(i)}"> </td>
-        </tr>
-	 </c:forEach>
+		 <c:forEach var="i" begin="0" end="${usersPerPage-1}" step="1">
+	     	<tr>
+	        	<td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
+	            <td>
+	            	<input type="checkbox" name="checkList${i}" value="${users.get(i).getEmail()}" <c:if test="${tempChecked.get(i) == true}"> checked="checked"</c:if> > 
+	         	</td>
+	        </tr>
+		 </c:forEach>
 	    	<tr>
 	    	<td>
 	    	 <%@ include file="./pagination.jsp" %>
@@ -54,6 +56,9 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	 <input type = "submit" value = "Add" />
+	 </form>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

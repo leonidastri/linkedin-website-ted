@@ -38,7 +38,7 @@
 	
 		<br>
 		<h3> Show list of users </h3>
-		<a href="AdminManagement?action=getAllUsers"> Show Users </a>
+		<a href="AdminShowAllUsers"> Show Users </a>
     </div>
     	
     <br> <br> <br> <br>
