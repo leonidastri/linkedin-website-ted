@@ -44,7 +44,7 @@
 		<c:if test="${users.size() != 0}">
 			<c:forEach var="i" begin="0" end="${users.size()-1}" step="1">
 		     	<tr>
-		        	<td> <a href="AdminManagement?action=getSpecificUser&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
+		        	<td> <a href="AdminShowSpecificUserInfo&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
 		            <td>
 		            	<input type="checkbox" name="checkList" value="${users.get(i).getEmail()}" <c:if test="${tempChecked.get(i) == true}"> checked="checked"</c:if> > 
 		         	</td>
@@ -65,8 +65,12 @@
 	</table>
 	
 	<input type="submit" value="Save choices" />
+	<>
 	</form>
 	
+	<form id="a_form2" action="GetUsersXML" method="POST">
+		<input type="submit" value="Export users" />
+	</form>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

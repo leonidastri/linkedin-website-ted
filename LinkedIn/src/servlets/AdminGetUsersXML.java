@@ -1,6 +1,10 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -10,6 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+/* for xml marshalling */
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
@@ -34,10 +42,15 @@ public class AdminGetUsersXML extends HttpServlet {
 		UserDAO dao = new UserDAOImpl();
 		
 		Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
-				
+
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss.SSS");
+
+		File file = new File("/Data/XML/users" + sdf.format(cal.getTime()) + ".xml");
+		
 		if (isAdmin) {
 			List<User> users = dao.list();
-			List<User> selectedUsers = null;
+			List<User> selectedUsers = new ArrayList<User>();
 			@SuppressWarnings("unchecked")
 			Vector<Boolean> checked = (Vector<Boolean>) session.getAttribute("checked");
 			
@@ -46,8 +59,22 @@ public class AdminGetUsersXML extends HttpServlet {
 				if (checked.get(i))
 					selectedUsers.add(users.get(i));
 			
-			if (selectedUsers != null && selectedUsers.size() > 0) {
-				;
+			if ( selectedUsers.size() > 0 ) {
+
+				for( int i = 0; i < selectedUsers.size(); i++ ) {
+					try {
+						//Marshalling
+						JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
+						Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+						jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+						jaxbMarshaller.marshal(selectedUsers.get(i), file);
+						jaxbMarshaller.marshal(selectedUsers.get(i), System.out);
+					}
+					catch(Exception ex)
+					{
+						System.out.println(ex);
+					}
+				}
 			}
 			else {
 				session.setAttribute("errorMsg", "no selected users");
