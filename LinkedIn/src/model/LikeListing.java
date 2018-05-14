@@ -3,20 +3,29 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+/* for xml marshalling */
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * The persistent class for the like_listing database table.
  * 
  */
+
+@XmlRootElement // for xml marshalling
 @Entity
 @Table(name="like_listing")
 @NamedQuery(name="LikeListing.findAll", query="SELECT l FROM LikeListing l")
 public class LikeListing implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute
 	@Id
 	private String like_listingID;
 
+	@XmlElement(name="listing")
 	//bi-directional many-to-one association to Listing
 	@ManyToOne
 	@JoinColumn(name="listingID")

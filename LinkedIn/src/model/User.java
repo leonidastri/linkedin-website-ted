@@ -4,53 +4,70 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
+/* for xml marshalling */
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * The persistent class for the user database table.
  * 
  */
+
+@XmlRootElement // for xml marshalling
 @Entity
 @Table(name="user")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute // for xml marshalling
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String userID;
 
+	@XmlElement // for xml marshalling
 	@Column(name="cv_path")
 	private String cvPath;
 
+	@XmlElement // for xml marshalling
 	private String email;
 
+	@XmlElement // for xml marshalling
 	@Column(name="first_name")
 	private String firstName;
 
+	@XmlElement // for xml marshalling
 	@Column(name="last_name")
 	private String lastName;
 
 	@Column(name="password_hashed")
 	private String passwordHashed;
 
+	@XmlElement // for xml marshalling
 	@Column(name="phone_number")
 	private String phoneNumber;
 
 	@Column(name="photo_path")
 	private String photoPath;
 
+	@XmlElement(name="article")	// for xml marshalling
 	//bi-directional many-to-one association to Article
 	@OneToMany(mappedBy="user")
 	private List<Article> articles;
 
+	@XmlElement(name="comment")	// for xml marshalling
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="user")
 	private List<Comment> comments;
 
+	@XmlElement(name="connection1")	// for xml marshalling
 	//bi-directional many-to-one association to Connection
 	@OneToMany(mappedBy="user1")
 	private List<Connection> connections1;
 
+	@XmlElement(name="connection2")	// for xml marshalling
 	//bi-directional many-to-one association to Connection
 	@OneToMany(mappedBy="user2")
 	private List<Connection> connections2;
@@ -59,18 +76,22 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	private List<Education> educations;
 
+	@XmlElement(name="job")	// for xml marshalling
 	//bi-directional many-to-one association to Job
 	@OneToMany(mappedBy="user")
 	private List<Job> jobs;
 
+	@XmlElement(name="likeArticle")	// for xml marshalling
 	//bi-directional many-to-one association to LikeArticle
 	@OneToMany(mappedBy="user")
 	private List<LikeArticle> likeArticles;
 
+	@XmlElement(name="likeListing")	// for xml marshalling
 	//bi-directional many-to-one association to LikeListing
 	@OneToMany(mappedBy="user")
 	private List<LikeListing> likeListings;
 
+	@XmlElement(name="listing")	// for xml marshalling
 	//bi-directional many-to-one association to Listing
 	@OneToMany(mappedBy="user")
 	private List<Listing> listings;

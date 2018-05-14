@@ -5,29 +5,40 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+/* for xml marshalling */
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * The persistent class for the article database table.
  * 
  */
+
+@XmlRootElement // for xml marshalling
 @Entity
 @Table(name="article")
 @NamedQuery(name="Article.findAll", query="SELECT a FROM Article a")
 public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute // for xml marshalling
 	@Id
 	private String articleID;
 
 	@Column(name="picture_path")
 	private String picturePath;
 
+	@XmlElement(name="publicationDate")
 	@Temporal(TemporalType.DATE)
 	@Column(name="pub_date")
 	private Date pubDate;
 
+	@XmlElement
 	private String text;
 
+	@XmlElement
 	private String title;
 
 	@Column(name="video_path")

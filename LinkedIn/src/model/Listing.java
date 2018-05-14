@@ -5,26 +5,37 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+/* for xml marshalling */
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * The persistent class for the listing database table.
  * 
  */
+
+@XmlRootElement // for xml marshalling
 @Entity
 @Table(name="listing")
 @NamedQuery(name="Listing.findAll", query="SELECT l FROM Listing l")
 public class Listing implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute
 	@Id
 	private String listingID;
 
+	@XmlElement
 	private String description;
 
+	@XmlElement(name="publicationDate")
 	@Temporal(TemporalType.DATE)
 	@Column(name="pub_date")
 	private Date pubDate;
 
+	@XmlElement
 	private String title;
 
 	//bi-directional many-to-one association to LikeListing

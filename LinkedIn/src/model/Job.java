@@ -4,30 +4,42 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
+/* for xml marshalling */
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * The persistent class for the job database table.
  * 
  */
+
+@XmlRootElement // for xml marshalling
 @Entity
 @Table(name="job")
 @NamedQuery(name="Job.findAll", query="SELECT j FROM Job j")
 public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute
 	@Id
 	private String jobID;
 
+	@XmlElement
 	@Column(name="job_description")
 	private String jobDescription;
 
+	@XmlElement(name="jobFromDate")
 	@Temporal(TemporalType.DATE)
 	@Column(name="job_from")
 	private Date jobFrom;
 
+	@XmlElement
 	@Column(name="job_title")
 	private String jobTitle;
 
+	@XmlElement(name="jobToDate")
 	@Temporal(TemporalType.DATE)
 	@Column(name="job_to")
 	private Date jobTo;

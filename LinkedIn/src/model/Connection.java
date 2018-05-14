@@ -3,25 +3,35 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+/* for xml marshalling */
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * The persistent class for the connection database table.
  * 
  */
+
+@XmlRootElement // for xml marshalling
 @Entity
 @Table(name="connection")
 @NamedQuery(name="Connection.findAll", query="SELECT c FROM Connection c")
 public class Connection implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute
 	@Id
 	private String connectionID;
 
+	@XmlElement(name="user1")
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="userID_1")
 	private User user1;
 
+	@XmlElement(name="user2")
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="userID_2")

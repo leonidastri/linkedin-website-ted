@@ -21,9 +21,12 @@ import model.User;
  */
 @WebServlet("/AdminShowAllUsers")
 public class AdminShowAllUsers extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	
 	private static Vector<Boolean> checked;
 	private static boolean flag = true;
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -131,6 +134,8 @@ public class AdminShowAllUsers extends HttpServlet {
 	        
 	        redirect = "/admin_management.jsp";
 	        session.setAttribute("tempChecked",tempChecked);
+	        // to help us export selected users
+	        session.setAttribute("checked", checked);
 	        request.setAttribute("usersPerPage", usersPerPage);
 	        request.setAttribute("previousPage", previousPage);
 	        request.setAttribute("currentPage", currentPage);

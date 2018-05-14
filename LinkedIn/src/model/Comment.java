@@ -4,24 +4,34 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
+/* for xml marshalling */
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
 
 /**
  * The persistent class for the comment database table.
  * 
  */
+
+@XmlRootElement // for xml marshalling
 @Entity
 @Table(name="comment")
 @NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")
 public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute
 	@Id
 	private String commentID;
 
+	@XmlElement(name="publicationDate")
 	@Temporal(TemporalType.DATE)
 	@Column(name="pub_date")
 	private Date pubDate;
 
+	@XmlElement
 	private String text;
 
 	//bi-directional many-to-one association to Article
