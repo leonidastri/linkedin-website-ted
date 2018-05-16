@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-/* for xml marshalling */
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
@@ -36,6 +34,7 @@ public class AdminGetUsersXML extends HttpServlet {
 	 */
 	@SuppressWarnings("null")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("AdminGetUsersXML doGet IN");
 		HttpSession session = request.getSession();
 		String redirect = "admin_homepage.jsp";
 		
@@ -62,13 +61,21 @@ public class AdminGetUsersXML extends HttpServlet {
 			if ( selectedUsers.size() > 0 ) {
 
 				for( int i = 0; i < selectedUsers.size(); i++ ) {
+					User testUser = new User();
+					testUser.setUserID("1");
+					testUser.setFirstName("Test");
+					testUser.setLastName("User");
+					testUser.setEmail("user@test.com");
+					
 					try {
 						//Marshalling
 						JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
 						Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 						jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-						jaxbMarshaller.marshal(selectedUsers.get(i), file);
-						jaxbMarshaller.marshal(selectedUsers.get(i), System.out);
+//						jaxbMarshaller.marshal(selectedUsers.get(i), file);
+//						jaxbMarshaller.marshal(selectedUsers.get(i), System.out);
+						jaxbMarshaller.marshal(testUser, file);
+						jaxbMarshaller.marshal(testUser, System.out);
 					}
 					catch(Exception ex)
 					{
@@ -85,6 +92,8 @@ public class AdminGetUsersXML extends HttpServlet {
 		}
 	
 		request.getRequestDispatcher(redirect).forward(request, response);
+	
+		System.out.println("AdminGetUsersXML doGet OUT");
 	}
 
 	/**

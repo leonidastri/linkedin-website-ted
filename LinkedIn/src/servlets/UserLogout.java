@@ -35,6 +35,11 @@ public class UserLogout extends HttpServlet {
 		
 		if (session != null) {
 			session.invalidate();
+			response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
+            response.setHeader("Cache-Control","no-store"); // Directs caches not to store the page under any circumstance
+            response.setHeader("Cache-Control", "must-revalidate"); // HTTP 1.1.
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            response.setDateHeader("Expires", 0);
 		}
 		
 		request.setAttribute("msg", "logged-out successfully");

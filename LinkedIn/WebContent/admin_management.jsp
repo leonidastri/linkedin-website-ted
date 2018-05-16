@@ -68,7 +68,7 @@
 	<>
 	</form>
 	
-	<form id="a_form2" action="GetUsersXML" method="POST">
+	<form id="a_form2" action="GetUsersXML" method="GET">
 		<input type="submit" value="Export users" />
 	</form>
 	<!-- Bootstrap core JavaScript
