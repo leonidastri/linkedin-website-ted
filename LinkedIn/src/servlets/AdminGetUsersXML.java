@@ -45,7 +45,7 @@ public class AdminGetUsersXML extends HttpServlet {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss.SSS");
 
-		File file = new File("/Data/XML/users" + sdf.format(cal.getTime()) + ".xml");
+		File file = new File("./users" + sdf.format(cal.getTime()) + ".xml");
 		
 		if (isAdmin) {
 			List<User> users = dao.list();

@@ -7,8 +7,9 @@ import java.util.Date;
 /* for xml marshalling */
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-
+import javax.xml.bind.annotation.XmlAccessType;
 
 /**
  * The persistent class for the comment database table.
@@ -16,6 +17,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 
 @XmlRootElement // for xml marshalling
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="comment")
 @NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")

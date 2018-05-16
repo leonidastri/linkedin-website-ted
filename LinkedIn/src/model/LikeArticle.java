@@ -6,6 +6,8 @@ import javax.persistence.*;
 /* for xml marshalling */
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 
@@ -15,6 +17,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 
 @XmlRootElement // for xml marshalling
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="like_article")
 @NamedQuery(name="LikeArticle.findAll", query="SELECT l FROM LikeArticle l")

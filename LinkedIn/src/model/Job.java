@@ -7,6 +7,8 @@ import java.util.Date;
 /* for xml marshalling */
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 
@@ -16,6 +18,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 
 @XmlRootElement // for xml marshalling
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="job")
 @NamedQuery(name="Job.findAll", query="SELECT j FROM Job j")
