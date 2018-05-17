@@ -33,10 +33,6 @@
 	<!--  HOMEPAGE BODY -->
 	<br> <br> <br>
 	<div align="center" class ="register-container">
-		<% User user = (User) request.getAttribute("user"); %>
-		<h1> Hello <%= user.getFirstName() %>!</h1>
-	
-		<br>
 		<h3> Show list of users </h3>
 		<a href="AdminShowAllUsers"> Show Users </a>
     </div>

@@ -34,7 +34,7 @@ public class AdminGetUsersXML extends HttpServlet {
 	 */
 	@SuppressWarnings("null")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("AdminGetUsersXML doGet IN");
+//		System.out.println("AdminGetUsersXML doGet IN");
 		HttpSession session = request.getSession();
 		String redirect = "admin_homepage.jsp";
 		
@@ -61,33 +61,36 @@ public class AdminGetUsersXML extends HttpServlet {
 			if ( selectedUsers.size() > 0 ) {
 
 				for( int i = 0; i < selectedUsers.size(); i++ ) {
-					User testUser = new User();
-					testUser.setUserID("1");
-					testUser.setFirstName("Test");
-					testUser.setLastName("User");
-					testUser.setEmail("user@test.com");
+//					User testUser = new User();
+//					testUser.setUserID("1");
+//					testUser.setFirstName("Test");
+//					testUser.setLastName("User");
+//					testUser.setEmail("user@test.com");
 					
 					try {
 						//Marshalling
 						JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
 						Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 						jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//						jaxbMarshaller.marshal(selectedUsers.get(i), file);
-//						jaxbMarshaller.marshal(selectedUsers.get(i), System.out);
-						jaxbMarshaller.marshal(testUser, file);
-						jaxbMarshaller.marshal(testUser, System.out);
+						jaxbMarshaller.marshal(selectedUsers.get(i), file);
+						jaxbMarshaller.marshal(selectedUsers.get(i), System.out);
+//						jaxbMarshaller.marshal(testUser, file);
+//						jaxbMarshaller.marshal(testUser, System.out);
 					}
 					catch(Exception ex)
 					{
 						System.out.println(ex);
 					}
 				}
+				
+				session.setAttribute("succMsg", "success");
 			}
 			else {
 				session.setAttribute("errorMsg", "no selected users");
 			}
 		}
 		else {
+			redirect = "start_page.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}
 	
