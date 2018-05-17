@@ -65,7 +65,6 @@
 	</table>
 	
 	<input type="submit" value="Save choices" />
-	<>
 	</form>
 	
 	<form id="a_form2" action="GetUsersXML" method="GET">
