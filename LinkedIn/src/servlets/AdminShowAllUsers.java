@@ -30,6 +30,7 @@ public class AdminShowAllUsers extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("null")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int currentPage = 1;
@@ -76,15 +77,17 @@ public class AdminShowAllUsers extends HttpServlet {
 	        	numberOfPages++;
 	        
 	        int offset = usersPerPage * (currentPage - 1);
-	        int found = 0;
+	        int found;
 	        
 	        String[] checkList = request.getParameterValues("checkList");
 	        if( pageNumberValue != null && checkList != null ) {
 	        	System.out.println(checkList.length);
+
 	        	for(int i = 0; i < usersPerPage; i++ ) {
 	        		found = 0;
 	        		if( i < users.size() ) {
 	        			for( int j = 0; j < checkList.length; j++ ) {
+	        				System.out.println("list" + checkList[j]);
 	        				if( users.get(offset+i).getEmail().equals(checkList[j]) ) {
 	        					checked.set(offset+i,true);
 	        					found = 1;
@@ -92,7 +95,7 @@ public class AdminShowAllUsers extends HttpServlet {
 	        			}
 	        			
 	        			if( found == 0 ) {
-	        				checked.set(offset+i,false);
+	       					checked.set(offset+i,false);
 	        			}
 	        		}
 	        	}
@@ -117,6 +120,7 @@ public class AdminShowAllUsers extends HttpServlet {
 	            } else {
 	            	tempChecked.set(i-offset,false);
 	            }
+	            System.out.println(tempChecked.get(i-offset));
 	        }
 	        
 	        request.setAttribute("users", tempUsers);
@@ -133,7 +137,7 @@ public class AdminShowAllUsers extends HttpServlet {
 	        }
 	        
 	        redirect = "/admin_management.jsp";
-	        session.setAttribute("tempChecked",tempChecked);
+	        request.setAttribute("tempChecked",tempChecked);
 	        // to help us export selected users
 	        session.setAttribute("checked", checked);
 	        request.setAttribute("usersPerPage", usersPerPage);
@@ -157,3 +161,4 @@ public class AdminShowAllUsers extends HttpServlet {
 	}
 
 }
+
