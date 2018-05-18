@@ -7,8 +7,11 @@ import java.util.List;
 /* for xml marshalling */
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 
 
 /**
@@ -24,6 +27,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlAttribute // for xml marshalling
+	@XmlID
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String userID;
@@ -51,21 +56,25 @@ public class User implements Serializable {
 	private String photoPath;
 
 	@XmlElement(name="article")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to Article
 	@OneToMany(mappedBy="user")
 	private List<Article> articles;
 
 	@XmlElement(name="comment")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="user")
 	private List<Comment> comments;
 
 	@XmlElement(name="connection1")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to Connection
 	@OneToMany(mappedBy="user1")
 	private List<Connection> connections1;
 
 	@XmlElement(name="connection2")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to Connection
 	@OneToMany(mappedBy="user2")
 	private List<Connection> connections2;
@@ -75,21 +84,25 @@ public class User implements Serializable {
 	private List<Education> educations;
 
 	@XmlElement(name="job")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to Job
 	@OneToMany(mappedBy="user")
 	private List<Job> jobs;
 
 	@XmlElement(name="likeArticle")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to LikeArticle
 	@OneToMany(mappedBy="user")
 	private List<LikeArticle> likeArticles;
 
 	@XmlElement(name="likeListing")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to LikeListing
 	@OneToMany(mappedBy="user")
 	private List<LikeListing> likeListings;
 
 	@XmlElement(name="listing")	// for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to Listing
 	@OneToMany(mappedBy="user")
 	private List<Listing> listings;

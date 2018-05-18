@@ -19,6 +19,7 @@ import javax.xml.bind.Marshaller;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import model.AllUsers;
 import model.User;
 
 /**
@@ -60,27 +61,20 @@ public class AdminGetUsersXML extends HttpServlet {
 			
 			if ( selectedUsers.size() > 0 ) {
 
-				for( int i = 0; i < selectedUsers.size(); i++ ) {
-//					User testUser = new User();
-//					testUser.setUserID("1");
-//					testUser.setFirstName("Test");
-//					testUser.setLastName("User");
-//					testUser.setEmail("user@test.com");
-					
-					try {
-						//Marshalling
-						JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
-						Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-						jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-						jaxbMarshaller.marshal(selectedUsers.get(i), file);
-						jaxbMarshaller.marshal(selectedUsers.get(i), System.out);
-//						jaxbMarshaller.marshal(testUser, file);
-//						jaxbMarshaller.marshal(testUser, System.out);
-					}
-					catch(Exception ex)
-					{
-						System.out.println(ex);
-					}
+				AllUsers allUsers = new AllUsers();
+				allUsers.setUsers(selectedUsers);
+				
+				try {
+					//Marshalling
+					JAXBContext jaxbContext = JAXBContext.newInstance(AllUsers.class);
+					Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+					jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+					jaxbMarshaller.marshal(allUsers, file);
+					jaxbMarshaller.marshal(allUsers, System.out);
+				}
+				catch(Exception ex)
+				{
+					System.out.println(ex);
 				}
 				
 				session.setAttribute("succMsg", "success");

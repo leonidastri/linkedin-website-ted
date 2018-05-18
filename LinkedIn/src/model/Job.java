@@ -5,8 +5,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 /* for xml marshalling */
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -17,7 +18,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * 
  */
 
-@XmlRootElement // for xml marshalling
+//@XmlRootElement // for xml marshalling
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="job")
@@ -25,24 +26,25 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@XmlAttribute
+	@XmlAttribute // for xml marshalling
+	@XmlID
 	@Id
 	private String jobID;
 
-	@XmlElement
+	@XmlElement // for xml marshalling
 	@Column(name="job_description")
 	private String jobDescription;
 
-	@XmlElement(name="jobFromDate")
+	@XmlElement(name="jobFromDate") // for xml marshalling
 	@Temporal(TemporalType.DATE)
 	@Column(name="job_from")
 	private Date jobFrom;
 
-	@XmlElement
+	@XmlElement // for xml marshalling
 	@Column(name="job_title")
 	private String jobTitle;
 
-	@XmlElement(name="jobToDate")
+	@XmlElement(name="jobToDate") // for xml marshalling
 	@Temporal(TemporalType.DATE)
 	@Column(name="job_to")
 	private Date jobTo;

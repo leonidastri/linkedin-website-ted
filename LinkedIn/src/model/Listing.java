@@ -6,8 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 /* for xml marshalling */
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -18,7 +19,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * 
  */
 
-@XmlRootElement // for xml marshalling
+//@XmlRootElement // for xml marshalling
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="listing")
@@ -26,19 +27,20 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class Listing implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@XmlAttribute
+	@XmlAttribute // for xml marshalling
+	@XmlID
 	@Id
 	private String listingID;
 
-	@XmlElement
+	@XmlElement // for xml marshalling
 	private String description;
 
-	@XmlElement(name="publicationDate")
+	@XmlElement(name="publicationDate") // for xml marshalling
 	@Temporal(TemporalType.DATE)
 	@Column(name="pub_date")
 	private Date pubDate;
 
-	@XmlElement
+	@XmlElement // for xml marshalling
 	private String title;
 
 	//bi-directional many-to-one association to LikeListing

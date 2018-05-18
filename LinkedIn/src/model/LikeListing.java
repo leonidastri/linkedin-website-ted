@@ -4,8 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /* for xml marshalling */
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -16,7 +18,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * 
  */
 
-@XmlRootElement // for xml marshalling
+//@XmlRootElement // for xml marshalling
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="like_listing")
@@ -24,11 +26,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class LikeListing implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@XmlAttribute
+	@XmlAttribute // for xml marshalling
+	@XmlID
 	@Id
 	private String like_listingID;
 
-	@XmlElement(name="listing")
+	@XmlElement(name="listing") // for xml marshalling
+	@XmlIDREF
 	//bi-directional many-to-one association to Listing
 	@ManyToOne
 	@JoinColumn(name="listingID")
