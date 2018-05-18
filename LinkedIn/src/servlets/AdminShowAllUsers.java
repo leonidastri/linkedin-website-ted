@@ -45,14 +45,26 @@ public class AdminShowAllUsers extends HttpServlet {
 			List<User> users = dao.list();
 	        List<User> tempUsers = new ArrayList<User>();
 	        
+	        // first time initialize vector for all checked
 	        if( flag == true) {
 	        	checked = new Vector<Boolean>(users.size());
 	        	flag = false;
 	        }
-	        Vector<Boolean> tempChecked = new Vector<Boolean>(usersPerPage);
 	        
-	        for (int i = 0; i < users.size(); i++)
+	        // find number of pages
+	        numberOfPages = users.size() / usersPerPage;
+	        if( numberOfPages % usersPerPage != 0 )
+	        	numberOfPages++;
+	        
+	        // fix size of checked vector
+	        int s = numberOfPages * usersPerPage - checked.size();
+	        System.out.print(s);
+	        for (int i = 0; i < s; i++) {
+	        	System.out.println(i);
 	        	checked.addElement(false);
+	        }
+	        
+	        Vector<Boolean> tempChecked = new Vector<Boolean>(usersPerPage);
 	        for (int i = 0; i < usersPerPage; i++)
 	        	tempChecked.addElement(false);
 	        
@@ -61,31 +73,24 @@ public class AdminShowAllUsers extends HttpServlet {
 	        if (pageNumberValue != null) {
 	            try {
 	                currentPage = Integer.parseInt(pageNumberValue);
-	                //debug
-	                //for(int i = 0; i < usersPerPage; i++)
-	                //	System.out.println(request.getParameter("checkList"+i));
-	                //if (session.getAttribute("tempChecked") != null && !session.getAttribute("tempChecked").equals(""))
-	                //	tempChecked = (Vector<Boolean>)request.getAttribute("tempChecked");
 	                System.out.println("Page Number:" + currentPage);
 	            } catch (NumberFormatException e) {
 	                e.printStackTrace();
 	            }
 	        }
 	        
-	        numberOfPages = users.size() / usersPerPage;
-	        if( numberOfPages % usersPerPage != 0 )
-	        	numberOfPages++;
-	        
 	        int offset = usersPerPage * (currentPage - 1);
 	        int found;
 	        
 	        String[] checkList = request.getParameterValues("checkList");
+	        
+	        // Get checkboxes 
 	        if( pageNumberValue != null && checkList != null ) {
-	        	System.out.println(checkList.length);
+	        	//System.out.println(checkList.length);
 
 	        	for(int i = 0; i < usersPerPage; i++ ) {
 	        		found = 0;
-	        		if( i < users.size() ) {
+	        		if( offset+i < users.size() ) {
 	        			for( int j = 0; j < checkList.length; j++ ) {
 	        				System.out.println("list" + checkList[j]);
 	        				if( users.get(offset+i).getEmail().equals(checkList[j]) ) {
@@ -106,25 +111,26 @@ public class AdminShowAllUsers extends HttpServlet {
 	        }
 	        
 	        //System.out.println("Page");
+	        
 	        int to = offset + usersPerPage;
 	        if( offset > users.size() )
 	            offset = users.size();
 	        if( to > users.size() )
 	            to = users.size();
+	        
 	        for( int i = offset; i < to; i++) {
 	        	
 	            tempUsers.add(users.get(i));
 	            
-	            if( checked.get(i) ) {
+	            if( checked.get(i) )
 		            tempChecked.set(i-offset,true);
-	            } else {
+	            else
 	            	tempChecked.set(i-offset,false);
-	            }
-	            System.out.println(tempChecked.get(i-offset));
+	            
+	            //System.out.println(tempChecked.get(i-offset));
 	        }
-	        
-	        request.setAttribute("users", tempUsers);
-	        
+
+	        // Fix previous and next page for pagination
 	        if( currentPage > 1 && currentPage < numberOfPages) {
 	        	previousPage = "AdminShowAllUsers?pageNumber=" + (currentPage-1);
 	        	nextPage = "AdminShowAllUsers?pageNumber=" + (currentPage+1);
@@ -136,16 +142,22 @@ public class AdminShowAllUsers extends HttpServlet {
 	        	nextPage = null;
 	        }
 	        
-	        redirect = "/admin_management.jsp";
-	        request.setAttribute("tempChecked",tempChecked);
-	        // to help us export selected users
+	        /*	tempChecked contains checked of current page
+	         * 	checked contains all checked
+	         * 	users contains users of current page
+	         */
 	        session.setAttribute("checked", checked);
+	        request.setAttribute("tempChecked",tempChecked);
+	        request.setAttribute("users", tempUsers);
 	        request.setAttribute("usersPerPage", usersPerPage);
 	        request.setAttribute("previousPage", previousPage);
 	        request.setAttribute("currentPage", currentPage);
 	        request.setAttribute("nextPage", nextPage);
 	        
+	        redirect = "/admin_management.jsp";
+	        
 		} else {
+
 			redirect = "/access_error.jsp";
 		}
 		
