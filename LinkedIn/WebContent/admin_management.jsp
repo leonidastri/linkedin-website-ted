@@ -44,7 +44,7 @@
 		<c:if test="${users.size() != 0}">
 			<c:forEach var="i" begin="0" end="${users.size()-1}" step="1">
 		     	<tr>
-		        	<td> <a href="AdminShowSpecificUserInfo&email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
+		        	<td> <a href="AdminShowSpecificUserInfo?email=${users.get(i).getEmail()}">${users.get(i).getEmail()}</a></td>
 		            <td>
 		            	<input type="checkbox" id="box" name="checkList" value="${users.get(i).getEmail()}" <c:if test="${tempChecked.get(i) == true}"> checked="checked"</c:if> > 
 		         	</td>
