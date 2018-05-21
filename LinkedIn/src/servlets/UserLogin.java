@@ -61,6 +61,8 @@ public class UserLogin extends HttpServlet {
                     request.setAttribute("users", users);
                     redirect = "/admin_homepage.jsp";
 					session.setAttribute("isAdmin", true);
+				} else {
+					session.setAttribute("isUser", true);
 				}
 			}
 			else {

@@ -16,14 +16,13 @@
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="col-md-4">
+    <div class="col-md-2">
       <a class="navbar-brand" href="#">LinkedIn Clone</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-    <div class="col-md-2"></div>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <form class="form-inline my-2 my-lg-0" action="UserLogin" method="post" id="loginForm">
           <input class="form-control mr-sm-2" id="email" name="email"

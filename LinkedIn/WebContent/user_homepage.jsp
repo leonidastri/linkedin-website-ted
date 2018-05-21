@@ -12,23 +12,20 @@
 </head>
 <body>
 
-	<!-- NAVBAR -->
-  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    	<div class="col-md-4">
-      		<a class="navbar-brand" href="#">LinkedIn Clone</a>
-      		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        		<span class="navbar-toggler-icon"></span>
-      		</button>
-    	</div>
-    	<div class="col-md-2"></div>
-    	<div class="col-md-6">
-      		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        		<form class="form-inline my-2 my-lg-0" action="UserLogout" method="post" id="userForm">
-          			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-out</button>
-        		</form>
-      		</div>
-    	</div>
-  	</nav>
+	<nav class="my-2 my-md-0 mr-md-3">
+	
+    	<a class="p-2 text-light" href="UserNavigation?action=Homepage"> Homepage </a>
+        <a class="p-2 text-light" href="UserNavigation?action=Connections"> Connections </a>
+        <a class="p-2 text-light" href="UserNavigation?action=Listings"> Listings </a>
+        <a class="p-2 text-light" href="UserNavigation?action=Messenger"> Messenger </a>
+        <a class="p-2 text-light" href="UserNavigation?action=Personal info"> Personal info </a>
+        <a class="p-2 text-light" href="UserNavigation?action=Settings"> Settings </a>  
+    
+    	<form class="form-inline my-2 my-lg-0" action="UserLogout" method="post" id="userForm">
+    		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-out</button>
+    	</form>
+    	
+	</nav>
   	
 	<!--  HOMEPAGE BODY -->
 	<% User user = (User) request.getAttribute("user"); %>
