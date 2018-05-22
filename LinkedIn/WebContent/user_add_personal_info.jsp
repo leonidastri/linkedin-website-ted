@@ -9,7 +9,7 @@
 	</head>
 	<body>
 
- 		<form id="a_form" action="UserProfile" method="POST">
+ 		<form id="a_form" action="UserAddPersonalInfo?action=job" method="POST">
 
 			<h3> Add a job </h3> <br>
 			Add title: <br>
@@ -27,7 +27,7 @@
 
 		<br> <br>
 		
- 		<form id="a_form" action="UserProfile" method="POST">
+ 		<form id="a_form" action="UserAddPersonalInfo?action=education" method="POST">
 
 			<h3> Add an education </h3> <br>
 			Add title: <br>
@@ -45,11 +45,11 @@
 
 		<br> <br>
 		
-		 <form id="a_form" action="UserProfile" method="POST">
+		 <form id="a_form" action="UserAddPersonalInfo?action=skill" method="POST">
 
 			<h3> Add a skill </h3> <br>
 			Add description: <br>
-			<input type="text" name="jobTitle" /> <br>
+			<input type="text" name="description" /> <br>
 			Private: <br>
 			<input type="checkbox" name="private" /> <br> <br>
 			<input type="submit" value="Add skill" />

@@ -9,21 +9,21 @@
 	</head>
 	<body>
 
- 		<form id="a_form" action="UserSettings" method="POST">
+ 		<form id="a_form" action="UserSettings?action=changePassword" method="POST">
 
 			Current password : <br>
-			<input type="password" name="currentPaswword" /> <br>
+			<input type="password" name="currentPassword" /> <br>
 			New password: <br>
 			<input type="password" name="newPassword" /> <br>
 			Confirm password : <br>
-			<input type="password" name="newPassword" /> <br> <br>
+			<input type="password" name="confirmPassword" /> <br> <br>
 			
 			<input type="submit" value="Change password" />
 		</form>
 
 		<br> <br>
 		
- 		<form id="a_form" action="UserSettings" method="POST">
+ 		<form id="a_form" action="UserSettings?action=changeEmail" method="POST">
  		
 			New email: <br>
 			<input type="text" name="newEmail" /> <br> <br>
