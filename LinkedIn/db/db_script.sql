@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `linkedin_db`.`education` (
   `education_title` VARCHAR(128) NOT NULL,
   `education_from` DATE NOT NULL,
   `education_to` DATE NOT NULL,
+  `private` BOOLEAN NOT NULL,
   `educationID` BIGINT NOT NULL AUTO_INCREMENT,
   INDEX `fk_education_1_idx` (`userID` ASC),
   PRIMARY KEY (`educationID`),
@@ -62,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `linkedin_db`.`job` (
   `job_title` VARCHAR(128) NOT NULL,
   `job_from` DATE NOT NULL,
   `job_to` DATE NOT NULL,
+  `private` BOOLEAN NOT NULL,
   `jobID` BIGINT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`jobID`),
   CONSTRAINT `fk_job_1`
@@ -78,6 +80,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `linkedin_db`.`skill` (
   `userID` BIGINT NOT NULL,
   `skill` VARCHAR(128) NOT NULL,
+  `private` BOOLEAN NOT NULL,
   `skillID` BIGINT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`skillID`),
   CONSTRAINT `fk_skill_1`

@@ -48,6 +48,9 @@ public class Job implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="job_to")
 	private Date jobTo;
+	
+	@Column(name="private")
+	private Boolean priv;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -95,6 +98,14 @@ public class Job implements Serializable {
 
 	public void setJobTo(Date jobTo) {
 		this.jobTo = jobTo;
+	}
+	
+	public Boolean getPrivate() {
+		return this.priv;
+	}
+	
+	public void setPrivate(Boolean priv) {
+		this.priv = priv;
 	}
 
 	public User getUser() {

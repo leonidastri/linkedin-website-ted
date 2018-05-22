@@ -18,6 +18,9 @@ public class Skill implements Serializable {
 	private String skillID;
 
 	private String skill;
+	
+	@Column(name="private")
+	private Boolean priv;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -41,6 +44,14 @@ public class Skill implements Serializable {
 
 	public void setSkill(String skill) {
 		this.skill = skill;
+	}
+	
+	public Boolean getPrivate() {
+		return this.priv;
+	}
+	
+	public void setPrivate(Boolean priv) {
+		this.priv = priv;
 	}
 
 	public User getUser() {

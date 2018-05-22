@@ -31,6 +31,9 @@ public class Education implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="education_to")
 	private Date educationTo;
+	
+	@Column(name="private")
+	private Boolean priv;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -78,6 +81,14 @@ public class Education implements Serializable {
 
 	public void setEducationTo(Date educationTo) {
 		this.educationTo = educationTo;
+	}
+	
+	public Boolean getPrivate() {
+		return this.priv;
+	}
+	
+	public void setPrivate(Boolean priv) {
+		this.priv = priv;
 	}
 
 	public User getUser() {

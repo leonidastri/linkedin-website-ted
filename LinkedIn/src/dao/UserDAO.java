@@ -1,10 +1,6 @@
 package dao;
 
 import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import jpautils.EntityManagerHelper;
 import model.User;
 
 public interface UserDAO {
