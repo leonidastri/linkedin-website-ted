@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UserDAO;
+import dao.UserDAOImpl;
+
 /**
  * Servlet implementation class UserSettings
  */
@@ -19,11 +22,13 @@ public class UserSettings extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UserDAO dao = new UserDAOImpl();
 		HttpSession session = request.getSession();
 		String action;
 		String redirect = "/user_settings.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
+		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
 			action = (String) request.getParameter("action");
@@ -38,9 +43,12 @@ public class UserSettings extends HttpServlet {
 	        	
 			}
 			else if( action.equals("changeEmail") ) {
+				
 				String newEmail = request.getParameter("newEmail");
+				
+	        	dao.changeEmail(userID, newEmail);
 	        	
-	        	System.out.println("Given: " + newEmail );
+	        	System.out.println("Given: " + userID + " " + newEmail );
 			}	
 			
 			redirect = "/user_settings.jsp";

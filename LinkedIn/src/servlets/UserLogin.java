@@ -63,6 +63,7 @@ public class UserLogin extends HttpServlet {
 					session.setAttribute("isAdmin", true);
 				} else {
 					session.setAttribute("isUser", true);
+					session.setAttribute("userID", user.getUserID() );
 				}
 			}
 			else {

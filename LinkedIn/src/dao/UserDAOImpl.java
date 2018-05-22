@@ -33,6 +33,16 @@ public class UserDAOImpl implements UserDAO {
 			return null;
 		}
 	}
+	
+	@Override
+	public Boolean changeEmail( String userID, String email) {
+
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		System.out.println("UPDATE User SET email = '" + email + "' WHERE userID = '" + userID + "'");
+		em.createQuery("UPDATE User SET email = '" + email + "' WHERE userID = '" + userID + "'");
+
+		return true;
+	}
 
 	@Override
 	public List<User> list() {
