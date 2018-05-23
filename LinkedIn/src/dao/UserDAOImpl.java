@@ -11,10 +11,23 @@ import model.User;
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public User find(long id) {
+	public User find(Long id) {
+//		EntityManager em = EntityManagerHelper.getEntityManager();
+//		User user = em.find(User.class, id); 
+//        return user;
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		User user = em.find(User.class, id); 
-        return user;
+		Query query = em.createQuery("SELECT u FROM User u WHERE u.userID = '" + String.valueOf(id) + "'");
+		@SuppressWarnings("unchecked")
+		List<User> users = query.getResultList();
+		
+		if (users.size() == 1) {
+			System.out.println("find userID A");
+			return users.get(0);
+		}
+		else {
+			System.out.println("find userID B");
+			return null;
+		}
 	}
 	
 	@Override

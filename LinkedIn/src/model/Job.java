@@ -29,6 +29,7 @@ public class Job implements Serializable {
 	@XmlAttribute // for xml marshalling
 	@XmlID
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String jobID;
 
 	@XmlElement // for xml marshalling

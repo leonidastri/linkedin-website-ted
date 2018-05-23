@@ -59,7 +59,7 @@ public class AdminShowAllUsers extends HttpServlet {
 	        // fix size of checked vector
 	        int s = numberOfPages * usersPerPage - checked.size();
 	        System.out.print(s);
-	        for (int i = 0; i < s; i++) {
+	        for (int i = 0; i <= s; i++) {
 	        	System.out.println(i);
 	        	checked.addElement(false);
 	        }

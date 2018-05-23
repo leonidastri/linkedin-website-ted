@@ -20,8 +20,9 @@
 			<input type="date" name="dateFrom" /> <br>
 			To : <br>
 			<input type="date" name="dateTo" /> <br>
-			Private: <br>
-			<input type="checkbox" name="private" /> <br> <br>
+			Choose if u want to be public or private: <br>
+			<input type="radio" name="isPrivate" value="false" checked> Public <br>
+			<input type="radio" name="isPrivate" value="true"> Private <br><br>
 			<input type="submit" value="Add job" />
 		</form>
 
@@ -38,8 +39,9 @@
 			<input type="date" name="dateFrom" /> <br>
 			To : <br>
 			<input type="date" name="dateTo" /> <br>
-			Private: <br>
-			<input type="checkbox" name="private" /> <br> <br>
+			Choose if u want to be public or private: <br>
+			<input type="radio" name="isPrivate" value="false" checked> Public <br>
+			<input type="radio" name="isPrivate" value="true"> Private <br> <br>
 			<input type="submit" value="Add education" />
 		</form>
 
@@ -50,8 +52,9 @@
 			<h3> Add a skill </h3> <br>
 			Add description: <br>
 			<input type="text" name="description" /> <br>
-			Private: <br>
-			<input type="checkbox" name="private" /> <br> <br>
+			Choose if u want to be public or private: <br>
+			<input type="radio" name="isPrivate" value="false" checked> Public <br>
+			<input type="radio" name="isPrivate" value="true"> Private <br><br>
 			<input type="submit" value="Add skill" />
 		</form>
 	</body>

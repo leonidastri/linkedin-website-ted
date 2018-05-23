@@ -5,7 +5,7 @@ import model.User;
 
 public interface UserDAO {
 
-	public User find(long id);
+	public User find(Long id);
 	
 	public User find(String email);
 	
