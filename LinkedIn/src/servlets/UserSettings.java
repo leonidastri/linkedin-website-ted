@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import jpautils.PasswordAuthentication;
+import model.User;
 
 /**
  * Servlet implementation class UserSettings
@@ -21,6 +23,7 @@ public class UserSettings extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDAO dao = new UserDAOImpl();
 		HttpSession session = request.getSession();
@@ -34,12 +37,35 @@ public class UserSettings extends HttpServlet {
 			action = (String) request.getParameter("action");
 			System.out.println(action);
 			
+			User user = dao.find(Long.parseLong(userID));
+			
 			if( action.equals("changePassword") ) {
+				
 	        	String currentPassword = request.getParameter("currentPassword");
 	        	String newPassword = request.getParameter("newPassword");
 	        	String confirmPassword = request.getParameter("confirmPassword");
 	        	
 	        	System.out.println("Given: " + currentPassword + " " + newPassword + " " + confirmPassword );
+	        	
+	        	PasswordAuthentication pa = new PasswordAuthentication();
+	        	
+	        	if (pa.authenticate(currentPassword, user.getPasswordHashed())) {
+	        		System.out.println("Given: " + currentPassword + " " + newPassword + " " + confirmPassword );
+	        		if (newPassword.equals(confirmPassword)) {
+	        			System.out.println("Given: " + currentPassword + " " + newPassword + " " + confirmPassword );
+	        			String passwordHashed = pa.hash(newPassword);
+	        			System.out.println(passwordHashed);
+	        			dao.changePassword(userID, passwordHashed);
+	        		}
+	        		else {
+						redirect = "/user_settings";
+						session.setAttribute("errorMsg", "passwords do not match");
+	        		}
+	        	}
+				else {
+					redirect = "/user_settings";
+					session.setAttribute("errorMsg", "wrong password");
+				}
 	        	
 			}
 			else if( action.equals("changeEmail") ) {

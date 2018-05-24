@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +42,7 @@ public class UserRegister extends HttpServlet {
 		UserDAO dao = new UserDAOImpl();
 		HttpSession session = request.getSession();
         
-        String redirect = "/user.jsp";
+        String redirect = "/user_homepage.jsp";
         
 //        try {
         	String email = request.getParameter("email");
@@ -81,8 +80,12 @@ public class UserRegister extends HttpServlet {
                 	System.out.println("C");
                     
 //                    List<User> users = em.createQuery("SELECT u FROM user u", User.class).getResultList();
-                	List<User> users = dao.list();
-                    request.setAttribute("users", users);
+//                	List<User> users = dao.list();
+                    User userRegistered = dao.find(email);
+                    request.setAttribute("user", userRegistered);
+                    session.setAttribute("isUser", true);
+                    session.setAttribute("userID", userRegistered.getUserID() );
+                    
                 	System.out.println("D");
         		}
         		else {

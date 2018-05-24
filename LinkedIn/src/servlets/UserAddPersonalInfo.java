@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.EducationDAO;
+import dao.EducationDAOImpl;
 import dao.JobDAO;
 import dao.JobDAOImpl;
+import dao.SkillDAO;
+import dao.SkillDAOImpl;
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import model.Education;
 import model.Job;
+import model.Skill;
 import model.User;
 
 /**
@@ -56,34 +60,17 @@ public class UserAddPersonalInfo extends HttpServlet {
 	        	job.setJobTitle(title);
 	        	job.setJobDescription(description);
 	        	
-	        	SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-	        	java.util.Date dateFrom = null;
-				try {
-					dateFrom = sdf1.parse(dFrom);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-	        	java.sql.Date sqlDateFrom = new java.sql.Date(dateFrom.getTime()); 
-	        	job.setJobFrom(sqlDateFrom);
+	        	job.setJobFrom(java.sql.Date.valueOf(dFrom));
+	        	job.setJobTo(java.sql.Date.valueOf(dTo));
 	        	
-	        	java.util.Date dateTo = null;
-				try {
-					dateTo = sdf1.parse(dTo);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-	        	java.sql.Date sqlDateTo = new java.sql.Date(dateTo.getTime());
-	        	job.setJobTo(sqlDateTo);
-	        	
-	        	job.setPrivate(Boolean.valueOf(isPrivate));
+	        	if (isPrivate.equals("true"))
+	        		job.setPrivate(true);
+	        	else
+	        		job.setPrivate(false);
 	        	
 	        	jobDao.create(job);
 	        	
-	        	System.out.println("Given: " + title + " " + description + " " + sqlDateFrom + " " + sqlDateTo + " " + isPrivate );
+	        	System.out.println("Given: " + title + " " + description + " " + dFrom + " " + dTo + " " + isPrivate );
 			}
 			else if( action.equals("education") ) {
 				String title = request.getParameter("title");
@@ -92,13 +79,42 @@ public class UserAddPersonalInfo extends HttpServlet {
 	        	String dTo = request.getParameter("dateTo");
 	        	String isPrivate = request.getParameter("private");
 	        	
-	        	//System.out.println("Given: " + title + " " + description + " " + dFrom + " " + dTo + " " + isPrivate );
+	        	EducationDAO educationDao = new EducationDAOImpl();
+	        	Education education = new Education();
+	        	
+	        	education.setUser(user);
+	        	education.setEducationTitle(title);
+	        	education.setEducationDescription(description);
+	        	
+	        	education.setEducationFrom(java.sql.Date.valueOf(dFrom));
+	        	education.setEducationTo(java.sql.Date.valueOf(dTo));
+	        	
+	        	if (isPrivate.equals("true"))
+	        		education.setPrivate(true);
+	        	else
+	        		education.setPrivate(false);
+	        	
+	        	educationDao.create(education);
+	        	System.out.println("Given: " + title + " " + description + " " + dFrom + " " + dTo + " " + isPrivate );
 			}
 			else if( action.equals("skill") ) {
 				String description = request.getParameter("description");
-	        	String isPrivate = request.getParameter("private");
+	        	String isPrivate = request.getParameter("isPrivate");
 	        	
-	        	//System.out.println("Given: " + description + " " + isPrivate );
+	        	SkillDAO skillDao = new SkillDAOImpl();
+	        	Skill skill = new Skill();
+	        	
+	        	skill.setUser(user);
+	        	skill.setSkill(description);
+	        	
+	        	if (isPrivate.equals("true"))
+	        		skill.setPrivate(true);
+	        	else
+	        		skill.setPrivate(false);
+	        	
+	        	skillDao.create(skill);
+	        	
+	        	System.out.println("Given: " + description + " " + isPrivate );
 			}		
 			
 			redirect = "/user_add_personal_info.jsp";

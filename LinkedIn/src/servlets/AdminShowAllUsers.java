@@ -53,13 +53,13 @@ public class AdminShowAllUsers extends HttpServlet {
 	        
 	        // find number of pages
 	        numberOfPages = users.size() / usersPerPage;
-	        if( numberOfPages % usersPerPage != 0 )
+	        if( users.size() % usersPerPage > 0 )
 	        	numberOfPages++;
 	        
 	        // fix size of checked vector
-	        int s = numberOfPages * usersPerPage - checked.size();
+	        int s = users.size() - checked.size();
 	        System.out.print(s);
-	        for (int i = 0; i <= s; i++) {
+	        for (int i = 0; i < s; i++) {
 	        	System.out.println(i);
 	        	checked.addElement(false);
 	        }
@@ -134,10 +134,16 @@ public class AdminShowAllUsers extends HttpServlet {
 	        if( currentPage > 1 && currentPage < numberOfPages) {
 	        	previousPage = "AdminShowAllUsers?pageNumber=" + (currentPage-1);
 	        	nextPage = "AdminShowAllUsers?pageNumber=" + (currentPage+1);
-	        } else if( currentPage == 1 ) {
+	        }
+	        else if( currentPage == 1 && currentPage < numberOfPages ) {
 	        	previousPage = null;
 	        	nextPage = "AdminShowAllUsers?pageNumber=" + (currentPage+1);
-	        } else {
+	        }
+	        else if( currentPage == 1 && currentPage == numberOfPages ) {
+	        	previousPage = null;
+	        	nextPage = null;	        	
+			}
+			else {
 	        	previousPage = "AdminShowAllUsers?pageNumber=" + (currentPage-1);
 	        	nextPage = null;
 	        }

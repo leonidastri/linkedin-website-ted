@@ -11,6 +11,8 @@ public interface UserDAO {
 	
 	public Boolean changeEmail( String userID, String email);
 
+	public Boolean changePassword( String userID, String passwordHashed);
+	
     public List<User> list();
     
     public User login(String email, String pass);

@@ -17,6 +17,7 @@ public class UserDAOImpl implements UserDAO {
 //        return user;
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT u FROM User u WHERE u.userID = '" + String.valueOf(id) + "'");
+		System.out.println("SELECT u FROM User u WHERE u.userID = '" + String.valueOf(id) + "'");
 		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();
 		
@@ -51,12 +52,22 @@ public class UserDAOImpl implements UserDAO {
 	public Boolean changeEmail( String userID, String email) {
 
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		System.out.println("UPDATE User SET email = '" + email + "' WHERE userID = '" + userID + "'");
-		em.createQuery("UPDATE User SET email = '" + email + "' WHERE userID = '" + userID + "'");
+		User user = em.find(User.class ,userID);
+		user.setEmail(email);
 
 		return true;
 	}
 
+	@Override
+	public Boolean changePassword( String userID, String passwordHashed) {
+
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		User user = em.find(User.class ,userID);
+		user.setPasswordHashed(passwordHashed);
+
+		return true;
+	}
+	
 	@Override
 	public List<User> list() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
