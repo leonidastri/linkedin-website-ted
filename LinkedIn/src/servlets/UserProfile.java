@@ -78,6 +78,15 @@ public class UserProfile extends HttpServlet {
 			List<LikeArticle> userLikeArticles = likeArticleDAO.getUserLikeArticles(Long.parseLong(userID));
 			List<LikeListing> userLikeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID));
 			
+			request.setAttribute("user", user);
+			request.setAttribute("userJobs", userJobs);
+			request.setAttribute("userSkills", userSkills);
+			request.setAttribute("userEducation", userEducation);
+			request.setAttribute("userListings", userListings);
+			request.setAttribute("userComments", userComments);
+			request.setAttribute("userArticles", userArticles);
+			request.setAttribute("userLikeArticles", userLikeArticles);
+			request.setAttribute("userLikeListings", userLikeListings);
 		}
 		else {
 			redirect = "/start_page.jsp";
