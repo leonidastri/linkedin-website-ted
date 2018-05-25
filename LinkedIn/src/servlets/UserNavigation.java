@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/UserNavigation")
 public class UserNavigation extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	
 	/**

@@ -19,10 +19,22 @@ public class JobDAOImpl implements JobDAO {
         return jobs;
 	}
 	
-	public void create(Job job) 
-	{
+	public void create(Job job) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		em.persist(job);
+	}
+	
+	public List<Job> getUserJobs(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT j FROM Job j WHERE j.userID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Job> jobs = query.getResultList();
+		
+		if (jobs.size() > 0)
+			return jobs;
+		else 
+			return null;
 	}
 	
 }

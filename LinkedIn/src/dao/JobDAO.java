@@ -8,5 +8,7 @@ public interface JobDAO {
     public List<Job> list();
 
 	public void create(Job job);
+	
+	public List<Job> getUserJobs(Long id);
 
 }

@@ -8,5 +8,7 @@ public interface SkillDAO {
     public List<Skill> list();
 
 	public void create(Skill skill);
+	
+	public List<Skill> getUserSkills(Long id);
 
 }

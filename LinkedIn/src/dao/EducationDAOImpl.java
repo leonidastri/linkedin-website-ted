@@ -19,10 +19,22 @@ public class EducationDAOImpl implements EducationDAO {
         return educations;
 	}
 	
-	public void create(Education education) 
-	{
+	public void create(Education education) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		em.persist(education);
+	}
+	
+	public List<Education> getUserEducation(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT e FROM Education e WHERE e.userID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Education> educations = query.getResultList();
+		
+		if (educations.size() > 0)
+			return educations;
+		else 
+			return null;
 	}
 	
 }

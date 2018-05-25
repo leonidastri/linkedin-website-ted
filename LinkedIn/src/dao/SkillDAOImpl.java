@@ -19,10 +19,22 @@ public class SkillDAOImpl implements SkillDAO {
         return skills;
 	}
 	
-	public void create(Skill skill) 
-	{
+	public void create(Skill skill) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		em.persist(skill);
+	}
+	
+	public List<Skill> getUserSkills(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT s FROM Skill s WHERE s.userID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Skill> skills = query.getResultList();
+		
+		if (skills.size() > 0)
+			return skills;
+		else 
+			return null;
 	}
 	
 }
