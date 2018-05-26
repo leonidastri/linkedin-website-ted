@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -69,24 +70,32 @@ public class UserProfile extends HttpServlet {
 			LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
 			
 			User user = userDAO.find(Long.parseLong(userID));
-			List<Job> userJobs = jobDAO.getUserJobs(Long.parseLong(userID));
-			List<Skill> userSkills = skillDAO.getUserSkills(Long.parseLong(userID));
-			List<Education> userEducation = educationDAO.getUserEducation(Long.parseLong(userID));
-			List<Listing> userListings = listingDAO.getUserListings(Long.parseLong(userID));
-			List<Comment> userComments = commentDAO.getUserComments(Long.parseLong(userID));
-			List<Article> userArticles = articleDAO.getUserArticles(Long.parseLong(userID));
-			List<LikeArticle> userLikeArticles = likeArticleDAO.getUserLikeArticles(Long.parseLong(userID));
-			List<LikeListing> userLikeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID));
+			List<Job> jobs = jobDAO.getUserJobs(Long.parseLong(userID));
+			List<Skill> skills = skillDAO.getUserSkills(Long.parseLong(userID));
+			List<Education> education = educationDAO.getUserEducation(Long.parseLong(userID));
+			List<Listing> listings = listingDAO.getUserListings(Long.parseLong(userID));
+			List<Comment> comments = commentDAO.getUserComments(Long.parseLong(userID));
+			List<Article> articles = articleDAO.getUserArticles(Long.parseLong(userID));
+			List<LikeArticle> likeArticles = likeArticleDAO.getUserLikeArticles(Long.parseLong(userID));
+			List<LikeListing> likeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID));
+			
+			List<Article> likedArticlesDetails = new ArrayList<Article>();
+			for (LikeArticle l : likeArticles)
+				likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
+			
+			List<Listing> likedListingsDetails = new ArrayList<Listing>();
+			for (LikeListing l : likeListings)
+				likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
 			
 			request.setAttribute("user", user);
-			request.setAttribute("userJobs", userJobs);
-			request.setAttribute("userSkills", userSkills);
-			request.setAttribute("userEducation", userEducation);
-			request.setAttribute("userListings", userListings);
-			request.setAttribute("userComments", userComments);
-			request.setAttribute("userArticles", userArticles);
-			request.setAttribute("userLikeArticles", userLikeArticles);
-			request.setAttribute("userLikeListings", userLikeListings);
+			request.setAttribute("jobs", jobs);
+			request.setAttribute("skills", skills);
+			request.setAttribute("education", education);
+			request.setAttribute("listings", listings);
+			request.setAttribute("comments", comments);
+			request.setAttribute("articles", articles);
+			request.setAttribute("likedArticlesDetails", likedArticlesDetails);
+			request.setAttribute("likedListingsDetails", likedListingsDetails);
 		}
 		else {
 			redirect = "/start_page.jsp";

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.*,model.User,model.Article,model.Comment,model.Job,model.Skill,model.Education"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="java.util.*,java.math.*,model.User,model.Job,model.Skill,model.Education,model.Listing,model.Comment,model.Article,model.LikeArticle,model.LikeListing"%>
+<!-- source: https://stackoverflow.com/questions/6162401/convert-and-format-a-date-in-jsp?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -48,31 +51,38 @@
 	                    	<div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Jobs</h5>
 	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Job Title 1</strong> from <strong>start_date1</strong> to <strong>end_date1</strong>
-	                                            <p>Job Description 1</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Job Title 2</strong> from <strong>start_date2</strong> to <strong>end_date2</strong>
-	                                            <p>Job Description2</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Job Title 3</strong> from <strong>start_date3</strong> to <strong>end_date3</strong>
-	                                            <p>Job Description 3</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Job Title 4</strong> from <strong>start_date4</strong> to <strong>end_date4</strong>
-	                                            <p>Job Description 4</p>
-	                                        </td>
-	                                    </tr>
+	                                <tbody>
+										<c:if test="${jobs.size() != 0}">
+											<c:if test="${jobs.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${jobs.size()-1}" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${jobs.get(i).getJobTitle()}</strong> from <strong><fmt:formatDate value="${jobs.get(i).getJobFrom()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong> to <strong><fmt:formatDate value="${jobs.get(i).getJobTo()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<p>${jobs.get(i).getJobDescription()}</p>
+			                                        	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${jobs.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${jobs.get(i).getJobTitle()}</strong> from <strong><fmt:formatDate value="${jobs.get(i).getJobFrom()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong> to <strong><fmt:formatDate value="${jobs.get(i).getJobTo()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<p>${jobs.get(i).getJobDescription()}</p>
+			                                        	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all jobs</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${jobs.size() == 0}">
+											<tr>
+												<td>
+													<p>No jobs provided yet</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -80,31 +90,38 @@
 	                    	<div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Education</h5>
 	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Education Title 1</strong> from <strong>start_date1</strong> to <strong>end_date1</strong>
-	                                            <p>Education Description 1 </p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Education Title 2</strong> from <strong>start_date2</strong> to <strong>end_date2</strong>
-	                                            <p>Education Description 2</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Education Title 3</strong> from <strong>start_date3</strong> to <strong>end_date3</strong>
-	                                            <p>Education Description 3</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Education Title 4</strong> from <strong>start_date4</strong> to <strong>end_date4</strong>
-	                                            <p>Education Description 4</p>
-	                                        </td>
-	                                    </tr>
+	                                <tbody>                                
+	                                    <c:if test="${education.size() != 0}">
+											<c:if test="${education.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${education.size()-1}" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${education.get(i).getEducationTitle()}</strong> from <strong><fmt:formatDate value="${education.get(i).getEducationFrom()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong> to <strong><fmt:formatDate value="${education.get(i).getEducationTo()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<p>${education.get(i).getEducationDescription()}</p>
+			                                        	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${education.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${education.get(i).getEducationTitle()}</strong> from <strong><fmt:formatDate value="${education.get(i).getEducationFrom()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong> to <strong><fmt:formatDate value="${education.get(i).getEducationTo()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<p>${education.get(i).getEducationDescription()}</p>
+			                                        	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all education</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${education.size() == 0}">
+											<tr>
+												<td>
+													<p>No education provided yet</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -115,26 +132,35 @@
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Skills</h5>
 	                            <table class="table table-sm table-hover table-striped">
 	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-												<strong>Skill 1</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-												<strong>Skill 2</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-												<strong>Skill 3 </strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-												<strong>Skill 4</strong>
-	                                        </td>
-	                                    </tr>
+	                                    <c:if test="${skills.size() != 0}">
+											<c:if test="${skills.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${skills.size()-1}" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${skills.get(i).getSkill()}</strong>
+			                                            </td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${skills.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${skills.get(i).getSkill()}</strong>
+			                                            </td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all skills</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${skills.size() == 0}">
+											<tr>
+												<td>
+													<p>No skills provided yet</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -143,26 +169,35 @@
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Articles</h5>
 	                            <table class="table table-sm table-hover table-striped">
 	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Article Title 1</strong> published at <strong>pub_date1</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Article Title 2</strong> published at <strong>pub_date2</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Article Title 3</strong> published at <strong>pub_date3</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Article Title 4</strong> published at <strong>pub_date4</strong>
-	                                        </td>
-	                                    </tr>
+	                                    <c:if test="${articles.size() != 0}">
+											<c:if test="${articles.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${articles.size()-1}" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${articles.get(i).getTitle()}</strong> published <strong><fmt:formatDate value="${articles.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${articles.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${articles.get(i).getTitle()}</strong> published <strong><fmt:formatDate value="${articles.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all articles</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${articles.size() == 0}">
+											<tr>
+												<td>
+													<p>No articles published yet</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -170,31 +205,38 @@
 	                        <div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Listings</h5>
 	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 1</strong> published at <strong>pub_date1</strong>
-	                                        	<p>Description 1</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 2</strong> published at <strong>pub_date2</strong>
-	                                        	<p>Description 2</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 3</strong> published at <strong>pub_date3</strong>
-	                                        	<p>Description 3</p>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 4</strong> published at <strong>pub_date4</strong>
-	                                        	<p>Description 4</p>
-	                                        </td>
-	                                    </tr>
+	                                <tbody>                                  
+	                                    <c:if test="${listings.size() != 0}">
+											<c:if test="${listings.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${listings.size()-1}" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${listings.get(i).getTitle()}</strong> published <strong><fmt:formatDate value="${listings.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           		<p>${listings.get(i).getDescription()}</p>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${listings.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${listings.get(i).getTitle()}</strong> published <strong><fmt:formatDate value="${listings.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           		<p>${listings.get(i).getDescription()}</p>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all listings</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${listings.size() == 0}">
+											<tr>
+												<td>
+													<p>No listings published yet</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -203,27 +245,38 @@
 	                        <div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Comments</h5>
 	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Substring of comment 1...</strong> at <strong>pub_date1</strong>
-	                                        </td>
-	                                    </tr>                                   
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Substring of comment 2...</strong> at <strong>pub_date2</strong>
-	                                        </td>
-	                                    </tr>                                   
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Substring of comment 3...</strong> at <strong>pub_date3</strong>
-	                                        </td>
-	                                    </tr>                                   
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Substring of comment 4...</strong> at <strong>pub_date4</strong>
-	                                        </td>
-	                                    </tr>
+	                                <tbody>
+	                                    <c:if test="${comments.size() != 0}">
+											<c:if test="${comments.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${comments.size()-1}" step="1">
+													<tr>
+			                                        	<!-- substring source: https://stackoverflow.com/questions/1583940/how-do-i-get-the-first-n-characters-of-a-string-without-checking-the-size-or-goi -->
+			                                        	<td>
+			                                            	<strong>${comments.get(i).getText().substring(0, Math.min(comments.get(i).getText().length(), 20))}</strong> published <strong><fmt:formatDate value="${comments.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${comments.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<!-- substring source: https://stackoverflow.com/questions/1583940/how-do-i-get-the-first-n-characters-of-a-string-without-checking-the-size-or-goi -->
+			                                        	<td>
+			                                            	<strong>${comments.get(i).getText().substring(0, Math.min(comments.get(i).getText().length(), 20))}</strong> published <strong><fmt:formatDate value="${comments.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all comments</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${comments.size() == 0}">
+											<tr>
+												<td>
+													<p>No comments published yet</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -233,27 +286,36 @@
 	                        <div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Liked Articles</h5>
 	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Title1</strong> published by <strong>Author1</strong> at <strong>pub_date1</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Title2</strong> published by <strong>Author2</strong> at <strong>pub_date2</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Title3</strong> published by <strong>Author3</strong> at <strong>pub_date3</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Title4</strong> published by <strong>Author4</strong> at <strong>pub_date4</strong>
-	                                        </td>
-	                                    </tr>
+	                                <tbody>
+	                                    <c:if test="${likedArticlesDetails.size() != 0}">
+											<c:if test="${likedArticlesDetails.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${likedArticlesDetails.size()-1}" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName} ${likedArticlesDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${likedArticlesDetails.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName} ${likedArticlesDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all liked articles</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${likedArticlesDetails.size() == 0}">
+											<tr>
+												<td>
+													<p>No articles liked so far</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -261,27 +323,36 @@
 	                        <div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Liked Listings</h5>
 	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 1</strong> published by <strong>Publisher1</strong> at <strong>pub_date1</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 2</strong> published by <strong>Publisher2</strong> at <strong>pub_date2</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 3</strong> published by <strong>Publisher3</strong> at <strong>pub_date3</strong>
-	                                        </td>
-	                                    </tr>                                    
-	                                    <tr>
-	                                        <td>
-	                                            <strong>Listing Title 4</strong> published by <strong>Publisher4</strong> at <strong>pub_date4</strong>
-	                                        </td>
-	                                    </tr>
+	                                <tbody>
+	                                   <c:if test="${likedListingsDetails.size() != 0}">
+											<c:if test="${likedListingsDetails.size() <= 3}">
+												<c:forEach var="i" begin="0" end="${likedListingsDetails.size()-1}" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong>${likedListingsDetails.get(i).getUser().getFirstName} ${likedListingsDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+	                                    	</c:if>
+	                                    	<c:if test="${likedListingsDetails.size() > 3}">
+												<c:forEach var="i" begin="0" end="2" step="1">
+													<tr>
+			                                        	<td>
+			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong>${likedListingsDetails.get(i).getUser().getFirstName} ${likedListingsDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                           	</td>
+			                                    	</tr>
+		                                    	</c:forEach>
+		                                    	<!-- TODO -->
+		                                    	<a class="btn btn-primary" href="#" role="button">Show all liked listings</a>
+	                                    	</c:if>
+										</c:if>
+										<c:if test="${likedListingsDetails.size() == 0}">
+											<tr>
+												<td>
+													<p>No listings liked so far</p>
+												</td>
+											</tr>
+										</c:if>
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -291,7 +362,7 @@
 	         	</div>
 	       	</div>
 	        <div class="col-lg-4 order-lg-1 text-center">
-	            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+	            <img src="${user.getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 	            <h6 class="mt-2">Upload a different photo</h6>
 	            <label class="custom-file">
 	                <input type="file" id="file" class="custom-file-input">
@@ -301,10 +372,10 @@
 	            <br>
 	            <br>
 	        	<h5>Email:</h5>
-	        	<p>john@doe.com</p>
+	        	<p>${user.getEmail()}</p>
 	        	<h5>Phone:</h5>
-	        	<p>6900000011</p>
-	        	<h6><a href="#">Curriculum Vitae</a></h6>
+	        	<p>${user.getPhoneNumber()}</p>
+	        	<h6><a href="${user.getCvPath()}">Curriculum Vitae</a></h6>
 	        </div>
 	    </div>
 	</div>

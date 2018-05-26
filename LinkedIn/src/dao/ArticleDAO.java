@@ -6,6 +6,8 @@ import model.Article;
 
 public interface ArticleDAO {
 
+	public Article find(Long id);
+
     public List<Article> list();
 
 	public void create(Article article);

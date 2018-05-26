@@ -10,6 +10,20 @@ import model.Listing;
 
 public class ListingDAOImpl implements ListingDAO {
 
+	@Override
+	public Listing find(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT l FROM Listing l WHERE l.listingID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Listing> listings = query.getResultList();
+		
+		if (listings.size() == 1)
+			return listings.get(0);
+		else
+			return null;
+	}
+
 	public List<Listing> list() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT l FROM Listing l", Listing.class);

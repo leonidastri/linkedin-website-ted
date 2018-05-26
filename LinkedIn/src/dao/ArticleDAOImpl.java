@@ -10,6 +10,20 @@ import model.Article;
 
 public class ArticleDAOImpl implements ArticleDAO {
 
+	@Override
+	public Article find(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT a FROM Article a WHERE a.articleID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Article> articles = query.getResultList();
+		
+		if (articles.size() == 1)
+			return articles.get(0);
+		else
+			return null;
+	}
+
 	public List<Article> list() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT a FROM Article a", Article.class);

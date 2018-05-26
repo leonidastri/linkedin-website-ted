@@ -5,6 +5,8 @@ import java.util.List;
 import model.Listing;
 
 public interface ListingDAO {
+	
+	public Listing find(Long id);
 
     public List<Listing> list();
 
