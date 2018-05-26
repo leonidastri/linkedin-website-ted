@@ -38,7 +38,7 @@
 	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
 
 	<div class="pricing-header px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <h1 class="display-5">John Doe</h1>
+      <h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
     </div>
 
 	<div class="container">
@@ -125,8 +125,6 @@
 	                                </tbody>
 	                            </table>
 	                        </div>
-	                    
-	                    	
 	                    
 	                    	<div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Skills</h5>
@@ -241,7 +239,6 @@
 	                            </table>
 	                        </div>
 	                        
-	                        
 	                        <div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Comments</h5>
 	                            <table class="table table-sm table-hover table-striped">
@@ -280,8 +277,6 @@
 	                                </tbody>
 	                            </table>
 	                        </div>
-	                        
-	                        
 	                        
 	                        <div class="col-md-12">
 	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Liked Articles</h5>
@@ -361,6 +356,7 @@
 	               	</div>
 	         	</div>
 	       	</div>
+	       	
 	        <div class="col-lg-4 order-lg-1 text-center">
 	            <img src="${user.getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 	            <h6 class="mt-2">Upload a different photo</h6>
