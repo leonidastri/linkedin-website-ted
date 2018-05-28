@@ -40,7 +40,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	
 	public List<Article> getUserArticles(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT a FROM Article a WHERE a.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT a FROM Article a WHERE a.user.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Article> articles = query.getResultList();

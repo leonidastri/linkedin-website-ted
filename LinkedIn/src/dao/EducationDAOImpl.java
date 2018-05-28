@@ -26,7 +26,7 @@ public class EducationDAOImpl implements EducationDAO {
 	
 	public List<Education> getUserEducation(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT e FROM Education e WHERE e.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT e FROM Education e WHERE e.user.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Education> educations = query.getResultList();

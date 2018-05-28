@@ -40,7 +40,7 @@ public class ListingDAOImpl implements ListingDAO {
 	
 	public List<Listing> getUserListings(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT l FROM Listing l WHERE l.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT l FROM Listing l WHERE l.user.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Listing> listings = query.getResultList();

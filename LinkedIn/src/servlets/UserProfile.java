@@ -57,6 +57,7 @@ public class UserProfile extends HttpServlet {
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		
 		if (isUser) {
+			System.out.println("Aaaaa sdsadas");
 			String userID = (String) session.getAttribute("userID");
 			
 			UserDAO userDAO = new UserDAOImpl();
@@ -80,12 +81,14 @@ public class UserProfile extends HttpServlet {
 			List<LikeListing> likeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID));
 			
 			List<Article> likedArticlesDetails = new ArrayList<Article>();
-			for (LikeArticle l : likeArticles)
-				likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
+			if( likeArticles != null )
+				for (LikeArticle l : likeArticles)
+					likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
 			
 			List<Listing> likedListingsDetails = new ArrayList<Listing>();
-			for (LikeListing l : likeListings)
-				likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
+			if( likeListings != null)
+				for (LikeListing l : likeListings)
+					likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
 			
 			request.setAttribute("user", user);
 			request.setAttribute("jobs", jobs);

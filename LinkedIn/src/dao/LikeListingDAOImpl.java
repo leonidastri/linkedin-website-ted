@@ -26,7 +26,7 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 	
 	public List<LikeListing> getUserLikeListings(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT ll FROM LikeListing ll WHERE ll.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT ll FROM LikeListing ll WHERE ll.user.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<LikeListing> likeListings = query.getResultList();

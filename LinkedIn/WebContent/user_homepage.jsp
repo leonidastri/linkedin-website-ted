@@ -31,6 +31,16 @@
 	<% User user = (User) request.getAttribute("user"); %>
 	<p>Hello <%= user.getFirstName() %>!</p>
 	
+	<br> <br>
+	<form class="form-inline my-2 my-lg-0" action="UserProfile" method="get" id="Profile">
+    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Profile page</button>
+    </form>
+	<br>
+	<form class="form-inline my-2 my-lg-0" action="" method="post" id="userForm">
+    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Connections</button>
+    </form>
+	
+	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

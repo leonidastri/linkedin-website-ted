@@ -73,7 +73,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all jobs</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_jobs.jsp" role="button">Show all jobs</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${jobs.size() == 0}">
@@ -112,7 +112,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all education</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_education.jsp" role="button">Show all education</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${education.size() == 0}">
@@ -149,7 +149,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all skills</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_skills.jsp" role="button">Show all skills</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${skills.size() == 0}">
@@ -186,7 +186,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all articles</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_articles.jsp" role="button">Show all articles</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${articles.size() == 0}">
@@ -225,7 +225,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all listings</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_listings.jsp" role="button">Show all listings</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${listings.size() == 0}">
@@ -264,7 +264,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all comments</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_comments.jsp" role="button">Show all comments</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${comments.size() == 0}">
@@ -301,7 +301,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all liked articles</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_liked_articles.jsp" role="button">Show all liked articles</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${likedArticlesDetails.size() == 0}">
@@ -338,7 +338,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="#" role="button">Show all liked listings</a>
+		                                    	<a class="btn btn-primary" href="user_profile_all_liked_listings.jsp" role="button">Show all liked listings</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${likedListingsDetails.size() == 0}">

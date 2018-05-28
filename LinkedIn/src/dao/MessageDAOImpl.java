@@ -26,7 +26,7 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	public List<Message> getUserSentMessages(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT m FROM Message m WHERE m.senderID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT m FROM Message m WHERE m.user.senderID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Message> messages = query.getResultList();
@@ -39,7 +39,7 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	public List<Message> getUserReceivedMessages(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT m FROM Message m WHERE m.receiverID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT m FROM Message m WHERE m.user.receiverID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Message> messages = query.getResultList();

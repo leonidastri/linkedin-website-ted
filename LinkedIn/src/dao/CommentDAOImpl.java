@@ -26,7 +26,7 @@ public class CommentDAOImpl implements CommentDAO {
 	
 	public List<Comment> getUserComments(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT c FROM Comment c WHERE c.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT c FROM Comment c WHERE c.user.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Comment> comments = query.getResultList();
