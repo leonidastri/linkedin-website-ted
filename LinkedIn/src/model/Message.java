@@ -1,7 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
 
 
 /**
@@ -18,6 +21,11 @@ public class Message implements Serializable {
 	private String messageID;
 
 	private String text;
+
+	@XmlElement(name="publicationDate") // for xml marshalling
+	@Temporal(TemporalType.DATE)
+	@Column(name="pub_date")
+	private Date pubDate;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -46,6 +54,14 @@ public class Message implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Date getPubDate() {
+		return this.pubDate;
+	}
+
+	public void setPubDate(Date pubDate) {
+		this.pubDate = pubDate;
 	}
 
 	public User getUser1() {

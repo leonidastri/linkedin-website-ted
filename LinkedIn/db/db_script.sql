@@ -230,6 +230,7 @@ CREATE TABLE IF NOT EXISTS `linkedin_db`.`message` (
   `senderID` BIGINT NOT NULL,
   `receiverID` BIGINT NOT NULL,
   `text` VARCHAR(1024) NOT NULL,
+  `pub_date` DATE NOT NULL,
   PRIMARY KEY (`messageID`),
   INDEX `fk_message_1_idx` (`senderID` ASC),
   INDEX `fk_message_2_idx` (`receiverID` ASC),

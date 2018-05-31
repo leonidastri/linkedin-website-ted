@@ -49,5 +49,39 @@ public class MessageDAOImpl implements MessageDAO {
 		else 
 			return null;
 	}
+	
+	public List<Message> getUserConversation(Long senderID, Long receiverID) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT m FROM Message m WHERE (m.user.receiverID = '" + String.valueOf(receiverID) + "' AND m.user.senderID = '" + String.valueOf(senderID) + "') OR (m.user.receiverID = '" + String.valueOf(senderID) + "' AND m.user.senderID = '" + String.valueOf(receiverID) + "')");
+		
+		@SuppressWarnings("unchecked")
+		List<Message> messages = query.getResultList();
+		
+		/* sort conversation */
+		for (int i = 0; i < messages.size()-1; i++) {
+			for (int j = 0; j < messages.size()-i-1; j++) {
+				if (messages.get(j).getPubDate().after(messages.get(j+1).getPubDate())) {
+					Message temp = messages.get(j);
+					
+					messages.get(j).setMessageID(messages.get(j+1).getMessageID());
+					messages.get(j).setText(messages.get(j+1).getText());
+					messages.get(j).setPubDate(messages.get(j+1).getPubDate());
+					messages.get(j).setUser1(messages.get(j+1).getUser1());
+					messages.get(j).setUser2(messages.get(j+1).getUser2());
+					
+					messages.get(j+1).setMessageID(temp.getMessageID());
+					messages.get(j+1).setText(temp.getText());
+					messages.get(j+1).setPubDate(temp.getPubDate());
+					messages.get(j+1).setUser1(temp.getUser1());
+					messages.get(j+1).setUser2(temp.getUser2());
+				}
+			}
+		}
+		
+		if (messages.size() > 0)
+			return messages;
+		else 
+			return null;
+	}
 
 }

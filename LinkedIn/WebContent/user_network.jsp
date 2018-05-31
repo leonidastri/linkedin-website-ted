@@ -54,36 +54,37 @@
 	</div>
 	                        
 	<!-- FOOTER -->
-  <footer class="footer" style="background-color: lightgrey;padding-top: 50px;">
-    <div class="container" >
-      <div class=row>
-        <div class="col-md-4"></div>
-      <div class="col-md-2">
-        <h4>About Us</h4>
-        <a href="#"><p style="margin-bottom: 3px;">About</p></a>
-        <a href="#"><p style="margin-bottom: 3px;">News</p></a>
-        <a href="#"><p style="margin-bottom: 3px;">Services</p></a>
-        <a href="#"><p style="margin-bottom: 3px;">FAQ</p></a>
-      </div>
-      <div class="col-md-2">
-        <h4>Contact Us</h4>
-        <p>tel  : 210 8898985 <br/>
-          fax: 210 8898900 <br/>
-          email: tm39@li.com</p>
-        </div>
-        <div class="col-md-4"></div>
+  	<footer class="footer" style="background-color: lightgrey;padding-top: 50px;">
+    	<div class="container" >
+      		<div class=row>
+        		<div class="col-md-4"></div>
+      			<div class="col-md-2">
+	        		<h4>About Us</h4>
+	        		<a href="#"><p style="margin-bottom: 3px;">About</p></a>
+	        		<a href="#"><p style="margin-bottom: 3px;">News</p></a>
+	        		<a href="#"><p style="margin-bottom: 3px;">Services</p></a>
+	        		<a href="#"><p style="margin-bottom: 3px;">FAQ</p></a>
+	      		</div>
+	      		<div class="col-md-2">
+	        		<h4>Contact Us</h4>
+	        		<p>tel  : 210 8898985 <br/>
+	          			fax: 210 8898900 <br/>
+	          			email: tm39@li.com</p>
+	        	</div>
+        		<div class="col-md-4"></div>
 
-      </div>  <br>
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <!--Footer Bottom-->
-              <p class="text-center">&copy; Copyright 2018 - University of Athens Di.  All rights reserved.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      		</div>  <br>
+      		<div class="footer-bottom">
+        		<div class="container">
+          			<div class="row">
+            			<div class="col-md-12">
+              				<!--Footer Bottom-->
+              				<p class="text-center">&copy; Copyright 2018 - University of Athens Di.  All rights reserved.</p>
+            			</div>
+          			</div>
+        		</div>
+      		</div>
+      	</div>
     </footer>
 
     <!-- Bootstrap core JavaScript

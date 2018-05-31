@@ -1,14 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.*,model.User"%>
+<%@page import="java.util.*,model.User,model.Message"%>
+<!-- source: https://stackoverflow.com/questions/6162401/convert-and-format-a-date-in-jsp?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  	<link rel="icon" href="../images/toplogo.png">
-  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Admin homepage</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>Messages</title>
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-  	<link rel="stylesheet" href="./css/admin_homepage.css">
+  	<link rel="stylesheet" href="./css/start_page.css">
+  	
 </head>
 <body>
 
@@ -29,17 +34,51 @@
       		</div>
     	</div>
   	</nav>
+  	
+  	<!-- SEND A MESSAGE AND VIEW CONVERSATION -->
+  	<div class="container">
+  		<div class="row">
+  			<main>
+  				<div class="row">
+  					<form action="/SendMessage" method="post">
+  						<input type="hidden" name="receiverID" value="${ receiverID }">
+  						<input type="hidden" name="senderID" value="${ senderID }">
+  						<input type="text" name="text" placeholder="Message" 
+  								required requireMessage="Please insert message"
+  								pattern=".{1,1000}" title="Maximum length is 1000 characters">
+  					</form>
+  				</div>
+  				<c:if test="${ not empty messages }">
+  					<c:forEach var="i" begin="0" end="${messages.size()-1}" step="1"">
+  						<c:if test="${ userID == senderID }">
+  							<p>
+  								<span>
+  									<strong>You at <fmt:formatDate value="${messages.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+  								</span>
+  								<span>
+  									${messages.get(i).getText() }
+  								</span>
+  							</p>
+  						</c:if>
+  						<c:if test="${ userID == receiverID }">
+  							<p>
+  								<span>
+  									<strong>${ messages.get(i).getUser1().getFirstName() } ${ messages.get(i).getUser1().getLastName() } at <fmt:formatDate value="${messages.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+  								</span>
+  								<span>
+  									${messages.get(i).getText() }
+  								</span>
+  							</p>
+  						</c:if>
+  					</c:forEach>
+  				</c:if>
+  				<c:if test="${ empty messages }">
+  					<p>No messages yet. Start a conversation!</p>
+  				</c:if>
+  			</main>
+  		</div>
+  	</div>
 
-	<!--  HOMEPAGE BODY -->
-	<br> <br> <br>
-	<div align="center" class ="register-container">
-		<h3> Show list of users </h3>
-		<a href="AdminShowAllUsers"> Show Users </a>
-    </div>
-    	
-    <br> <br> <br> <br>
-
-    
 	<!-- FOOTER -->
   	<footer class="footer" style="background-color: lightgrey;padding-top: 50px;">
     	<div class="container" >
@@ -83,5 +122,6 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX5iDXPWX9yVKjUC5FD_hX36CttO5DmzQ&callback=initMap">
     </script>
+    
 </body>
 </html>

@@ -14,4 +14,6 @@ public interface MessageDAO {
 	
 	public List<Message> getUserReceivedMessages(Long id);
 
+	public List<Message> getUserConversation(Long senderID, Long receiverID);
+	
 }
