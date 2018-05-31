@@ -32,14 +32,9 @@
 	<p>Hello <%= user.getFirstName() %>!</p>
 	
 	<br> <br>
-	<form class="form-inline my-2 my-lg-0" action="UserProfile" method="get" id="Profile">
-    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Profile page</button>
-    </form>
+	<a class="btn btn-primary" href="UserProfile?action=UserProfile" role="button">User profile</a>
 	<br>
-	<form class="form-inline my-2 my-lg-0" action="" method="post" id="userForm">
-    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Connections</button>
-    </form>
-	
+	<a class="btn btn-primary" href="UserProfile?action=UserNetwork" role="button">User network</a>
 	
 	<!-- Bootstrap core JavaScript
     ================================================== -->

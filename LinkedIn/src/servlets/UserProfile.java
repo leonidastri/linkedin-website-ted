@@ -15,6 +15,8 @@ import dao.ArticleDAO;
 import dao.ArticleDAOImpl;
 import dao.CommentDAO;
 import dao.CommentDAOImpl;
+import dao.ConnectionDAO;
+import dao.ConnectionDAOImpl;
 import dao.EducationDAO;
 import dao.EducationDAOImpl;
 import dao.JobDAO;
@@ -31,6 +33,7 @@ import dao.UserDAO;
 import dao.UserDAOImpl;
 import model.Article;
 import model.Comment;
+import model.Connection;
 import model.Education;
 import model.Job;
 import model.LikeArticle;
@@ -52,53 +55,82 @@ public class UserProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String redirect = "/user_profile.jsp";
+		String redirect = "/user_homepage.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
+		String action = request.getParameter("action");
 		
 		if (isUser) {
-			System.out.println("Aaaaa sdsadas");
+			
 			String userID = (String) session.getAttribute("userID");
-			
 			UserDAO userDAO = new UserDAOImpl();
-			JobDAO jobDAO = new JobDAOImpl();
-			SkillDAO skillDAO = new SkillDAOImpl();
-			EducationDAO educationDAO = new EducationDAOImpl();
-			ListingDAO listingDAO = new ListingDAOImpl();
-			CommentDAO commentDAO = new CommentDAOImpl();
-			ArticleDAO articleDAO = new ArticleDAOImpl();
-			LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
-			LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
-			
 			User user = userDAO.find(Long.parseLong(userID));
-			List<Job> jobs = jobDAO.getUserJobs(Long.parseLong(userID));
-			List<Skill> skills = skillDAO.getUserSkills(Long.parseLong(userID));
-			List<Education> education = educationDAO.getUserEducation(Long.parseLong(userID));
-			List<Listing> listings = listingDAO.getUserListings(Long.parseLong(userID));
-			List<Comment> comments = commentDAO.getUserComments(Long.parseLong(userID));
-			List<Article> articles = articleDAO.getUserArticles(Long.parseLong(userID));
-			List<LikeArticle> likeArticles = likeArticleDAO.getUserLikeArticles(Long.parseLong(userID));
-			List<LikeListing> likeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID));
 			
-			List<Article> likedArticlesDetails = new ArrayList<Article>();
-			if( likeArticles != null )
-				for (LikeArticle l : likeArticles)
-					likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
+			if( action.equals("UserProfile") ) {
+				
+				JobDAO jobDAO = new JobDAOImpl();
+				SkillDAO skillDAO = new SkillDAOImpl();
+				EducationDAO educationDAO = new EducationDAOImpl();
+				ListingDAO listingDAO = new ListingDAOImpl();
+				CommentDAO commentDAO = new CommentDAOImpl();
+				ArticleDAO articleDAO = new ArticleDAOImpl();
+				LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
+				LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
 			
-			List<Listing> likedListingsDetails = new ArrayList<Listing>();
-			if( likeListings != null)
-				for (LikeListing l : likeListings)
-					likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
+				List<Job> jobs = jobDAO.getUserJobs(Long.parseLong(userID));
+				List<Skill> skills = skillDAO.getUserSkills(Long.parseLong(userID));
+				List<Education> education = educationDAO.getUserEducation(Long.parseLong(userID));
+				List<Listing> listings = listingDAO.getUserListings(Long.parseLong(userID));
+				List<Comment> comments = commentDAO.getUserComments(Long.parseLong(userID));
+				List<Article> articles = articleDAO.getUserArticles(Long.parseLong(userID));
+				List<LikeArticle> likeArticles = likeArticleDAO.getUserLikeArticles(Long.parseLong(userID));
+				List<LikeListing> likeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID));
+			
+				List<Article> likedArticlesDetails = new ArrayList<Article>();
+				if( likeArticles != null )
+					for (LikeArticle l : likeArticles)
+						likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
+			
+				List<Listing> likedListingsDetails = new ArrayList<Listing>();
+				if( likeListings != null)
+					for (LikeListing l : likeListings)
+						likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
+			
+				request.setAttribute("jobs", jobs);
+				request.setAttribute("skills", skills);
+				request.setAttribute("education", education);
+				request.setAttribute("listings", listings);
+				request.setAttribute("comments", comments);
+				request.setAttribute("articles", articles);
+				request.setAttribute("likedArticlesDetails", likedArticlesDetails);
+				request.setAttribute("likedListingsDetails", likedListingsDetails);
+			
+				redirect = "/user_profile.jsp";
+			}
+			else if ( action.equals("UserNetwork") ) {
+				
+				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+				List<Connection> connections = connectionDAO.getUserConnections(Long.parseLong(userID));
+				
+				List<User> networkUsers = new ArrayList<User>();
+				
+				if( connections != null) {
+					System.out.println("AAAA");
+					for (Connection con : connections) {
+						if( con.getUser1().getUserID() == userID ) {
+							networkUsers.add(con.getUser1());
+						} else if( con.getUser2().getUserID() == userID ) {
+							networkUsers.add(con.getUser2());
+						}
+					}
+					
+				}
+				
+				request.setAttribute("networkUsers", networkUsers);
+				redirect = "/user_network.jsp";
+			}
 			
 			request.setAttribute("user", user);
-			request.setAttribute("jobs", jobs);
-			request.setAttribute("skills", skills);
-			request.setAttribute("education", education);
-			request.setAttribute("listings", listings);
-			request.setAttribute("comments", comments);
-			request.setAttribute("articles", articles);
-			request.setAttribute("likedArticlesDetails", likedArticlesDetails);
-			request.setAttribute("likedListingsDetails", likedListingsDetails);
 		}
 		else {
 			redirect = "/start_page.jsp";

@@ -26,7 +26,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 	
 	public List<Connection> getUserConnections(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user.userID_1 = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id) + "' OR c.user2.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Connection> connections = query.getResultList();
