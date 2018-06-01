@@ -44,7 +44,6 @@ public class UserMessenger extends HttpServlet {
 			
 			List<Message> conversation = messageDAO.getUserConversation( Long.parseLong(userID), Long.parseLong(receiverID));
 			
-			session.setAttribute("senderID", user.getUserID() );
 			session.setAttribute("receiverID", receiverID );
 			session.setAttribute("messages", conversation);
 			redirect = "/user_messages.jsp";

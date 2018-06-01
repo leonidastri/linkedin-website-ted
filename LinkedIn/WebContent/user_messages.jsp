@@ -51,7 +51,7 @@
   				</div>
   				<c:if test="${ not empty messages }">
   					<c:forEach var="i" begin="0" end="${messages.size()-1}" step="1">
-  						<c:if test="${ userID == senderID }">
+  						<c:if test="${ userID == messages.get(i).getUser1().getUserID() }">
   							<p>
   								<span>
   									<strong>You at <fmt:formatDate value="${messages.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
@@ -61,7 +61,7 @@
   								</span>
   							</p>
   						</c:if>
-  						<c:if test="${ userID == receiverID }">
+  						<c:if test="${ userID == messages.get(i).getUser2().getUserID() }">
   							<p>
   								<span>
   									<strong>${ messages.get(i).getUser1().getFirstName() } ${ messages.get(i).getUser1().getLastName() } at <fmt:formatDate value="${messages.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>

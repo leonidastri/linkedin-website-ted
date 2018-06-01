@@ -1,9 +1,6 @@
 package servlets;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class UsersConversation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String redirect = "/users_conversation.jsp";
+		String redirect = "/user_messages.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
@@ -62,6 +59,8 @@ public class UsersConversation extends HttpServlet {
 			
 			List<Message> conversation = messageDAO.getUserConversation( Long.parseLong(userID), Long.parseLong(receiverID));
 			
+			for( Message c : conversation )
+				System.out.println(c.getUser1() + ": " + c.getText() );
 			request.setAttribute("messages", conversation);
 		}
 		else {
