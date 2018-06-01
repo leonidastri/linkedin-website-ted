@@ -26,7 +26,7 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	public List<Message> getUserSentMessages(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT m FROM Message m WHERE m.user.senderID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT m FROM Message m WHERE m.user1.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Message> messages = query.getResultList();
@@ -39,7 +39,7 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	public List<Message> getUserReceivedMessages(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT m FROM Message m WHERE m.user.receiverID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT m FROM Message m WHERE m.user2.userID = '" + String.valueOf(id) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Message> messages = query.getResultList();
@@ -52,7 +52,7 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	public List<Message> getUserConversation(Long senderID, Long receiverID) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT m FROM Message m WHERE (m.user.receiverID = '" + String.valueOf(receiverID) + "' AND m.user.senderID = '" + String.valueOf(senderID) + "') OR (m.user.receiverID = '" + String.valueOf(senderID) + "' AND m.user.senderID = '" + String.valueOf(receiverID) + "')");
+		Query query = em.createQuery("SELECT m FROM Message m WHERE (m.user1.userID = '" + String.valueOf(senderID) + "' AND m.user2.userID = '" + String.valueOf(receiverID) + "') OR (m.user1.userID = '" + String.valueOf(receiverID) + "' AND m.user2.userID = '" + String.valueOf(senderID) + "')");
 		
 		@SuppressWarnings("unchecked")
 		List<Message> messages = query.getResultList();

@@ -11,33 +11,23 @@
 
 		<div align="center">
 			<h3> User Messenger </h3> <br> <br>
-		</div>
-		
-		<div class="row">
 			
-			<div class="col-md-4" align="center">
-				<h4> List of users you chat with: </h4>
+			<h4> List of users to chat with: </h4>
 				
-				<c:if test="${users.size() != 0}">
-					<table>
-				     	<c:forEach var="i" begin="0" end="${users.size()-1}" step="1">
-				     		<tr>
-		        				<td>
-		        					<a href="user_messenger.jsp?user=${users.get(i)}"> ${users.get(i).getEmail()}</a>
-		        				</td>
-		        			</tr>
-						</c:forEach>
-					</table>
-				</c:if>
-				
-			</div>
+			<c:if test="${networkUsers.size() != 0}">
 			
-			<div class="col-md-8" align="center">
-				<c:if test="${ not empty user }">
-					<h4> Chat with: ${user.firstName} </h4>
-				</c:if>
-			</div>
+				<table>
+			     	<c:forEach var="i" begin="0" end="${networkUsers.size()-1}" step="1">
+			     		<tr>
+		       				<td>
+		       					<a href="UserMessenger?receiverID=${networkUsers.get(i).getUserID()}"> ${networkUsers.get(i).getFirstName()} ${networkUsers.get(i).getEmail()} </a>
+		       				</td>
+		       			</tr>
+					</c:forEach>
+				</table>
+				
+			</c:if>
+				
 		</div>
-
 
 </html>

@@ -40,16 +40,17 @@
   		<div class="row">
   			<main>
   				<div class="row">
-  					<form action="/SendMessage" method="post">
+  					<form action="UsersConversation" method="post">
   						<input type="hidden" name="receiverID" value="${ receiverID }">
   						<input type="hidden" name="senderID" value="${ senderID }">
-  						<input type="text" name="text" placeholder="Message" 
+  						<input type="text" name="newMessage" placeholder="Message" 
   								required requireMessage="Please insert message"
   								pattern=".{1,1000}" title="Maximum length is 1000 characters">
+  								<button class="button-primary" type="submit" name="message" value="addNewMessage">send</button>
   					</form>
   				</div>
   				<c:if test="${ not empty messages }">
-  					<c:forEach var="i" begin="0" end="${messages.size()-1}" step="1"">
+  					<c:forEach var="i" begin="0" end="${messages.size()-1}" step="1">
   						<c:if test="${ userID == senderID }">
   							<p>
   								<span>

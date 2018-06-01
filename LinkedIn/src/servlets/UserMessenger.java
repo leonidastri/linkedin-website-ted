@@ -1,10 +1,6 @@
 package servlets;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,13 +18,12 @@ import model.Message;
 import model.User;
 
 /**
- * Servlet implementation class UserNavigation
+ * Servlet implementation class UserMessenger
  */
-@WebServlet("/UsersConversation")
-public class UsersConversation extends HttpServlet {
-
+@WebServlet("/UserMessenger")
+public class UserMessenger extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -38,31 +33,21 @@ public class UsersConversation extends HttpServlet {
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
-		String messageText = (String) request.getParameter("newMessage");
-		
-		System.out.println(messageText);
+		String receiverID = request.getParameter("receiverID");
 		
 		if (isUser) {
-			String receiverID = (String) session.getAttribute("receiverID");
 			
 			UserDAO userDAO = new UserDAOImpl();
-			
-			User sender = userDAO.find(Long.parseLong(userID));
-			User receiver = userDAO.find(Long.parseLong(receiverID));
+			User user = userDAO.find(Long.parseLong(userID));
 			
 			MessageDAO messageDAO = new MessageDAOImpl();
 			
-			Message newMessage = new Message();
-			newMessage.setPubDate(new Date());			// return current date
-			newMessage.setText(messageText);
-			newMessage.setUser1(sender);
-			newMessage.setUser2(receiver);
-			
-			messageDAO.create(newMessage);
-			
 			List<Message> conversation = messageDAO.getUserConversation( Long.parseLong(userID), Long.parseLong(receiverID));
 			
-			request.setAttribute("messages", conversation);
+			session.setAttribute("senderID", user.getUserID() );
+			session.setAttribute("receiverID", receiverID );
+			session.setAttribute("messages", conversation);
+			redirect = "/user_messages.jsp";
 		}
 		else {
 			redirect = "/start_page.jsp";
@@ -70,8 +55,9 @@ public class UsersConversation extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(redirect).forward(request, response);
+		
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

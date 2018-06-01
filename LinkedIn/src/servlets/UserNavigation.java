@@ -1,12 +1,20 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.ConnectionDAO;
+import dao.ConnectionDAOImpl;
+import model.Connection;
+import model.User;
 
 /**
  * Servlet implementation class UserNavigation
@@ -25,10 +33,13 @@ public class UserNavigation extends HttpServlet {
 		String redirect = "/start_page.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
+		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
+			
 			action = (String) request.getParameter("action");
 			System.out.println(action);
+			
 			if( action.equals("Homepage") ) {
 				redirect = "/user_homepage.jsp";
 			}
@@ -39,6 +50,24 @@ public class UserNavigation extends HttpServlet {
 				redirect = "/user_listings.jsp";
 			}
 			else if( action.equals("Messenger") ) {
+			
+				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+				List<Connection> connections = connectionDAO.getUserConnections(Long.parseLong(userID));
+				
+				List<User> networkUsers = new ArrayList<User>();
+				
+				if( connections != null) {
+					for (Connection con : connections) {
+						if( con.getUser1().getUserID() == userID ) {
+							networkUsers.add(con.getUser2());
+						} else if( con.getUser2().getUserID() == userID ) {
+							networkUsers.add(con.getUser1());
+						}
+					}
+					
+				}
+				
+				request.setAttribute("networkUsers", networkUsers);
 				redirect = "/user_messenger.jsp";
 			}
 			else if( action.equals("Personal info") ) {
