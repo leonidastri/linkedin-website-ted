@@ -30,6 +30,10 @@ public class Connection implements Serializable {
 	@XmlID
 	@Id
 	private String connectionID;
+	
+	private Boolean accepted;
+
+	private Boolean rejected;
 
 	@XmlElement(name="user1") // for xml marshalling
 	@XmlIDREF
@@ -54,6 +58,22 @@ public class Connection implements Serializable {
 
 	public void setConnectionID(String connectionID) {
 		this.connectionID = connectionID;
+	}
+	
+	public Boolean getAccepted() {
+		return this.accepted;
+	}
+	
+	public void setAccepted(Boolean accepted) {
+		this.accepted = accepted;
+	}
+	
+	public Boolean getRejected() {
+		return this.rejected;
+	}
+	
+	public void setRejected(Boolean rejected) {
+		this.rejected = rejected;
 	}
 
 	public User getUser1() {

@@ -142,6 +142,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `linkedin_db`.`connection` (
   `userID_1` BIGINT NOT NULL,
   `userID_2` BIGINT NOT NULL,
+  `accepted` BOOLEAN NOT NULL,
+  `rejected` BOOLEAN NOT NULL,
   `connectionID` BIGINT NOT NULL AUTO_INCREMENT,
   INDEX `fk_connection_2_idx` (`userID_2` ASC),
   PRIMARY KEY (`connectionID`),
@@ -226,7 +228,7 @@ ENGINE = InnoDB;
 -- Table `linkedin_db`.`message`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `linkedin_db`.`message` (
-  `messageID` BIGINT ZEROFILL NOT NULL,
+  `messageID` BIGINT NOT NULL AUTO_INCREMENT,
   `senderID` BIGINT NOT NULL,
   `receiverID` BIGINT NOT NULL,
   `text` VARCHAR(1024) NOT NULL,
