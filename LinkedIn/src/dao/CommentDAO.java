@@ -12,4 +12,6 @@ public interface CommentDAO {
 	
 	public List<Comment> getUserComments(Long id);
 	
+	public List<Comment> getArticleComments(Long id);
+	
 }

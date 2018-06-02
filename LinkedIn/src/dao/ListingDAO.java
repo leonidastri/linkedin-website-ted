@@ -14,4 +14,6 @@ public interface ListingDAO {
 	
 	public List<Listing> getUserListings(Long id);
 	
+	public List<Listing> getOtherUsersListings(Long id);
+	
 }

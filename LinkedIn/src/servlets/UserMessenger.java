@@ -12,10 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.MessageDAO;
 import dao.MessageDAOImpl;
-import dao.UserDAO;
-import dao.UserDAOImpl;
 import model.Message;
-import model.User;
 
 /**
  * Servlet implementation class UserMessenger
@@ -36,10 +33,6 @@ public class UserMessenger extends HttpServlet {
 		String receiverID = request.getParameter("receiverID");
 		
 		if (isUser) {
-			
-			UserDAO userDAO = new UserDAOImpl();
-			User user = userDAO.find(Long.parseLong(userID));
-			
 			MessageDAO messageDAO = new MessageDAOImpl();
 			
 			List<Message> conversation = messageDAO.getUserConversation( Long.parseLong(userID), Long.parseLong(receiverID));

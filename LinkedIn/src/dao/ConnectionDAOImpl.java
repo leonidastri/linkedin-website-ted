@@ -36,5 +36,18 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 		else 
 			return null;
 	}
+	
+	public List<Connection> getUserUnansweredConnectionsRequests(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id) + "' AND c.accepted = false AND c.rejected = false");
+		
+		@SuppressWarnings("unchecked")
+		List<Connection> connections = query.getResultList();
+		
+		if (connections.size() > 0)
+			return connections;
+		else 
+			return null;
+	}
 
 }

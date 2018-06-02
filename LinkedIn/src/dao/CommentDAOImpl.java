@@ -37,4 +37,17 @@ public class CommentDAOImpl implements CommentDAO {
 			return null;
 	}
 	
+	public List<Comment> getArticleComments(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT c FROM Comment c WHERE c.article.articleID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Comment> comments = query.getResultList();
+		
+		if (comments.size() > 0)
+			return comments;
+		else 
+			return null;
+	}
+	
 }

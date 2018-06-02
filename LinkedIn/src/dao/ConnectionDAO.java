@@ -11,5 +11,7 @@ public interface ConnectionDAO {
 	public void create(Connection connection);
 	
 	public List<Connection> getUserConnections(Long id);
+	
+	public List<Connection> getUserUnansweredConnectionsRequests(Long id);
 
 }

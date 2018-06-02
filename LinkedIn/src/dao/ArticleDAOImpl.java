@@ -50,5 +50,18 @@ public class ArticleDAOImpl implements ArticleDAO {
 		else 
 			return null;
 	}
+	
+	public List<Article> getOtherUsersArticles(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT a FROM Article a WHERE NOT a.user.userID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Article> articles = query.getResultList();
+		
+		if (articles.size() > 0)
+			return articles;
+		else 
+			return null;
+	}
 
 }

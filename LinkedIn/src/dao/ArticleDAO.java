@@ -13,5 +13,7 @@ public interface ArticleDAO {
 	public void create(Article article);
 	
 	public List<Article> getUserArticles(Long id);
+	
+	public List<Article> getOtherUsersArticles(Long id);
 
 }

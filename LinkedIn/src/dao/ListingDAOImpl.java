@@ -51,4 +51,17 @@ public class ListingDAOImpl implements ListingDAO {
 			return null;
 	}
 	
+	public List<Listing> getOtherUsersListings(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT l FROM Listing l WHERE NOT l.user.userID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Listing> listings = query.getResultList();
+		
+		if (listings.size() > 0)
+			return listings;
+		else 
+			return null;
+	}
+	
 }
