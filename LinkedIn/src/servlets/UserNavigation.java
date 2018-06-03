@@ -11,9 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ArticleDAO;
+import dao.ArticleDAOImpl;
 import dao.ConnectionDAO;
 import dao.ConnectionDAOImpl;
+import dao.LikeArticleDAO;
+import dao.LikeArticleDAOImpl;
+import model.Article;
 import model.Connection;
+import model.LikeArticle;
 import model.User;
 
 /**
@@ -48,6 +54,27 @@ public class UserNavigation extends HttpServlet {
 			}
 			else if( action.equals("Listings") ) {
 				redirect = "/user_listings.jsp";
+			}
+			else if( action.equals("Notifications") ) {
+				
+				ArticleDAO articlesDAO = new ArticleDAOImpl();
+				List<Article> articles = articlesDAO.getUserArticles(Long.parseLong(userID));
+
+				LikeArticleDAO likeArticlesDAO = new LikeArticleDAOImpl();
+				List<LikeArticle> likeArticles = new ArrayList<LikeArticle>();
+				
+				for( Article article : articles ) {
+					likeArticles.addAll( likeArticlesDAO.getOtherUserLikeArticlesOfUser(Long.parseLong(article.getArticleID())) );
+				}
+				
+				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+				
+				List<Connection> unansweredCons = connectionDAO.getUserUnansweredConnectionsRequests(Long.parseLong(userID));
+				
+				request.setAttribute("likeArticles", likeArticles);
+				request.setAttribute("unansweredCons", unansweredCons);
+				
+				redirect = "/user_notifications.jsp";
 			}
 			else if( action.equals("Messenger") ) {
 			

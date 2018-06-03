@@ -17,6 +17,7 @@
     	<a class="p-2 text-light" href="UserNavigation?action=Homepage"> Homepage </a>
         <a class="p-2 text-light" href="UserNavigation?action=Connections"> Connections </a>
         <a class="p-2 text-light" href="UserNavigation?action=Listings"> Listings </a>
+        <a class="p-2 text-light" href="UserNavigation?action=Notifications"> Notifications </a>
         <a class="p-2 text-light" href="UserNavigation?action=Messenger"> Messenger </a>
         <a class="p-2 text-light" href="UserNavigation?action=Personal info"> Personal info </a>
         <a class="p-2 text-light" href="UserNavigation?action=Settings"> Settings </a>  

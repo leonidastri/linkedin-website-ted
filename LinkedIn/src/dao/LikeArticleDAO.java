@@ -12,4 +12,5 @@ public interface LikeArticleDAO {
 	
 	public List<LikeArticle> getUserLikeArticles(Long id);
 
+	public List<LikeArticle> getOtherUserLikeArticlesOfUser(Long articleID);
 }

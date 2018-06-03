@@ -55,12 +55,18 @@ public class UserProfileShowAll extends HttpServlet {
 
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String action = request.getParameter("action");
-		
+
 		if (isUser) {
 			
 			String userID = (String) session.getAttribute("userID");
 			UserDAO userDAO = new UserDAOImpl();
-			User user = userDAO.find(Long.parseLong(userID));
+			
+			if( request.getParameter("email") != null ) {
+				User user = userDAO.find(request.getParameter("email"));
+			}
+			else {
+				User user = userDAO.find(Long.parseLong(userID));
+			}
 			
 			if( action.equals("jobs") ) {
 				
