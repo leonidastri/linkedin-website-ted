@@ -59,12 +59,20 @@ public class UserProfile extends HttpServlet {
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String action = request.getParameter("action");
+		String email = request.getParameter("email");
 		
 		if (isUser) {
 			
 			String userID = (String) session.getAttribute("userID");
 			UserDAO userDAO = new UserDAOImpl();
-			User user = userDAO.find(Long.parseLong(userID));
+			User user;
+			
+			if( email != null) {
+				user = userDAO.find(email);
+				userID = user.getUserID();
+			} else {
+				user = userDAO.find(Long.parseLong(userID));
+			}
 			
 			if( action.equals("UserProfile") ) {
 				
@@ -104,7 +112,8 @@ public class UserProfile extends HttpServlet {
 				request.setAttribute("articles", articles);
 				request.setAttribute("likedArticlesDetails", likedArticlesDetails);
 				request.setAttribute("likedListingsDetails", likedListingsDetails);
-			
+				request.setAttribute("email", email);
+				
 				redirect = "/user_profile.jsp";
 			}
 			else if ( action.equals("UserNetwork") ) {
@@ -115,7 +124,7 @@ public class UserProfile extends HttpServlet {
 				List<User> networkUsers = new ArrayList<User>();
 				
 				if( connections != null) {
-					System.out.println("AAAA");
+					
 					for (Connection con : connections) {
 						if( con.getUser1().getUserID() == userID ) {
 							networkUsers.add(con.getUser1());

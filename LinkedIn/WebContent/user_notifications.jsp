@@ -52,8 +52,16 @@
 											<c:forEach var="i" begin="0" end="${unansweredCons.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <a href="UserProfile?action="${unansweredCons.get(i).getUser().getFirstName()}</strong>
-			                                        </td>
+			                                            <a href="UserProfile?email=${unansweredCons.get(i).getUser().getEmail()}">${unansweredCons.get(i).getUser().getFirstName()}</a>
+			                                        	
+			                                        	<form action="/UserNavigation" method="get">
+														  	<button type="submit" id="acceptFriend" name="acceptFriend" value="true">Accept</button>
+															<button type="submit" id="acceptFriend" name="acceptFriend" value="false">Ignore</button>
+															<input type="hidden" name="otherUserID" value="${unansweredCons.get(i).getUser().getuserID()}">
+  															<input type="hidden" name="action" value="Notifications">
+														</form>
+														 
+													</td>
 			                                    </tr>
 		                                    </c:forEach>
 										</c:if>
@@ -69,26 +77,67 @@
 	                        </div>
 	                    
 						</div>
+						
+						<div class="row">
+	                    
+	                    	<div class="col-md-12">
+	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Liked Article Notifications </h5>
+	                            <table class="table table-sm table-hover table-striped">
+	                                <tbody>                                  
+	                                    <c:if test="${likeArticles.size() != 0}">
+											<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
+												<tr>
+			                                        <td>
+			                                            <a href="UserProfile?email=${likeArticles.get(i).getUser().getEmail()}">${likeArticles.get(i).getUser().getFirstName()}</a>
+			                                        	<p> liked ${likeArticles.get(i).getArticle().getTitle()} </p>
+			                                        </td>
+			                                    </tr>
+		                                    </c:forEach>
+										</c:if>
+										<c:if test="${likeArticles.size() == 0}">
+											<tr>
+												<td>
+													<p>No likes yet in your articles</p>
+												</td>
+											</tr>
+										</c:if>
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                        	                    
+						</div>
+						
+						<div class="row">
+	                    
+	                    	<div class="col-md-12">
+	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Comments Notifications </h5>
+	                            <table class="table table-sm table-hover table-striped">
+	                                <tbody>                                  
+	                                    <c:if test="${comments.size() != 0}">
+											<c:forEach var="i" begin="0" end="${comments.size()-1}" step="1">
+												<tr>
+			                                        <td>
+			                                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}">${comments.get(i).getUser().getFirstName()}</a>
+			                                        	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
+			                                        </td>
+			                                    </tr>
+		                                    </c:forEach>
+										</c:if>
+										<c:if test="${comments.size() == 0}">
+											<tr>
+												<td>
+													<p>No comments yet in your articles</p>
+												</td>
+											</tr>
+										</c:if>
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                        	                    
+						</div>
 	               	</div>
 	         	</div>
 	       	</div>
-	       	
-	        <div class="col-lg-4 order-lg-1 text-center">
-	            <img src="${user.getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-	            <h6 class="mt-2">Upload a different photo</h6>
-	            <label class="custom-file">
-	                <input type="file" id="file" class="custom-file-input">
-	                <span class="custom-file-control">Choose file</span>
-	            </label>
-	            <br>
-	            <br>
-	            <br>
-	        	<h5>Email:</h5>
-	        	<p>${user.getEmail()}</p>
-	        	<h5>Phone:</h5>
-	        	<p>${user.getPhoneNumber()}</p>
-	        	<h6><a href="${user.getCvPath()}">Curriculum Vitae</a></h6>
-	        </div>
 	    </div>
 	</div>
 

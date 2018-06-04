@@ -49,5 +49,4 @@ public class CommentDAOImpl implements CommentDAO {
 		else 
 			return null;
 	}
-	
 }

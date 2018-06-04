@@ -14,4 +14,7 @@ public interface ConnectionDAO {
 	
 	public List<Connection> getUserUnansweredConnectionsRequests(Long id);
 
+	public Connection getConnection(Long id1, Long id2);
+	
+	public void connectionChangeStatus(Long id1, Long id2, String change);
 }

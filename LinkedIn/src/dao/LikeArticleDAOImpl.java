@@ -37,7 +37,7 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 			return null;
 	}
 
-	public List<LikeArticle> getOtherUserLikeArticlesOfUser(Long articleID) {
+	public List<LikeArticle> getLikesOfUserArticles(Long articleID) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT la FROM LikeArticle la WHERE la.article.articleID = '" + String.valueOf(articleID) + "'");
 		

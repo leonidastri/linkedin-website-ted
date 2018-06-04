@@ -50,4 +50,31 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 			return null;
 	}
 
+	public Connection getConnection(Long id1, Long id2) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id1) + "' AND c.user2.userID = '" + String.valueOf(id2) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Connection> connections = query.getResultList();
+		
+		if (connections.size() == 1)
+			return connections.get(0);
+		else 
+			return null;
+	}
+	
+	public void connectionChangeStatus(Long id1, Long id2, String acceptFriend) {
+		
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		
+		Connection connection = getConnection(id1, id2);
+		Connection con = em.find(Connection.class, connection.getConnectionID());
+		
+		if( acceptFriend.equals("true") ) {
+			con.setAccepted(true);
+		}
+		else {
+			con.setRejected(true);
+		}
+	}
 }

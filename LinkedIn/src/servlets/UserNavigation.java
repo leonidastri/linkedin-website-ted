@@ -13,11 +13,14 @@ import javax.servlet.http.HttpSession;
 
 import dao.ArticleDAO;
 import dao.ArticleDAOImpl;
+import dao.CommentDAO;
+import dao.CommentDAOImpl;
 import dao.ConnectionDAO;
 import dao.ConnectionDAOImpl;
 import dao.LikeArticleDAO;
 import dao.LikeArticleDAOImpl;
 import model.Article;
+import model.Comment;
 import model.Connection;
 import model.LikeArticle;
 import model.User;
@@ -57,6 +60,19 @@ public class UserNavigation extends HttpServlet {
 			}
 			else if( action.equals("Notifications") ) {
 				
+				String acceptFriend = request.getParameter("acceptFriend");
+				String otherUserID = request.getParameter("otherUserID");
+				
+				if( acceptFriend != null) {
+					
+					ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+					
+					if( acceptFriend.equals("true") ) 
+						connectionDAO.connectionChangeStatus(Long.parseLong(userID), Long.parseLong(otherUserID), acceptFriend);
+					else
+						connectionDAO.connectionChangeStatus(Long.parseLong(userID), Long.parseLong(otherUserID), acceptFriend);
+				}
+				
 				ArticleDAO articlesDAO = new ArticleDAOImpl();
 				List<Article> articles = articlesDAO.getUserArticles(Long.parseLong(userID));
 
@@ -64,7 +80,14 @@ public class UserNavigation extends HttpServlet {
 				List<LikeArticle> likeArticles = new ArrayList<LikeArticle>();
 				
 				for( Article article : articles ) {
-					likeArticles.addAll( likeArticlesDAO.getOtherUserLikeArticlesOfUser(Long.parseLong(article.getArticleID())) );
+					likeArticles.addAll( likeArticlesDAO.getLikesOfUserArticles(Long.parseLong(article.getArticleID())) );
+				}
+				
+				CommentDAO commentDAO = new CommentDAOImpl();
+				List<Comment> comments = new ArrayList<Comment>();
+				
+				for( Article article : articles ) {
+					comments.addAll( commentDAO.getArticleComments(Long.parseLong(article.getArticleID())) );
 				}
 				
 				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
@@ -73,6 +96,7 @@ public class UserNavigation extends HttpServlet {
 				
 				request.setAttribute("likeArticles", likeArticles);
 				request.setAttribute("unansweredCons", unansweredCons);
+				request.setAttribute("comments", comments);
 				
 				redirect = "/user_notifications.jsp";
 			}
