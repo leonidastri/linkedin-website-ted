@@ -9,9 +9,9 @@ public interface UserDAO {
 	
 	public User find(String email);
 	
-	public Boolean changeEmail( String userID, String email);
+	public void changeEmail( String userID, String email);
 
-	public Boolean changePassword( String userID, String passwordHashed);
+	public void changePassword( String userID, String passwordHashed);
 	
     public List<User> list();
     

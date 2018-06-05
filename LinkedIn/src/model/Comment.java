@@ -28,6 +28,7 @@ public class Comment implements Serializable {
 	@XmlAttribute // for xml marshalling
 	@XmlID
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String commentID;
 
 	@XmlElement(name="publicationDate") // for xml marshalling

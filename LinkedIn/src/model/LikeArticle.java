@@ -29,6 +29,7 @@ public class LikeArticle implements Serializable {
 	@XmlAttribute // for xml marshalling
 	@XmlID
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String like_articleID;
 
 	@XmlElement(name="article") // for xml marshalling

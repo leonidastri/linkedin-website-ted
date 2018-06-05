@@ -30,6 +30,7 @@ public class Article implements Serializable {
 	@XmlAttribute // for xml marshalling
 	@XmlID
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String articleID;
 
 	@Column(name="picture_path")

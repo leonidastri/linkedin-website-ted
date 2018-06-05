@@ -159,6 +159,29 @@ CREATE TABLE IF NOT EXISTS `linkedin_db`.`connection` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `linkedin_db`.`application`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `linkedin_db`.`application` (
+  `listingID` BIGINT NOT NULL,
+  `applicantID` BIGINT NOT NULL,
+  `accepted` BOOLEAN NOT NULL,
+  `rejected` BOOLEAN NOT NULL,
+  `applicationID` BIGINT NOT NULL AUTO_INCREMENT,
+  INDEX `fk_application_2_idx` (`applicantID` ASC),
+  PRIMARY KEY (`applicationID`),
+  CONSTRAINT `fk_application_1`
+    FOREIGN KEY (`listingID`)
+    REFERENCES `linkedin_db`.`listing` (`listingID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_application_2`
+    FOREIGN KEY (`applicantID`)
+    REFERENCES `linkedin_db`.`user` (`userID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `linkedin_db`.`like_article`

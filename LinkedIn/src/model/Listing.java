@@ -30,6 +30,7 @@ public class Listing implements Serializable {
 	@XmlAttribute // for xml marshalling
 	@XmlID
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String listingID;
 
 	@XmlElement // for xml marshalling

@@ -49,23 +49,17 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public Boolean changeEmail( String userID, String email) {
-
+	public void changeEmail( String userID, String email) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		User user = em.find(User.class ,userID);
 		user.setEmail(email);
-
-		return true;
 	}
 
 	@Override
-	public Boolean changePassword( String userID, String passwordHashed) {
-
+	public void changePassword( String userID, String passwordHashed) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		User user = em.find(User.class ,userID);
 		user.setPasswordHashed(passwordHashed);
-
-		return true;
 	}
 	
 	@Override

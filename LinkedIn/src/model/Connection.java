@@ -29,6 +29,7 @@ public class Connection implements Serializable {
 	@XmlAttribute // for xml marshalling
 	@XmlID
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String connectionID;
 	
 	private Boolean accepted;
