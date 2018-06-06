@@ -37,9 +37,22 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 			return null;
 	}
 	
-	public List<Application> getUserUnansweredApplicationsRequests(Long id) {
+	public List<Application> getUserUnansweredApplications(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT a FROM Application a WHERE a.user.userID = '" + String.valueOf(id) + "' AND a.accepted = false AND a.rejected = false");
+		
+		@SuppressWarnings("unchecked")
+		List<Application> applications = query.getResultList();
+		
+		if (applications.size() > 0)
+			return applications;
+		else 
+			return null;
+	}
+	
+	public List<Application> getListingUnansweredApplications(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT a FROM Application a WHERE a.listing.listingID = '" + String.valueOf(id) + "' AND a.accepted = false AND a.rejected = false");
 		
 		@SuppressWarnings("unchecked")
 		List<Application> applications = query.getResultList();

@@ -12,7 +12,9 @@ public interface ApplicationDAO {
 	
 	public List<Application> getUserApplications(Long id);
 	
-	public List<Application> getUserUnansweredApplicationsRequests(Long id);
+	public List<Application> getUserUnansweredApplications(Long id);
+	
+	public List<Application> getListingUnansweredApplications(Long id);
 
 	public Application getApplication(Long id1, Long id2);
 	
