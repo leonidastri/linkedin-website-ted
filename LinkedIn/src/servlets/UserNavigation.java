@@ -56,6 +56,7 @@ public class UserNavigation extends HttpServlet {
 				redirect = "/user_connections.jsp";
 			}
 			else if( action.equals("Listings") ) {
+				
 				redirect = "/user_listings.jsp";
 			}
 			else if( action.equals("Notifications") ) {
@@ -79,15 +80,19 @@ public class UserNavigation extends HttpServlet {
 				LikeArticleDAO likeArticlesDAO = new LikeArticleDAOImpl();
 				List<LikeArticle> likeArticles = new ArrayList<LikeArticle>();
 				
-				for( Article article : articles ) {
-					likeArticles.addAll( likeArticlesDAO.getLikesOfUserArticles(Long.parseLong(article.getArticleID())) );
+				if( articles != null ) {
+					for( Article article : articles ) {
+						likeArticles.addAll( likeArticlesDAO.getLikesOfUserArticles(Long.parseLong(article.getArticleID())) );
+					}
 				}
 				
 				CommentDAO commentDAO = new CommentDAOImpl();
 				List<Comment> comments = new ArrayList<Comment>();
 				
-				for( Article article : articles ) {
-					comments.addAll( commentDAO.getArticleComments(Long.parseLong(article.getArticleID())) );
+				if( articles != null) {
+					for( Article article : articles ) {
+						comments.addAll( commentDAO.getArticleComments(Long.parseLong(article.getArticleID())) );
+					}
 				}
 				
 				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
