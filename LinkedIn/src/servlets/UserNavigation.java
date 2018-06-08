@@ -99,6 +99,14 @@ public class UserNavigation extends HttpServlet {
 				
 				List<Connection> unansweredCons = connectionDAO.getUserUnansweredConnectionsRequests(Long.parseLong(userID));
 				
+				if( unansweredCons == null ) {
+					unansweredCons = new ArrayList<Connection>();
+				}
+				
+				System.out.println(unansweredCons.size() );
+				System.out.println(comments.size() );
+				System.out.println(likeArticles.size() );
+				
 				request.setAttribute("likeArticles", likeArticles);
 				request.setAttribute("unansweredCons", unansweredCons);
 				request.setAttribute("comments", comments);
