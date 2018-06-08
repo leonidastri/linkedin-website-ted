@@ -15,6 +15,8 @@ public interface UserDAO {
 	
     public List<User> list();
     
+    public List<String> listUserIDs();
+    
     public User login(String email, String pass);
 
     public void create(User user);

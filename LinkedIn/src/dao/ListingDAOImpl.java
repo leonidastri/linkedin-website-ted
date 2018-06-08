@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -62,6 +63,50 @@ public class ListingDAOImpl implements ListingDAO {
 			return listings;
 		else 
 			return null;
+	}
+	
+	public List<Listing> getConnectedUsersListings(Long id) {
+		ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+		List<String> userIDs = connectionDAO.getConnectedUsersIDs(id);
+		
+		List<Listing> listings = new ArrayList<Listing>();
+		
+		for (String userID : userIDs) {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			Query query = em.createQuery("SELECT l FROM Listing l WHERE l.user.userID = '" + userID + "'");
+			
+			@SuppressWarnings("unchecked")
+			List<Listing> temp = query.getResultList();
+			
+			if (temp.size() == 1)
+				listings.add(temp.get(0));
+			else
+				System.out.println("getConnectedUsersListings: Error, temp > 1");
+		}
+		
+		return listings;
+	}
+	
+	public List<Listing> getNotConnectedUsersListings(Long id) {
+		ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+		List<String> userIDs = connectionDAO.getNotConnectedUsersIDs(id);
+		
+		List<Listing> listings = new ArrayList<Listing>();
+		
+		for (String userID : userIDs) {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			Query query = em.createQuery("SELECT l FROM Listing l WHERE l.user.userID = '" + userID + "'");
+			
+			@SuppressWarnings("unchecked")
+			List<Listing> temp = query.getResultList();
+			
+			if (temp.size() == 1)
+				listings.add(temp.get(0));
+			else
+				System.out.println("getNotConnectedUsersListings: Error, temp > 1");
+		}
+		
+		return listings;
 	}
 	
 }

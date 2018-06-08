@@ -73,6 +73,16 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
+	public List<String> listUserIDs() {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT u.userID FROM User u", User.class);
+		@SuppressWarnings("unchecked")
+		List<String> userIDs = query.getResultList();  
+//		em.getTransaction().commit();
+        return userIDs;
+	}
+	
+	@Override
 	public User login(String email, String pass) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "' and u.passwordHashed = '" + pass + "'");

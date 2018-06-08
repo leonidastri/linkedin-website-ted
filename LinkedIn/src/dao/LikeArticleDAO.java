@@ -11,6 +11,6 @@ public interface LikeArticleDAO {
 	public void create(LikeArticle likeArticle);
 	
 	public List<LikeArticle> getUserLikeArticles(Long id);
-
+	
 	public List<LikeArticle> getLikesOfUserArticles(Long articleID);
 }

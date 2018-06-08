@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -60,6 +61,41 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 		if (connections.size() == 1)
 			return connections.get(0);
 		else 
+			return null;
+	}
+	
+	public List<String> getConnectedUsersIDs(Long id1) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT c.user2.userID FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id1) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<String> connections = query.getResultList();
+		
+		if (connections.size() > 0)
+			return connections;
+		else
+			return null;
+	}
+	
+	public List<String> getNotConnectedUsersIDs(Long id1) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT c.user2.userID FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id1) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<String> connections = query.getResultList();
+		
+		UserDAO userDAO = new UserDAOImpl();
+		List<String> allUsers = userDAO.listUserIDs();
+		
+		List<String> nonConnections = new ArrayList<String>();
+		
+		for (String u : allUsers)
+			if (!connections.contains(u))
+				nonConnections.add(u);
+		
+		if (nonConnections.size() > 0)
+			return nonConnections;
+		else
 			return null;
 	}
 	

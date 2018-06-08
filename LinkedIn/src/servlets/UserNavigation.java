@@ -19,10 +19,13 @@ import dao.ConnectionDAO;
 import dao.ConnectionDAOImpl;
 import dao.LikeArticleDAO;
 import dao.LikeArticleDAOImpl;
+import dao.ListingDAO;
+import dao.ListingDAOImpl;
 import model.Article;
 import model.Comment;
 import model.Connection;
 import model.LikeArticle;
+import model.Listing;
 import model.User;
 
 /**
@@ -56,6 +59,14 @@ public class UserNavigation extends HttpServlet {
 				redirect = "/user_connections.jsp";
 			}
 			else if( action.equals("Listings") ) {
+				ListingDAO listingDAO = new ListingDAOImpl();
+				List<Listing> connectedUsersListings = listingDAO.getConnectedUsersListings(Long.parseLong(userID));
+				List<Listing> notConnectedUsersListings = listingDAO.getNotConnectedUsersListings(Long.parseLong(userID));
+				
+				/* TODO: filter the notConnectedUsersListings */
+
+				request.setAttribute("connectedUsersListings", connectedUsersListings);
+				request.setAttribute("notConnectedUsersListings", notConnectedUsersListings);
 				
 				redirect = "/user_listings.jsp";
 			}
