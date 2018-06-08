@@ -38,7 +38,7 @@
 	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
 
 	<div class="pricing-header px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <a class="btn btn-primary" href="UserListing?action=UserListings" role="button">Add a listing or check applications to your current listings</a>
+      <a class="btn btn-primary" href="UserListings?action=UserListingsPersonal" role="button">Add a listing or check applications to your current listings</a>
     </div>
 
 	<div class="container">
@@ -62,7 +62,7 @@
 			                                        	<p> ${connectionListings.get(i).getDescription()}</p>
 			                                        </td>
 			                                        <td>
-			                                           	<form action="/UserListing" method="post">
+			                                           	<form action="/UserListings" method="post">
 														  	<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
 															<input type="hidden" name="listingID" value="${connectionListings.get(i).getListingID()}">
   															<input type="hidden" name="action" value="ListingApplication">
@@ -100,7 +100,7 @@
 			                                        	<p> ${noConnectionListings.get(i).getDescription()}</p>
 			                                        </td>
 			                                        <td>
-			                                           	<form action="/UserListing" method="post">
+			                                           	<form action="/UserListings" method="post">
 														  	<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
 															<input type="hidden" name="listingID" value="${noConnectionListings.get(i).getListingID()}">
   															<input type="hidden" name="action" value="ListingApplication">

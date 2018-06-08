@@ -37,10 +37,6 @@
   	
 	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
 
-	<div class="pricing-header px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <a class="btn btn-primary" href="UserListing?action=UserListings" role="button">Add a listing or check applications to your current listings</a>
-    </div>
-
 	<div class="container">
 	    <div class="row my-2">
 	        <div class="col-lg-8 order-lg-2">
@@ -49,13 +45,12 @@
 	                
 	                	<div class="row">
 
-                	 		<form id="a_form" action="UserListings?action=addListing" method="POST">
+                	 		<form id="a_form" action="UserListings?action=AddListing" method="POST">
 
 								Add title: <br>
 								<input type="text" name="title" /> <br>
 								Add description: <br>
 								<input type="text" name="description" /> <br>
-								Confirm password : <br> <br>
 								
 								<input type="submit" value="Add new listing" />
 							</form>
