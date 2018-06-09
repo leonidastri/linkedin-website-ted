@@ -19,8 +19,9 @@ import dao.ConnectionDAO;
 import dao.ConnectionDAOImpl;
 import dao.LikeArticleDAO;
 import dao.LikeArticleDAOImpl;
-import dao.ListingDAO;
-import dao.ListingDAOImpl;
+//import dao.ListingDAO;
+//import dao.ListingDAOImpl;
+import jpautils.RecommendationSystem;
 import model.Article;
 import model.Comment;
 import model.Connection;
@@ -59,14 +60,22 @@ public class UserNavigation extends HttpServlet {
 				redirect = "/user_connections.jsp";
 			}
 			else if( action.equals("Listings") ) {
-				ListingDAO listingDAO = new ListingDAOImpl();
-				List<Listing> connectedUsersListings = listingDAO.getConnectedUsersListings(Long.parseLong(userID));
-				List<Listing> notConnectedUsersListings = listingDAO.getNotConnectedUsersListings(Long.parseLong(userID));
+//				ListingDAO listingDAO = new ListingDAOImpl();
+//				List<Listing> connectedUsersListings = listingDAO.getConnectedUsersListings(Long.parseLong(userID));
+//				List<Listing> notConnectedUsersListings = listingDAO.getNotConnectedUsersListings(Long.parseLong(userID));
 				
-				/* TODO: filter the notConnectedUsersListings */
+				/* TODO: filter the notConnectedUsersListings
+				 * TODO: should we filter the connectedUsersListingsAsWell */
+				
+				/* for now, just take the recommended users' listings directly */
+				RecommendationSystem recommendationSystem = new RecommendationSystem();
+				List<Listing> recommendedConnectedUsersListings = recommendationSystem.getConnectedRecommendedListings(userID);
+				List<Listing> recommendedNotConnectedUsersListings = recommendationSystem.getNotConnectedRecommendedListings(userID);
 
-				request.setAttribute("connectedUsersListings", connectedUsersListings);
-				request.setAttribute("notConnectedUsersListings", notConnectedUsersListings);
+//				request.setAttribute("connectedUsersListings", connectedUsersListings);
+//				request.setAttribute("notConnectedUsersListings", notConnectedUsersListings);
+				request.setAttribute("recommendedConnectedUsersListings", recommendedConnectedUsersListings);
+				request.setAttribute("recommendedNotConnectedUsersListings", recommendedNotConnectedUsersListings);
 				
 				redirect = "/user_listings.jsp";
 			}
