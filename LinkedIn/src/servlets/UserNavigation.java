@@ -56,8 +56,26 @@ public class UserNavigation extends HttpServlet {
 			if( action.equals("Homepage") ) {
 				redirect = "/user_homepage.jsp";
 			}
-			else if( action.equals("Connections") ) {
-				redirect = "/user_connections.jsp";
+			else if( action.equals("Network") ) {
+				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+				List<Connection> connections = connectionDAO.getUserConnections(Long.parseLong(userID));
+				
+				List<User> networkUsers = new ArrayList<User>();
+				
+				if( connections != null) {
+					
+					for (Connection con : connections) {
+						if( con.getUser1().getUserID() == userID ) {
+							networkUsers.add(con.getUser1());
+						} else if( con.getUser2().getUserID() == userID ) {
+							networkUsers.add(con.getUser2());
+						}
+					}
+					
+				}
+				
+				request.setAttribute("networkUsers", networkUsers);
+				redirect = "/user_network.jsp";
 			}
 			else if( action.equals("Listings") ) {
 //				ListingDAO listingDAO = new ListingDAOImpl();

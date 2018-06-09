@@ -49,6 +49,42 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
+	public List<User> find(String name, String surname) {
+		
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = null;
+		
+		if( name != null && surname != null ) {
+			
+			query = em.createQuery("SELECT u FROM User u WHERE u.firstName = '" + name + "'AND u.lastName = '" + surname + "'");			
+		}
+		else if( name != null && surname == null ) {
+			
+			query = em.createQuery("SELECT u FROM User u WHERE u.firstName = '" + name + "'");
+		}
+		else if( name == null && surname != null ) {
+			
+			query = em.createQuery("SELECT u FROM User u WHERE u.lastName = '" + surname + "'");
+		} 
+		else {
+			
+			query = em.createQuery("SELECT u FROM User u");
+		}
+		
+		@SuppressWarnings("unchecked")
+		List<User> users = query.getResultList();
+		
+		if (users.size() == 1) {
+			System.out.println("found users");
+			return users;
+		}
+		else {
+			System.out.println("found no users");
+			return null;
+		}
+	}
+	
+	@Override
 	public void changeEmail( String userID, String email) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		User user = em.find(User.class ,userID);

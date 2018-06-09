@@ -31,48 +31,32 @@
       		</div>
     	</div>
   	</nav>
- 
-	<div class="row">
-		<form id="a_form" action="UserNetwork" method="GET">
-			<p> Search by name and surname </p> <br>
-			
-			Name: <br>
-			<input type="text" name="name"/> <br>
-			Surname: <br>
-			<input type="text" name="surname"/> <br>
-			
-			<input type="submit" id="action" name="action" value="Search" />
-		
-		</form>
-					
-		<br> <br>
-	</div>
 	                	
     <div class="row">
 		<div class="col-md-12">
 	    	<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> User's network</h5>
 	        <table class="table table-sm table-hover table-striped">
 	           	<tbody>
-					<c:if test="${networkUsers.size() != 0}">
-						<c:forEach var="i" begin="0" end="${networkUsers.size()-1}" step="1">
+					<c:if test="${searchUsers.size() != 0}">
+						<c:forEach var="i" begin="0" end="${searchUsers.size()-1}" step="1">
 							<tr>
 			                   	<td>
-			                   		<img src="${networkUsers.get(i).getUser().getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+			                   		<img src="${searchUsers.get(i).getUser().getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 			                   	</td>
 			                   	<td>
-			                   		<a href="UserProfile?email=${networkUsers.get(i).getEmail()}"> <strong>${networkUsers.get(i).getEmail()}</strong> </a>
+			                   		<a href="UserProfile?email=${searchUsers.get(i).getEmail()}"> <strong>${searchUsers.get(i).getEmail()}</strong> </a>
 			                   	</td>
 			                   	<td>
-			                   		<strong>${networkUsers.get(i).getFirstName()}</strong>
+			                   		<strong>${searchUsers.get(i).getFirstName()}</strong>
 			                   	</td>
 			                   	<td>
-			                   		<strong>${networkUsers.get(i).getLastName()}</strong>
+			                   		<strong>${searchUsers.get(i).getLastName()}</strong>
 			                   	</td>
 			                </tr>
 		                </c:forEach>
 	                </c:if>
-	                <c:if test="${networkUsers.size() == 0}">
-	                	<strong> Not connected with other users yet</strong>
+	                <c:if test="${searchUsers.size() == 0}">
+	                	<strong> No users found </strong>
 	                </c:if>
 	            </tbody>
 	        </table>

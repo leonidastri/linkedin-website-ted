@@ -116,7 +116,7 @@ public class UserProfile extends HttpServlet {
 				
 				redirect = "/user_profile.jsp";
 			}
-			else if ( action.equals("UserNetwork") ) {
+			else if ( action.equals("Network") ) {
 				
 				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
 				List<Connection> connections = connectionDAO.getUserConnections(Long.parseLong(userID));

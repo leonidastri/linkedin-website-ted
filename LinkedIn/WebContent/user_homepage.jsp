@@ -15,7 +15,7 @@
 	<nav class="my-2 my-md-0 mr-md-3">
 	
     	<a class="p-2 text-light" href="UserNavigation?action=Homepage"> Homepage </a>
-        <a class="p-2 text-light" href="UserNavigation?action=Connections"> Connections </a>
+        <a class="p-2 text-light" href="UserNavigation?action=Network"> Network </a>
         <a class="p-2 text-light" href="UserNavigation?action=Listings"> Listings </a>
         <a class="p-2 text-light" href="UserNavigation?action=Notifications"> Notifications </a>
         <a class="p-2 text-light" href="UserNavigation?action=Messenger"> Messenger </a>
@@ -35,7 +35,7 @@
 	<br> <br>
 	<a class="btn btn-primary" href="UserProfile?action=UserProfile" role="button">User profile</a>
 	<br>
-	<a class="btn btn-primary" href="UserProfile?action=UserNetwork" role="button">User network</a>
+	<a class="btn btn-primary" href="UserProfile?action=Network" role="button">User network</a>
 	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
