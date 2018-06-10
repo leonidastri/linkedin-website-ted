@@ -10,6 +10,10 @@ public interface LikeListingDAO {
 
 	public void create(LikeListing likeListing);
 	
-	public List<LikeListing> getUserLikeListings(Long id);
+	public List<LikeListing> getUserLikeListings(Long userID);
+	
+	public List<String> getLikeListingUserIDs(Long listingID);
+	
+	public List<String> getUserLikeListingsListingIDs(Long userID);
 
 }

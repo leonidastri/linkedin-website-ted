@@ -24,9 +24,9 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 		em.persist(likeListing);
 	}
 	
-	public List<LikeListing> getUserLikeListings(Long id) {
+	public List<LikeListing> getUserLikeListings(Long userID) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT ll FROM LikeListing ll WHERE ll.user.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT ll FROM LikeListing ll WHERE ll.user.userID = '" + String.valueOf(userID) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<LikeListing> likeListings = query.getResultList();
@@ -36,5 +36,32 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 		else 
 			return null;
 	}
+	
+	public List<String> getLikeListingUserIDs(Long listingID) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT ll.user.userID FROM LikeListing ll WHERE ll.listing.listingID = '" + String.valueOf(listingID) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<String> userIDs = query.getResultList();
+		
+		if (userIDs.size() > 0)
+			return userIDs;
+		else 
+			return null;
+	}
 
+	
+	public List<String> getUserLikeListingsListingIDs(Long userID) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT ll.listing.listingID FROM LikeListing ll WHERE ll.user.userID = '" + String.valueOf(userID) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<String> listingIDs = query.getResultList();
+		
+		if (listingIDs.size() > 0)
+			return listingIDs;
+		else 
+			return null;
+	}
+	
 }

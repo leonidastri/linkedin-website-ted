@@ -49,4 +49,32 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 		else 
 			return null;
 	}
+	
+	public List<String> getLikeArticleUserIDs(Long articleID) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT la.user.userID FROM LikeArticle la WHERE la.article.articleID = '" + String.valueOf(articleID) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<String> userIDs = query.getResultList();
+		
+		if (userIDs.size() > 0)
+			return userIDs;
+		else 
+			return null;
+	}
+
+	
+	public List<String> getUserLikeArticlesArticleIDs(Long userID) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT la.article.articleID FROM LikeArticle la WHERE la.user.userID = '" + String.valueOf(userID) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<String> articleIDs = query.getResultList();
+		
+		if (articleIDs.size() > 0)
+			return articleIDs;
+		else 
+			return null;
+	}
+	
 }

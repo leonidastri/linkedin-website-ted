@@ -14,4 +14,8 @@ public interface CommentDAO {
 	
 	public List<Comment> getArticleComments(Long id);
 	
+	public List<String> getArticleCommentsUserIDs(Long articleID);
+	
+	public List<String> getUserCommentsArticleIDs(Long userID);
+	
 }
