@@ -53,7 +53,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 
 	public Connection getConnection(Long id1, Long id2) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id1) + "' AND c.user2.userID = '" + String.valueOf(id2) + "'");
+		Query query = em.createQuery("SELECT c FROM Connection c WHERE (c.user1.userID = '" + String.valueOf(id1) + "' AND c.user2.userID = '" + String.valueOf(id2) + "') OR (c.user1.userID = '" + String.valueOf(id2) + "' AND c.user2.userID = '" + String.valueOf(id1) + "')");
 		
 		@SuppressWarnings("unchecked")
 		List<Connection> connections = query.getResultList();

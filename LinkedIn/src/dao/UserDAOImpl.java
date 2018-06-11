@@ -74,7 +74,7 @@ public class UserDAOImpl implements UserDAO {
 		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();
 		
-		if (users.size() == 1) {
+		if (users.size() > 0) {
 			System.out.println("found users");
 			return users;
 		}

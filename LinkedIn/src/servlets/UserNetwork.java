@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ConnectionDAO;
+import dao.ConnectionDAOImpl;
 import dao.UserDAO;
 import dao.UserDAOImpl;
 import model.User;
@@ -41,17 +43,32 @@ public class UserNetwork extends HttpServlet {
 				String surname = request.getParameter("surname");
 				
 				UserDAO userDAO = new UserDAOImpl();
-				List<User> searchUsers = userDAO.find( name, surname);
+				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+				
+				List<User> searchUsers = userDAO.find(name, surname);
+				List<String> searchUserIDs = new ArrayList<String>();
 				
 				if( searchUsers == null ) {
 					searchUsers = new ArrayList<User>();
+					
+					searchUserIDs = connectionDAO.getConnectedUsersIDs(Long.parseLong(userID));
+					
+					for (String id : searchUserIDs)
+						searchUsers.add(userDAO.find(Long.parseLong(id)));
+				}
+				else {
+					List<User> temp = new ArrayList<User>();
+					
+					for (User u : searchUsers)
+						if (connectionDAO.getConnection(Long.parseLong(userID), Long.parseLong(u.getUserID())) != null)
+							temp.add(u);
+					
+					searchUsers = temp;
 				}
 				
 				request.setAttribute("searchUsers", searchUsers);
 				redirect = "/user_network_search_results.jsp";
-			
 			}
-			
 		}
 		else {
 			redirect = "/start_page.jsp";
