@@ -18,6 +18,7 @@ import model.User;
  */
 @WebServlet("/UserSettings")
 public class UserSettings extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

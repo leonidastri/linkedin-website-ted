@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,45 +10,55 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MessageDAO;
-import dao.MessageDAOImpl;
-import model.Message;
+import dao.ArticleDAO;
+import dao.ArticleDAOImpl;
+import dao.CommentDAO;
+import dao.CommentDAOImpl;
+import dao.UserDAO;
+import dao.UserDAOImpl;
+import model.Comment;
 
 /**
- * Servlet implementation class UserMessenger
+ * Servlet implementation class UserAddPersonalInfo
  */
-@WebServlet("/UserMessenger")
-public class UserMessenger extends HttpServlet {
+@WebServlet("/UserAddComment")
+public class UserAddComment extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String redirect = "/users_conversation.jsp";
+		String redirect = "/user_homepage.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
-		String receiverID = request.getParameter("receiverID");
 		
 		if (isUser) {
-			MessageDAO messageDAO = new MessageDAOImpl();
+			String articleID = (String) session.getAttribute("articleID");
+			String text = request.getParameter("text");
 			
-			List<Message> conversation = messageDAO.getUserConversation( Long.parseLong(userID), Long.parseLong(receiverID));
+			ArticleDAO articleDAO = new ArticleDAOImpl();
+			CommentDAO commentDAO = new CommentDAOImpl();
+			UserDAO userDAO = new UserDAOImpl();
 			
-			session.setAttribute("receiverID", receiverID );
-			session.setAttribute("messages", conversation);
-			redirect = "/user_messages.jsp";
+			Comment comment = new Comment();
+			
+			comment.setArticle(articleDAO.find(Long.parseLong(articleID)));
+			comment.setPubDate(new Date());
+			comment.setText(text);
+			comment.setUser(userDAO.find(Long.parseLong(userID)));
+			
+			commentDAO.create(comment);
 		}
 		else {
-			redirect = "/start_page.jsp";
+			redirect = "/user_homepage.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}
-		
+
 		request.getRequestDispatcher(redirect).forward(request, response);
-		
 	}
 
 	/**
@@ -58,5 +68,4 @@ public class UserMessenger extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

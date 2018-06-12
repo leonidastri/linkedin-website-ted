@@ -22,6 +22,7 @@ import model.User;
  */
 @WebServlet("/UserNetwork")
 public class UserNetwork extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

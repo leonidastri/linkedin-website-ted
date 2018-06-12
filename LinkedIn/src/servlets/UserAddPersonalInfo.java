@@ -27,6 +27,7 @@ import model.User;
  */
 @WebServlet("/UserAddPersonalInfo")
 public class UserAddPersonalInfo extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

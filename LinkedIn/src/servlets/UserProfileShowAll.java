@@ -44,6 +44,7 @@ import model.User;
  */
 @WebServlet("/UserProfileShowAll")
 public class UserProfileShowAll extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

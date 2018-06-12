@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,15 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MessageDAO;
-import dao.MessageDAOImpl;
-import model.Message;
+import dao.ArticleDAO;
+import dao.ArticleDAOImpl;
+import dao.UserDAO;
+import dao.UserDAOImpl;
+import model.Article;
 
 /**
- * Servlet implementation class UserMessenger
+ * Servlet implementation class UserAddPersonalInfo
  */
-@WebServlet("/UserMessenger")
-public class UserMessenger extends HttpServlet {
+@WebServlet("/UserAddArticle")
+public class UserAddArticle extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -27,30 +29,38 @@ public class UserMessenger extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String redirect = "/users_conversation.jsp";
+		String redirect = "/user_homepage.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
-		String receiverID = request.getParameter("receiverID");
 		
 		if (isUser) {
-			MessageDAO messageDAO = new MessageDAOImpl();
+			String title = request.getParameter("title");
+			String text = request.getParameter("text");
 			
-			List<Message> conversation = messageDAO.getUserConversation( Long.parseLong(userID), Long.parseLong(receiverID));
+			ArticleDAO articleDAO = new ArticleDAOImpl();
+			UserDAO userDAO = new UserDAOImpl();
 			
-			session.setAttribute("receiverID", receiverID );
-			session.setAttribute("messages", conversation);
-			redirect = "/user_messages.jsp";
+			Article article = new Article();
+			
+			article.setText(text);
+			article.setTitle(title);
+			article.setUser(userDAO.find(Long.parseLong(userID)));
+			article.setPubDate(new Date());			// return current date
+			/* TODO: add picture path and video path */
+			article.setPicturePath("");
+			article.setVideoPath("");
+			
+			articleDAO.create(article);
 		}
 		else {
-			redirect = "/start_page.jsp";
+			redirect = "/user_homepage.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}
-		
-		request.getRequestDispatcher(redirect).forward(request, response);
-		
-	}
 
+		request.getRequestDispatcher(redirect).forward(request, response);
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -58,5 +68,4 @@ public class UserMessenger extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

@@ -21,6 +21,7 @@ import model.User;
  */
 @WebServlet("/AdminManagement")
 public class AdminManagement extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
 	/**

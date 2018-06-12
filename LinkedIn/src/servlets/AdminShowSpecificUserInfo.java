@@ -17,6 +17,7 @@ import model.User;
  */
 @WebServlet("/AdminShowSpecificUserInfo")
 public class AdminShowSpecificUserInfo extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
