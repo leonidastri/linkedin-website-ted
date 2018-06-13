@@ -29,6 +29,7 @@ public class UserAddArticle extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		/* TODO: check if alright */
 		String redirect = "/user_homepage.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
@@ -54,6 +55,7 @@ public class UserAddArticle extends HttpServlet {
 			articleDAO.create(article);
 		}
 		else {
+			/* TODO: check if alright */
 			redirect = "/user_homepage.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}

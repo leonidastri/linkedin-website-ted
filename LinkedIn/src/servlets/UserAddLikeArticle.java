@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,17 +11,17 @@ import javax.servlet.http.HttpSession;
 
 import dao.ArticleDAO;
 import dao.ArticleDAOImpl;
-import dao.CommentDAO;
-import dao.CommentDAOImpl;
+import dao.LikeArticleDAO;
+import dao.LikeArticleDAOImpl;
 import dao.UserDAO;
 import dao.UserDAOImpl;
-import model.Comment;
+import model.LikeArticle;
 
 /**
  * Servlet implementation class UserAddPersonalInfo
  */
-@WebServlet("/UserAddComment")
-public class UserAddComment extends HttpServlet {
+@WebServlet("/UserAddLikeArticle")
+public class UserAddLikeArticle extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -39,20 +38,17 @@ public class UserAddComment extends HttpServlet {
 		
 		if (isUser) {
 			String articleID = (String) session.getAttribute("articleID");
-			String text = request.getParameter("text");
 			
 			ArticleDAO articleDAO = new ArticleDAOImpl();
-			CommentDAO commentDAO = new CommentDAOImpl();
+			LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
 			UserDAO userDAO = new UserDAOImpl();
 			
-			Comment comment = new Comment();
+			LikeArticle likeArticle = new LikeArticle();
 			
-			comment.setArticle(articleDAO.find(Long.parseLong(articleID)));
-			comment.setPubDate(new Date());
-			comment.setText(text);
-			comment.setUser(userDAO.find(Long.parseLong(userID)));
+			likeArticle.setArticle(articleDAO.find(Long.parseLong(articleID)));
+			likeArticle.setUser(userDAO.find(Long.parseLong(userID)));
 			
-			commentDAO.create(comment);
+			likeArticleDAO.create(likeArticle);
 		}
 		else {
 			/* TODO: check if alright */

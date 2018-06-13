@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ArticleDAO;
-import dao.ArticleDAOImpl;
-import dao.CommentDAO;
-import dao.CommentDAOImpl;
+import dao.LikeListingDAO;
+import dao.LikeListingDAOImpl;
+import dao.ListingDAO;
+import dao.ListingDAOImpl;
 import dao.UserDAO;
 import dao.UserDAOImpl;
-import model.Comment;
+import model.LikeListing;
 
 /**
  * Servlet implementation class UserAddPersonalInfo
  */
-@WebServlet("/UserAddComment")
-public class UserAddComment extends HttpServlet {
+@WebServlet("/UserAddLikeListing")
+public class UserAddLikeListing extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -38,21 +37,18 @@ public class UserAddComment extends HttpServlet {
 		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
-			String articleID = (String) session.getAttribute("articleID");
-			String text = request.getParameter("text");
+			String listingID = (String) session.getAttribute("listingID");
 			
-			ArticleDAO articleDAO = new ArticleDAOImpl();
-			CommentDAO commentDAO = new CommentDAOImpl();
+			LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
+			ListingDAO listingDAO = new ListingDAOImpl();
 			UserDAO userDAO = new UserDAOImpl();
 			
-			Comment comment = new Comment();
+			LikeListing likeListing = new LikeListing();
 			
-			comment.setArticle(articleDAO.find(Long.parseLong(articleID)));
-			comment.setPubDate(new Date());
-			comment.setText(text);
-			comment.setUser(userDAO.find(Long.parseLong(userID)));
+			likeListing.setListing(listingDAO.find(Long.parseLong(listingID)));
+			likeListing.setUser(userDAO.find(Long.parseLong(userID)));
 			
-			commentDAO.create(comment);
+			likeListingDAO.create(likeListing);
 		}
 		else {
 			/* TODO: check if alright */
