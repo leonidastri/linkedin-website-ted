@@ -11,4 +11,5 @@ public interface EducationDAO {
 	
 	public List<Education> getUserEducation(Long id);
 
+	public List<Education> getOnlyPublicUserEducation(Long id);
 }

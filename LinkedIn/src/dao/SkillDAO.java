@@ -11,4 +11,6 @@ public interface SkillDAO {
 	
 	public List<Skill> getUserSkills(Long id);
 
+	public List<Skill> getOnlyPublicUserSkills(Long id);
+	
 }

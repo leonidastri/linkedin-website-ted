@@ -56,6 +56,7 @@ public class UserProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String redirect = "/user_homepage.jsp";
+		String userID2 = null;
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String action = request.getParameter("action");
@@ -69,7 +70,7 @@ public class UserProfile extends HttpServlet {
 			
 			if( email != null) {
 				user = userDAO.find(email);
-				userID = user.getUserID();
+				userID2 = user.getUserID();
 			} else {
 				user = userDAO.find(Long.parseLong(userID));
 			}
@@ -94,6 +95,63 @@ public class UserProfile extends HttpServlet {
 				List<LikeArticle> likeArticles = likeArticleDAO.getUserLikeArticles(Long.parseLong(userID));
 				List<LikeListing> likeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID));
 			
+				List<Article> likedArticlesDetails = new ArrayList<Article>();
+				if( likeArticles != null )
+					for (LikeArticle l : likeArticles)
+						likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
+			
+				List<Listing> likedListingsDetails = new ArrayList<Listing>();
+				if( likeListings != null)
+					for (LikeListing l : likeListings)
+						likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
+			
+				request.setAttribute("jobs", jobs);
+				request.setAttribute("skills", skills);
+				request.setAttribute("education", education);
+				request.setAttribute("listings", listings);
+				request.setAttribute("comments", comments);
+				request.setAttribute("articles", articles);
+				request.setAttribute("likedArticlesDetails", likedArticlesDetails);
+				request.setAttribute("likedListingsDetails", likedListingsDetails);
+				request.setAttribute("email", email);
+				
+				redirect = "/user_profile.jsp";
+			}
+			else if ( action.equals("OtherUserProfile") ) {
+				
+				JobDAO jobDAO = new JobDAOImpl();
+				SkillDAO skillDAO = new SkillDAOImpl();
+				EducationDAO educationDAO = new EducationDAOImpl();
+				ListingDAO listingDAO = new ListingDAOImpl();
+				CommentDAO commentDAO = new CommentDAOImpl();
+				ArticleDAO articleDAO = new ArticleDAOImpl();
+				LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
+				LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
+				ConnectionDAO connectionDAO = new ConnectionDAOImpl();
+				
+				Connection con = connectionDAO.getConnection( Long.parseLong(userID), Long.parseLong(userID2));
+				
+				List<Job> jobs;
+				List<Skill> skills;
+				List<Education> education;
+				
+				if( con == null ) {
+					jobs = jobDAO.getOnlyPublicUserJobs(Long.parseLong(userID2));
+					skills = skillDAO.getOnlyPublicUserSkills(Long.parseLong(userID2));
+					education = educationDAO.getOnlyPublicUserEducation(Long.parseLong(userID2));
+				}
+				else {
+					jobs = jobDAO.getUserJobs(Long.parseLong(userID2));
+					skills = skillDAO.getUserSkills(Long.parseLong(userID2));
+					education = educationDAO.getUserEducation(Long.parseLong(userID2));
+				}
+				
+				List<Listing> listings = listingDAO.getUserListings(Long.parseLong(userID2));
+				List<Comment> comments = commentDAO.getUserComments(Long.parseLong(userID2));
+				List<Article> articles = articleDAO.getUserArticles(Long.parseLong(userID2));
+				List<LikeArticle> likeArticles = likeArticleDAO.getUserLikeArticles(Long.parseLong(userID2));
+				List<LikeListing> likeListings = likeListingDAO.getUserLikeListings(Long.parseLong(userID2));
+				
 				List<Article> likedArticlesDetails = new ArrayList<Article>();
 				if( likeArticles != null )
 					for (LikeArticle l : likeArticles)

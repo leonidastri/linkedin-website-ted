@@ -60,7 +60,7 @@
 			                   		<img src="${networkUsers.get(i).getUser().getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 			                   	</td>
 			                   	<td>
-			                   		<a href="UserProfile?email=${networkUsers.get(i).getEmail()}"> <strong>${networkUsers.get(i).getEmail()}</strong> </a>
+			                   		<a href="UserProfile?email=${networkUsers.get(i).getEmail()}&action=OtherUserProfile"> <strong>${networkUsers.get(i).getEmail()}</strong> </a>
 			                   	</td>
 			                   	<td>
 			                   		<strong>${networkUsers.get(i).getFirstName()}</strong>

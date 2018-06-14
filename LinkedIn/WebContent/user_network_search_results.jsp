@@ -44,7 +44,7 @@
 			                   		<img src="${searchUsers.get(i).getUser().getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 			                   	</td>
 			                   	<td>
-			                   		<a href="UserProfile?email=${searchUsers.get(i).getEmail()}"> <strong>${searchUsers.get(i).getEmail()}</strong> </a>
+			                   		<a href="UserProfile?email=${searchUsers.get(i).getEmail()}&action=OtherUserProfile"> <strong>${searchUsers.get(i).getEmail()}</strong> </a>
 			                   	</td>
 			                   	<td>
 			                   		<strong>${searchUsers.get(i).getFirstName()}</strong>

@@ -11,4 +11,5 @@ public interface JobDAO {
 	
 	public List<Job> getUserJobs(Long id);
 
+	public List<Job> getOnlyPublicUserJobs(Long id);
 }

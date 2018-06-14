@@ -37,4 +37,17 @@ public class JobDAOImpl implements JobDAO {
 			return null;
 	}
 	
+	public List<Job> getOnlyPublicUserJobs(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT j FROM Job j WHERE j.user.userID = '" + String.valueOf(id) + " AND j.priv = false'");
+		
+		@SuppressWarnings("unchecked")
+		List<Job> jobs = query.getResultList();
+		
+		if (jobs.size() > 0)
+			return jobs;
+		else 
+			return null;
+	}
+	
 }

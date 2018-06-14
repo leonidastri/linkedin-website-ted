@@ -50,7 +50,7 @@
 											<c:forEach var="i" begin="0" end="${unansweredCons.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <a href="UserProfile?email=${unansweredCons.get(i).getUser().getEmail()}">${unansweredCons.get(i).getUser().getFirstName()}</a>
+			                                            <a href="UserProfile?email=${unansweredCons.get(i).getUser().getEmail()}&action=OtherUserProfile">${unansweredCons.get(i).getUser().getFirstName()}</a>
 			                                        	
 			                                        	<form action="/UserNavigation" method="get">
 														  	<button type="submit" id="acceptFriend" name="acceptFriend" value="true">Accept</button>
@@ -86,7 +86,7 @@
 											<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <a href="UserProfile?email=${likeArticles.get(i).getUser().getEmail()}">${likeArticles.get(i).getUser().getFirstName()}</a>
+			                                            <a href="UserProfile?email=${likeArticles.get(i).getUser().getEmail()}&action=OtherUserProfile">${likeArticles.get(i).getUser().getFirstName()}</a>
 			                                        	<p> liked ${likeArticles.get(i).getArticle().getTitle()} </p>
 			                                        </td>
 			                                    </tr>
@@ -115,7 +115,7 @@
 											<c:forEach var="i" begin="0" end="${comments.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}">${comments.get(i).getUser().getFirstName()}</a>
+			                                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}&action=OtherUserProfile">${comments.get(i).getUser().getFirstName()}</a>
 			                                        	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
 			                                        </td>
 			                                    </tr>
