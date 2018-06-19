@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS `linkedin_db`.`user` (
   `last_name` VARCHAR(128) NOT NULL,
   `email` VARCHAR(128) NOT NULL,
   `phone_number` VARCHAR(128) NOT NULL,
-  `photo_path` VARCHAR(128) NOT NULL,
-  `cv_path` VARCHAR(128) NOT NULL,
+  `photo_path` VARCHAR(1024) NOT NULL,
+  `cv_path` VARCHAR(1024) NOT NULL,
   PRIMARY KEY (`userID`))
 ENGINE = InnoDB;
 
@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `linkedin_db`.`article` (
   `text` VARCHAR(2048) NOT NULL,
   `authorID` BIGINT NOT NULL,
   `pub_date` DATE NOT NULL,
-  `picture_path` VARCHAR(128) NOT NULL,
-  `video_path` VARCHAR(128) NOT NULL,
+  `picture_path` VARCHAR(1024) NOT NULL,
+  `video_path` VARCHAR(1024) NOT NULL,
   PRIMARY KEY (`articleID`),
   INDEX `fk_article_1_idx` (`authorID` ASC),
   CONSTRAINT `fk_article_1`

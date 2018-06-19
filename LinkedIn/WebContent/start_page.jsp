@@ -43,7 +43,7 @@
   <div class="bgimg">
     <br> <br> <br>
     <div align="center" class ="register-container">
-      <form class="form-signin" action="UserRegister" method="post" id="registerForm">
+      <form class="form-signin" action="UserRegister" method="post" id="registerForm" enctype = "multipart/form-data">
         <h3> Get started - it's free. </h3>
         <hr>
           <div class="form-group">
@@ -86,6 +86,18 @@
               placeholder="Phone Number" type="tel"
               pattern=".{1,30}" title="Maximum length is 30 characters"
               required="true" requiredMessage="Please insert a phone number">
+            </label>
+          </div>
+          <div class="form-group">
+            <label> <input class="form-control" id="cv" name="cv" type="file"
+              accept="application/pdf" >
+              <span class="form-control">Choose CV file</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label> <input class="form-control" id="photo" name="photo" type="file"
+              accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
+              <span class="form-control">Choose Photo file</span>
             </label>
           </div>
 

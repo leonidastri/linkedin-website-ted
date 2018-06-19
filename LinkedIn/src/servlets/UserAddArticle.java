@@ -14,6 +14,7 @@ import dao.ArticleDAO;
 import dao.ArticleDAOImpl;
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import jpautils.FileUploadSystem;
 import model.Article;
 
 /**
@@ -44,13 +45,14 @@ public class UserAddArticle extends HttpServlet {
 			
 			Article article = new Article();
 			
+			FileUploadSystem fileUploadSystem = new FileUploadSystem();
+			
 			article.setText(text);
 			article.setTitle(title);
 			article.setUser(userDAO.find(Long.parseLong(userID)));
 			article.setPubDate(new Date());			// return current date
-			/* TODO: add picture path and video path */
-			article.setPicturePath("");
-			article.setVideoPath("");
+			article.setPicturePath(fileUploadSystem.uploadPhoto(request));
+			article.setVideoPath(fileUploadSystem.uploadVideo(request));
 			
 			articleDAO.create(article);
 		}

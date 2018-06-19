@@ -360,10 +360,13 @@
 	        <div class="col-lg-4 order-lg-1 text-center">
 	            <img src="${user.getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 	            <h6 class="mt-2">Upload a different photo</h6>
-	            <label class="custom-file">
-	                <input type="file" id="file" class="custom-file-input">
-	                <span class="custom-file-control">Choose file</span>
-	            </label>
+	            	<form class="form-photoFileFromProfile" action="uploadPhotoFromProfile" method="post" id="profileUploadPhotoForm" enctype = "multipart/form-data">
+	            		<label class="custom-file">
+		                	<input class="form-control" id="photo" name="photo" type="file"
+	              				accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
+		                	<span class="custom-file-control">Choose new photo file</span>
+	            		</label>
+		            </form>
 	            <br>
 	            <br>
 	            <br>
@@ -371,7 +374,19 @@
 	        	<p>${user.getEmail()}</p>
 	        	<h5>Phone:</h5>
 	        	<p>${user.getPhoneNumber()}</p>
-	        	<h6><a href="${user.getCvPath()}">Curriculum Vitae</a></h6>
+	        	<c:if test="${!user.getCvPath().equals(\"\")}">
+	        		<h6><a href="${user.getCvPath()}">Curriculum Vitae</a></h6>
+	        	</c:if>
+	        	<c:if test="${user.getCvPath().equals(\"\")}">
+	        		<h6>Curriculum Vitae</h6>
+	        	</c:if>
+		        	<form class="form-cvFileFromProfile" action="uploadCvFromProfile" method="post" id="profileUploadCvForm" enctype = "multipart/form-data">
+	            		<label class="custom-file">
+		                <input class="form-control" id="cv" name="cv" type="file"
+	              				accept="application/pdf" >
+		                <span class="custom-file-control">Choose new CV file</span>
+		            </label>
+		        </form>
 	        </div>
 	    </div>
 	</div>

@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import jpautils.FileUploadSystem;
 import jpautils.PasswordAuthentication;
 import model.User;
 
@@ -19,6 +21,7 @@ import model.User;
  * Servlet implementation class UserServlet
  */
 @WebServlet("/UserRegister")
+@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
 public class UserRegister extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -58,6 +61,8 @@ public class UserRegister extends HttpServlet {
         	if (password.equals(confirmPassword)) {
         		User temp = dao.find(email);
         		if (temp == null) {
+        			FileUploadSystem fileUploadSystem = new FileUploadSystem();
+        			
         			PasswordAuthentication pa = new PasswordAuthentication();
         			@SuppressWarnings("deprecation")
 					String passwordHashed = pa.hash(password);
@@ -67,9 +72,8 @@ public class UserRegister extends HttpServlet {
                 	user.setLastName(lastName);
                 	user.setEmail(email);
                 	user.setPhoneNumber(phoneNumber);
-                	// TODO: add photo_path cv_path
-                	user.setPhotoPath("");
-                	user.setCvPath("");
+                	user.setPhotoPath(fileUploadSystem.uploadPhoto(request));
+                	user.setCvPath(fileUploadSystem.uploadCV(request));
                 	System.out.println("B");
                 	
                 	// TODO: may need checking
