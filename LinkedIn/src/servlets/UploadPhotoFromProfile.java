@@ -49,8 +49,10 @@ public class UploadPhotoFromProfile extends HttpServlet {
 			dao.changePhotoPath(userID, fileUploadSystem.uploadPhoto(request));
 			
 			/* delete the old photo */
-			File file = new File(oldPhotoPath);
-			file.delete();
+			if (!oldPhotoPath.equals("")) {
+				File file = new File(oldPhotoPath);
+				file.delete();
+			}
 		}
 		else {
 			redirect = "/start_page.jsp";

@@ -49,8 +49,10 @@ public class UploadCvFromProfile extends HttpServlet {
 			dao.changeCvPath(userID, fileUploadSystem.uploadCV(request));
 			
 			/* delete the old cv */
-			File file = new File(oldCvPath);
-			file.delete();
+			if (!oldCvPath.equals("")) {
+				File file = new File(oldCvPath);
+				file.delete();
+			}
 		}
 		else {
 			redirect = "/start_page.jsp";
