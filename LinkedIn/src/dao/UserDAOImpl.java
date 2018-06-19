@@ -99,6 +99,20 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
+	public void changeCvPath( String userID, String newCvPath) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		User user = em.find(User.class ,userID);
+		user.setCvPath(newCvPath);
+	}
+	
+	@Override
+	public void changePhotoPath( String userID, String newPhotoPath) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		User user = em.find(User.class ,userID);
+		user.setPhotoPath(newPhotoPath);
+	}
+	
+	@Override
 	public List<User> list() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT u FROM User u", User.class);

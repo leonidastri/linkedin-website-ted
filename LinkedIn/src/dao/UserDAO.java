@@ -22,5 +22,9 @@ public interface UserDAO {
     public User login(String email, String pass);
 
     public void create(User user);
+    
+    public void changeCvPath( String userID, String newCvPath);
+    
+    public void changePhotoPath( String userID, String newPhotoPath);
 	
 }

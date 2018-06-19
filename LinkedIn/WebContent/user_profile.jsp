@@ -360,7 +360,7 @@
 	        <div class="col-lg-4 order-lg-1 text-center">
 	            <img src="${user.getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 	            <h6 class="mt-2">Upload a different photo</h6>
-	            	<form class="form-photoFileFromProfile" action="uploadPhotoFromProfile" method="post" id="profileUploadPhotoForm" enctype = "multipart/form-data">
+	            	<form class="form-photoFileFromProfile" action="UploadPhotoFromProfile" method="post" id="profileUploadPhotoForm" enctype = "multipart/form-data">
 	            		<label class="custom-file">
 		                	<input class="form-control" id="photo" name="photo" type="file"
 	              				accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
@@ -380,7 +380,7 @@
 	        	<c:if test="${user.getCvPath().equals(\"\")}">
 	        		<h6>Curriculum Vitae</h6>
 	        	</c:if>
-		        	<form class="form-cvFileFromProfile" action="uploadCvFromProfile" method="post" id="profileUploadCvForm" enctype = "multipart/form-data">
+		        	<form class="form-cvFileFromProfile" action="UploadCvFromProfile" method="post" id="profileUploadCvForm" enctype = "multipart/form-data">
 	            		<label class="custom-file">
 		                <input class="form-control" id="cv" name="cv" type="file"
 	              				accept="application/pdf" >
