@@ -172,6 +172,8 @@ public class UserProfile extends HttpServlet {
 				request.setAttribute("likedListingsDetails", likedListingsDetails);
 				request.setAttribute("email", email);
 				
+				request.setAttribute("userID2", userID2);
+				
 				redirect = "/user_profile.jsp";
 			}
 			else if ( action.equals("Network") ) {

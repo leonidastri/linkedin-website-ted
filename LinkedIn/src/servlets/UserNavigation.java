@@ -19,6 +19,8 @@ import dao.ConnectionDAO;
 import dao.ConnectionDAOImpl;
 import dao.LikeArticleDAO;
 import dao.LikeArticleDAOImpl;
+import dao.MessageDAO;
+import dao.MessageDAOImpl;
 //import dao.ListingDAO;
 //import dao.ListingDAOImpl;
 import jpautils.RecommendationSystem;
@@ -169,7 +171,17 @@ public class UserNavigation extends HttpServlet {
 					
 				}
 				
+				MessageDAO messageDAO= new MessageDAOImpl();
+				List<User> chattingUsers;
+				
+				chattingUsers = messageDAO.getChattingUsers(Long.parseLong(userID));
+				
+				if( chattingUsers == null ) {
+					chattingUsers = new ArrayList<User>();
+				}
+				
 				request.setAttribute("networkUsers", networkUsers);
+				request.setAttribute("chattingUsers", chattingUsers);
 				redirect = "/user_messenger.jsp";
 			}
 			else if( action.equals("Personal info") ) {

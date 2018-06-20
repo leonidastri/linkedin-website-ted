@@ -40,6 +40,13 @@
 	<div class="pricing-header px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
       <h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
     </div>
+    
+    <br>
+    <c:if test="${not empty userID2}">
+    	<a href="UserMessenger?receiverID=${userID2}"> Send a message </a>
+  	</c:if>
+    
+    <br>
 
 	<div class="container">
 	    <div class="row my-2">

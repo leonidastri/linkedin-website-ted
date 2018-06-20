@@ -13,7 +13,23 @@
 			<h3> User Messenger </h3> <br> <br>
 			
 			<h4> List of users to chat with: </h4>
+
+			<c:if test="${chattingUsers.size() != 0}">
+			
+				<table>
+			     	<c:forEach var="i" begin="0" end="${chattingUsers.size()-1}" step="1">
+			     		<tr>
+		       				<td>
+		       					<a href="UserMessenger?receiverID=${chattingUsers.get(i).getUserID()}"> ${chattingUsers.get(i).getFirstName()} ${chattingUsers.get(i).getEmail()} </a>
+		       				</td>
+		       			</tr>
+					</c:forEach>
+				</table>
 				
+			</c:if>
+			
+			<h4> Or start a chat: </h4>
+						
 			<c:if test="${networkUsers.size() != 0}">
 			
 				<table>

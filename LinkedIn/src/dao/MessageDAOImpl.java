@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,7 @@ import javax.persistence.Query;
 
 import jpautils.EntityManagerHelper;
 import model.Message;
+import model.User;
 
 public class MessageDAOImpl implements MessageDAO {
 
@@ -82,6 +84,34 @@ public class MessageDAOImpl implements MessageDAO {
 			return messages;
 		else 
 			return null;
+	}
+	
+	public List<User> getChattingUsers(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT DISTINCT m FROM Message m WHERE m.user1.userID = '" + String.valueOf(id) + "' OR m.user2.userID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<Message> messages = query.getResultList();
+		List<User> otherUsers = new ArrayList<User>();
+		
+		if( messages != null ) {
+			for (int i = 0; i < messages.size()-1; i++) {
+				
+				if( !messages.get(i).getUser1().equals(String.valueOf(id)) ) {
+					otherUsers.add(messages.get(i).getUser1());
+				}
+				else if( !messages.get(i).getUser2().equals(String.valueOf(id)) ) {
+					otherUsers.add(messages.get(i).getUser2());
+				}
+
+			}
+		}
+		
+		if (otherUsers.size() > 0)
+			return otherUsers;
+		else 
+			return null;	
+		
 	}
 
 }

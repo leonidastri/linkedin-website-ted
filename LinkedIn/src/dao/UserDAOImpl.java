@@ -55,19 +55,19 @@ public class UserDAOImpl implements UserDAO {
 		Query query = null;
 		
 		if( name != null && surname != null ) {
-			
+			System.out.println("a");
 			query = em.createQuery("SELECT u FROM User u WHERE u.firstName = '" + name + "'AND u.lastName = '" + surname + "'");			
 		}
 		else if( name != null && surname == null ) {
-			
+			System.out.println("b");
 			query = em.createQuery("SELECT u FROM User u WHERE u.firstName = '" + name + "'");
 		}
 		else if( name == null && surname != null ) {
-			
+			System.out.println("c");
 			query = em.createQuery("SELECT u FROM User u WHERE u.lastName = '" + surname + "'");
 		} 
 		else {
-			
+			System.out.println("d");
 			query = em.createQuery("SELECT u FROM User u");
 		}
 		

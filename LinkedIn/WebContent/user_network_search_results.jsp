@@ -41,7 +41,7 @@
 						<c:forEach var="i" begin="0" end="${searchUsers.size()-1}" step="1">
 							<tr>
 			                   	<td>
-			                   		<img src="${searchUsers.get(i).getUser().getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+			                   		<img src="${searchUsers.get(i).getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 			                   	</td>
 			                   	<td>
 			                   		<a href="UserProfile?email=${searchUsers.get(i).getEmail()}&action=OtherUserProfile"> <strong>${searchUsers.get(i).getEmail()}</strong> </a>
