@@ -10,9 +10,45 @@ import javax.servlet.http.Part;
 
 public class FileUploadSystem {
 
+	private static final String AUDIO_UPLOAD_DIRECTORY = "uploads/audio";
 	private static final String CV_UPLOAD_DIRECTORY = "uploads/cv";
 	private static final String PHOTO_UPLOAD_DIRECTORY = "uploads/photos";
 	private static final String VIDEO_UPLOAD_DIRECTORY = "uploads/videos";
+	
+	public String uploadAudio(HttpServletRequest request) throws IOException, ServletException {
+		/* form our images upload directory path */
+		String servletContextPath = request.getServletContext().getRealPath("");
+		String audioFile = servletContextPath + File.separator + AUDIO_UPLOAD_DIRECTORY;
+		/* create upload directory if it doesn't already exist */
+		File audioDir = new File(audioFile);
+		if (!audioDir.exists()) audioDir.mkdir();
+		
+		String audioName;
+		/* source: https://stackoverflow.com/questions/43813392/how-to-get-the-name-of-the-file-which-i-want-to-upload-using-multipart */
+		for(Part p : request.getParts()) {
+			if (p.getName().equals("audio")) {
+				audioName = getFileName(p);
+
+				if (!audioName.equals("")) {
+					Date date = new Date();
+					String audioPath = audioFile + File.separator + date.toString() + audioName;
+					p.write(audioPath);
+					
+					String retPath = AUDIO_UPLOAD_DIRECTORY + File.separator + date.toString() + audioName;
+					
+					/* for debugging */
+					System.out.println(audioPath);
+					System.out.println(retPath);
+					
+					return retPath;
+				}
+				else
+					return "";
+			}
+		}
+		
+		return "";
+	}
 	
 	public String uploadCV(HttpServletRequest request) throws IOException, ServletException {
 		/* form our images upload directory path */
@@ -26,7 +62,7 @@ public class FileUploadSystem {
 		/* source: https://stackoverflow.com/questions/43813392/how-to-get-the-name-of-the-file-which-i-want-to-upload-using-multipart */
 		for(Part p : request.getParts()) {
 			if (p.getName().equals("cv")) {
-				cvName = getImageName(p);
+				cvName = getFileName(p);
 
 				if (!cvName.equals("")) {
 					Date date = new Date();
@@ -61,7 +97,7 @@ public class FileUploadSystem {
 		/* source: https://stackoverflow.com/questions/43813392/how-to-get-the-name-of-the-file-which-i-want-to-upload-using-multipart */
 		for(Part p : request.getParts()) {
 			if (p.getName().equals("photo")) {
-				photoName = getImageName(p);
+				photoName = getFileName(p);
 
 				if (!photoName.equals("")) {
 					Date date = new Date();
@@ -96,7 +132,7 @@ public class FileUploadSystem {
 		/* source: https://stackoverflow.com/questions/43813392/how-to-get-the-name-of-the-file-which-i-want-to-upload-using-multipart */
 		for(Part p : request.getParts()) {
 			if (p.getName().equals("video")) {
-				videoName = getImageName(p);
+				videoName = getFileName(p);
 
 				if (!videoName.equals("")) {
 					Date date = new Date();
@@ -120,7 +156,7 @@ public class FileUploadSystem {
 	}
 	
 	/* source: https://stackoverflow.com/questions/43813392/how-to-get-the-name-of-the-file-which-i-want-to-upload-using-multipart */
-	private static String getImageName(javax.servlet.http.Part part) {
+	private static String getFileName(javax.servlet.http.Part part) {
 		String contentDisp = part.getHeader("content-disposition");
         System.out.println("content-disposition header= "+contentDisp);
         String[] tokens = contentDisp.split(";");

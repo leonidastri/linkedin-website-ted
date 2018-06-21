@@ -51,6 +51,7 @@ public class UserAddArticle extends HttpServlet {
 			article.setTitle(title);
 			article.setUser(userDAO.find(Long.parseLong(userID)));
 			article.setPubDate(new Date());			// return current date
+			article.setAudioPath(fileUploadSystem.uploadAudio(request));
 			article.setPicturePath(fileUploadSystem.uploadPhoto(request));
 			article.setVideoPath(fileUploadSystem.uploadVideo(request));
 			

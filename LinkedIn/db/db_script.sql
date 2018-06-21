@@ -96,12 +96,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `linkedin_db`.`article` (
   `articleID` BIGINT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(128) NOT NULL,
-  `text` VARCHAR(2048) NOT NULL,
+  `title` VARCHAR(256) NOT NULL,
+  `text` VARCHAR(4096) NOT NULL,
   `authorID` BIGINT NOT NULL,
   `pub_date` DATE NOT NULL,
   `picture_path` VARCHAR(1024) NOT NULL,
   `video_path` VARCHAR(1024) NOT NULL,
+  `audio_path` VARCHAR(1024) NOT NULL,
   PRIMARY KEY (`articleID`),
   INDEX `fk_article_1_idx` (`authorID` ASC),
   CONSTRAINT `fk_article_1`

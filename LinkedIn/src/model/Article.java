@@ -49,6 +49,9 @@ public class Article implements Serializable {
 
 	@Column(name="video_path")
 	private String videoPath;
+	
+	@Column(name="audio_path")
+	private String audioPath;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -112,6 +115,14 @@ public class Article implements Serializable {
 
 	public void setVideoPath(String videoPath) {
 		this.videoPath = videoPath;
+	}
+	
+	public String getAudioPath() {
+		return this.audioPath;
+	}
+
+	public void setAudioPath(String audioPath) {
+		this.audioPath = audioPath;
 	}
 
 	public User getUser() {
