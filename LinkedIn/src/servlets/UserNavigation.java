@@ -21,6 +21,8 @@ import dao.LikeArticleDAO;
 import dao.LikeArticleDAOImpl;
 import dao.MessageDAO;
 import dao.MessageDAOImpl;
+import dao.UserDAO;
+import dao.UserDAOImpl;
 //import dao.ListingDAO;
 //import dao.ListingDAOImpl;
 import jpautils.RecommendationSystem;
@@ -56,6 +58,12 @@ public class UserNavigation extends HttpServlet {
 			System.out.println(action);
 			
 			if( action.equals("Homepage") ) {
+				
+				UserDAO userDAO = new UserDAOImpl();
+				
+				User user = userDAO.find(Long.parseLong(userID));
+				
+				request.setAttribute("firstname", user.getFirstName());
 				redirect = "/user_homepage.jsp";
 			}
 			else if( action.equals("Network") ) {
@@ -184,7 +192,7 @@ public class UserNavigation extends HttpServlet {
 				request.setAttribute("chattingUsers", chattingUsers);
 				redirect = "/user_messenger.jsp";
 			}
-			else if( action.equals("Personal info") ) {
+			else if( action.equals("Personal Details") ) {
 				redirect = "/user_add_personal_info.jsp";
 			}
 			else if( action.equals("Settings") ) {
