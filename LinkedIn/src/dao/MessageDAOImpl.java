@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -88,29 +87,15 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	public List<User> getChattingUsers(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT DISTINCT m FROM Message m WHERE m.user1.userID = '" + String.valueOf(id) + "' OR m.user2.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT DISTINCT u FROM User u, Message m WHERE ( m.user1.userID = '" + String.valueOf(id) + "' AND u.userID = m.user2.userID) OR (m.user2.userID = '" + String.valueOf(id) + "' AND u.userID = m.user1.userID)");
 		
 		@SuppressWarnings("unchecked")
-		List<Message> messages = query.getResultList();
-		List<User> otherUsers = new ArrayList<User>();
-		
-		if( messages != null ) {
-			for (int i = 0; i < messages.size()-1; i++) {
-				
-				if( !messages.get(i).getUser1().equals(String.valueOf(id)) ) {
-					otherUsers.add(messages.get(i).getUser1());
-				}
-				else if( !messages.get(i).getUser2().equals(String.valueOf(id)) ) {
-					otherUsers.add(messages.get(i).getUser2());
-				}
-
-			}
-		}
+		List<User> otherUsers = query.getResultList();
 		
 		if (otherUsers.size() > 0)
 			return otherUsers;
 		else 
-			return null;	
+			return null;
 		
 	}
 
