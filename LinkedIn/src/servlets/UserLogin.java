@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,6 +65,10 @@ public class UserLogin extends HttpServlet {
 				} else {
 					session.setAttribute("isUser", true);
 					session.setAttribute("userID", user.getUserID() );
+					
+					RequestDispatcher rd = request.getRequestDispatcher("UserNavigation?action=Homepage");
+
+					rd.forward(request,response);
 				}
 			}
 			else {
