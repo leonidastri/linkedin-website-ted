@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.ArticleDAO;
 import dao.ArticleDAOImpl;
@@ -31,14 +37,12 @@ public class UserAddArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		/* TODO: check if alright */
-		String redirect = "/user_homepage.jsp";
+		String redirect = null;
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
-			String title = request.getParameter("title");
-			String text = request.getParameter("text");
 			
 			ArticleDAO articleDAO = new ArticleDAOImpl();
 			UserDAO userDAO = new UserDAOImpl();
@@ -47,8 +51,26 @@ public class UserAddArticle extends HttpServlet {
 			
 			FileUploadSystem fileUploadSystem = new FileUploadSystem();
 			
-			article.setText(text);
-			article.setTitle(title);
+			/* https://stackoverflow.com/questions/17937841/multipart-form-data-does-not-support-for-request-getparamerter
+			
+			List<FileItem> items;
+			try {
+				items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+
+		        for (FileItem item : items) {
+		            if (item.isFormField()) {
+		                if( item.getFieldName().equals("title") )
+		                	article.setTitle(item.getString());
+		                else if( item.getFieldName().equals("text") )
+		                	article.setText(item.getString());
+		            }
+		        }
+			
+			} catch (FileUploadException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
 			article.setUser(userDAO.find(Long.parseLong(userID)));
 			article.setPubDate(new Date());			// return current date
 			article.setAudioPath(fileUploadSystem.uploadAudio(request));
@@ -56,6 +78,8 @@ public class UserAddArticle extends HttpServlet {
 			article.setVideoPath(fileUploadSystem.uploadVideo(request));
 			
 			articleDAO.create(article);
+			
+			redirect = "UserNavigation?action=Homepage";
 		}
 		else {
 			/* TODO: check if alright */

@@ -57,14 +57,65 @@
     		<div class="col-md-8">
     		
     			<!-- TOP 20 RESULTS -->
-    			<div class="card article-card">
-  					<div class="card-body">
-    					<h5 class="card-title">Article title 1</h5>
-					    <p class="card-text">Article text 1......................</p>
-					    <p class="card-text"><small class="text-muted">Uploaded at upload time 1</small></p>
-  					</div>
-  					<img class="card-img-bottom" src=".../100px180/" alt="Article-title-1">
-				</div>
+    			<c:if test="${recommendedConnectedUsersArticles.size() != 0}">
+	    			<c:forEach var="i" begin="0" end="${recommendedConnectedUsersArticles.size()-1}" step="1">
+		    			
+		    			<div class="card article-card">
+		  					<div class="card-body">
+		    					<h5 class="card-title"> ${recommendedConnectedUsersArticles.get(i).getTitle()}</h5>
+							    <p class="card-text"> ${recommendedConnectedUsersArticles.get(i).getText()} </p>
+							    <p class="card-text"><small class="text-muted"> ${recommendedConnectedUsersArticles.get(i).getpubDate()} </small></p>
+		  					</div>
+		  					
+		  					<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getPicturePath() }">
+		  						<img class="card-img-bottom" src="${recommendedConnectedUsersArticles.get(i).getPicturePath()}" alt="Article-title-1">
+		  					</c:if>
+							
+							<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getVideoPath() }">
+								<iframe width="560" height="315" src="${recommendedConnectedUsersArticles.get(i).getVideoPath()}" frameborder="0" allowfullscreen></iframe>
+		  					</c:if>
+		  					
+		  					<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getAudioPath() }">
+		  						<audio controls>
+									<source src="${recommendedConnectedUsersArticles.get(i).getAudioPath()}" type="audio/ogg">
+								</audio>
+		  					</c:if>
+		  						  					
+						</div>
+						
+					</c:forEach>
+				</c:if>
+				
+				<c:if test="${recommendedNotConnectedUsersArticles.size() != 0}">
+					<c:forEach var="i" begin="0" end="${recommendedNotConnectedUsersArticles.size()-1}" step="1">
+		    			
+		    			<div class="card article-card">
+		  					<div class="card-body">
+		    					<h5 class="card-title"> ${recommendedNotConnectedUsersArticles.get(i).getTitle()}</h5>
+							    <p class="card-text"> ${recommendedNotConnectedUsersArticles.get(i).getText()} </p>
+							    <p class="card-text"><small class="text-muted"> ${recommendedNotConnectedUsersArticles.get(i).getpubDate()} </small></p>
+		  					</div>
+		  					
+		  					<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getPicturePath() }">
+		  						<img class="card-img-bottom" src="${recommendedNotConnectedUsersArticles.get(i).getPicturePath()}" alt="Article-title-1">
+		  					</c:if>
+							
+							<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getVideoPath() }">
+								<iframe width="560" height="315" src="${recommendedNotConnectedUsersArticles.get(i).getVideoPath()}" frameborder="0" allowfullscreen></iframe>
+		  					</c:if>
+		  					
+		  					<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getAudioPath() }">
+		  						<audio controls>
+									<source src="${recommendedNotConnectedUsersArticles.get(i).getAudioPath()}" type="audio/ogg">
+								</audio>
+		  					</c:if>
+		  						  					
+						</div>
+						
+					</c:forEach>
+				</c:if>
+					
+				<!--
     			<div class="card article-card">
   					<div class="card-body">
     					<h5 class="card-title">Article title 2</h5>
@@ -81,6 +132,7 @@
   					</div>
   					<img class="card-img-bottom" src=".../100px180/" alt="Article-title-3">
 				</div>
+				-->
 				
 				<!-- TODO: SEE ALL RESULTS -->
 				<div align="center">
@@ -91,7 +143,7 @@
     	
     		<!-- INSERT NEW ARTICLE -->
     		<div class="col-md-2">
-    			<form action="UserUploadArticle" method="post" id="userUploadArticleForm" enctype = "multipart/form-data">
+    			<form action="UserAddArticle" method="POST" id="UserAddArticle" enctype = "multipart/form-data">
     				<div class="form-group">
 			            <label> Title
 			            <input class="form-control" id="title" name="title"
