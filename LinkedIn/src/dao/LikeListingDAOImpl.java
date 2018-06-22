@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -61,7 +62,7 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 		if (listingIDs.size() > 0)
 			return listingIDs;
 		else 
-			return null;
+			return new ArrayList<String>();
 	}
 	
 }

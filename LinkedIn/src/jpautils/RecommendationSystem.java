@@ -121,6 +121,10 @@ public class RecommendationSystem {
 		// create an arraylist initialized by the keys of the map
 		ArrayList<String> userIDs = new ArrayList<String>(similarityMapSumSorted.keySet());
 		
+		// kNearestNeighbors returns empty
+		if ( userIDs.size() == 0 )
+			return kNearestNeighbors;
+		
 		for (int i = userIDs.size()-1; i > userIDs.size() - NEAREST_NEIGHBORS - 1; i--)
 			kNearestNeighbors.add(userIDs.get(i));
 		
@@ -224,8 +228,16 @@ List<String> kNearestNeighbors = new ArrayList<>();
 		// create an arraylist initialized by the keys of the map
 		ArrayList<String> userIDs = new ArrayList<String>(similarityMapSumSorted.keySet());
 		
-		for (int i = userIDs.size()-1; i > userIDs.size() - NEAREST_NEIGHBORS - 1; i--)
-			kNearestNeighbors.add(userIDs.get(i));
+		// kNearestNeighbors returns empty
+		if ( userIDs.size() == 0 )
+			return kNearestNeighbors;
+		
+		if (userIDs.size() > NEAREST_NEIGHBORS)
+			for (int i = userIDs.size()-1; i >= userIDs.size() - NEAREST_NEIGHBORS; i--)
+				kNearestNeighbors.add(userIDs.get(i));
+		else
+			for (int i = userIDs.size()-1; i >= 0; i--)
+				kNearestNeighbors.add(userIDs.get(i));
 		
 		return kNearestNeighbors;
 	}

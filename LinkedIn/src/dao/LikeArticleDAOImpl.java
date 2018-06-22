@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -60,7 +61,7 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 		if (userIDs.size() > 0)
 			return userIDs;
 		else 
-			return null;
+			return new ArrayList<String>();
 	}
 
 	
@@ -74,7 +75,7 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 		if (articleIDs.size() > 0)
 			return articleIDs;
 		else 
-			return null;
+			return new ArrayList<String>();
 	}
 	
 }

@@ -63,7 +63,21 @@ public class UserNavigation extends HttpServlet {
 				
 				User user = userDAO.find(Long.parseLong(userID));
 				
+				RecommendationSystem recommendationSystem = new RecommendationSystem();
+				
+				List<Article> recommendedConnectedUsersArticles = recommendationSystem.getConnectedRecommendedArticles(userID);
+				List<Article> recommendedNotConnectedUsersArticles = recommendationSystem.getNotConnectedRecommendedArticles(userID);
+
+				if( recommendedConnectedUsersArticles == null )
+					recommendedConnectedUsersArticles = new ArrayList<Article>();
+				
+				if( recommendedNotConnectedUsersArticles == null )
+					recommendedNotConnectedUsersArticles = new ArrayList<Article>();
+				
 				request.setAttribute("firstname", user.getFirstName());
+				request.setAttribute("recommendedConnectedUsersArticles", recommendedConnectedUsersArticles);
+				request.setAttribute("recommendedNotConnectedUsersArticles", recommendedNotConnectedUsersArticles);
+				
 				redirect = "/user_homepage.jsp";
 			}
 			else if( action.equals("Network") ) {
@@ -100,6 +114,12 @@ public class UserNavigation extends HttpServlet {
 				List<Listing> recommendedConnectedUsersListings = recommendationSystem.getConnectedRecommendedListings(userID);
 				List<Listing> recommendedNotConnectedUsersListings = recommendationSystem.getNotConnectedRecommendedListings(userID);
 
+				if( recommendedConnectedUsersListings == null )
+					recommendedConnectedUsersListings = new ArrayList<Listing>();
+				
+				if( recommendedNotConnectedUsersListings == null )
+					recommendedNotConnectedUsersListings = new ArrayList<Listing>();
+				
 //				request.setAttribute("connectedUsersListings", connectedUsersListings);
 //				request.setAttribute("notConnectedUsersListings", notConnectedUsersListings);
 				request.setAttribute("recommendedConnectedUsersListings", recommendedConnectedUsersListings);

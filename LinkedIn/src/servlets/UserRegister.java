@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -93,9 +92,7 @@ public class UserRegister extends HttpServlet {
                     
                 	System.out.println("D");
                 	
-                	RequestDispatcher rd = request.getRequestDispatcher("UserNavigation?action=Homepage");
-
-					rd.forward(request,response);
+                	redirect = "UserNavigation?action=Homepage";
         		}
         		else {
         			redirect = "signup_error.jsp";

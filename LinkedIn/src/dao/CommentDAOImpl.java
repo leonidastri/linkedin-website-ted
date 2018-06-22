@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -74,7 +75,7 @@ public class CommentDAOImpl implements CommentDAO {
 		if (articleIDs.size() > 0)
 			return articleIDs;
 		else 
-			return null;
+			return new ArrayList<String>();
 	}
 	
 }

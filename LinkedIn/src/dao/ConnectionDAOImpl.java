@@ -74,7 +74,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 		if (connections.size() > 0)
 			return connections;
 		else
-			return null;
+			return new ArrayList<String>();
 	}
 	
 	public List<String> getNotConnectedUsersIDs(Long id1) {
@@ -96,7 +96,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 		if (nonConnections.size() > 0)
 			return nonConnections;
 		else
-			return null;
+			return new ArrayList<String>();
 	}
 	
 	public void connectionChangeStatus(Long id1, Long id2, String acceptFriend) {

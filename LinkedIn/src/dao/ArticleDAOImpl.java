@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -48,7 +49,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		if (articles.size() > 0)
 			return articles;
 		else 
-			return null;
+			return new ArrayList<Article>();
 	}
 	
 	public List<Article> getOtherUsersArticles(Long id) {
