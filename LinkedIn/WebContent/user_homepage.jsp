@@ -48,9 +48,9 @@
     		<!-- PERSONAL DETAILS AND NETWORK -->
     		<div class="col-md-2">
     			<h4> Hello ${firstname}! </h4>
-    			<a class="btn btn-primary" href="UserProfile?action=UserProfile" role="button">Check Profile</a>
+    			<a class="btn btn-primary homepage-btn" href="UserProfile?action=UserProfile" role="button">Check Profile</a>
 				<br>
-				<a class="btn btn-primary" href="UserProfile?action=Network" role="button">Your Network</a>
+				<a class="btn btn-primary homepage-btn" href="UserProfile?action=Network" role="button">Your Network</a>
     		</div>
     	
     		<!-- NEWSFEED -->

@@ -18,7 +18,7 @@ public class FileUploadSystem {
 	public String uploadAudio(HttpServletRequest request) throws IOException, ServletException {
 		/* form our images upload directory path */
 		String servletContextPath = request.getServletContext().getRealPath("");
-		String audioFile = servletContextPath + File.separator + AUDIO_UPLOAD_DIRECTORY;
+		String audioFile = servletContextPath + AUDIO_UPLOAD_DIRECTORY;
 		/* create upload directory if it doesn't already exist */
 		File audioDir = new File(audioFile);
 		if (!audioDir.exists()) audioDir.mkdir();
@@ -88,10 +88,15 @@ public class FileUploadSystem {
 	public String uploadPhoto(HttpServletRequest request) throws IOException, ServletException {
 		/* form our images upload directory path */
 		String servletContextPath = request.getServletContext().getRealPath("");
-		String photosFile = servletContextPath + File.separator + PHOTO_UPLOAD_DIRECTORY;
+		String photosFile = servletContextPath + PHOTO_UPLOAD_DIRECTORY;
 		/* create upload directory if it doesn't already exist */
 		File photosDir = new File(photosFile);
+//		if (!photosDir.canWrite()) {
+//			System.err.println("Cannot write in " + PHOTO_UPLOAD_DIRECTORY);
+//			return "";
+//		}
 		if (!photosDir.exists()) photosDir.mkdir();
+		photosDir.getParentFile().mkdirs();
 		
 		String photoName;
 		/* source: https://stackoverflow.com/questions/43813392/how-to-get-the-name-of-the-file-which-i-want-to-upload-using-multipart */
@@ -99,15 +104,22 @@ public class FileUploadSystem {
 			if (p.getName().equals("photo")) {
 				photoName = getFileName(p);
 
+				/* for debugging */
+				System.out.println(servletContextPath);
+				System.out.println(photosFile);
+				
 				if (!photoName.equals("")) {
 					Date date = new Date();
 					String photoPath = photosFile + File.separator + date.toString() + photoName;
+					
+					/* for debugging */
+					System.out.println(photoPath);
+					
 					p.write(photoPath);
 					
 					String retPath = PHOTO_UPLOAD_DIRECTORY + File.separator + date.toString() + photoName;
 					
 					/* for debugging */
-					System.out.println(photoPath);
 					System.out.println(retPath);
 					
 					return retPath;
@@ -123,7 +135,7 @@ public class FileUploadSystem {
 	public String uploadVideo(HttpServletRequest request) throws IOException, ServletException {
 		/* form our images upload directory path */
 		String servletContextPath = request.getServletContext().getRealPath("");
-		String videosFile = servletContextPath + File.separator + VIDEO_UPLOAD_DIRECTORY;
+		String videosFile = servletContextPath + VIDEO_UPLOAD_DIRECTORY;
 		/* create upload directory if it doesn't already exist */
 		File videosDir = new File(videosFile);
 		if (!videosDir.exists()) videosDir.mkdir();

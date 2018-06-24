@@ -49,10 +49,10 @@
 			<br> <br> <br>
 		    <div align="center" class ="register-container">
 		      	<form class="form-signin" action="UserRegister" method="post" id="registerForm" enctype = "multipart/form-data">
-		        	<h3> Get started - it's free. </h3>
+		        	<h3>Get started - it's free.</h3>
 		        	<hr>
 		          	<div class="form-group">
-		            	<label> Email address
+		            	<label>Email address
 		            		<input class="form-control" id="email" name="email"
 		              		placeholder="Email address" type="email"
 		              		pattern=".{1,100}" title="Maximum length is 100 characters"
@@ -60,7 +60,7 @@
 		            	</label>
 		          	</div>
 		          	<div class="form-group">
-		            	<label> Password
+		            	<label>Password
 		            		<input class="form-control" id="password" name="password"
 		              		placeholder="Password" type="password"
 		              		pattern=".{1,30}" title="Maximum length is 30 characters"
@@ -68,7 +68,7 @@
 		            	</label>
 		          	</div>
 		          	<div class="form-group">
-		            	<label> Confirm password
+		            	<label>Confirm password
 		            		<input class="form-control" id="confirmPassword" name="confirmPassword"
 		              		placeholder="Confirm password" type="password"
 		              		pattern=".{1,30}" title="Maximum length is 30 characters"
@@ -76,7 +76,7 @@
 		            	</label>
 		          	</div>
 		          	<div class="form-group">
-		            	<label> First name
+		            	<label>First name
 		            		<input class="form-control" id="firstName" name="firstName"
 		              		placeholder="First name" type="text"
 		              		pattern=".{1,60}" title="Maximum length is 60 characters"
@@ -84,7 +84,7 @@
 		            	</label>
 		          	</div>
 		          	<div class="form-group">
-		            	<label> Last name
+		            	<label>Last name
 		            		<input class="form-control" id="lastName" name="lastName"
 		              		placeholder="Last name" type="text"
 		              		pattern=".{1,60}" title="Maximum length is 60 characters"
@@ -92,7 +92,7 @@
 		            	</label>
 		          	</div>
 		          	<div class="form-group">
-		            	<label> Phone number
+		            	<label>Phone number
 		            		<input class="form-control" id="phoneNumber" name="phoneNumber"
 		              		placeholder="Phone number" type="tel"
 		              		pattern=".{1,30}" title="Maximum length is 30 characters"
@@ -100,13 +100,13 @@
 		            	</label>
 		          	</div>
 		          	<div class="form-group">
-		            	<label> Choose CV file
+		            	<label>Choose CV file
 		            		<input class="form-control" id="cv" name="cv" type="file"
 		              		accept="application/pdf" >
 		            	</label>
 		          	</div>
 		          	<div class="form-group">
-		            	<label> Choose photo file
+		            	<label>Choose photo file
 		            		<input class="form-control" id="photo" name="photo" type="file"
 		              		accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
 		            	</label>
