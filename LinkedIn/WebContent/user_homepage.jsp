@@ -24,7 +24,7 @@
 <body>
 	<!-- NAVBAR -->
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-		<h5 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h5>
+		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
         	<a class="p-2 text-dark" href="UserNavigation?action=Network">Network</a>
@@ -65,6 +65,8 @@
 		    					<h5 class="card-title"> ${recommendedConnectedUsersArticles.get(i).getTitle()}</h5>
 							    <p class="card-text"> ${recommendedConnectedUsersArticles.get(i).getText()} </p>
 							    <p class="card-text"><small class="text-muted"> ${recommendedConnectedUsersArticles.get(i).getpubDate()} </small></p>
+		  						<a href="#" class="card-link">View full article</a>
+    							<a href="/UserAddLikeArticle?articleID=${ recommendedConnectedUsersArticles.get(i).getArticleID }" class="card-link">Like article</a>
 		  					</div>
 		  					
 		  					<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getPicturePath() }">
@@ -94,6 +96,8 @@
 		    					<h5 class="card-title"> ${recommendedNotConnectedUsersArticles.get(i).getTitle()}</h5>
 							    <p class="card-text"> ${recommendedNotConnectedUsersArticles.get(i).getText()} </p>
 							    <p class="card-text"><small class="text-muted"> ${recommendedNotConnectedUsersArticles.get(i).getpubDate()} </small></p>
+		  						<a href="#" class="card-link">View full article</a>
+    							<a href="/UserAddLikeArticle?articleID=${ recommendedNotConnectedUsersArticles.get(i).getArticleID }" class="card-link">Like article</a>
 		  					</div>
 		  					
 		  					<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getPicturePath() }">
@@ -188,6 +192,7 @@
     	
     	</div>
 
+		<!-- FOOTER -->
 		<footer class="pt-4 my-md-5 pt-md-5 border-top">
 	    	<div class="row">
 	          	<div class="col-12 col-md">
