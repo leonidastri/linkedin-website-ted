@@ -39,6 +39,11 @@ public class UserNetwork extends HttpServlet {
 				String name = request.getParameter("name");
 				String surname = request.getParameter("surname");
 				
+				if( name.equals(""))
+					name = "emptyName";
+				if( surname.equals(""))
+					surname = "emptySurname";
+				
 				System.out.println(name + " " + surname);
 				
 				UserDAO userDAO = new UserDAOImpl();

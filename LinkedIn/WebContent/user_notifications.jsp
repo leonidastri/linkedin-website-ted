@@ -16,22 +16,19 @@
 <body>
 
 	<!-- NAVBAR -->
-  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    	<div class="col-md-4">
-      		<a class="navbar-brand" href="#">LinkedIn Clone</a>
-      		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        		<span class="navbar-toggler-icon"></span>
-      		</button>
-    	</div>
-    	<div class="col-md-2"></div>
-    	<div class="col-md-6">
-      		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        		<form class="form-inline my-2 my-lg-0" action="UserLogout" method="post" id="userForm">
-          			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log-out</button>
-        		</form>
-      		</div>
-    	</div>
-  	</nav>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+		<h5 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h5>
+      	<nav class="my-2 my-md-0 mr-md-3">
+        	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
+        	<a class="p-2 text-dark" href="UserNavigation?action=Network">Network</a>
+        	<a class="p-2 text-dark" href="UserNavigation?action=Listings">Listings</a>
+        	<a class="p-2 text-dark" href="UserNavigation?action=Notifications">Notifications</a>
+        	<a class="p-2 text-dark" href="UserNavigation?action=Messenger">Messenger</a>
+        	<a class="p-2 text-dark" href="UserNavigation?action=Personal Details">Personal Details</a>
+        	<a class="p-2 text-dark" href="UserNavigation?action=Settings">Settings</a>
+      	</nav>
+      	<a class="btn btn-outline-primary" href="UserLogout">Sign out</a>
+    </div>
   	
 	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
 
@@ -50,12 +47,12 @@
 											<c:forEach var="i" begin="0" end="${unansweredCons.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <a href="UserProfile?email=${unansweredCons.get(i).getUser().getEmail()}&action=OtherUserProfile">${unansweredCons.get(i).getUser().getFirstName()}</a>
+			                                            <a href="UserProfile?email=${unansweredCons.get(i).getUser1().getEmail()}&action=OtherUserProfile">${unansweredCons.get(i).getUser1().getFirstName()}</a>
 			                                        	
-			                                        	<form action="/UserNavigation" method="get">
+			                                        	<form action="UserNavigation" method="get">
 														  	<button type="submit" id="acceptFriend" name="acceptFriend" value="true">Accept</button>
 															<button type="submit" id="acceptFriend" name="acceptFriend" value="false">Ignore</button>
-															<input type="hidden" name="otherUserID" value="${unansweredCons.get(i).getUser().getuserID()}">
+															<input type="hidden" name="otherUserID" value="${unansweredCons.get(i).getUser1().getUserID()}">
   															<input type="hidden" name="action" value="Notifications">
 														</form>
 														 

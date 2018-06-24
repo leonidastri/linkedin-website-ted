@@ -40,7 +40,6 @@
 			<input type="text" name="name"/> <br>
 			Surname: <br>
 			<input type="text" name="surname"/> <br>
-			
 			<input type="submit" id="action" name="action" value="Search" />
 		
 		</form>
@@ -57,7 +56,7 @@
 						<c:forEach var="i" begin="0" end="${networkUsers.size()-1}" step="1">
 							<tr>
 			                   	<td>
-			                   		<img src="${networkUsers.get(i).getUser().getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+			                   		<img src="${networkUsers.get(i).getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 			                   	</td>
 			                   	<td>
 			                   		<a href="UserProfile?email=${networkUsers.get(i).getEmail()}&action=OtherUserProfile"> <strong>${networkUsers.get(i).getEmail()}</strong> </a>

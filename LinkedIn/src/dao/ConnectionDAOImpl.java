@@ -27,7 +27,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 	
 	public List<Connection> getUserConnections(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id) + "' OR c.user2.userID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT c FROM Connection c WHERE (c.user1.userID = '" + String.valueOf(id) + "' OR c.user2.userID = '" + String.valueOf(id) + "') AND c.accepted = true");
 		
 		@SuppressWarnings("unchecked")
 		List<Connection> connections = query.getResultList();
@@ -40,7 +40,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 	
 	public List<Connection> getUserUnansweredConnectionsRequests(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user1.userID = '" + String.valueOf(id) + "' AND c.accepted = false AND c.rejected = false");
+		Query query = em.createQuery("SELECT c FROM Connection c WHERE c.user2.userID = '" + String.valueOf(id) + "' AND c.accepted = false AND c.rejected = false");
 		
 		@SuppressWarnings("unchecked")
 		List<Connection> connections = query.getResultList();

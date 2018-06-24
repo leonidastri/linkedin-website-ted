@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ArticleDAO;
-import dao.ArticleDAOImpl;
+import dao.ConnectionDAO;
+import dao.ConnectionDAOImpl;
 import dao.UserDAO;
 import dao.UserDAOImpl;
-import jpautils.FileUploadSystem;
-import model.Article;
+import model.Connection;
+import model.User;
+
 
 /**
- * Servlet implementation class UserAddPersonalInfo
+ * Servlet implementation class UserSendFriendRequest
  */
-@WebServlet("/UserAddArticle")
-public class UserAddArticle extends HttpServlet {
-	
+@WebServlet("/UserSendFriendRequest")
+public class UserSendFriendRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -30,42 +29,53 @@ public class UserAddArticle extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		/* TODO: check if alright */
-		String redirect = null;
+		String redirect = "/user_homepage.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
 		
+		String email = request.getParameter("email");
+		String userID2 = request.getParameter("userID2");
+		
 		if (isUser) {
-			
-			ArticleDAO articleDAO = new ArticleDAOImpl();
 			UserDAO userDAO = new UserDAOImpl();
 			
-			Article article = new Article();
+			User user1 = userDAO.find(Long.parseLong(userID));
+			User user2 = userDAO.find(Long.parseLong(userID2));
 			
-			FileUploadSystem fileUploadSystem = new FileUploadSystem();
+			ConnectionDAO connectionDAO = new ConnectionDAOImpl();
 			
-			article.setText("apple apple");
-			article.setTitle("apple");
-			article.setUser(userDAO.find(Long.parseLong(userID)));
-			article.setPubDate(new Date());			// return current date
-			article.setAudioPath(fileUploadSystem.uploadAudio(request));
-			article.setPicturePath(fileUploadSystem.uploadPhoto(request));
-			article.setVideoPath(fileUploadSystem.uploadVideo(request));
+			Connection con = connectionDAO.getConnection(Long.parseLong(userID), Long.parseLong(userID2));
 			
-			articleDAO.create(article);
+			// if connection does not exist, create it
+			if( (con == null) ) {
+				Connection connection = new Connection();
 			
-			redirect = "UserNavigation?action=Homepage";
+				connection.setAccepted(false);
+				connection.setRejected(false);
+				connection.setUser1(user1);
+				connection.setUser2(user2);
+			
+				connectionDAO.create(connection);
+			// if exists, change rejected to false to check again
+			} else {
+				if ( con.getRejected() ) {
+					con.setRejected(false);
+				}
+			}
+			
+			request.setAttribute("action", "OtherUserProfile");
+			request.setAttribute("email", email);
+			redirect = "/UserProfile?action=OtherUserProfile&email=" + email;
 		}
 		else {
-			/* TODO: check if alright */
-			redirect = "/user_homepage.jsp";
+			redirect = "/start_page.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}
-
+		
 		request.getRequestDispatcher(redirect).forward(request, response);
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -73,4 +83,5 @@ public class UserAddArticle extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

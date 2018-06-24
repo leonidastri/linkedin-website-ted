@@ -65,8 +65,8 @@ public class UserNavigation extends HttpServlet {
 				
 				RecommendationSystem recommendationSystem = new RecommendationSystem();
 				
-				List<Article> recommendedConnectedUsersArticles = recommendationSystem.getConnectedRecommendedArticles(userID);
-				List<Article> recommendedNotConnectedUsersArticles = recommendationSystem.getNotConnectedRecommendedArticles(userID);
+				List<Article> recommendedConnectedUsersArticles = null; //recommendationSystem.getConnectedRecommendedArticles(userID);
+				List<Article> recommendedNotConnectedUsersArticles = null; //recommendationSystem.getNotConnectedRecommendedArticles(userID);
 
 				if( recommendedConnectedUsersArticles == null )
 					recommendedConnectedUsersArticles = new ArrayList<Article>();
@@ -90,9 +90,9 @@ public class UserNavigation extends HttpServlet {
 					
 					for (Connection con : connections) {
 						if( con.getUser1().getUserID() == userID ) {
-							networkUsers.add(con.getUser1());
-						} else if( con.getUser2().getUserID() == userID ) {
 							networkUsers.add(con.getUser2());
+						} else if( con.getUser2().getUserID() == userID ) {
+							networkUsers.add(con.getUser1());
 						}
 					}
 					

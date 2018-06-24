@@ -54,15 +54,15 @@ public class UserDAOImpl implements UserDAO {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = null;
 		
-		if( name != null && surname != null ) {
+		if( !name.equals("emptyName") && !surname.equals("emptySurname") ) {
 			System.out.println("a");
 			query = em.createQuery("SELECT u FROM User u WHERE u.firstName = '" + name + "'AND u.lastName = '" + surname + "'");			
 		}
-		else if( name != null && surname == null ) {
+		else if( !name.equals("emptyName") && surname.equals("emptySurname")) {
 			System.out.println("b");
 			query = em.createQuery("SELECT u FROM User u WHERE u.firstName = '" + name + "'");
 		}
-		else if( name == null && surname != null ) {
+		else if( name.equals("emptyName") && !surname.equals("emptySurname") ) {
 			System.out.println("c");
 			query = em.createQuery("SELECT u FROM User u WHERE u.lastName = '" + surname + "'");
 		} 

@@ -173,7 +173,17 @@ public class UserProfile extends HttpServlet {
 				request.setAttribute("email", email);
 				
 				request.setAttribute("userID2", userID2);
+			
+				String noFriendRequest = null;
 				
+				Connection connection = connectionDAO.getConnection(Long.parseLong(userID), Long.parseLong(userID2));
+				
+				// if not accepted and not rejected or accepted cannot send again
+				if( connection != null )
+					if ( (!connection.getAccepted() && !connection.getRejected()) || connection.getAccepted() )
+						noFriendRequest = "yes";
+				
+				request.setAttribute("noFriendRequest", noFriendRequest);
 				redirect = "/user_profile.jsp";
 			}
 			else if ( action.equals("Network") ) {
@@ -186,9 +196,7 @@ public class UserProfile extends HttpServlet {
 				if( connections != null) {
 					
 					for (Connection con : connections) {
-						if( con.getUser1().getUserID() == userID ) {
-							networkUsers.add(con.getUser1());
-						} else if( con.getUser2().getUserID() == userID ) {
+						if( con.getUser2().getUserID() == userID ) {
 							networkUsers.add(con.getUser2());
 						}
 					}

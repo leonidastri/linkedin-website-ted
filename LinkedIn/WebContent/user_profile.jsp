@@ -47,7 +47,15 @@
   	</c:if>
     
     <br>
-
+    
+    <c:if test="${not empty userID2}">
+    	<c:if test="${empty noFriendRequest}">
+    		<a href="UserSendFriendRequest?userID2=${userID2}&email=${email}"> Send friend request </a>
+  		</c:if>
+	</c:if>
+	
+	<br>
+	
 	<div class="container">
 	    <div class="row my-2">
 	        <div class="col-lg-8 order-lg-2">
