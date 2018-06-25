@@ -124,9 +124,13 @@ public class RecommendationSystem {
 		// kNearestNeighbors returns empty
 		if ( userIDs.size() == 0 )
 			return kNearestNeighbors;
-		
-		for (int i = userIDs.size()-1; i > userIDs.size() - NEAREST_NEIGHBORS - 1; i--)
-			kNearestNeighbors.add(userIDs.get(i));
+
+		if (userIDs.size() > NEAREST_NEIGHBORS)
+			for (int i = userIDs.size()-1; i >= userIDs.size() - NEAREST_NEIGHBORS; i--)
+				kNearestNeighbors.add(userIDs.get(i));
+		else
+			for (int i = userIDs.size()-1; i >= 0; i--)
+				kNearestNeighbors.add(userIDs.get(i));
 		
 		return kNearestNeighbors;
 	}
@@ -150,7 +154,8 @@ List<String> kNearestNeighbors = new ArrayList<>();
 		List<String> notConnectedUserIDs = new ArrayList<String>();
 		for (String uID : allUserIDs)
 			if (!connectedUserIDs.contains(uID))
-				notConnectedUserIDs.add(uID);
+				if( !uID.equals(userID) )
+					notConnectedUserIDs.add(uID);
 		
 		/* map to a userID the number of its similarities with the current user */
 		Map<String, Integer> similarityMapConnections = new TreeMap<>();
@@ -286,12 +291,16 @@ List<String> kNearestNeighbors = new ArrayList<>();
 		for (String neighborID : kNearestNeighbors) {
 			List<Listing> listings = listingDAO.getUserListings(Long.parseLong(neighborID));
 			
-			for (Listing l : listings) {
-				recommendations.add(l);
-				counter++;
+			if( listings != null ) {
 				
-				if(counter >= NUM_OF_RECOMMENDATIONS)
-					break;
+				for (Listing l : listings) {
+					recommendations.add(l);
+					counter++;
+				
+					if(counter >= NUM_OF_RECOMMENDATIONS)
+						break;
+				}
+				
 			}
 		}
 		

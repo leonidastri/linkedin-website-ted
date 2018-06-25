@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.*,model.User,model.Article"%>
+<%@page import="java.util.*,model.User,model.Listing"%>
 <!-- source: https://stackoverflow.com/questions/6162401/convert-and-format-a-date-in-jsp?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -49,29 +47,34 @@
 	                    <div class="row">
 	                    
 	                    	<div class="col-md-12">
-	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Listings from your connections </h5>
+	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Listings from connected users </h5>
 	                            <table class="table table-sm table-hover table-striped">
 	                                <tbody>
-	                                    <c:if test="${connectionListings.size() != 0}">
-											<c:forEach var="i" begin="0" end="${connectionListings.size()-1}" step="1">
+	                                    <c:if test="${recommendedConnectedUsersListings.size() != 0}">
+											<c:forEach var="i" begin="0" end="${recommendedConnectedUsersListings.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <strong>${connectionListings.get(i).getTitle()}</strong> published by <strong>${connectionListings.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName() }</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            <strong>${recommendedConnectedUsersListings.get(i).getTitle()}</strong> published by <strong>${recommendedConnectedUsersListings.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName() }</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}"/></strong>
 			                                        </td>
 			                                        <td>
-			                                        	<p> ${connectionListings.get(i).getDescription()}</p>
+			                                        	<p> ${recommendedConnectedUsersListings.get(i).getDescription()}</p>
 			                                        </td>
 			                                        <td>
-			                                           	<form action="/UserListings" method="post">
-														  	<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
-															<input type="hidden" name="listingID" value="${connectionListings.get(i).getListingID()}">
-  															<input type="hidden" name="action" value="ListingApplication">
-  														</form>
+			                                           	<c:if test="${ conApplied.get(i) }">
+			                                           		<form action="UserListings" method="get">
+														  		<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
+																<input type="hidden" name="listingID" value="${recommendedConnectedUsersListings.get(i).getListingID()}">
+  																<input type="hidden" name="action" value="ListingApplication">
+  															</form>
+  														</c:if>
+  														<c:if test="${ not conApplied.get(i) }">
+  															<strong> Applied already! </strong>
+  														</c:if>
 			                                        </td>
 			                                    </tr>
 		                                    </c:forEach>
 										</c:if>
-										<c:if test="${connectionListings.size() == 0}">
+										<c:if test="${recommendedConnectedUsersListings.size() == 0}">
 											<tr>
 												<td>
 													<p>No listings yet </p>
@@ -87,29 +90,34 @@
 						<div class="row">
 	                    
 	                    	<div class="col-md-12">
-	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Listings from no connected users </h5>
+	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Listings from not connected users </h5>
 	                            <table class="table table-sm table-hover table-striped">
 	                                <tbody>
-	                                    <c:if test="${noConnectionListings.size() != 0}">
-											<c:forEach var="i" begin="0" end="${listings.size()-1}" step="1">
+	                                    <c:if test="${recommendedNotConnectedUsersListings.size() != 0}">
+											<c:forEach var="i" begin="0" end="${recommendedNotConnectedUsersListings.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <strong>${noConnectionListings.get(i).getTitle()}</strong> published by <strong>${noConnectionListings.get(i).getUser().getFirstName()} ${noConnectionListings.get(i).getUser().getLastName() }</strong> at <strong><fmt:formatDate value="${noConnectionListings.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            <strong>${recommendedNotConnectedUsersListings.get(i).getTitle()}</strong> published by <strong>${recommendedNotConnectedUsersListings.get(i).getUser().getFirstName()} ${recommendedNotConnectedUsersListings.get(i).getUser().getLastName() }</strong> at <strong><fmt:formatDate value="${recommendedNotConnectedUsersListings.get(i).getPubDate()}"/></strong>
 			                                        </td>
 			                                        <td>
-			                                        	<p> ${noConnectionListings.get(i).getDescription()}</p>
+			                                        	<p> ${recommendedNotConnectedUsersListings.get(i).getDescription()}</p>
 			                                        </td>
 			                                        <td>
-			                                           	<form action="/UserListings" method="post">
-														  	<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
-															<input type="hidden" name="listingID" value="${noConnectionListings.get(i).getListingID()}">
-  															<input type="hidden" name="action" value="ListingApplication">
-  														</form>
+			                                           	<c:if test="${ notConApplied.get(i) }">
+			                                        	   	<form action="/UserListings" method="get">
+															  	<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
+																<input type="hidden" name="listingID" value="${recommendedNotConnectedUsersListings.get(i).getListingID()}">
+  																<input type="hidden" name="action" value="ListingApplication">
+  															</form>
+  														</c:if>
+  														<c:if test="${ not notConApplied.get(i) }">
+  															<strong> Applied already! </strong>
+  														</c:if>
 			                                        </td>
 			                                    </tr>
 		                                    </c:forEach>
 										</c:if>
-										<c:if test="${noConnectionListings.size() == 0}">
+										<c:if test="${recommendedNotConnectedUsersListings.size() == 0}">
 											<tr>
 												<td>
 													<p>No listings yet </p>

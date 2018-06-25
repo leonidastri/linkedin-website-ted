@@ -61,22 +61,57 @@
 	                    <div class="row">
 	                    
 	                    	<div class="col-md-12">
-	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Applications of others user to your listings </h5>
+	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Applications of other users to your listings </h5>
 	                            <table class="table table-sm table-hover table-striped">
 	                                <tbody>
-	                                    <c:if test="${listingApplications.size() != 0}">
-											<c:forEach var="i" begin="0" end="${listingApplications.size()-1}" step="1">
+	                                    <c:if test="${unansweredApplications.size() != 0}">
+											<c:forEach var="i" begin="0" end="${unansweredApplications.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <strong>${listingApplications.get(i).getUser().getFirstName()} ${listingApplications.get(i).getUser().getLastName()} wants to apply for listing with title ${listingApplications.get(i).getTitle()}</strong>
+			                                            <a href="UserProfile?email=${unansweredApplications.get(i).getUser().getEmail()}&action=OtherUserProfile"> <strong>${unansweredApplications.get(i).getUser().getFirstName()} ${unansweredApplications.get(i).getUser().getLastName()} wants to apply for listing with title ${unansweredApplications.get(i).getListing().getTitle()}</strong> </a>
+			                                        	<form action="UserListings" method="get">
+														  	<button type="submit" id="acceptApplication" name="acceptApplication" value="true">Accept</button>
+															<button type="submit" id="acceptApplication" name="acceptApplication" value="false">Ignore</button>
+															<input type="hidden" name="otherUserID" value="${unansweredApplication.get(i).getUser().getUserID()}">
+  															<input type="hidden" name="listingID" value="${unansweredApplication.get(i).getListingID()}">
+  															<input type="hidden" name="action" value="CheckApplication">
+														</form>
 			                                        </td>
 			                                    </tr>
 		                                    </c:forEach>
 										</c:if>
-										<c:if test="${listingApplications.size() == 0}">
+										<c:if test="${unansweredApplications.size() == 0}">
 											<tr>
 												<td>
 													<p>No listings yet </p>
+												</td>
+											</tr>
+										</c:if>
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                    	
+						</div>
+						
+						<div class="row">
+	                    
+	                    	<div class="col-md-12">
+	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Accepted applications </h5>
+	                            <table class="table table-sm table-hover table-striped">
+	                                <tbody>
+	                                    <c:if test="${acceptedApplications.size() != 0}">
+											<c:forEach var="i" begin="0" end="${acceptedApplications.size()-1}" step="1">
+												<tr>
+			                                        <td>
+			                                            <a href="UserProfile?email=${acceptedApplications.get(i).getUser().getEmail()}&action=OtherUserProfile"> <strong> ${acceptedApplications.get(i).getUser().getFirstName()} ${listingApplications.get(i).getUser().getLastName()} for ${listingApplications.get(i).getListing().getTitle()}</strong> </a>
+			                                        </td>
+			                                    </tr>
+		                                    </c:forEach>
+										</c:if>
+										<c:if test="${acceptedApplications.size() == 0}">
+											<tr>
+												<td>
+													<p>No accepted listings yet </p>
 												</td>
 											</tr>
 										</c:if>

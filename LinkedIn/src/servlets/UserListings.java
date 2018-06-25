@@ -62,18 +62,23 @@ public class UserListings extends HttpServlet {
 				
 				applicationDAO.create(application);
 				
-				redirect = "/user_listings.jsp";
+				redirect = "/UserNavigation?action=Listings";
 			}
 			else if (action.equals("UserListingsPersonal")) {
 				ApplicationDAO applicationDAO = new ApplicationDAOImpl();
 				
-				List<Application> applications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
-				List<Listing> listingApplications = new ArrayList<Listing>();
+				List<Application> unansweredApplications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
 				
-				for (Application a : applications)
-					listingApplications.add(a.getListing());
+				if( unansweredApplications == null )
+					unansweredApplications = new ArrayList<Application>();
 				
-				request.setAttribute("listingApplications", listingApplications);
+				List<Application> acceptedApplications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
+				
+				if( acceptedApplications == null )
+					acceptedApplications = new ArrayList<Application>();
+				
+				request.setAttribute("unansweredApplications", unansweredApplications);
+				request.setAttribute("acceptedApplications", acceptedApplications);
 				
 				redirect = "/user_listings_personal.jsp";
 			}
@@ -92,13 +97,46 @@ public class UserListings extends HttpServlet {
 				/* we need them again -- re-send them */
 				ApplicationDAO applicationDAO = new ApplicationDAOImpl();
 				
-				List<Application> applications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
-				List<Listing> listingApplications = new ArrayList<Listing>();
+				List<Application> unansweredApplications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
 				
-				for (Application a : applications)
-					listingApplications.add(a.getListing());
+				if( unansweredApplications == null )
+					unansweredApplications = new ArrayList<Application>();
 				
-				request.setAttribute("listingApplications", listingApplications);
+				List<Application> acceptedApplications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
+				
+				if( acceptedApplications == null )
+					acceptedApplications = new ArrayList<Application>();
+				
+				request.setAttribute("unansweredApplications", unansweredApplications);
+				request.setAttribute("acceptedApplications", acceptedApplications);
+				
+				redirect = "/user_listings_personal.jsp";
+			} else if( action.equals("CheckApplication") ) {
+				String acceptApplication = request.getParameter("acceptApplication");
+				String listingID = request.getParameter("listingID");
+				String otherUserID = request.getParameter("otherUserID");
+				
+				if( acceptApplication != null) {
+					
+					ApplicationDAO applicationDAO = new ApplicationDAOImpl();
+					applicationDAO.applicationChangeStatus(Long.parseLong(otherUserID), Long.parseLong(listingID), acceptApplication);
+				}
+				
+
+				ApplicationDAO applicationDAO = new ApplicationDAOImpl();
+				
+				List<Application> unansweredApplications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
+				
+				if( unansweredApplications == null )
+					unansweredApplications = new ArrayList<Application>();
+				
+				List<Application> acceptedApplications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
+				
+				if( acceptedApplications == null )
+					acceptedApplications = new ArrayList<Application>();
+				
+				request.setAttribute("unansweredApplications", unansweredApplications);
+				request.setAttribute("acceptedApplications", acceptedApplications);
 				
 				redirect = "/user_listings_personal.jsp";
 			}

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ApplicationDAO;
+import dao.ApplicationDAOImpl;
 import dao.ArticleDAO;
 import dao.ArticleDAOImpl;
 import dao.CommentDAO;
@@ -120,10 +122,33 @@ public class UserNavigation extends HttpServlet {
 				if( recommendedNotConnectedUsersListings == null )
 					recommendedNotConnectedUsersListings = new ArrayList<Listing>();
 				
+				ApplicationDAO applicationDAO = new ApplicationDAOImpl();
+				List<Boolean> conApplied = new ArrayList<Boolean>();
+				
+				for( Listing l : recommendedConnectedUsersListings ) {
+					
+					if ( applicationDAO.getApplication(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null )
+						conApplied.add(true);					
+					else
+						conApplied.add(false);
+				}
+				
+				List<Boolean> notConApplied = new ArrayList<Boolean>();
+				
+				for( Listing l : recommendedNotConnectedUsersListings ) {
+					
+					if ( applicationDAO.getApplication(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null )
+						notConApplied.add(true);					
+					else
+						notConApplied.add(false);
+				}
+				
 //				request.setAttribute("connectedUsersListings", connectedUsersListings);
 //				request.setAttribute("notConnectedUsersListings", notConnectedUsersListings);
 				request.setAttribute("recommendedConnectedUsersListings", recommendedConnectedUsersListings);
 				request.setAttribute("recommendedNotConnectedUsersListings", recommendedNotConnectedUsersListings);
+				request.setAttribute("conApplied", conApplied);
+				request.setAttribute("notConApplied", notConApplied);
 				
 				redirect = "/user_listings.jsp";
 			}
@@ -150,7 +175,10 @@ public class UserNavigation extends HttpServlet {
 				
 				if( articles != null ) {
 					for( Article article : articles ) {
-						likeArticles.addAll( likeArticlesDAO.getLikesOfUserArticles(Long.parseLong(article.getArticleID())) );
+						List<LikeArticle> likedArticleList = likeArticlesDAO.getLikesOfUserArticles(Long.parseLong(article.getArticleID()));
+						
+						if( likedArticleList != null )
+							likeArticles.addAll( likedArticleList );
 					}
 				}
 				
@@ -159,7 +187,10 @@ public class UserNavigation extends HttpServlet {
 				
 				if( articles != null) {
 					for( Article article : articles ) {
-						comments.addAll( commentDAO.getArticleComments(Long.parseLong(article.getArticleID())) );
+						List<Comment> articleComments = commentDAO.getArticleComments(Long.parseLong(article.getArticleID()));
+						
+						if (articleComments != null) 
+							comments.addAll( articleComments );
 					}
 				}
 				

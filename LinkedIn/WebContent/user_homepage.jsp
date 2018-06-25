@@ -147,10 +147,10 @@
     	
     		<!-- INSERT NEW ARTICLE -->
     		<div class="col-md-2">
-    			<form action="UserAddArticle" method="POST" id="UserAddArticle" enctype = "multipart/form-data">
+    			<form action="UserAddArticle" method="post" id="publishForm" enctype = "multipart/form-data">
     				<div class="form-group">
 			            <label> Title
-			            <input class="form-control" id="title" name="title"
+			            <input class="form-control" id="article-title" name="article-title"
 			              placeholder="Title" type="text"
 			              pattern=".{1,100}" title="Maximum length is 100 characters"
 			              required="true" requiredMessage="Please insert a title">
@@ -158,7 +158,7 @@
 			        </div>
 			        <div class="form-group">
 			            <label> Text
-			            <input class="form-control" id="text" name="text"
+			            <input class="form-control" id="article-text" name="article-text"
 			              placeholder="Text" type="text"
 			              pattern=".{1,100}" title="Maximum length is 100 characters"
 			              required="true" requiredMessage="Please insert the text">

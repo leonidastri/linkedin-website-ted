@@ -39,7 +39,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 	
 	public List<Application> getUserUnansweredApplications(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT a FROM Application a WHERE a.user.userID = '" + String.valueOf(id) + "' AND a.accepted = false AND a.rejected = false");
+		Query query = em.createQuery("SELECT a FROM Listing l, Application a WHERE l.user.userID = '" + String.valueOf(id) + "' AND l.listingID = a.listing.listingID AND a.accepted = false AND a.rejected = false");
 		
 		@SuppressWarnings("unchecked")
 		List<Application> applications = query.getResultList();
@@ -63,9 +63,22 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 			return null;
 	}
 
+	public List<Application> getUserAcceptedApplications(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT a FROM Listing l, Application a WHERE l.user.userID = '" + String.valueOf(id) + "' AND l.listingID = a.listing.listingID AND a.accepted = false AND a.rejected = false");
+		
+		@SuppressWarnings("unchecked")
+		List<Application> applications = query.getResultList();
+		
+		if (applications.size() > 0)
+			return applications;
+		else 
+			return null;
+	}
+	
 	public Application getApplication(Long id1, Long id2) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT a FROM Application a WHERE c.user.userID = '" + String.valueOf(id1) + "' AND c.listing.listingID = '" + String.valueOf(id2) + "'");
+		Query query = em.createQuery("SELECT a FROM Application a WHERE a.user.userID = '" + String.valueOf(id1) + "' AND a.listing.listingID = '" + String.valueOf(id2) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<Application> applications = query.getResultList();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import model.Article;
  * Servlet implementation class UserAddPersonalInfo
  */
 @WebServlet("/UserAddArticle")
+@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
 public class UserAddArticle extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -29,6 +31,14 @@ public class UserAddArticle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(request, response);
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		/* TODO: check if alright */
 		String redirect = null;
@@ -43,10 +53,14 @@ public class UserAddArticle extends HttpServlet {
 			
 			Article article = new Article();
 			
-			FileUploadSystem fileUploadSystem = new FileUploadSystem();
+			String title = request.getParameter("article-title");
+			String text = request.getParameter("article-text");
 			
-			article.setText("apple apple");
-			article.setTitle("apple");
+			FileUploadSystem fileUploadSystem = new FileUploadSystem();
+
+			System.out.println(title + " " + text);
+			article.setText(text);
+			article.setTitle(title);
 			article.setUser(userDAO.find(Long.parseLong(userID)));
 			article.setPubDate(new Date());			// return current date
 			article.setAudioPath(fileUploadSystem.uploadAudio(request));
@@ -64,13 +78,5 @@ public class UserAddArticle extends HttpServlet {
 		}
 
 		request.getRequestDispatcher(redirect).forward(request, response);
-	}
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 }
