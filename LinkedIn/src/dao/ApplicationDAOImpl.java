@@ -65,7 +65,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 
 	public List<Application> getUserAcceptedApplications(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT a FROM Listing l, Application a WHERE l.user.userID = '" + String.valueOf(id) + "' AND l.listingID = a.listing.listingID AND a.accepted = false AND a.rejected = false");
+		Query query = em.createQuery("SELECT a FROM Listing l, Application a WHERE l.user.userID = '" + String.valueOf(id) + "' AND l.listingID = a.listing.listingID AND a.accepted = true AND a.rejected = false");
 		
 		@SuppressWarnings("unchecked")
 		List<Application> applications = query.getResultList();

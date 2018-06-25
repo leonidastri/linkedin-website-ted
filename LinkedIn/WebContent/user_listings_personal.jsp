@@ -72,8 +72,8 @@
 			                                        	<form action="UserListings" method="get">
 														  	<button type="submit" id="acceptApplication" name="acceptApplication" value="true">Accept</button>
 															<button type="submit" id="acceptApplication" name="acceptApplication" value="false">Ignore</button>
-															<input type="hidden" name="otherUserID" value="${unansweredApplication.get(i).getUser().getUserID()}">
-  															<input type="hidden" name="listingID" value="${unansweredApplication.get(i).getListingID()}">
+															<input type="hidden" name="otherUserID" value="${unansweredApplications.get(i).getUser().getUserID()}">
+  															<input type="hidden" name="listingID" value="${unansweredApplications.get(i).getListing().getListingID()}">
   															<input type="hidden" name="action" value="CheckApplication">
 														</form>
 			                                        </td>
@@ -103,7 +103,12 @@
 											<c:forEach var="i" begin="0" end="${acceptedApplications.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <a href="UserProfile?email=${acceptedApplications.get(i).getUser().getEmail()}&action=OtherUserProfile"> <strong> ${acceptedApplications.get(i).getUser().getFirstName()} ${listingApplications.get(i).getUser().getLastName()} for ${listingApplications.get(i).getListing().getTitle()}</strong> </a>
+			                                            <a href="UserProfile?email=${acceptedApplications.get(i).getUser().getEmail()}&action=OtherUserProfile"> </a>
+			                                        </td>
+			                                        <td>
+			                                        	<strong> 
+			                                        		${acceptedApplications.get(i).getUser().getFirstName()} ${listingApplications.get(i).getUser().getLastName()} accepted for listing ${listingApplications.get(i).getListing().getTitle()}
+			                                        	</strong>
 			                                        </td>
 			                                    </tr>
 		                                    </c:forEach>

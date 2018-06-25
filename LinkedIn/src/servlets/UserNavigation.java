@@ -123,24 +123,27 @@ public class UserNavigation extends HttpServlet {
 					recommendedNotConnectedUsersListings = new ArrayList<Listing>();
 				
 				ApplicationDAO applicationDAO = new ApplicationDAOImpl();
-				List<Boolean> conApplied = new ArrayList<Boolean>();
+				List<String> conApplied = new ArrayList<String>();
 				
 				for( Listing l : recommendedConnectedUsersListings ) {
 					
 					if ( applicationDAO.getApplication(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null )
-						conApplied.add(true);					
+						conApplied.add("true");					
 					else
-						conApplied.add(false);
+						conApplied.add("false");
 				}
 				
-				List<Boolean> notConApplied = new ArrayList<Boolean>();
+				List<String> notConApplied = new ArrayList<String>();
 				
 				for( Listing l : recommendedNotConnectedUsersListings ) {
-					
-					if ( applicationDAO.getApplication(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null )
-						notConApplied.add(true);					
-					else
-						notConApplied.add(false);
+					System.out.print(l.getListingID() + " " + userID );
+					if ( applicationDAO.getApplication(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null ) {
+						notConApplied.add("true");
+						System.out.println(" " + true);
+				} else {
+						System.out.println(" " + false);
+						notConApplied.add("false");
+					}
 				}
 				
 //				request.setAttribute("connectedUsersListings", connectedUsersListings);

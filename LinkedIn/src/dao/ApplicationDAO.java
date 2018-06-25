@@ -19,5 +19,6 @@ public interface ApplicationDAO {
 	public Application getApplication(Long id1, Long id2);
 	
 	public void applicationChangeStatus(Long id1, Long id2, String change);
-	
+
+	public List<Application> getUserAcceptedApplications(Long id);
 }

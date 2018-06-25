@@ -54,20 +54,20 @@
 											<c:forEach var="i" begin="0" end="${recommendedConnectedUsersListings.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <strong>${recommendedConnectedUsersListings.get(i).getTitle()}</strong> published by <strong>${recommendedConnectedUsersListings.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName() }</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}"/></strong>
+			                                            <strong>${recommendedConnectedUsersListings.get(i).getTitle()}</strong> published by <strong>${recommendedConnectedUsersListings.get(i).getUser().getFirstName()} ${recommendedConnectedUsersListings.get(i).getUser().getLastName() }</strong> at <strong><fmt:formatDate value="${recommendedConnectedUsersListings.get(i).getPubDate()}"/></strong>
 			                                        </td>
 			                                        <td>
 			                                        	<p> ${recommendedConnectedUsersListings.get(i).getDescription()}</p>
 			                                        </td>
 			                                        <td>
-			                                           	<c:if test="${ conApplied.get(i) }">
+			                                           	<c:if test="${ conApplied.get(i) eq false }">
 			                                           		<form action="UserListings" method="get">
 														  		<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
 																<input type="hidden" name="listingID" value="${recommendedConnectedUsersListings.get(i).getListingID()}">
   																<input type="hidden" name="action" value="ListingApplication">
   															</form>
   														</c:if>
-  														<c:if test="${ not conApplied.get(i) }">
+  														<c:if test="${ conApplied.get(i) eq true }">
   															<strong> Applied already! </strong>
   														</c:if>
 			                                        </td>
@@ -103,14 +103,14 @@
 			                                        	<p> ${recommendedNotConnectedUsersListings.get(i).getDescription()}</p>
 			                                        </td>
 			                                        <td>
-			                                           	<c:if test="${ notConApplied.get(i) }">
-			                                        	   	<form action="/UserListings" method="get">
+			                                           	<c:if test="${ notConApplied.get(i) eq false }">
+			                                        	   	<form action="UserListings" method="get">
 															  	<button type="submit" id="listingApply" name="listingApply" value="true">Apply</button>
 																<input type="hidden" name="listingID" value="${recommendedNotConnectedUsersListings.get(i).getListingID()}">
   																<input type="hidden" name="action" value="ListingApplication">
   															</form>
   														</c:if>
-  														<c:if test="${ not notConApplied.get(i) }">
+  														<c:if test="${ notConApplied.get(i) eq true }">
   															<strong> Applied already! </strong>
   														</c:if>
 			                                        </td>

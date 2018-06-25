@@ -72,7 +72,7 @@ public class UserListings extends HttpServlet {
 				if( unansweredApplications == null )
 					unansweredApplications = new ArrayList<Application>();
 				
-				List<Application> acceptedApplications = applicationDAO.getUserUnansweredApplications(Long.parseLong(userID));
+				List<Application> acceptedApplications = applicationDAO.getUserAcceptedApplications(Long.parseLong(userID));
 				
 				if( acceptedApplications == null )
 					acceptedApplications = new ArrayList<Application>();
@@ -116,6 +116,7 @@ public class UserListings extends HttpServlet {
 				String listingID = request.getParameter("listingID");
 				String otherUserID = request.getParameter("otherUserID");
 				
+				System.out.println(otherUserID + " " + listingID + " " + acceptApplication);
 				if( acceptApplication != null) {
 					
 					ApplicationDAO applicationDAO = new ApplicationDAOImpl();
