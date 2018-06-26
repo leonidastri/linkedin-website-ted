@@ -3,21 +3,28 @@
 <!-- source: https://stackoverflow.com/questions/6162401/convert-and-format-a-date-in-jsp?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
-	<title>All Listings</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Notifications</title>
+
+    <!-- Bootstrap core CSS -->
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   	<link rel="stylesheet" href="./css/start_page.css">
-  
+
+    <!-- Custom styles for this template -->
+    <link href="css/user_profile.css" rel="stylesheet">
 </head>
 <body>
-
 	<!-- NAVBAR -->
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-		<h5 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h5>
+		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
         	<a class="p-2 text-dark" href="UserNavigation?action=Network">Network</a>
@@ -30,156 +37,149 @@
       	<a class="btn btn-outline-primary" href="UserLogout">Sign out</a>
     </div>
   	
-	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
-
-	<div class="container">
-	    <div class="row my-2">
-	        <div class="col-lg-8 order-lg-2">
-	            <div class="tab-content py-4">
-	                <div class="tab-pane active" id="profile">
-	                    <div class="row">
-	                    
-	                    	<div class="col-md-12">
-	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>People who want to connect with you</h5>
-	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                  
-	                                    <c:if test="${unansweredCons.size() != 0}">
-											<c:forEach var="i" begin="0" end="${unansweredCons.size()-1}" step="1">
-												<tr>
-			                                        <td>
-			                                            <a href="UserProfile?email=${unansweredCons.get(i).getUser1().getEmail()}&action=OtherUserProfile">${unansweredCons.get(i).getUser1().getFirstName()}</a>
-			                                        	
-			                                        	<form action="UserNavigation" method="get">
-														  	<button type="submit" id="acceptFriend" name="acceptFriend" value="true">Accept</button>
-															<button type="submit" id="acceptFriend" name="acceptFriend" value="false">Ignore</button>
-															<input type="hidden" name="otherUserID" value="${unansweredCons.get(i).getUser1().getUserID()}">
-  															<input type="hidden" name="action" value="Notifications">
-														</form>
-														 
-													</td>
-			                                    </tr>
-		                                    </c:forEach>
-										</c:if>
-										<c:if test="${unansweredCons.size() == 0}">
-											<tr>
-												<td>
-													<p>No friend request yet</p>
-												</td>
-											</tr>
-										</c:if>
-	                                </tbody>
-	                            </table>
-	                        </div>
-	                    
-						</div>
-						
-						<div class="row">
-	                    
-	                    	<div class="col-md-12">
-	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Liked Article Notifications </h5>
-	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                  
-	                                    <c:if test="${likeArticles.size() != 0}">
-											<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
-												<tr>
-			                                        <td>
-			                                            <a href="UserProfile?email=${likeArticles.get(i).getUser().getEmail()}&action=OtherUserProfile">${likeArticles.get(i).getUser().getFirstName()}</a>
-			                                        	<p> liked ${likeArticles.get(i).getArticle().getTitle()} </p>
-			                                        </td>
-			                                    </tr>
-		                                    </c:forEach>
-										</c:if>
-										<c:if test="${likeArticles.size() == 0}">
-											<tr>
-												<td>
-													<p>No likes yet in your articles</p>
-												</td>
-											</tr>
-										</c:if>
-	                                </tbody>
-	                            </table>
-	                        </div>
-	                        	                    
-						</div>
-						
-						<div class="row">
-	                    
-	                    	<div class="col-md-12">
-	                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Comments Notifications </h5>
-	                            <table class="table table-sm table-hover table-striped">
-	                                <tbody>                                  
-	                                    <c:if test="${comments.size() != 0}">
-											<c:forEach var="i" begin="0" end="${comments.size()-1}" step="1">
-												<tr>
-			                                        <td>
-			                                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}&action=OtherUserProfile">${comments.get(i).getUser().getFirstName()}</a>
-			                                        	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
-			                                        </td>
-			                                    </tr>
-		                                    </c:forEach>
-										</c:if>
-										<c:if test="${comments.size() == 0}">
-											<tr>
-												<td>
-													<p>No comments yet in your articles</p>
-												</td>
-											</tr>
-										</c:if>
-	                                </tbody>
-	                            </table>
-	                        </div>
-	                        	                    
-						</div>
-	               	</div>
-	         	</div>
-	       	</div>
-	    </div>
-	</div>
-
+	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
+    <div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
+      <h1 class="display-16">Notifications</h1>
+    </div>
+	
+	<!-- CONTAINER -->
+    <div class="container">
     
-	<!-- FOOTER -->
-  	<footer class="footer" style="background-color: lightgrey;padding-top: 50px;">
-    	<div class="container" >
-      		<div class=row>
-        		<div class="col-md-4"></div>
-      			<div class="col-md-2">
-	        		<h4>About Us</h4>
-	        		<a href="#"><p style="margin-bottom: 3px;">About</p></a>
-	        		<a href="#"><p style="margin-bottom: 3px;">News</p></a>
-	        		<a href="#"><p style="margin-bottom: 3px;">Services</p></a>
-	        		<a href="#"><p style="margin-bottom: 3px;">FAQ</p></a>
-	      		</div>
-	      		<div class="col-md-2">
-	        		<h4>Contact Us</h4>
-	        		<p>tel  : 210 8898985 <br/>
-	          			fax: 210 8898900 <br/>
-	          			email: tm39@li.com</p>
-	        	</div>
-        		<div class="col-md-4"></div>
+    	<div class="row">
+    	
+    		<div class="col-md-4">
+    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Connection requests</h5>
+	       		<table class="table table-sm table-hover table-striped">
+	            	<tbody>                                  
+	                 	<c:if test="${unansweredCons.size() != 0}">
+							<c:forEach var="i" begin="0" end="${unansweredCons.size()-1}" step="1">
+								<tr>
+				                   	<td>
+				                    <a href="UserProfile?email=${unansweredCons.get(i).getUser1().getEmail()}&action=OtherUserProfile">${unansweredCons.get(i).getUser1().getFirstName()}</a>
+				                                        	
+				                    <form action="UserNavigation" method="get">
+										<button type="submit" id="acceptFriend" name="acceptFriend" value="true">Accept</button>
+										<button type="submit" id="acceptFriend" name="acceptFriend" value="false">Ignore</button>
+										<input type="hidden" name="otherUserID" value="${unansweredCons.get(i).getUser1().getUserID()}">
+	  									<input type="hidden" name="action" value="Notifications">
+									</form>
+															 
+									</td>
+			                    </tr>
+		                    </c:forEach>
+						</c:if>
+						<c:if test="${unansweredCons.size() == 0}">
+							<tr>
+								<td>
+									<p>No friend request yet</p>
+								</td>
+							</tr>
+						</c:if>
+	               </tbody>
+	            </table>
+    		</div>
+    		
+    		<div class="col-md-4">
+    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Liked Articles</h5>
+	            <table class="table table-sm table-hover table-striped">
+	            	<tbody>                                  
+	                	<c:if test="${likeArticles.size() != 0}">
+							<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
+								<tr>
+			                    	<td>
+			                        	<a href="UserProfile?email=${likeArticles.get(i).getUser().getEmail()}&action=OtherUserProfile">${likeArticles.get(i).getUser().getFirstName()}</a>
+			                            <p> liked ${likeArticles.get(i).getArticle().getTitle()} </p>
+			                   		</td>
+			                    </tr>
+		                   	</c:forEach>
+						</c:if>
+						<c:if test="${likeArticles.size() == 0}">
+							<tr>
+								<td>
+									<p>No likes yet in your articles</p>
+								</td>
+							</tr>
+						</c:if>
+	               </tbody>
+	          	</table>
+    		</div>
+    		
+    		<div class="col-md-4">
+    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Comments</h5>
+	            <table class="table table-sm table-hover table-striped">
+	                <tbody>                                  
+	                    <c:if test="${comments.size() != 0}">
+							<c:forEach var="i" begin="0" end="${comments.size()-1}" step="1">
+								<tr>
+			                        <td>
+			                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}&action=OtherUserProfile">${comments.get(i).getUser().getFirstName()}</a>
+			                         	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
+			                       	</td>
+			                  	</tr>
+		                    </c:forEach>
+						</c:if>
+						<c:if test="${comments.size() == 0}">
+							<tr>
+								<td>
+									<p>No comments yet in your articles</p>
+								</td>
+							</tr>
+						</c:if>
+	           		</tbody>
+	        	</table>
+    		</div>
+    		
+	    </div>
 
-      		</div>  <br>
-      		<div class="footer-bottom">
-        		<div class="container">
-          			<div class="row">
-            			<div class="col-md-12">
-              				<!--Footer Bottom-->
-              				<p class="text-center">&copy; Copyright 2018 - University of Athens Di.  All rights reserved.</p>
-            			</div>
-          			</div>
-        		</div>
-      		</div>
-      	</div>
-    </footer>
+		<!-- FOOTER -->
+		<footer class="pt-4 my-md-5 pt-md-5 border-top">
+	    	<div class="row">
+	          	<div class="col-12 col-md">
+	            	<img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+	            	<small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+	          	</div>
+	          	<div class="col-6 col-md">
+	            	<h5>Spotlight</h5>
+	            	<ul class="list-unstyled text-small">
+		              	<li><a class="text-muted" href="#">Article of the day</a></li>
+		              	<li><a class="text-muted" href="#">Listing of the day</a></li>
+		              	<li><a class="text-muted" href="#">User of the day</a></li>
+	            	</ul>
+	          	</div>
+	          	<div class="col-6 col-md">
+	            	<h5>Resources</h5>
+	            	<ul class="list-unstyled text-small">
+		              	<li><a class="text-muted" href="#">Organization guide</a></li>
+		              	<li><a class="text-muted" href="#">User guide</a></li>
+	            	</ul>
+	          	</div>
+	          	<div class="col-6 col-md">
+	            	<h5>About</h5>
+	            	<ul class="list-unstyled text-small">
+		              	<li><a class="text-muted" href="#">About LinkedIn</a></li>
+		              	<li><a class="text-muted" href="#">Privacy</a></li>
+		              	<li><a class="text-muted" href="#">Terms</a></li>
+	            	</ul>
+	          	</div>
+			</div>
+		</footer>
+		
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX5iDXPWX9yVKjUC5FD_hX36CttO5DmzQ&callback=initMap">
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
     </script>
-
 </body>
 </html>
