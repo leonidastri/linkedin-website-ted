@@ -39,7 +39,7 @@ public class SkillDAOImpl implements SkillDAO {
 	
 	public List<Skill> getOnlyPublicUserSkills(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT s FROM Skill s WHERE s.user.userID = '" + String.valueOf(id) + " AND s.priv = false'");
+		Query query = em.createQuery("SELECT s FROM Skill s WHERE s.user.userID = '" + String.valueOf(id) + "' AND s.priv = false");
 		
 		@SuppressWarnings("unchecked")
 		List<Skill> skills = query.getResultList();

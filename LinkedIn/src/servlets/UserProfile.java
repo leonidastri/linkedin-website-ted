@@ -136,11 +136,13 @@ public class UserProfile extends HttpServlet {
 				List<Education> education;
 				
 				if( con == null ) {
+					System.out.println("AAA");
 					jobs = jobDAO.getOnlyPublicUserJobs(Long.parseLong(userID2));
 					skills = skillDAO.getOnlyPublicUserSkills(Long.parseLong(userID2));
 					education = educationDAO.getOnlyPublicUserEducation(Long.parseLong(userID2));
 				}
 				else {
+					System.out.println("bbb");
 					jobs = jobDAO.getUserJobs(Long.parseLong(userID2));
 					skills = skillDAO.getUserSkills(Long.parseLong(userID2));
 					education = educationDAO.getUserEducation(Long.parseLong(userID2));

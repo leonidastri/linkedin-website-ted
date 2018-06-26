@@ -39,7 +39,7 @@ public class JobDAOImpl implements JobDAO {
 	
 	public List<Job> getOnlyPublicUserJobs(Long id) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT j FROM Job j WHERE j.user.userID = '" + String.valueOf(id) + " AND j.priv = false'");
+		Query query = em.createQuery("SELECT j FROM Job j WHERE j.user.userID = '" + String.valueOf(id) + "' AND j.priv = false");
 		
 		@SuppressWarnings("unchecked")
 		List<Job> jobs = query.getResultList();

@@ -78,7 +78,7 @@ public class UserAddPersonalInfo extends HttpServlet {
 	        	String description = request.getParameter("description");
 	        	String dFrom = request.getParameter("dateFrom");
 	        	String dTo = request.getParameter("dateTo");
-	        	String isPrivate = request.getParameter("private");
+	        	String isPrivate = request.getParameter("isPrivate");
 	        	
 	        	EducationDAO educationDao = new EducationDAOImpl();
 	        	Education education = new Education();
