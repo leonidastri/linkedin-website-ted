@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,7 +18,11 @@ public class MessageDAOImpl implements MessageDAO {
 		@SuppressWarnings("unchecked")
 		List<Message> messages = query.getResultList();  
 //		em.getTransaction().commit();
-        return messages;
+		
+		if (messages.size() > 0)
+			return messages;
+		else 
+			return new ArrayList<Message>();
 	}
 	
 	public void create(Message message) {
@@ -35,7 +40,7 @@ public class MessageDAOImpl implements MessageDAO {
 		if (messages.size() > 0)
 			return messages;
 		else 
-			return null;
+			return new ArrayList<Message>();
 	}
 	
 	public List<Message> getUserReceivedMessages(Long id) {
@@ -48,7 +53,7 @@ public class MessageDAOImpl implements MessageDAO {
 		if (messages.size() > 0)
 			return messages;
 		else 
-			return null;
+			return new ArrayList<Message>();
 	}
 	
 	public List<Message> getUserConversation(Long senderID, Long receiverID) {
@@ -82,7 +87,7 @@ public class MessageDAOImpl implements MessageDAO {
 		if (messages.size() > 0)
 			return messages;
 		else 
-			return null;
+			return new ArrayList<Message>();
 	}
 	
 	public List<User> getChattingUsers(Long id) {
@@ -95,7 +100,7 @@ public class MessageDAOImpl implements MessageDAO {
 		if (otherUsers.size() > 0)
 			return otherUsers;
 		else 
-			return null;
+			return new ArrayList<User>();
 		
 	}
 

@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,11 @@ public class SkillDAOImpl implements SkillDAO {
 		@SuppressWarnings("unchecked")
 		List<Skill> skills = query.getResultList();  
 //		em.getTransaction().commit();
-        return skills;
+		
+		if (skills.size() > 0)
+			return skills;
+		else 
+			return new ArrayList<Skill>();
 	}
 	
 	public void create(Skill skill) {
@@ -34,7 +39,7 @@ public class SkillDAOImpl implements SkillDAO {
 		if (skills.size() > 0)
 			return skills;
 		else 
-			return null;
+			return new ArrayList<Skill>();
 	}
 	
 	public List<Skill> getOnlyPublicUserSkills(Long id) {
@@ -47,7 +52,7 @@ public class SkillDAOImpl implements SkillDAO {
 		if (skills.size() > 0)
 			return skills;
 		else 
-			return null;
+			return new ArrayList<Skill>();
 	}
 	
 }

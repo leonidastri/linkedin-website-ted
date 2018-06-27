@@ -17,7 +17,11 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 		@SuppressWarnings("unchecked")
 		List<LikeArticle> likeArticles = query.getResultList();  
 //		em.getTransaction().commit();
-        return likeArticles;
+		
+		if (likeArticles.size() > 0)
+			return likeArticles;
+		else 
+			return new ArrayList<LikeArticle>();
 	}
 	
 	public void create(LikeArticle likeArticle) {
@@ -35,7 +39,7 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 		if (likeArticles.size() > 0)
 			return likeArticles;
 		else 
-			return null;
+			return new ArrayList<LikeArticle>();
 	}
 
 	public List<LikeArticle> getLikesOfUserArticles(Long articleID) {
@@ -48,7 +52,7 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 		if (likeArticles.size() > 0)
 			return likeArticles;
 		else 
-			return null;
+			return new ArrayList<LikeArticle>();
 	}
 	
 	public List<String> getLikeArticleUserIDs(Long articleID) {

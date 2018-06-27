@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,11 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 		@SuppressWarnings("unchecked")
 		List<Application> applications = query.getResultList();  
 //		em.getTransaction().commit();
-        return applications;
+		
+		if (applications.size() > 0)
+			return applications;
+		else 
+			return new ArrayList<Application>();
 	}
 	
 	public void create(Application application) {
@@ -34,7 +39,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 		if (applications.size() > 0)
 			return applications;
 		else 
-			return null;
+			return new ArrayList<Application>();
 	}
 	
 	public List<Application> getUserUnansweredApplications(Long id) {
@@ -47,7 +52,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 		if (applications.size() > 0)
 			return applications;
 		else 
-			return null;
+			return new ArrayList<Application>();
 	}
 	
 	public List<Application> getListingUnansweredApplications(Long id) {
@@ -60,7 +65,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 		if (applications.size() > 0)
 			return applications;
 		else 
-			return null;
+			return new ArrayList<Application>();
 	}
 
 	public List<Application> getUserAcceptedApplications(Long id) {
@@ -73,7 +78,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 		if (applications.size() > 0)
 			return applications;
 		else 
-			return null;
+			return new ArrayList<Application>();
 	}
 	
 	public Application getApplication(Long id1, Long id2) {

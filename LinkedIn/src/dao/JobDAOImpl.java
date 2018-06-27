@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,11 @@ public class JobDAOImpl implements JobDAO {
 		@SuppressWarnings("unchecked")
 		List<Job> jobs = query.getResultList();  
 //		em.getTransaction().commit();
-        return jobs;
+		
+		if (jobs.size() > 0)
+			return jobs;
+		else 
+			return new ArrayList<Job>();
 	}
 	
 	public void create(Job job) {
@@ -34,7 +39,7 @@ public class JobDAOImpl implements JobDAO {
 		if (jobs.size() > 0)
 			return jobs;
 		else 
-			return null;
+			return new ArrayList<Job>();
 	}
 	
 	public List<Job> getOnlyPublicUserJobs(Long id) {
@@ -47,7 +52,7 @@ public class JobDAOImpl implements JobDAO {
 		if (jobs.size() > 0)
 			return jobs;
 		else 
-			return null;
+			return new ArrayList<Job>();
 	}
 	
 }

@@ -15,9 +15,13 @@ public class CommentDAOImpl implements CommentDAO {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT c FROM Comment c", Comment.class);
 		@SuppressWarnings("unchecked")
-		List<Comment> educations = query.getResultList();  
+		List<Comment> comments = query.getResultList();  
 //		em.getTransaction().commit();
-        return educations;
+		
+		if (comments.size() > 0)
+			return comments;
+		else 
+			return new ArrayList<Comment>();
 	}
 	
 	public void create(Comment comment) {
@@ -35,7 +39,7 @@ public class CommentDAOImpl implements CommentDAO {
 		if (comments.size() > 0)
 			return comments;
 		else 
-			return null;
+			return new ArrayList<Comment>();
 	}
 	
 	public List<Comment> getArticleComments(Long id) {
@@ -48,7 +52,7 @@ public class CommentDAOImpl implements CommentDAO {
 		if (comments.size() > 0)
 			return comments;
 		else 
-			return null;
+			return new ArrayList<Comment>();
 	}
 	
 	public List<String>  getArticleCommentsUserIDs(Long articleID) {
@@ -61,7 +65,7 @@ public class CommentDAOImpl implements CommentDAO {
 		if (userIDs.size() > 0)
 			return userIDs;
 		else 
-			return null;
+			return new ArrayList<String>();
 	}
 
 	

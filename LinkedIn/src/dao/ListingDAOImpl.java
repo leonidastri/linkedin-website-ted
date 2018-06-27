@@ -31,7 +31,11 @@ public class ListingDAOImpl implements ListingDAO {
 		@SuppressWarnings("unchecked")
 		List<Listing> listings = query.getResultList();  
 //		em.getTransaction().commit();
-        return listings;
+		
+		if (listings.size() > 0)
+			return listings;
+		else 
+			return new ArrayList<Listing>();
 	}
 	
 	public void create(Listing listing) {
@@ -49,7 +53,7 @@ public class ListingDAOImpl implements ListingDAO {
 		if (listings.size() > 0)
 			return listings;
 		else 
-			return null;
+			return new ArrayList<Listing>();
 	}
 	
 	public List<Listing> getOtherUsersListings(Long id) {
@@ -62,7 +66,7 @@ public class ListingDAOImpl implements ListingDAO {
 		if (listings.size() > 0)
 			return listings;
 		else 
-			return null;
+			return new ArrayList<Listing>();
 	}
 	
 	public List<Listing> getConnectedUsersListings(Long id) {
@@ -84,7 +88,10 @@ public class ListingDAOImpl implements ListingDAO {
 				System.out.println("getConnectedUsersListings: Error, temp > 1");
 		}
 		
-		return listings;
+		if (listings.size() > 0)
+			return listings;
+		else 
+			return new ArrayList<Listing>();
 	}
 	
 	public List<Listing> getNotConnectedUsersListings(Long id) {
@@ -106,7 +113,10 @@ public class ListingDAOImpl implements ListingDAO {
 				System.out.println("getNotConnectedUsersListings: Error, temp > 1");
 		}
 		
-		return listings;
+		if (listings.size() > 0)
+			return listings;
+		else 
+			return new ArrayList<Listing>();
 	}
 	
 }

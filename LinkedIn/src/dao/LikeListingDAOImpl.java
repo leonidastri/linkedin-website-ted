@@ -17,7 +17,11 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 		@SuppressWarnings("unchecked")
 		List<LikeListing> likeListings = query.getResultList();  
 //		em.getTransaction().commit();
-        return likeListings;
+		
+		if (likeListings.size() > 0)
+			return likeListings;
+		else 
+			return new ArrayList<LikeListing>();
 	}
 	
 	public void create(LikeListing likeListing) {
@@ -35,7 +39,7 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 		if (likeListings.size() > 0)
 			return likeListings;
 		else 
-			return null;
+			return new ArrayList<LikeListing>();
 	}
 	
 	public List<String> getLikeListingUserIDs(Long listingID) {
@@ -48,7 +52,7 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 		if (userIDs.size() > 0)
 			return userIDs;
 		else 
-			return null;
+			return new ArrayList<String>();
 	}
 
 	

@@ -31,7 +31,11 @@ public class ArticleDAOImpl implements ArticleDAO {
 		@SuppressWarnings("unchecked")
 		List<Article> articles = query.getResultList();  
 //		em.getTransaction().commit();
-        return articles;
+		
+		if (articles.size() > 0)
+			return articles;
+		else 
+			return new ArrayList<Article>();
 	}
 	
 	public void create(Article article) {
@@ -62,7 +66,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		if (articles.size() > 0)
 			return articles;
 		else 
-			return null;
+			return new ArrayList<Article>();
 	}
 
 }

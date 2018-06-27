@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -80,7 +81,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		else {
 			System.out.println("found no users");
-			return null;
+			return new ArrayList<User>();
 		}
 	}
 	
@@ -119,7 +120,15 @@ public class UserDAOImpl implements UserDAO {
 		@SuppressWarnings("unchecked")
 		List<User> users = query.getResultList();  
 //		em.getTransaction().commit();
-        return users;
+		
+		if (users.size() > 0) {
+			System.out.println("found users");
+			return users;
+		}
+		else {
+			System.out.println("found no users");
+			return new ArrayList<User>();
+		}
 	}
 	
 	@Override
@@ -129,7 +138,14 @@ public class UserDAOImpl implements UserDAO {
 		@SuppressWarnings("unchecked")
 		List<String> userIDs = query.getResultList();  
 //		em.getTransaction().commit();
-        return userIDs;
+		if (userIDs.size() > 0) {
+			System.out.println("found user IDs");
+			return userIDs;
+		}
+		else {
+			System.out.println("found no user IDs");
+			return new ArrayList<String>();
+		}
 	}
 	
 	@Override

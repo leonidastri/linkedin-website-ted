@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,10 @@ public class EducationDAOImpl implements EducationDAO {
 		@SuppressWarnings("unchecked")
 		List<Education> educations = query.getResultList();  
 //		em.getTransaction().commit();
-        return educations;
+		if (educations.size() > 0)
+			return educations;
+		else 
+			return new ArrayList<Education>();
 	}
 	
 	public void create(Education education) {
@@ -34,7 +38,7 @@ public class EducationDAOImpl implements EducationDAO {
 		if (educations.size() > 0)
 			return educations;
 		else 
-			return null;
+			return new ArrayList<Education>();
 	}
 	
 	public List<Education> getOnlyPublicUserEducation(Long id) {
@@ -47,7 +51,7 @@ public class EducationDAOImpl implements EducationDAO {
 		if (educations.size() > 0)
 			return educations;
 		else 
-			return null;
+			return new ArrayList<Education>();
 	}
 	
 }

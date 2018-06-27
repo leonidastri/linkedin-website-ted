@@ -1,3 +1,5 @@
-/jpautils/
-/servlets/
 /dao/
+/filters/
+/jpautils/
+/model/
+/servlets/

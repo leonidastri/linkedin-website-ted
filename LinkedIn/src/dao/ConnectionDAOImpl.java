@@ -17,7 +17,10 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 		@SuppressWarnings("unchecked")
 		List<Connection> connections = query.getResultList();  
 //		em.getTransaction().commit();
-        return connections;
+		if (connections.size() > 0)
+			return connections;
+		else 
+			return new ArrayList<Connection>();
 	}
 	
 	public void create(Connection connection) {
@@ -35,7 +38,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 		if (connections.size() > 0)
 			return connections;
 		else 
-			return null;
+			return new ArrayList<Connection>();
 	}
 	
 	public List<Connection> getUserUnansweredConnectionsRequests(Long id) {
@@ -48,7 +51,7 @@ public class ConnectionDAOImpl implements ConnectionDAO {
 		if (connections.size() > 0)
 			return connections;
 		else 
-			return null;
+			return new ArrayList<Connection>();
 	}
 
 	public Connection getConnection(Long id1, Long id2) {
