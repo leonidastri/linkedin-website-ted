@@ -34,8 +34,12 @@
 
 	<!--  HOMEPAGE BODY -->
 	<br> <br>
+
 	<div align="center">
-		<h3> Show List of all Users </h3>
+	
+		<h3> Hello Admin! </h3>
+		<br> <br>
+		<h4> From here you can view user profiles and export some information. </h4>
 		<br>
 	   	<a class="btn btn-primary" href="AdminShowAllUsers" role="button">Show Users</a>
 	</div>

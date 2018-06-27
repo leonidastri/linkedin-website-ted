@@ -38,7 +38,7 @@
     	<div class="container">
     
     		<div class="row">
-	        	<div class="col-lg-8 order-lg-2">
+	        	<div class="col-lg-12">
 	            	<div class="tab-content py-4">
 	                	<div class="tab-pane active" id="profile">
 	                    	<div class="row">
