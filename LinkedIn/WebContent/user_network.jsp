@@ -48,7 +48,7 @@
     	
     		<div class="col-md-6">
     			<form id="a_form" action="UserNetwork" method="GET">
-					<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Search by name and surname</h5>
+					<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Search user by name and surname</h5>
 					<div class="form-group">
 				    	<label>Name
 				            <input class="form-control" type="text" name="name" />
@@ -65,7 +65,7 @@
     		</div>
     		
     		<div class="col-md-6">
-    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> User's network</h5>
+    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Your network (connected users)</h5>
 			   	<table class="table table-sm table-hover table-striped">
 			    	<tbody>
 						<c:if test="${networkUsers.size() != 0}">
@@ -94,39 +94,6 @@
     		</div>
     		
 	    </div>
-
-		<!-- FOOTER -->
-		<footer class="pt-4 my-md-5 pt-md-5 border-top">
-	    	<div class="row">
-	          	<div class="col-12 col-md">
-	            	<img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-	            	<small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
-	          	</div>
-	          	<div class="col-6 col-md">
-	            	<h5>Spotlight</h5>
-	            	<ul class="list-unstyled text-small">
-		              	<li><a class="text-muted" href="#">Article of the day</a></li>
-		              	<li><a class="text-muted" href="#">Listing of the day</a></li>
-		              	<li><a class="text-muted" href="#">User of the day</a></li>
-	            	</ul>
-	          	</div>
-	          	<div class="col-6 col-md">
-	            	<h5>Resources</h5>
-	            	<ul class="list-unstyled text-small">
-		              	<li><a class="text-muted" href="#">Organization guide</a></li>
-		              	<li><a class="text-muted" href="#">User guide</a></li>
-	            	</ul>
-	          	</div>
-	          	<div class="col-6 col-md">
-	            	<h5>About</h5>
-	            	<ul class="list-unstyled text-small">
-		              	<li><a class="text-muted" href="#">About LinkedIn</a></li>
-		              	<li><a class="text-muted" href="#">Privacy</a></li>
-		              	<li><a class="text-muted" href="#">Terms</a></li>
-	            	</ul>
-	          	</div>
-			</div>
-		</footer>
 		
     </div>
 

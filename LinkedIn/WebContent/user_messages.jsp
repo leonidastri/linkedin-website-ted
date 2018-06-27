@@ -46,9 +46,25 @@
     </div>
   	
   	<br> <br>
+  	
+  	<div align="center">
+  		<c:if test="${ not empty messages }">
+	  		<c:if test="${ userID == messages.get(0).getUser1().getUserID() }">
+	  			<h3> You chat with ${ messages.get(0).getUser2().getFirstName()} ${ messages.get(0).getUser2().getLastName()} </h3>
+	  		</c:if>
+	  	
+	  		<c:if test="${ userID == messages.get(0).getUser2().getUserID() }">
+	  			<h3> You chat with ${ messages.get(0).getUser1().getFirstName()} ${ messages.get(0).getUser1().getLastName()} </h3>
+	  		</c:if>
+  		</c:if>
+  	</div>
+  	
+  	<br>
+  	
   	<!-- SEND A MESSAGE AND VIEW CONVERSATION -->
 	  	<div class="container">
 	  		<div class="row">
+	  		
 	  			<div class="col-sm">
 	  			</div>
 	  			
@@ -56,7 +72,9 @@
 	  				<main>
 		  				
 		  				<c:if test="${ not empty messages }">
+		  				
 			  				<div class="chat-container" id="chat-container" align="center">
+  								
 			  					<ul>	
 			  						<c:forEach var="i" begin="0" end="${messages.size()-1}" step="1">
 			  							<c:if test="${ userID == messages.get(i).getUser1().getUserID() }">

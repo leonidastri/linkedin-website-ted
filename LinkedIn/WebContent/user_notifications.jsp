@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.*,model.User,model.Listing"%>
 <!-- source: https://stackoverflow.com/questions/6162401/convert-and-format-a-date-in-jsp?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -39,16 +38,14 @@
   	
 	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
     <div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <h1 class="display-16">Notifications</h1>
+      <h3 class="display-16">Manage you friend requests, see who liked or commented your articles</h3>
     </div>
 	
 	<!-- CONTAINER -->
     <div class="container">
-    
-    	<div class="row">
     	
-    		<div class="col-md-4">
-    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Connection requests</h5>
+    		<div align="center">
+    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Connection requests</h5>
 	       		<table class="table table-sm table-hover table-striped">
 	            	<tbody>                                  
 	                 	<c:if test="${unansweredCons.size() != 0}">
@@ -79,8 +76,10 @@
 	            </table>
     		</div>
     		
-    		<div class="col-md-4">
-    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Liked Articles</h5>
+    		<br>
+    		
+    		<div align="center">
+    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Liked Articles</h5>
 	            <table class="table table-sm table-hover table-striped">
 	            	<tbody>                                  
 	                	<c:if test="${likeArticles.size() != 0}">
@@ -104,8 +103,10 @@
 	          	</table>
     		</div>
     		
-    		<div class="col-md-4">
-    			<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Comments</h5>
+    		<br>
+    		
+    		<div align="center">
+    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Comments</h5>
 	            <table class="table table-sm table-hover table-striped">
 	                <tbody>                                  
 	                    <c:if test="${comments.size() != 0}">
@@ -128,41 +129,6 @@
 	           		</tbody>
 	        	</table>
     		</div>
-    		
-	    </div>
-
-		<!-- FOOTER -->
-		<footer class="pt-4 my-md-5 pt-md-5 border-top">
-	    	<div class="row">
-	          	<div class="col-12 col-md">
-	            	<img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-	            	<small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
-	          	</div>
-	          	<div class="col-6 col-md">
-	            	<h5>Spotlight</h5>
-	            	<ul class="list-unstyled text-small">
-		              	<li><a class="text-muted" href="#">Article of the day</a></li>
-		              	<li><a class="text-muted" href="#">Listing of the day</a></li>
-		              	<li><a class="text-muted" href="#">User of the day</a></li>
-	            	</ul>
-	          	</div>
-	          	<div class="col-6 col-md">
-	            	<h5>Resources</h5>
-	            	<ul class="list-unstyled text-small">
-		              	<li><a class="text-muted" href="#">Organization guide</a></li>
-		              	<li><a class="text-muted" href="#">User guide</a></li>
-	            	</ul>
-	          	</div>
-	          	<div class="col-6 col-md">
-	            	<h5>About</h5>
-	            	<ul class="list-unstyled text-small">
-		              	<li><a class="text-muted" href="#">About LinkedIn</a></li>
-		              	<li><a class="text-muted" href="#">Privacy</a></li>
-		              	<li><a class="text-muted" href="#">Terms</a></li>
-	            	</ul>
-	          	</div>
-			</div>
-		</footer>
 		
     </div>
 
