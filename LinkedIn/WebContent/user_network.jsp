@@ -36,10 +36,7 @@
       	<a class="btn btn-outline-primary" href="UserLogout">Sign out</a>
     </div>
   	
-	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
-    <div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <h1 class="display-16">Notifications</h1>
-    </div>
+	<br> <br>
 	
 	<!-- CONTAINER -->
     <div class="container">
@@ -94,6 +91,38 @@
     		</div>
     		
 	    </div>
+
+			<footer class="pt-4 my-md-5 pt-md-5 border-top">
+		    	<div class="row">
+		          	<div class="col-12 col-md">
+		            	<img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+		            	<small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+		          	</div>
+		          	<div class="col-6 col-md">
+		            	<h5>Spotlight</h5>
+		            	<ul class="list-unstyled text-small">
+			              	<li><a class="text-muted" href="#">Article of the day</a></li>
+			              	<li><a class="text-muted" href="#">Listing of the day</a></li>
+			              	<li><a class="text-muted" href="#">User of the day</a></li>
+		            	</ul>
+		          	</div>
+		          	<div class="col-6 col-md">
+		            	<h5>Resources</h5>
+		            	<ul class="list-unstyled text-small">
+			              	<li><a class="text-muted" href="#">Organization guide</a></li>
+			              	<li><a class="text-muted" href="#">User guide</a></li>
+		            	</ul>
+		          	</div>
+		          	<div class="col-6 col-md">
+		            	<h5>About</h5>
+		            	<ul class="list-unstyled text-small">
+			              	<li><a class="text-muted" href="#">About LinkedIn</a></li>
+			              	<li><a class="text-muted" href="#">Privacy</a></li>
+			              	<li><a class="text-muted" href="#">Terms</a></li>
+		            	</ul>
+		          	</div>
+				</div>
+			</footer>
 		
     </div>
 
