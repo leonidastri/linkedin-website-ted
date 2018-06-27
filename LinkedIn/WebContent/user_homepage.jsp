@@ -48,6 +48,9 @@
     		<!-- PERSONAL DETAILS AND NETWORK -->
     		<div class="col-md-2">
     			<h4> Hello ${firstname}! </h4>
+    			
+    			<img src="${photopath}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+    			
     			<a class="btn btn-primary homepage-btn" href="UserProfile?action=UserProfile" role="button">Check Profile</a>
 				<br>
 				<a class="btn btn-primary homepage-btn" href="UserProfile?action=Network" role="button">Your Network</a>

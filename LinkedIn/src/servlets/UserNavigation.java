@@ -77,6 +77,7 @@ public class UserNavigation extends HttpServlet {
 					recommendedNotConnectedUsersArticles = new ArrayList<Article>();
 				
 				request.setAttribute("firstname", user.getFirstName());
+				request.setAttribute("photopath", user.getPhotoPath());
 				request.setAttribute("recommendedConnectedUsersArticles", recommendedConnectedUsersArticles);
 				request.setAttribute("recommendedNotConnectedUsersArticles", recommendedNotConnectedUsersArticles);
 				

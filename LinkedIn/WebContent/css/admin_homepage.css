@@ -1,10 +1,35 @@
-body {
-    background-color: grey;
+html {
+  font-size: 14px;
 }
-.register-container {
-	width: 450px;
-	margin: 20px auto auto;
-	border: 1px solid #000;
-	padding: 20px;
-	background-color: lightgrey;
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.article-card {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.homepage-btn {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
