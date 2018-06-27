@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Notifications</title>
+    <title>User Network</title>
 
     <!-- Bootstrap core CSS -->
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -44,7 +44,7 @@
     	<div class="row">
     	
     		<div class="col-md-6">
-    			<form id="a_form" action="UserNetwork" method="GET">
+    			<form id="a_form" action="UserNetwork?action=Search" method="Post">
 					<h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Search user by name and surname</h5>
 					<div class="form-group">
 				    	<label>Name
@@ -56,7 +56,7 @@
 				            <input class="form-control" type="text" name="surname" />
 				        </label>
 				   	</div>
-					<button type="submit" id="action" name="action" class="btn btn btn-primary my-2 my-sm-0">Search</button>
+					<button type="submit" class="btn btn btn-primary my-2 my-sm-0">Search</button>
 					
 				</form>
     		</div>

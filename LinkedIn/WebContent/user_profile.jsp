@@ -46,18 +46,23 @@
       <h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
     </div>
     
-    <c:if test="${not empty userID2}">
-    	<br>
-    	<a href="UserMessenger?receiverID=${userID2}"> Send a message </a>
-  	</c:if>
-    
-    <c:if test="${not empty userID2}">
-    	<br>
-    	<c:if test="${empty noFriendRequest}">
-    		<a href="UserSendFriendRequest?userID2=${userID2}&email=${email}"> Send friend request </a>
-  		</c:if>
-	</c:if>
-	
+    <div class=:container">
+    	<div align="center">
+		    <c:if test="${not empty userID2}">
+		    	<br>
+		    	<a class="btn btn-primary" href="UserMessenger?receiverID=${userID2}" role="button"> Send message </a>
+		  	</c:if>
+		  	
+		  	<br>
+		    
+		    <c:if test="${not empty userID2}">
+		    	<br>
+		    	<c:if test="${empty noFriendRequest}">
+		    		<a class="btn btn-primary" href="UserSendFriendRequest?userID2=${userID2}&email=${email}" role="button"> Add to friends </a>
+		  		</c:if>
+			</c:if>
+		</div>
+	</div>
 	<br>
 
 	<!-- CONTAINER -->

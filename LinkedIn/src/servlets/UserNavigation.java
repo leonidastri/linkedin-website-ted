@@ -90,7 +90,6 @@ public class UserNavigation extends HttpServlet {
 				List<User> networkUsers = new ArrayList<User>();
 				
 				if( connections != null) {
-					
 					for (Connection con : connections) {
 						if( con.getUser1().getUserID() == userID ) {
 							networkUsers.add(con.getUser2());
@@ -98,7 +97,6 @@ public class UserNavigation extends HttpServlet {
 							networkUsers.add(con.getUser1());
 						}
 					}
-					
 				}
 				
 				request.setAttribute("networkUsers", networkUsers);

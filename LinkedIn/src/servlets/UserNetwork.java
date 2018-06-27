@@ -44,7 +44,7 @@ public class UserNetwork extends HttpServlet {
 				if( surname.equals(""))
 					surname = "emptySurname";
 				
-				System.out.println(name + " " + surname);
+				System.out.println( name + " " + surname);
 				
 				UserDAO userDAO = new UserDAOImpl();
 				List<User> searchUsers = userDAO.find(name, surname);
