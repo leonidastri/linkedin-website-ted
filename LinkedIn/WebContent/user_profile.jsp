@@ -46,7 +46,7 @@
       <h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
     </div>
     
-    <div class=:container">
+    <div class="container">
     	<div align="center">
 		    <c:if test="${not empty userID2}">
 		    	<br>
@@ -387,10 +387,15 @@
 	            <img src="${user.getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 	            <h6 class="mt-2">Upload a new photo</h6>
 	            <form class="form-photoFileFromProfile" action="UploadPhotoFromProfile" method="post" id="profileUploadPhotoForm" enctype = "multipart/form-data">
-	            	<label class="custom-file">Choose new photo file
-		                <input class="form-control" id="photo" name="photo" type="file"
-	              		accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
-	            	</label>
+	            	<div class="form-group">
+	            		<label class="custom-file">Choose new photo file
+		                	<input class="form-control" id="photo" name="photo" type="file"
+	              				accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
+	            		</label>
+	            	</div>
+		            <input type="hidden" id="email" name="email" value="${ user.getEmail() }" />
+	            	<br>
+		            <button type="submit" class="btn btn btn-primary my-2 my-sm-0 user-profile-btn">Upload photo</button>
 		        </form>
 	            <br>
 	            <br>
@@ -406,10 +411,15 @@
 	        	</c:if>
 	            <h6 class="mt-2">Upload a new CV</h6>
 		        <form class="form-cvFileFromProfile" action="UploadCvFromProfile" method="post" id="profileUploadCvForm" enctype = "multipart/form-data">
-	            	<label class="custom-file">Choose new CV file
-		                <input class="form-control" id="cv" name="cv" type="file"
-	              		accept="application/pdf" >
-		            </label>
+	            	<div class="form-group">
+	            		<label class="custom-file">Choose new CV file
+		                	<input class="form-control" id="cv" name="cv" type="file"
+	              				accept="application/pdf" >
+		            	</label>
+		            </div>
+		            <input type="hidden" id="email" name="email" value="${ user.getEmail() }" />
+	            	<br>
+		            <button type="submit" class="btn btn btn-primary my-2 my-sm-0 user-profile-btn">Upload CV</button>
 		        </form>
 	        </div>
 	    </div>

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 
@@ -14,6 +16,7 @@ import javax.xml.bind.annotation.XmlElement;
 @Entity
 @Table(name="message")
 @NamedQuery(name="Message.findAll", query="SELECT m FROM Message m")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 

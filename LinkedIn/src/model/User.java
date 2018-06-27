@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /* for xml marshalling */
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * 
  */
 
-@XmlRootElement // for xml marshalling
+//@XmlRootElement // for xml marshalling
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="user")

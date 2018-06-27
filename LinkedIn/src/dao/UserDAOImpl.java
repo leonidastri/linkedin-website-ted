@@ -101,6 +101,9 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public void changeCvPath( String userID, String newCvPath) {
+		if (newCvPath.equals(""))
+			return;
+		
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		User user = em.find(User.class ,userID);
 		user.setCvPath(newCvPath);
@@ -108,6 +111,9 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public void changePhotoPath( String userID, String newPhotoPath) {
+		if (newPhotoPath.equals(""))
+			return;
+		
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		User user = em.find(User.class ,userID);
 		user.setPhotoPath(newPhotoPath);

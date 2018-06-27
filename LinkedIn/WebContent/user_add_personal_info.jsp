@@ -18,7 +18,7 @@
   	<link rel="stylesheet" href="./css/start_page.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/user_setting_add_info.css" rel="stylesheet">
+    <link href="css/user_settings_add_info.css" rel="stylesheet">
 </head>
 
 <body>
@@ -49,57 +49,113 @@
     <div class="container">
 		<div class="row">
 			
-			<div class="col-sm">
+			<div class="col-md-4 info-div">
 				<form id="a_form" action="UserAddPersonalInfo?action=job" method="POST">
 			
-					<h3> Add a job </h3> <br>
-					Add title: <br>
-					<input type="text" name="title" /> <br>
-					Add description: <br>
-					<input type="text" name="description" /> <br>
-					From : <br>
-					<input type="date" name="dateFrom" /> <br>
-					To : <br>
-					<input type="date" name="dateTo" /> <br>
-					Choose if u want to be public or private: <br>
-					<input type="radio" name="isPrivate" value="false" checked> Public <br>
-					<input type="radio" name="isPrivate" value="true"> Private <br><br>
-					
-					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0"> Add job </button>
+					<h3>Add a job</h3>
+					<div class="form-group">
+		            	<label>Add title
+		            		<input class="form-control" type="text" name="title" id="title"
+		            		placeholder="Title"
+		              		pattern=".{1,60}" title="Maximum length is 60 characters"
+		              		required="true" requiredMessage="Please insert a job title">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>Add description
+		            		<input class="form-control" type="text" name="description" id="description"
+		            		placeholder="Description"
+		              		pattern=".{1,60}" title="Maximum length is 60 characters"
+		              		required="true" requiredMessage="Please insert a job description">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>From
+		            		<input class="form-control" type="date" name="dateFrom"
+		              		required="true" requiredMessage="Please insert a job date from">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>To
+		            		<input class="form-control" type="date" name="dateTo"
+		              		required="true" requiredMessage="Please insert a job date to">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>Choose if you want this job to be public or private <br>
+		            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+							<input type="radio" name="isPrivate" value="true"> Private
+		            	</label>
+		          	</div>
+					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add job</button>
 				
 				</form>
 			</div>
 			
-			<div class="col-sm">
+			<div class="col-md-4 info-div">
 			 	<form id="a_form" action="UserAddPersonalInfo?action=education" method="POST">
 			
-					<h3> Add an education </h3> <br>
-					Add title: <br>
-					<input type="text" name="title" /> <br>
-					Add description: <br>
-					<input type="text" name="description" /> <br>
-					From : <br>
-					<input type="date" name="dateFrom" /> <br>
-					To : <br>
-					<input type="date" name="dateTo" /> <br>
-					Choose if u want to be public or private: <br>
-					<input type="radio" name="isPrivate" value="false" checked> Public <br>
-					<input type="radio" name="isPrivate" value="true"> Private <br> <br>
-					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0"> Add education </button>
+					<h3>Add an education</h3>
+					<div class="form-group">
+		            	<label>Add title
+		            		<input class="form-control" type="text" name="title" id="title"
+		            		placeholder="Title"
+		              		pattern=".{1,60}" title="Maximum length is 60 characters"
+		              		required="true" requiredMessage="Please insert an education title">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>Add description
+		            		<input class="form-control" type="text" name="description" id="description"
+		            		placeholder="Description"
+		              		pattern=".{1,60}" title="Maximum length is 60 characters"
+		              		required="true" requiredMessage="Please insert an education description">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>From
+		            		<input class="form-control" type="date" name="dateFrom"
+		              		required="true" requiredMessage="Please insert an education date from">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>To
+		            		<input class="form-control" type="date" name="dateTo"
+		              		required="true" requiredMessage="Please insert an education date to">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>Choose if you want this education to be public or private <br>
+		            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+							<input type="radio" name="isPrivate" value="true"> Private
+		            	</label>
+		          	</div>
+					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add education</button>
+					
 				</form>
 			</div>
 			
-			<div class="col-sm">
+			<div class="col-md-4 info-div">
 		
 				 <form id="a_form" action="UserAddPersonalInfo?action=skill" method="POST">
-			
-					<h3> Add a skill </h3> <br>
-					Add description: <br>
-					<input type="text" name="description" /> <br>
-					Choose if u want to be public or private: <br>
-					<input type="radio" name="isPrivate" value="false" checked> Public <br>
-					<input type="radio" name="isPrivate" value="true"> Private <br><br>
-					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0"> Add skill </button>
+				 
+				 	<h3>Add a skill</h3>
+		          	<div class="form-group">
+		            	<label>Add description
+		            		<input class="form-control" type="text" name="description" id="description"
+		            		placeholder="Description"
+		              		pattern=".{1,60}" title="Maximum length is 60 characters"
+		              		required="true" requiredMessage="Please insert a skill description">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>Choose if you want this skill to be public or private <br>
+		            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+							<input type="radio" name="isPrivate" value="true"> Private
+		            	</label>
+		          	</div>
+					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add skill</button>
+
 				</form>
 	
 			</div>
