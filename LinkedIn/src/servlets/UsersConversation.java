@@ -59,8 +59,9 @@ public class UsersConversation extends HttpServlet {
 			
 			List<Message> conversation = messageDAO.getUserConversation( Long.parseLong(userID), Long.parseLong(receiverID));
 			
-			for( Message c : conversation )
-				System.out.println(c.getUser1() + ": " + c.getText() );
+			//for( Message c : conversation )
+			//	System.out.println(c.getUser1() + ": " + c.getText() );
+			
 			request.setAttribute("messages", conversation);
 		}
 		else {

@@ -32,15 +32,16 @@ public class UserAddComment extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		/* TODO: check if alright */
-		String redirect = "/user_homepage.jsp";
+		String redirect = "/UserNavigation?action=Homepage";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
-			String articleID = (String) session.getAttribute("articleID");
-			String text = request.getParameter("text");
+			String articleID = request.getParameter("articleID");
+			String newComment = request.getParameter("newComment");
 			
+			System.out.println(newComment + " " + articleID);
 			ArticleDAO articleDAO = new ArticleDAOImpl();
 			CommentDAO commentDAO = new CommentDAOImpl();
 			UserDAO userDAO = new UserDAOImpl();
@@ -49,14 +50,14 @@ public class UserAddComment extends HttpServlet {
 			
 			comment.setArticle(articleDAO.find(Long.parseLong(articleID)));
 			comment.setPubDate(new Date());
-			comment.setText(text);
+			comment.setText(newComment);
 			comment.setUser(userDAO.find(Long.parseLong(userID)));
 			
 			commentDAO.create(comment);
 		}
 		else {
 			/* TODO: check if alright */
-			redirect = "/user_homepage.jsp";
+			redirect = "/start_page.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}
 

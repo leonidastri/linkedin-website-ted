@@ -81,10 +81,31 @@ public class UserNavigation extends HttpServlet {
 				if( recommendedNotConnectedUsersArticles == null )
 					recommendedNotConnectedUsersArticles = new ArrayList<Article>();
 				
+				List<String> alreadyLikedConArticle = new ArrayList<String>();
+				List<String> alreadyLikedNotConArticle = new ArrayList<String>();
+				
+				LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
+				
+				for( Article a : recommendedConnectedUsersArticles) {
+					if ( likeArticleDAO.find(Long.parseLong(userID), Long.parseLong(a.getArticleID())) != null )
+						alreadyLikedConArticle.add("true");					
+					else
+						alreadyLikedConArticle.add("false");				
+				}
+				
+				for( Article a : recommendedNotConnectedUsersArticles) {
+					if ( likeArticleDAO.find(Long.parseLong(userID), Long.parseLong(a.getArticleID())) != null )
+						alreadyLikedNotConArticle.add("true");					
+					else
+						alreadyLikedNotConArticle.add("false");
+				}
+				
 				request.setAttribute("firstname", user.getFirstName());
 				request.setAttribute("photopath", user.getPhotoPath());
 				request.setAttribute("recommendedConnectedUsersArticles", recommendedConnectedUsersArticles);
 				request.setAttribute("recommendedNotConnectedUsersArticles", recommendedNotConnectedUsersArticles);
+				request.setAttribute("alreadyLikedConArticle", alreadyLikedConArticle);
+				request.setAttribute("alreadyLikedNotConArticle", alreadyLikedNotConArticle);
 				
 				redirect = "/user_homepage.jsp";
 			}
@@ -139,7 +160,7 @@ public class UserNavigation extends HttpServlet {
 					else
 						conApplied.add("false");
 					
-					if ( likeListingDAO.findByListingID(Long.parseLong(l.getListingID())) != null )
+					if ( likeListingDAO.find(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null )
 						alreadyLikedConListing.add("true");					
 					else
 						alreadyLikedConListing.add("false");
@@ -155,7 +176,7 @@ public class UserNavigation extends HttpServlet {
 					else
 						notConApplied.add("false");
 					
-					if ( likeListingDAO.findByListingID(Long.parseLong(l.getListingID())) != null )
+					if ( likeListingDAO.find(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null )
 						alreadyLikedNotConListing.add("true");					
 					else
 						alreadyLikedNotConListing.add("false");

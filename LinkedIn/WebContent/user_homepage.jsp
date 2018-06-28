@@ -67,24 +67,31 @@
 		  					<div class="card-body">
 		    					<h5 class="card-title"> ${recommendedConnectedUsersArticles.get(i).getTitle()}</h5>
 							    <p class="card-text"> ${recommendedConnectedUsersArticles.get(i).getText()} </p>
-							    <p class="card-text"><small class="text-muted"> ${recommendedConnectedUsersArticles.get(i).getPubDate()} </small></p>
-		  						<a href="#" class="card-link">View full article</a>
-    							<a href="UserAddLikeArticle?articleID=${ recommendedConnectedUsersArticles.get(i).getArticleID() }" class="card-link">Like article</a>
-		  					</div>
-		  					
-		  					<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getPicturePath() }">
-		  						<img class="card-img-bottom" src="${recommendedConnectedUsersArticles.get(i).getPicturePath()}" alt="Article-title-1">
-		  					</c:if>
+							    <p class="card-text"><small class="text-muted"> by ${recommendedConnectedUsersArticles.get(i).getUser().getFirstName()} ${recommendedConnectedUsersArticles.get(i).getUser().getLastName()} at ${recommendedConnectedUsersArticles.get(i).getPubDate()} </small></p>
+    							
+    							<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getPicturePath() }">
+		  							<img class="card-img-bottom" src="${recommendedConnectedUsersArticles.get(i).getPicturePath()}" alt="Article-title-1">
+		  						</c:if>
 							
-							<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getVideoPath() }">
-								<iframe width="560" height="315" src="${recommendedConnectedUsersArticles.get(i).getVideoPath()}" frameborder="0" allowfullscreen></iframe>
-		  					</c:if>
+								<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getVideoPath() }">
+									<iframe width="560" height="315" src="${recommendedConnectedUsersArticles.get(i).getVideoPath()}" frameborder="0" allowfullscreen></iframe>
+		  						</c:if>
 		  					
-		  					<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getAudioPath() }">
-		  						<audio controls>
-									<source src="${recommendedConnectedUsersArticles.get(i).getAudioPath()}" type="audio/ogg">
-								</audio>
-		  					</c:if>
+		  						<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getAudioPath() }">
+		  							<audio controls>
+										<source src="${recommendedConnectedUsersArticles.get(i).getAudioPath()}" type="audio/ogg">
+									</audio>
+		  						</c:if>
+		  					  					
+	    						<c:if test="${ alreadyLikedConArticle.get(i) eq false }">
+				                    <a href="UserAddLikeArticle?add=true&articleID=${recommendedConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">Like</a>
+	  							</c:if>
+	  							<c:if test="${ alreadyLikedConArticle.get(i) eq true }">
+									<a href="UserAddLikeArticle?add=false&articleID=${recommendedConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">Unlike</a>
+	  							</c:if>
+	  							
+	  							<a href="UserViewArticleComments?articleID=${recommendedConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">Comment</a>
+		  					</div>
 		  						  					
 						</div>
 						
@@ -98,24 +105,39 @@
 		  					<div class="card-body">
 		    					<h5 class="card-title"> ${recommendedNotConnectedUsersArticles.get(i).getTitle()}</h5>
 							    <p class="card-text"> ${recommendedNotConnectedUsersArticles.get(i).getText()} </p>
-							    <p class="card-text"><small class="text-muted"> ${recommendedNotConnectedUsersArticles.get(i).getPubDate()} </small></p>
-		  						<a href="#" class="card-link">View full article</a>
-    							<a href="UserAddLikeArticle?articleID=${ recommendedNotConnectedUsersArticles.get(i).getArticleID() }" class="card-link">Like article</a>
-		  					</div>
-		  					
-		  					<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getPicturePath() }">
-		  						<img class="card-img-bottom" src="${recommendedNotConnectedUsersArticles.get(i).getPicturePath()}" alt="Article-title-1">
-		  					</c:if>
+							    <p class="card-text"><small class="text-muted"> by ${recommendedNotConnectedUsersArticles.get(i).getUser().getFirstName()} ${recommendedNotConnectedUsersArticles.get(i).getUser().getLastName()} at ${recommendedNotConnectedUsersArticles.get(i).getPubDate()} </small></p>
+    								
+    							<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getPicturePath() }">
+		  							<img class="card-img-bottom" width="560" height="315" src="${recommendedNotConnectedUsersArticles.get(i).getPicturePath()}" alt="Article-title-1">
+		  						</c:if>
 							
-							<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getVideoPath() }">
-								<iframe width="560" height="315" src="${recommendedNotConnectedUsersArticles.get(i).getVideoPath()}" frameborder="0" allowfullscreen></iframe>
-		  					</c:if>
+								<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getVideoPath() }">
+									<iframe width="560" height="315" src="${recommendedNotConnectedUsersArticles.get(i).getVideoPath()}" frameborder="0" allowfullscreen></iframe>
+		  						</c:if>
 		  					
-		  					<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getAudioPath() }">
-		  						<audio controls>
-									<source src="${recommendedNotConnectedUsersArticles.get(i).getAudioPath()}" type="audio/ogg">
-								</audio>
-		  					</c:if>
+		  						<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getAudioPath() }">
+		  							<audio controls>
+										<source src="${recommendedNotConnectedUsersArticles.get(i).getAudioPath()}" type="audio/ogg">
+									</audio>
+		  						</c:if>
+		  					
+    							<div class="card-button">
+	    							<c:if test="${ alreadyLikedNotConArticle.get(i) eq false }">
+				                        <a href="UserAddLikeArticle?add=true&articleID=${recommendedNotConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">Like</a>
+	  								</c:if>
+	  								<c:if test="${ alreadyLikedNotConArticle.get(i) eq true }">
+										<a href="UserAddLikeArticle?add=false&articleID=${recommendedNotConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">Unlike</a>
+	  								</c:if>
+	  							</div>
+	  							
+	  							<form action="UserAddComment" method="post">
+		  							<input type="hidden" name="articleID" value="${ recommendedNotConnectedUsersArticles.get(i).getArticleID() }">
+		  							<input type="text" name="newComment" placeholder="Comment" 
+		  							required requireMessage="Please insert comment"
+		  							pattern=".{1,1000}" title="Maximum length is 1000 characters">
+		  							<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add Comment</button>
+		  						</form>
+		  					</div>
 		  						  					
 						</div>
 						
@@ -139,12 +161,11 @@
   					</div>
   					<img class="card-img-bottom" src=".../100px180/" alt="Article-title-3">
 				</div>
-				-->
 				
-				<!-- TODO: SEE ALL RESULTS -->
 				<div align="center">
 		        	<a class="btn btn-primary" href="UserShowCompleteNewsfeed?email=${email}" role="button">Show complete newsfeed</a>
 				</div>
+				-->
     		</div>
     	
     	

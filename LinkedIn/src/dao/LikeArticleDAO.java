@@ -18,4 +18,7 @@ public interface LikeArticleDAO {
 	
 	public List<String> getUserLikeArticlesArticleIDs(Long userID);
 	
+	public void delete(Long id1, Long id2);
+	
+	public LikeArticle find(Long id1, Long id2);
 }

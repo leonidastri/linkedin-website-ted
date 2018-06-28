@@ -11,6 +11,20 @@ import model.LikeArticle;
 
 public class LikeArticleDAOImpl implements LikeArticleDAO {
 
+	public LikeArticle find(Long id1, Long id2) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT la FROM LikeArticle la WHERE la.user.userID = '" + String.valueOf(id1) + "' AND la.article.articleID = '" + String.valueOf(id2) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<LikeArticle> articles = query.getResultList();
+		
+		if (articles.size() == 1) {
+			System.out.println("hey there");
+			return articles.get(0);
+		}else
+			return null;
+	}
+	
 	public List<LikeArticle> list() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT la FROM LikeArticle la", LikeArticle.class);
@@ -27,6 +41,18 @@ public class LikeArticleDAOImpl implements LikeArticleDAO {
 	public void create(LikeArticle likeArticle) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		em.persist(likeArticle);
+	}
+	
+	public void delete(Long id1, Long id2) {
+
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT la FROM LikeArticle la WHERE la.user.userID = '" + String.valueOf(id1) + "' AND la.article.articleID = '" + String.valueOf(id2) + "'");
+		 
+		@SuppressWarnings("unchecked")
+		List<LikeArticle> articles = query.getResultList();
+				
+		if (articles.size() == 1)
+			em.remove(articles.get(0));
 	}
 	
 	public List<LikeArticle> getUserLikeArticles(Long id) {

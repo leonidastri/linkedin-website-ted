@@ -11,10 +11,9 @@ import model.LikeListing;
 
 public class LikeListingDAOImpl implements LikeListingDAO {
 
-
-	public LikeListing findByListingID(Long id) {
+	public LikeListing find(Long id1, Long id2) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
-		Query query = em.createQuery("SELECT l FROM LikeListing l WHERE l.listing.listingID = '" + String.valueOf(id) + "'");
+		Query query = em.createQuery("SELECT l FROM LikeListing l WHERE l.user.userID = '" + String.valueOf(id1) + "' AND l.listing.listingID = '" + String.valueOf(id2) + "'");
 		
 		@SuppressWarnings("unchecked")
 		List<LikeListing> listings = query.getResultList();

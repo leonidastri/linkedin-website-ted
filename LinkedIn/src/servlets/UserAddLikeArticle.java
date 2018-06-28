@@ -38,17 +38,25 @@ public class UserAddLikeArticle extends HttpServlet {
 		
 		if (isUser) {
 			String articleID = request.getParameter("articleID");
+			String add = request.getParameter("add");
 			
 			ArticleDAO articleDAO = new ArticleDAOImpl();
 			LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
 			UserDAO userDAO = new UserDAOImpl();
 			
-			LikeArticle likeArticle = new LikeArticle();
+			if( add.equals("true") ) {
 			
-			likeArticle.setArticle(articleDAO.find(Long.parseLong(articleID)));
-			likeArticle.setUser(userDAO.find(Long.parseLong(userID)));
-			
-			likeArticleDAO.create(likeArticle);
+				LikeArticle likeArticle = new LikeArticle();
+				
+				likeArticle.setArticle(articleDAO.find(Long.parseLong(articleID)));
+				likeArticle.setUser(userDAO.find(Long.parseLong(userID)));
+				
+				likeArticleDAO.create(likeArticle);
+				
+			} else {
+				
+				likeArticleDAO.delete(Long.parseLong(userID), Long.parseLong(articleID));
+			}
 			
 		}
 		else {
