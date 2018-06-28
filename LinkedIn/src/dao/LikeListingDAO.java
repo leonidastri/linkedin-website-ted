@@ -19,4 +19,6 @@ public interface LikeListingDAO {
 	public LikeListing findByListingID(Long id);
 	
 	List<LikeListing> getLikesOfUserListings(Long listingID);
+	
+	public void delete(Long id1, Long id2);
 }

@@ -43,6 +43,18 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 		em.persist(likeListing);
 	}
 	
+	public void delete(Long id1, Long id2) {
+
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT ll FROM LikeListing ll WHERE ll.user.userID = '" + String.valueOf(id1) + "' AND ll.listing.listingID = '" + String.valueOf(id2) + "'");
+		 
+		@SuppressWarnings("unchecked")
+		List<LikeListing> listings = query.getResultList();
+				
+		if (listings.size() == 1)
+			em.remove(listings.get(0));
+	}
+	
 	public List<LikeListing> getUserLikeListings(Long userID) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT ll FROM LikeListing ll WHERE ll.user.userID = '" + String.valueOf(userID) + "'");

@@ -85,6 +85,9 @@
 	                	<c:if test="${likeArticles.size() != 0}">
 							<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
 								<tr>
+									<td>
+			                        	<a href="UserProfile?action=OtherUserProfile&email=${likeArticles.get(i).getUser().getEmail()}"> ${likeArticles.get(i).getUser().getEmail()} </a> 
+			                        </td>
 			                    	<td>
 			                        	${likeArticles.get(i).getUser().getFirstName()}
 			                        </td>
@@ -118,6 +121,9 @@
 							<c:forEach var="i" begin="0" end="${likeListings.size()-1}" step="1">
 								<tr>
 			                    	<td>
+			                        	<a href="UserProfile?action=OtherUserProfile&email=${likeListings.get(i).getUser().getEmail()}"> ${likeListings.get(i).getUser().getEmail()} </a> 
+			                        </td>
+			                        <td>
 			                        	${likeListings.get(i).getUser().getFirstName()}
 			                        </td>
 			                        <td>

@@ -43,12 +43,22 @@ public class UserAddLikeListing extends HttpServlet {
 			ListingDAO listingDAO = new ListingDAOImpl();
 			UserDAO userDAO = new UserDAOImpl();
 			
-			LikeListing likeListing = new LikeListing();
+			String add = request.getParameter("add");
 			
-			likeListing.setListing(listingDAO.find(Long.parseLong(listingID)));
-			likeListing.setUser(userDAO.find(Long.parseLong(userID)));
+			if( add.equals("true") ) {
 			
-			likeListingDAO.create(likeListing);
+				LikeListing likeListing = new LikeListing();
+				
+				likeListing.setListing(listingDAO.find(Long.parseLong(listingID)));
+				likeListing.setUser(userDAO.find(Long.parseLong(userID)));
+				
+				likeListingDAO.create(likeListing);
+				
+			} else {
+				
+				likeListingDAO.delete(Long.parseLong(userID), Long.parseLong(listingID));
+			}
+			
 		}
 		else {
 			/* TODO: check if alright */

@@ -62,6 +62,7 @@ public class UserProfile extends HttpServlet {
 		String action = request.getParameter("action");
 		String email = request.getParameter("email");
 		
+		System.out.println(email);
 		if (isUser) {
 			
 			String userID = (String) session.getAttribute("userID");
@@ -71,6 +72,7 @@ public class UserProfile extends HttpServlet {
 			if( email != null) {
 				user = userDAO.find(email);
 				userID2 = user.getUserID();
+				
 			} else {
 				user = userDAO.find(Long.parseLong(userID));
 			}
@@ -213,7 +215,6 @@ public class UserProfile extends HttpServlet {
 			redirect = "/start_page.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}
-		
 		request.getRequestDispatcher(redirect).forward(request, response);
 	}
 	

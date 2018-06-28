@@ -73,7 +73,7 @@
   										</c:if>
   										
   										<c:if test="${ conApplied.get(i) eq true }">
-  											<strong> Applied already! </strong>
+  											<strong> Applied! </strong>
   										</c:if>
 			                        </td>
 			                        <td>
@@ -82,10 +82,16 @@
 												<button type="submit" id="listingApply" name="listingApply" value="true">Like</button>
 												<input type="hidden" name="listingID" value="${recommendedConnectedUsersListings.get(i).getListingID()}">
   												<input type="hidden" name="action" value="LikeListing">
+  												<input type="hidden" name="add" value="true">
   											</form>
   										</c:if>
   										<c:if test="${ alreadyLikedConListing.get(i) eq true }">
-  											<strong> Liked already! </strong>
+  											<form action="UserAddLikeListing" method="get">
+												<button type="submit" id="listingApply" name="listingApply" value="true">Unlike</button>
+												<input type="hidden" name="listingID" value="${recommendedConnectedUsersListings.get(i).getListingID()}">
+  												<input type="hidden" name="action" value="LikeListing">
+  												<input type="hidden" name="add" value="false">
+  											</form>
   										</c:if>
 			             			</td>
 			                    </tr>
@@ -129,7 +135,7 @@
   										</form>
   									</c:if>
   									<c:if test="${ notConApplied.get(i) eq true }">
-  										<strong> Applied already! </strong>
+  										<strong> Applied! </strong>
   									</c:if>
 			             		</td>
 			             		<td>
@@ -141,7 +147,12 @@
   										</form>
   									</c:if>
   									<c:if test="${ alreadyLikedNotConListing.get(i) eq true }">
-  										<strong> Liked already! </strong>
+  										<form action="UserAddLikeListing" method="get">
+											<button type="submit" id="listingApply" name="listingApply" value="true">Unlike</button>
+											<input type="hidden" name="listingID" value="${recommendedNotConnectedUsersListings.get(i).getListingID()}">
+  											<input type="hidden" name="action" value="LikeListing">
+  											<input type="hidden" name="add" value="false">
+  										</form>
   									</c:if>
 			             		</td>
 			          		</tr>
