@@ -21,6 +21,10 @@ import dao.ConnectionDAO;
 import dao.ConnectionDAOImpl;
 import dao.LikeArticleDAO;
 import dao.LikeArticleDAOImpl;
+import dao.LikeListingDAO;
+import dao.LikeListingDAOImpl;
+import dao.ListingDAO;
+import dao.ListingDAOImpl;
 import dao.MessageDAO;
 import dao.MessageDAOImpl;
 import dao.UserDAO;
@@ -32,6 +36,7 @@ import model.Article;
 import model.Comment;
 import model.Connection;
 import model.LikeArticle;
+import model.LikeListing;
 import model.Listing;
 import model.User;
 
@@ -67,8 +72,8 @@ public class UserNavigation extends HttpServlet {
 				
 				RecommendationSystem recommendationSystem = new RecommendationSystem();
 				
-				List<Article> recommendedConnectedUsersArticles = null; //recommendationSystem.getConnectedRecommendedArticles(userID);
-				List<Article> recommendedNotConnectedUsersArticles = null; //recommendationSystem.getNotConnectedRecommendedArticles(userID);
+				List<Article> recommendedConnectedUsersArticles = recommendationSystem.getConnectedRecommendedArticles(userID);
+				List<Article> recommendedNotConnectedUsersArticles = recommendationSystem.getNotConnectedRecommendedArticles(userID);
 
 				if( recommendedConnectedUsersArticles == null )
 					recommendedConnectedUsersArticles = new ArrayList<Article>();
@@ -122,7 +127,10 @@ public class UserNavigation extends HttpServlet {
 					recommendedNotConnectedUsersListings = new ArrayList<Listing>();
 				
 				ApplicationDAO applicationDAO = new ApplicationDAOImpl();
+				LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
+				
 				List<String> conApplied = new ArrayList<String>();
+				List<String> alreadyLikedConListing = new ArrayList<String>();
 				
 				for( Listing l : recommendedConnectedUsersListings ) {
 					
@@ -130,19 +138,27 @@ public class UserNavigation extends HttpServlet {
 						conApplied.add("true");					
 					else
 						conApplied.add("false");
+					
+					if ( likeListingDAO.findByListingID(Long.parseLong(l.getListingID())) != null )
+						alreadyLikedConListing.add("true");					
+					else
+						alreadyLikedConListing.add("false");
 				}
 				
 				List<String> notConApplied = new ArrayList<String>();
+				List<String> alreadyLikedNotConListing = new ArrayList<String>();
 				
 				for( Listing l : recommendedNotConnectedUsersListings ) {
-					System.out.print(l.getListingID() + " " + userID );
-					if ( applicationDAO.getApplication(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null ) {
+					
+					if ( applicationDAO.getApplication(Long.parseLong(userID), Long.parseLong(l.getListingID())) != null )
 						notConApplied.add("true");
-						System.out.println(" " + true);
-				} else {
-						System.out.println(" " + false);
+					else
 						notConApplied.add("false");
-					}
+					
+					if ( likeListingDAO.findByListingID(Long.parseLong(l.getListingID())) != null )
+						alreadyLikedNotConListing.add("true");					
+					else
+						alreadyLikedNotConListing.add("false");
 				}
 				
 //				request.setAttribute("connectedUsersListings", connectedUsersListings);
@@ -151,7 +167,8 @@ public class UserNavigation extends HttpServlet {
 				request.setAttribute("recommendedNotConnectedUsersListings", recommendedNotConnectedUsersListings);
 				request.setAttribute("conApplied", conApplied);
 				request.setAttribute("notConApplied", notConApplied);
-				
+				request.setAttribute("alreadyLikedConListing", alreadyLikedConListing);
+				request.setAttribute("alreadyLikedNotConListing", alreadyLikedNotConListing);
 				redirect = "/user_listings.jsp";
 			}
 			else if( action.equals("Notifications") ) {
@@ -184,6 +201,21 @@ public class UserNavigation extends HttpServlet {
 					}
 				}
 				
+				ListingDAO listingDAO = new ListingDAOImpl();
+				List<Listing> listings = listingDAO.getUserListings(Long.parseLong(userID));
+
+				LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
+				List<LikeListing> likeListings = new ArrayList<LikeListing>();
+				
+				if( listings != null ) {
+					for( Listing l : listings ) {
+						List<LikeListing> likedListingsList = likeListingDAO.getLikesOfUserListings(Long.parseLong(l.getListingID()));
+						
+						if( likedListingsList != null )
+							likeListings.addAll( likedListingsList );
+					}
+				}
+				
 				CommentDAO commentDAO = new CommentDAOImpl();
 				List<Comment> comments = new ArrayList<Comment>();
 				
@@ -204,11 +236,12 @@ public class UserNavigation extends HttpServlet {
 					unansweredCons = new ArrayList<Connection>();
 				}
 				
-				System.out.println(unansweredCons.size() );
-				System.out.println(comments.size() );
-				System.out.println(likeArticles.size() );
+				//System.out.println(unansweredCons.size() );
+				//System.out.println(comments.size() );
+				//System.out.println(likeArticles.size() );
 				
 				request.setAttribute("likeArticles", likeArticles);
+				request.setAttribute("likeListings", likeListings);
 				request.setAttribute("unansweredCons", unansweredCons);
 				request.setAttribute("comments", comments);
 				

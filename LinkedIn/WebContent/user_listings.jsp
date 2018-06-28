@@ -76,6 +76,18 @@
   											<strong> Applied already! </strong>
   										</c:if>
 			                        </td>
+			                        <td>
+			                     		<c:if test="${ alreadyLikedConListing.get(i) eq false }">
+			                        		<form action="UserAddLikeListing" method="get">
+												<button type="submit" id="listingApply" name="listingApply" value="true">Like</button>
+												<input type="hidden" name="listingID" value="${recommendedConnectedUsersListings.get(i).getListingID()}">
+  												<input type="hidden" name="action" value="LikeListing">
+  											</form>
+  										</c:if>
+  										<c:if test="${ alreadyLikedConListing.get(i) eq true }">
+  											<strong> Liked already! </strong>
+  										</c:if>
+			             			</td>
 			                    </tr>
 		                    </c:forEach>
 					</c:if>
@@ -118,6 +130,18 @@
   									</c:if>
   									<c:if test="${ notConApplied.get(i) eq true }">
   										<strong> Applied already! </strong>
+  									</c:if>
+			             		</td>
+			             		<td>
+			                     	<c:if test="${ alreadyLikedNotConListing.get(i) eq false }">
+			                        	<form action="UserAddLikeListing" method="get">
+											<button type="submit" id="listingApply" name="listingApply" value="true">Like</button>
+											<input type="hidden" name="listingID" value="${recommendedNotConnectedUsersListings.get(i).getListingID()}">
+  											<input type="hidden" name="action" value="LikeListing">
+  										</form>
+  									</c:if>
+  									<c:if test="${ alreadyLikedNotConListing.get(i) eq true }">
+  										<strong> Liked already! </strong>
   									</c:if>
 			             		</td>
 			          		</tr>

@@ -67,9 +67,9 @@
 		  					<div class="card-body">
 		    					<h5 class="card-title"> ${recommendedConnectedUsersArticles.get(i).getTitle()}</h5>
 							    <p class="card-text"> ${recommendedConnectedUsersArticles.get(i).getText()} </p>
-							    <p class="card-text"><small class="text-muted"> ${recommendedConnectedUsersArticles.get(i).getpubDate()} </small></p>
+							    <p class="card-text"><small class="text-muted"> ${recommendedConnectedUsersArticles.get(i).getPubDate()} </small></p>
 		  						<a href="#" class="card-link">View full article</a>
-    							<a href="/UserAddLikeArticle?articleID=${ recommendedConnectedUsersArticles.get(i).getArticleID }" class="card-link">Like article</a>
+    							<a href="UserAddLikeArticle?articleID=${ recommendedConnectedUsersArticles.get(i).getArticleID() }" class="card-link">Like article</a>
 		  					</div>
 		  					
 		  					<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getPicturePath() }">
@@ -98,9 +98,9 @@
 		  					<div class="card-body">
 		    					<h5 class="card-title"> ${recommendedNotConnectedUsersArticles.get(i).getTitle()}</h5>
 							    <p class="card-text"> ${recommendedNotConnectedUsersArticles.get(i).getText()} </p>
-							    <p class="card-text"><small class="text-muted"> ${recommendedNotConnectedUsersArticles.get(i).getpubDate()} </small></p>
+							    <p class="card-text"><small class="text-muted"> ${recommendedNotConnectedUsersArticles.get(i).getPubDate()} </small></p>
 		  						<a href="#" class="card-link">View full article</a>
-    							<a href="/UserAddLikeArticle?articleID=${ recommendedNotConnectedUsersArticles.get(i).getArticleID }" class="card-link">Like article</a>
+    							<a href="UserAddLikeArticle?articleID=${ recommendedNotConnectedUsersArticles.get(i).getArticleID() }" class="card-link">Like article</a>
 		  					</div>
 		  					
 		  					<c:if test="${ not empty recommendedNotConnectedUsersArticles.get(i).getPicturePath() }">

@@ -11,6 +11,20 @@ import model.LikeListing;
 
 public class LikeListingDAOImpl implements LikeListingDAO {
 
+
+	public LikeListing findByListingID(Long id) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT l FROM LikeListing l WHERE l.listing.listingID = '" + String.valueOf(id) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<LikeListing> listings = query.getResultList();
+		
+		if (listings.size() == 1)
+			return listings.get(0);
+		else
+			return null;
+	}
+	
 	public List<LikeListing> list() {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		Query query = em.createQuery("SELECT ll FROM LikeListing ll", LikeListing.class);
@@ -67,6 +81,19 @@ public class LikeListingDAOImpl implements LikeListingDAO {
 			return listingIDs;
 		else 
 			return new ArrayList<String>();
+	}
+	
+	public List<LikeListing> getLikesOfUserListings(Long listingID) {
+		EntityManager em = EntityManagerHelper.getEntityManager();
+		Query query = em.createQuery("SELECT la FROM LikeListing la WHERE la.listing.listingID = '" + String.valueOf(listingID) + "'");
+		
+		@SuppressWarnings("unchecked")
+		List<LikeListing> likeListings = query.getResultList();
+		
+		if (likeListings.size() > 0)
+			return likeListings;
+		else 
+			return new ArrayList<LikeListing>();
 	}
 	
 }

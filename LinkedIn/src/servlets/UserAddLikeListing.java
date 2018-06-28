@@ -31,13 +31,13 @@ public class UserAddLikeListing extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		/* TODO: check if alright */
-		String redirect = "/user_homepage.jsp";
+		String redirect = "/UserNavigation?action=Listings";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
-			String listingID = (String) session.getAttribute("listingID");
+			String listingID = request.getParameter("listingID");
 			
 			LikeListingDAO likeListingDAO = new LikeListingDAOImpl();
 			ListingDAO listingDAO = new ListingDAOImpl();

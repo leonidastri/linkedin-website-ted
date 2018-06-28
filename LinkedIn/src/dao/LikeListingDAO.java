@@ -16,4 +16,7 @@ public interface LikeListingDAO {
 	
 	public List<String> getUserLikeListingsListingIDs(Long userID);
 
+	public LikeListing findByListingID(Long id);
+	
+	List<LikeListing> getLikesOfUserListings(Long listingID);
 }

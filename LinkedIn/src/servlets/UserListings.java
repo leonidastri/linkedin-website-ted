@@ -88,7 +88,7 @@ public class UserListings extends HttpServlet {
 				Listing listing = new Listing();
 				
 				listing.setTitle(request.getParameter("title"));
-				listing.setDescription("description");
+				listing.setDescription(request.getParameter("description"));
 				listing.setPubDate(new Date());
 				listing.setUser(user);
 				

@@ -31,13 +31,13 @@ public class UserAddLikeArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		/* TODO: check if alright */
-		String redirect = "/user_homepage.jsp";
+		String redirect = "UserNavigation?action=Homepage";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
-			String articleID = (String) session.getAttribute("articleID");
+			String articleID = request.getParameter("articleID");
 			
 			ArticleDAO articleDAO = new ArticleDAOImpl();
 			LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
@@ -49,6 +49,7 @@ public class UserAddLikeArticle extends HttpServlet {
 			likeArticle.setUser(userDAO.find(Long.parseLong(userID)));
 			
 			likeArticleDAO.create(likeArticle);
+			
 		}
 		else {
 			/* TODO: check if alright */

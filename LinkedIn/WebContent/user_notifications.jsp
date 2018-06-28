@@ -38,7 +38,7 @@
   	
 	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
     <div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <h3 class="display-16">Manage you friend requests, see who liked or commented your articles</h3>
+      <h3 class="display-16">Manage you friend requests, see who liked or commented your articles and listings</h3>
     </div>
 	
 	<!-- CONTAINER -->
@@ -86,16 +86,53 @@
 							<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
 								<tr>
 			                    	<td>
-			                        	<a href="UserProfile?email=${likeArticles.get(i).getUser().getEmail()}&action=OtherUserProfile">${likeArticles.get(i).getUser().getFirstName()}</a>
-			                            <p> liked ${likeArticles.get(i).getArticle().getTitle()} </p>
+			                        	${likeArticles.get(i).getUser().getFirstName()}
+			                        </td>
+			                        <td>
+			                        	${likeArticles.get(i).getUser().getLastName()}
+			                        </td>
+			                        <td>
+			                        	<p> liked article ${likeArticles.get(i).getArticle().getTitle()} </p>
 			                   		</td>
-			                    </tr>
+			                     </tr>
 		                   	</c:forEach>
 						</c:if>
 						<c:if test="${likeArticles.size() == 0}">
 							<tr>
 								<td>
 									<p>No likes yet in your articles</p>
+								</td>
+							</tr>
+						</c:if>
+	               </tbody>
+	          	</table>
+    		</div>
+    		
+    		<br>
+    		
+    		<div align="center">
+    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Liked Listings</h5>
+	            <table class="table table-sm table-hover table-striped">
+	            	<tbody>                                  
+	                	<c:if test="${likeListings.size() != 0}">
+							<c:forEach var="i" begin="0" end="${likeListings.size()-1}" step="1">
+								<tr>
+			                    	<td>
+			                        	${likeListings.get(i).getUser().getFirstName()}
+			                        </td>
+			                        <td>
+			                        	${likeListings.get(i).getUser().getLastName()}
+			                        </td>
+			                        <td>
+			                        	<p> liked listing ${likeListings.get(i).getListing().getTitle()} </p>
+			                   		</td>
+			                    </tr>
+		                   	</c:forEach>
+						</c:if>
+						<c:if test="${likeListings.size() == 0}">
+							<tr>
+								<td>
+									<p>No likes yet in your listings</p>
 								</td>
 							</tr>
 						</c:if>
