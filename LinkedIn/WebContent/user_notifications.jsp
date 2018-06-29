@@ -48,10 +48,10 @@
   			<label for="tab2">Article Likes</label>
   			 <!-- Tab 3 -->
   			<input type="radio" name="tabset" id="tab3" aria-controls="listingLikes" checked>
-  			<label for="tab1">Listing Likes</label>
+  			<label for="tab3">Listing Likes</label>
   			<!-- Tab 4 -->
   			<input type="radio" name="tabset" id="tab4" aria-controls="articleComments">
-  			<label for="tab2">Article Likes</label>
+  			<label for="tab4">Article Likes</label>
   			
 			<div class="tab-panels">
    				<section id="firendRequests" class="tab-panel">
