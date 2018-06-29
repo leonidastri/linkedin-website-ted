@@ -50,11 +50,11 @@
   	<div align="center">
   		<c:if test="${ not empty messages }">
 	  		<c:if test="${ userID == messages.get(0).getUser1().getUserID() }">
-	  			<h3> You chat with ${ messages.get(0).getUser2().getFirstName()} ${ messages.get(0).getUser2().getLastName()} </h3>
+	  			<h3> Your chat with ${ messages.get(0).getUser2().getFirstName()} ${ messages.get(0).getUser2().getLastName()} </h3>
 	  		</c:if>
 	  	
 	  		<c:if test="${ userID == messages.get(0).getUser2().getUserID() }">
-	  			<h3> You chat with ${ messages.get(0).getUser1().getFirstName()} ${ messages.get(0).getUser1().getLastName()} </h3>
+	  			<h3> Your chat with ${ messages.get(0).getUser1().getFirstName()} ${ messages.get(0).getUser1().getLastName()} </h3>
 	  		</c:if>
   		</c:if>
   	</div>
@@ -75,25 +75,25 @@
 		  				
 			  				<div class="chat-container" id="chat-container" align="center">
   								
-			  					<ul>	
+			  					<ul class="messenger-ul">	
 			  						<c:forEach var="i" begin="0" end="${messages.size()-1}" step="1">
 			  							<c:if test="${ userID == messages.get(i).getUser1().getUserID() }">
-		 									<li class="me">
+		 									<li class="me messenger-li">
 												<span>
 			  										${messages.get(i).getText() }
 			  									</span>
 			  								</li>
-			  								<li class="time-right">
+			  								<li class="time-right messenger-li">
 	  											You at <fmt:formatDate value="${messages.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" />
 			  								</li>
 			  							</c:if>
 			  							<c:if test="${ userID == messages.get(i).getUser2().getUserID() }">
-			  								<li class="him">
+			  								<li class="him messenger-li">
 			  									<span>
 			  										${messages.get(i).getText() }
 			  									</span>
 			  								</li>
-			  								<li class="time-left">
+			  								<li class="time-left messenger-li">
 		 										${ messages.get(i).getUser1().getFirstName() } ${ messages.get(i).getUser1().getLastName() } at <fmt:formatDate value="${messages.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" />
 			  								</li>
 			  							</c:if>

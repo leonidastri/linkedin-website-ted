@@ -385,18 +385,23 @@
 	       	
 	        <div class="col-lg-4 order-lg-1 text-center">
 	            <img src="${user.getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-	            <h6 class="mt-2">Upload a new photo</h6>
-	            <form class="form-photoFileFromProfile" action="UploadPhotoFromProfile" method="post" id="profileUploadPhotoForm" enctype = "multipart/form-data">
-	            	<div class="form-group">
-	            		<label class="custom-file">Choose new photo file
-		                	<input class="form-control" id="photo" name="photo" type="file"
-	              				accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
-	            		</label>
-	            	</div>
-		            <input type="hidden" id="email" name="email" value="${ user.getEmail() }" />
-	            	<br>
-		            <button type="submit" class="btn btn btn-primary my-2 my-sm-0 user-profile-btn">Upload photo</button>
-		        </form>
+	            
+		    	<c:if test="${empty userID2}">
+		    		<h6 class="mt-2">Upload a new photo</h6>
+		            <form class="form-photoFileFromProfile" action="UploadPhotoFromProfile" method="post" id="profileUploadPhotoForm" enctype = "multipart/form-data">
+		            	<div class="form-group">
+		            		<label class="custom-file">Choose new photo file
+			                	<input class="form-control" id="photo" name="photo" type="file"
+		              				accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
+		            		</label>
+		            	</div>
+			            <input type="hidden" id="email" name="email" value="${ user.getEmail() }" />
+		            	<br>
+			            <button type="submit" class="btn btn btn-primary my-2 my-sm-0 user-profile-btn">Upload photo</button>
+			        </form>
+		    	</c:if>
+	            
+	            
 	            <br>
 	            <br>
 	        	<h5>Email:</h5>
@@ -409,18 +414,22 @@
 	        	<c:if test="${user.getCvPath().equals(\"\")}">
 	        		<h6>Curriculum Vitae</h6>
 	        	</c:if>
-	            <h6 class="mt-2">Upload a new CV</h6>
-		        <form class="form-cvFileFromProfile" action="UploadCvFromProfile" method="post" id="profileUploadCvForm" enctype = "multipart/form-data">
-	            	<div class="form-group">
-	            		<label class="custom-file">Choose new CV file
-		                	<input class="form-control" id="cv" name="cv" type="file"
-	              				accept="application/pdf" >
-		            	</label>
-		            </div>
-		            <input type="hidden" id="email" name="email" value="${ user.getEmail() }" />
-	            	<br>
-		            <button type="submit" class="btn btn btn-primary my-2 my-sm-0 user-profile-btn">Upload CV</button>
-		        </form>
+	        	
+	        	<c:if test="${empty userID2}">
+		        	<h6 class="mt-2">Upload a new CV</h6>
+			        <form class="form-cvFileFromProfile" action="UploadCvFromProfile" method="post" id="profileUploadCvForm" enctype = "multipart/form-data">
+		            	<div class="form-group">
+		            		<label class="custom-file">Choose new CV file
+			                	<input class="form-control" id="cv" name="cv" type="file"
+		              				accept="application/pdf" >
+			            	</label>
+			            </div>
+			            <input type="hidden" id="email" name="email" value="${ user.getEmail() }" />
+		            	<br>
+			            <button type="submit" class="btn btn btn-primary my-2 my-sm-0 user-profile-btn">Upload CV</button>
+			        </form>
+	        	</c:if>
+	            
 	        </div>
 	    </div>
 

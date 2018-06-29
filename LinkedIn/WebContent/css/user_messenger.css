@@ -1,10 +1,10 @@
-ul{
+.messenger-ul{
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-ul li{
+.messenger-ul, .messenger-li{
   display:inline-block;
   clear: both;
   padding: 10px;

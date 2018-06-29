@@ -18,7 +18,7 @@
   	<link rel="stylesheet" href="./css/start_page.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/user_profile.css" rel="stylesheet">
+    <link href="css/user_network.css" rel="stylesheet">
 </head>
 <body>
 	<!-- NAVBAR -->
@@ -68,18 +68,18 @@
 						<c:if test="${networkUsers.size() != 0}">
 							<c:forEach var="i" begin="0" end="${networkUsers.size()-1}" step="1">
 								<tr>
-					            	<td>
+					            	<td class="network-td">
 					                	<img src="${networkUsers.get(i).getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 					             	</td>
-					             	<td>
-					                 	<a href="UserProfile?email=${networkUsers.get(i).getEmail()}&action=OtherUserProfile"> <strong>${networkUsers.get(i).getEmail()}</strong> </a>
-					              	</td>
-					              	<td>
+					              	<td class="network-td">
 					                 	<strong>${networkUsers.get(i).getFirstName()}</strong>
 					              	</td>
-					               	<td>
+					               	<td class="network-td">
 					                  	<strong>${networkUsers.get(i).getLastName()}</strong>
 					               	</td>
+					             	<td>
+					                 	<a class="btn btn-primary" role="button" href="UserProfile?email=${networkUsers.get(i).getEmail()}&action=OtherUserProfile">View</a>
+					              	</td>
 					           	</tr>
 				         	</c:forEach>
 			        	</c:if>

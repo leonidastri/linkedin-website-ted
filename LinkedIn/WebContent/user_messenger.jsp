@@ -55,15 +55,15 @@
 			     								<tr>
 			     									<td>
 												     	<img src="${chattingUsers.get(i).getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-												     </td>
-		       										<td>
-		       											<a href="UserMessenger?receiverID=${chattingUsers.get(i).getUserID()}"> ${chattingUsers.get(i).getEmail()} </a>
-		       										</td>
+												    </td>
 		       										<td>
 		       											${chattingUsers.get(i).getFirstName()}
 		       										</td>
 		       										<td>
 		       											${chattingUsers.get(i).getLastName()}
+		       										</td>
+		       										<td>
+		       											<a class="btn btn-primary" role="button" href="UserMessenger?receiverID=${chattingUsers.get(i).getUserID()}">Chat</a>
 		       										</td>
 		       									</tr>
 											</c:forEach>
@@ -90,15 +90,15 @@
 										       				<td>
 												     			<img src="${networkUsers.get(i).getPhotoPath()}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
 												     		</td>
-												     		<td>
-										       					<a href="UserMessenger?receiverID=${networkUsers.get(i).getUserID()}"> ${networkUsers.get(i).getEmail()} </a>
-										       				</td>
 										       				<td>
 		       													${networkUsers.get(i).getFirstName()}
 		       												</td>
 		       												<td>
 		       													${networkUsers.get(i).getLastName()}
 		       												</td>
+												     		<td>
+										       					<a class="btn btn-primary" role="button" href="UserMessenger?receiverID=${networkUsers.get(i).getUserID()}">Chat</a>
+										       				</td>
 										       			</tr>
 													</c:forEach>
 												</table>

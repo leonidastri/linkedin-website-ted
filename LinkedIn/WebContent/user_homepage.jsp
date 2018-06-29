@@ -46,8 +46,8 @@
     	<div class="row">
     	
     		<!-- PERSONAL DETAILS AND NETWORK -->
-    		<div class="col-md-2">
-    			<h4> Hello ${firstname}! </h4>
+    		<div class="col-md-2" align="center">
+    			<h4>Hello ${firstname}!</h4>
     			
     			<img src="${photopath}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
     			
@@ -57,7 +57,8 @@
     		</div>
     	
     		<!-- NEWSFEED -->
-    		<div class="col-md-8">
+    		<div class="col-md-8" align="center">
+    			<h4>Your newsfeed</h4>
     		
     			<!-- TOP 20 RESULTS -->
     			<c:if test="${recommendedConnectedUsersArticles.size() != 0}">
@@ -164,7 +165,9 @@
     	
     	
     		<!-- INSERT NEW ARTICLE -->
-    		<div class="col-md-2">
+    		<div class="col-md-2" align="center">
+    			<h4>Write an article</h4>
+    			
     			<form action="UserAddArticle" method="post" id="publishForm" enctype = "multipart/form-data">
     				<div class="form-group">
 			            <label> Title
