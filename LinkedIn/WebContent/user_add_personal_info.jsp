@@ -46,152 +46,169 @@
     
     <br> <br>
     
-    <div class="container">
-		<div class="row">
+	<div align="center">
+		<div class="tabset">
+ 			<!-- Tab 1 -->
+  			<input type="radio" name="tabset" id="tab1" aria-controls="addJob" checked>
+  			<label for="tab1">Add job</label>
+  
+  			<!-- Tab 2 -->
+  			<input type="radio" name="tabset" id="tab2" aria-controls="addEducation">
+  			<label for="tab2">Add Education</label>
 			
-			<div class="col-md-4 info-div">
-				<form id="a_form" action="UserAddPersonalInfo?action=job" method="POST">
-			
-					<h3>Add a job</h3>
-					<div class="form-group">
-		            	<label>Add title
-		            		<input class="form-control" type="text" name="title" id="title"
-		            		placeholder="Title"
-		              		pattern=".{1,60}" title="Maximum length is 60 characters"
-		              		required="true" requiredMessage="Please insert a job title">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>Add description
-		            		<input class="form-control" type="text" name="description" id="description"
-		            		placeholder="Description"
-		              		pattern=".{1,60}" title="Maximum length is 60 characters"
-		              		required="true" requiredMessage="Please insert a job description">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>From
-		            		<input class="form-control" type="date" name="dateFrom"
-		              		required="true" requiredMessage="Please insert a job date from">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>To
-		            		<input class="form-control" type="date" name="dateTo"
-		              		required="true" requiredMessage="Please insert a job date to">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>Choose if you want this job to be public or private <br>
-		            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
-							<input type="radio" name="isPrivate" value="true"> Private
-		            	</label>
-		          	</div>
-					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add job</button>
+  			<!-- Tab 3 -->
+  			<input type="radio" name="tabset" id="tab3" aria-controls="addSkill">
+  			<label for="tab3">Add skill</label>
+  			
+  			<div class="tab-panels">
+   				<section id="addJob" class="tab-panel">
+					<form id="a_form" action="UserAddPersonalInfo?action=job" method="POST">
 				
-				</form>
-			</div>
-			
-			<div class="col-md-4 info-div">
-			 	<form id="a_form" action="UserAddPersonalInfo?action=education" method="POST">
-			
-					<h3>Add an education</h3>
-					<div class="form-group">
-		            	<label>Add title
-		            		<input class="form-control" type="text" name="title" id="title"
-		            		placeholder="Title"
-		              		pattern=".{1,60}" title="Maximum length is 60 characters"
-		              		required="true" requiredMessage="Please insert an education title">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>Add description
-		            		<input class="form-control" type="text" name="description" id="description"
-		            		placeholder="Description"
-		              		pattern=".{1,60}" title="Maximum length is 60 characters"
-		              		required="true" requiredMessage="Please insert an education description">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>From
-		            		<input class="form-control" type="date" name="dateFrom"
-		              		required="true" requiredMessage="Please insert an education date from">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>To
-		            		<input class="form-control" type="date" name="dateTo"
-		              		required="true" requiredMessage="Please insert an education date to">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>Choose if you want this education to be public or private <br>
-		            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
-							<input type="radio" name="isPrivate" value="true"> Private
-		            	</label>
-		          	</div>
-					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add education</button>
+						<br>
+						<h3>Add a job</h3>
+						<div class="form-group">
+			            	<label>Add title
+			            		<input class="form-control" type="text" name="title" id="title"
+			            		placeholder="Title"
+			              		pattern=".{1,60}" title="Maximum length is 60 characters"
+			              		required="true" requiredMessage="Please insert a job title">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>Add description
+			            		<input class="form-control" type="text" name="description" id="description"
+			            		placeholder="Description"
+			              		pattern=".{1,60}" title="Maximum length is 60 characters"
+			              		required="true" requiredMessage="Please insert a job description">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>From
+			            		<input class="form-control" type="date" name="dateFrom"
+			              		required="true" requiredMessage="Please insert a job date from">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>To
+			            		<input class="form-control" type="date" name="dateTo"
+			              		required="true" requiredMessage="Please insert a job date to">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>Choose if you want this job to be public or private <br>
+			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+								<input type="radio" name="isPrivate" value="true"> Private
+			            	</label>
+			          	</div>
+						<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add job</button>
 					
-				</form>
-			</div>
-			
-			<div class="col-md-4 info-div">
+					</form>
+				</section>
+				
+   				<section id="addEducation" class="tab-panel">
+				 	<form id="a_form" action="UserAddPersonalInfo?action=education" method="POST">
+				
+						<br>
+						<h3>Add an education</h3>
+						<div class="form-group">
+			            	<label>Add title
+			            		<input class="form-control" type="text" name="title" id="title"
+			            		placeholder="Title"
+			              		pattern=".{1,60}" title="Maximum length is 60 characters"
+			              		required="true" requiredMessage="Please insert an education title">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>Add description
+			            		<input class="form-control" type="text" name="description" id="description"
+			            		placeholder="Description"
+			              		pattern=".{1,60}" title="Maximum length is 60 characters"
+			              		required="true" requiredMessage="Please insert an education description">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>From
+			            		<input class="form-control" type="date" name="dateFrom"
+			              		required="true" requiredMessage="Please insert an education date from">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>To
+			            		<input class="form-control" type="date" name="dateTo"
+			              		required="true" requiredMessage="Please insert an education date to">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>Choose if you want this education to be public or private <br>
+			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+								<input type="radio" name="isPrivate" value="true"> Private
+			            	</label>
+			          	</div>
+						<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add education</button>
+						
+					</form>
+				</section>
+				
+   				<section id="addSkill" class="tab-panel">
 		
-				 <form id="a_form" action="UserAddPersonalInfo?action=skill" method="POST">
-				 
-				 	<h3>Add a skill</h3>
-		          	<div class="form-group">
-		            	<label>Add description
-		            		<input class="form-control" type="text" name="description" id="description"
-		            		placeholder="Description"
-		              		pattern=".{1,60}" title="Maximum length is 60 characters"
-		              		required="true" requiredMessage="Please insert a skill description">
-		            	</label>
-		          	</div>
-		          	<div class="form-group">
-		            	<label>Choose if you want this skill to be public or private <br>
-		            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
-							<input type="radio" name="isPrivate" value="true"> Private
-		            	</label>
-		          	</div>
-					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add skill</button>
-
-				</form>
+					 <form id="a_form" action="UserAddPersonalInfo?action=skill" method="POST">
+					 
+					 	<br>
+					 	<h3>Add a skill</h3>
+			          	<div class="form-group">
+			            	<label>Add description
+			            		<input class="form-control" type="text" name="description" id="description"
+			            		placeholder="Description"
+			              		pattern=".{1,60}" title="Maximum length is 60 characters"
+			              		required="true" requiredMessage="Please insert a skill description">
+			            	</label>
+			          	</div>
+			          	<div class="form-group">
+			            	<label>Choose if you want this skill to be public or private <br>
+			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+								<input type="radio" name="isPrivate" value="true"> Private
+			            	</label>
+			          	</div>
+						<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add skill</button>
 	
+					</form>
+				</section>
 			</div>
 		</div>
+	</div>
 
-			<footer class="pt-4 my-md-5 pt-md-5 border-top">
-		    	<div class="row">
-		          	<div class="col-12 col-md">
-		            	<img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-		            	<small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
-		          	</div>
-		          	<div class="col-6 col-md">
-		            	<h5>Spotlight</h5>
-		            	<ul class="list-unstyled text-small">
-			              	<li><a class="text-muted" href="#">Article of the day</a></li>
-			              	<li><a class="text-muted" href="#">Listing of the day</a></li>
-			              	<li><a class="text-muted" href="#">User of the day</a></li>
-		            	</ul>
-		          	</div>
-		          	<div class="col-6 col-md">
-		            	<h5>Resources</h5>
-		            	<ul class="list-unstyled text-small">
-			              	<li><a class="text-muted" href="#">Organization guide</a></li>
-			              	<li><a class="text-muted" href="#">User guide</a></li>
-		            	</ul>
-		          	</div>
-		          	<div class="col-6 col-md">
-		            	<h5>About</h5>
-		            	<ul class="list-unstyled text-small">
-			              	<li><a class="text-muted" href="#">About LinkedIn</a></li>
-			              	<li><a class="text-muted" href="#">Privacy</a></li>
-			              	<li><a class="text-muted" href="#">Terms</a></li>
-		            	</ul>
-		          	</div>
-				</div>
-			</footer>
+	<div class="container">
+		<footer class="pt-4 my-md-5 pt-md-5 border-top">
+		   	<div class="row">
+		       	<div class="col-12 col-md">
+		           	<img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+		           	<small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+		       	</div>
+		       	<div class="col-6 col-md">
+		           	<h5>Spotlight</h5>
+		           	<ul class="list-unstyled text-small">
+		              	<li><a class="text-muted" href="#">Article of the day</a></li>
+		              	<li><a class="text-muted" href="#">Listing of the day</a></li>
+		              	<li><a class="text-muted" href="#">User of the day</a></li>
+		           	</ul>
+		       	</div>
+		       	<div class="col-6 col-md">
+		           	<h5>Resources</h5>
+		           	<ul class="list-unstyled text-small">
+		              	<li><a class="text-muted" href="#">Organization guide</a></li>
+		              	<li><a class="text-muted" href="#">User guide</a></li>
+		           	</ul>
+		       	</div>
+		       	<div class="col-6 col-md">
+		           	<h5>About</h5>
+		           	<ul class="list-unstyled text-small">
+		              	<li><a class="text-muted" href="#">About LinkedIn</a></li>
+		              	<li><a class="text-muted" href="#">Privacy</a></li>
+		              	<li><a class="text-muted" href="#">Terms</a></li>
+		           	</ul>
+		       	</div>
+			</div>
+		</footer>
 	</div>
 	
 	 <!-- Bootstrap core JavaScript

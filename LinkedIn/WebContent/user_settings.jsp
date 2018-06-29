@@ -18,7 +18,7 @@
   	<link rel="stylesheet" href="./css/start_page.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/user_setting_add_info.css" rel="stylesheet">
+    <link href="css/user_settings_add_info.css" rel="stylesheet">
 </head>
 
 <body>
@@ -46,49 +46,59 @@
     
     <br> <br>
     
-    <div align="center">
-	    <div class="container">
-			<div class="row">
+			<div align="center">
+				<div class="tabset">
+ 					 <!-- Tab 1 -->
+  					<input type="radio" name="tabset" id="tab1" aria-controls="changePassword" checked>
+  					<label for="tab1">Change Password</label>
+  
+  					<!-- Tab 2 -->
+  					<input type="radio" name="tabset" id="tab2" aria-controls="changeEmail">
+  					<label for="tab2">Change Email</label>
 				
-				<div class="col-sm">
-	     	    	<form id="a_form" action="UserSettings?action=changePassword" method="POST">
-						<div class="form-group">
-							<h3>Change password</h3>
-					    	<br>
-					    	<label>Current password
-					            <input class="form-control" type="password" name="currentPassword" />
-					        </label>
-					   	</div>
-					   	<div class="form-group">
-					    	<label>New password
-					            <input class="form-control" type="password" name="newPassword" />
-					        </label>
-					   	</div>
-					   	<div class="form-group">
-					    	<label>Confirm password
-					            <input class="form-control" type="password" name="confirmPassword" />
-					        </label>
-					   	</div>
-						<button type="submit" class="btn btn btn-primary my-2 my-sm-0">Change password</button>
-					</form>
-				</div>
-				
-				<div class="col-sm">
-			 		<form id="a_form" action="UserSettings?action=changeEmail" method="POST">
-			 			<div class="form-group">
-			 				<h3>Change email</h3>
-			 				<br>
-					    	<label>New email
-					            <input class="form-control" type="email" name="newEmail" />
-					        </label>
-					   	</div>
-			 			<button type="submit" class="btn btn btn-primary my-2 my-sm-0">Change email</button>
-					</form>
+					<div class="tab-panels">
+   				 		<section id="changePassword" class="tab-panel">
+   				 			<div align="center">
+	   				 			<form id="a_form" action="UserSettings?action=changePassword" method="POST">
+									<div class="form-group">
+										<h3>Change password</h3>
+								    	<br>
+								    	<label>Current password
+								            <input class="form-control" type="password" name="currentPassword" />
+								        </label>
+								   	</div>
+								   	<div class="form-group">
+								    	<label>New password
+								            <input class="form-control" type="password" name="newPassword" />
+								        </label>
+								   	</div>
+								   	<div class="form-group">
+								    	<label>Confirm password
+								            <input class="form-control" type="password" name="confirmPassword" />
+								        </label>
+								   	</div>
+									<button type="submit" class="btn btn btn-primary my-2 my-sm-0">Change password</button>
+								</form>
+   				 			</div>
+						</section>
+						
+						<section id="changeEmail" class="tab-panel">
+							<div align="center">
+								<form id="a_form" action="UserSettings?action=changeEmail" method="POST">
+						 			<div class="form-group">
+						 				<h3>Change email</h3>
+						 				<br>
+								    	<label>New email
+								            <input class="form-control" type="email" name="newEmail" />
+								        </label>
+								   	</div>
+				 					<button type="submit" class="btn btn btn-primary my-2 my-sm-0">Change email</button>
+								</form>
+							</div>
+						</section>
+					</div>
 	    		</div>
-	    	</div>
-	    </div>
-	</div>
-	
+			</div>
 	<div class="container">
 	    <footer class="pt-4 my-md-5 pt-md-5 border-top">
 		    	<div class="row">
