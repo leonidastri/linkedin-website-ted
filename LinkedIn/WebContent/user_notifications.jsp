@@ -18,7 +18,7 @@
   	<link rel="stylesheet" href="./css/start_page.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/user_profile.css" rel="stylesheet">
+    <link href="css/user_notifications.css" rel="stylesheet">
 </head>
 <body>
 	<!-- NAVBAR -->
@@ -36,145 +36,151 @@
       	<a class="btn btn-outline-primary" href="UserLogout">Sign out</a>
     </div>
   	
-	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
-    <div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <h3 class="display-16">Manage you friend requests, see who liked or commented your articles and listings</h3>
-    </div>
-	
-	<!-- CONTAINER -->
-    <div class="container">
-    	
-    		<div align="center">
-    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Connection requests</h5>
-	       		<table class="table table-sm table-hover table-striped">
-	            	<tbody>                                  
-	                 	<c:if test="${unansweredCons.size() != 0}">
-							<c:forEach var="i" begin="0" end="${unansweredCons.size()-1}" step="1">
-								<tr>
-				                   	<td>
-				                    <a href="UserProfile?email=${unansweredCons.get(i).getUser1().getEmail()}&action=OtherUserProfile">${unansweredCons.get(i).getUser1().getFirstName()}</a>
-				                                        	
-				                    <form action="UserNavigation" method="get">
-										<button type="submit" id="acceptFriend" name="acceptFriend" value="true">Accept</button>
-										<button type="submit" id="acceptFriend" name="acceptFriend" value="false">Ignore</button>
-										<input type="hidden" name="otherUserID" value="${unansweredCons.get(i).getUser1().getUserID()}">
-	  									<input type="hidden" name="action" value="Notifications">
-									</form>
-															 
-									</td>
-			                    </tr>
-		                    </c:forEach>
-						</c:if>
-						<c:if test="${unansweredCons.size() == 0}">
-							<tr>
-								<td>
-									<p>No friend request yet</p>
-								</td>
-							</tr>
-						</c:if>
-	               </tbody>
-	            </table>
-    		</div>
-    		
-    		<br>
-    		
-    		<div align="center">
-    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Liked Articles</h5>
-	            <table class="table table-sm table-hover table-striped">
-	            	<tbody>                                  
-	                	<c:if test="${likeArticles.size() != 0}">
-							<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
+    <br>
+    
+	<div align="center">
+		<div class="tabset">
+ 			 <!-- Tab 1 -->
+  			<input type="radio" name="tabset" id="tab1" aria-controls="friendRequests" checked>
+  			<label for="tab1">Friend Requests</label>
+  			<!-- Tab 2 -->
+  			<input type="radio" name="tabset" id="tab2" aria-controls="articleLikes">
+  			<label for="tab2">Article Likes</label>
+  			 <!-- Tab 3 -->
+  			<input type="radio" name="tabset" id="tab3" aria-controls="listingLikes" checked>
+  			<label for="tab1">Listing Likes</label>
+  			<!-- Tab 4 -->
+  			<input type="radio" name="tabset" id="tab4" aria-controls="articleComments">
+  			<label for="tab2">Article Likes</label>
+  			
+			<div class="tab-panels">
+   				<section id="firendRequests" class="tab-panel">
+		       		<table class="table table-sm table-hover table-striped">
+		            	<tbody>                                  
+		                 	<c:if test="${unansweredCons.size() != 0}">
+								<c:forEach var="i" begin="0" end="${unansweredCons.size()-1}" step="1">
+									<tr>
+					                   	<td>
+					                    <a href="UserProfile?email=${unansweredCons.get(i).getUser1().getEmail()}&action=OtherUserProfile">${unansweredCons.get(i).getUser1().getFirstName()}</a>
+					                                        	
+					                    <form action="UserNavigation" method="get">
+											<button type="submit" id="acceptFriend" name="acceptFriend" value="true">Accept</button>
+											<button type="submit" id="acceptFriend" name="acceptFriend" value="false">Ignore</button>
+											<input type="hidden" name="otherUserID" value="${unansweredCons.get(i).getUser1().getUserID()}">
+		  									<input type="hidden" name="action" value="Notifications">
+										</form>
+																 
+										</td>
+				                    </tr>
+			                    </c:forEach>
+							</c:if>
+							<c:if test="${unansweredCons.size() == 0}">
 								<tr>
 									<td>
-			                        	<a href="UserProfile?action=OtherUserProfile&email=${likeArticles.get(i).getUser().getEmail()}"> ${likeArticles.get(i).getUser().getEmail()} </a> 
-			                        </td>
-			                    	<td>
-			                        	${likeArticles.get(i).getUser().getFirstName()}
-			                        </td>
-			                        <td>
-			                        	${likeArticles.get(i).getUser().getLastName()}
-			                        </td>
-			                        <td>
-			                        	<p> liked article ${likeArticles.get(i).getArticle().getTitle()} </p>
-			                   		</td>
-			                     </tr>
-		                   	</c:forEach>
-						</c:if>
-						<c:if test="${likeArticles.size() == 0}">
-							<tr>
-								<td>
-									<p>No likes yet in your articles</p>
-								</td>
-							</tr>
-						</c:if>
-	               </tbody>
-	          	</table>
-    		</div>
-    		
-    		<br>
-    		
-    		<div align="center">
-    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Liked Listings</h5>
-	            <table class="table table-sm table-hover table-striped">
-	            	<tbody>                                  
-	                	<c:if test="${likeListings.size() != 0}">
-							<c:forEach var="i" begin="0" end="${likeListings.size()-1}" step="1">
+										<p>No friend request yet</p>
+									</td>
+								</tr>
+							</c:if>
+		               </tbody>
+		            </table>
+		    	</section>
+
+				<section id="articleLikes" class="tab-panel">
+		            <table class="table table-sm table-hover table-striped">
+		            	<tbody>                                  
+		                	<c:if test="${likeArticles.size() != 0}">
+								<c:forEach var="i" begin="0" end="${likeArticles.size()-1}" step="1">
+									<tr>
+										<td>
+				                        	<a href="UserProfile?action=OtherUserProfile&email=${likeArticles.get(i).getUser().getEmail()}"> ${likeArticles.get(i).getUser().getEmail()} </a> 
+				                        </td>
+				                    	<td>
+				                        	${likeArticles.get(i).getUser().getFirstName()}
+				                        </td>
+				                        <td>
+				                        	${likeArticles.get(i).getUser().getLastName()}
+				                        </td>
+				                        <td>
+				                        	<p> liked article ${likeArticles.get(i).getArticle().getTitle()} </p>
+				                   		</td>
+				                     </tr>
+			                   	</c:forEach>
+							</c:if>
+							<c:if test="${likeArticles.size() == 0}">
 								<tr>
-			                    	<td>
-			                        	<a href="UserProfile?action=OtherUserProfile&email=${likeListings.get(i).getUser().getEmail()}"> ${likeListings.get(i).getUser().getEmail()} </a> 
-			                        </td>
-			                        <td>
-			                        	${likeListings.get(i).getUser().getFirstName()}
-			                        </td>
-			                        <td>
-			                        	${likeListings.get(i).getUser().getLastName()}
-			                        </td>
-			                        <td>
-			                        	<p> liked listing ${likeListings.get(i).getListing().getTitle()} </p>
-			                   		</td>
-			                    </tr>
-		                   	</c:forEach>
-						</c:if>
-						<c:if test="${likeListings.size() == 0}">
-							<tr>
-								<td>
-									<p>No likes yet in your listings</p>
-								</td>
-							</tr>
-						</c:if>
-	               </tbody>
-	          	</table>
-    		</div>
+									<td>
+										<p>No likes yet in your articles</p>
+									</td>
+								</tr>
+							</c:if>
+		               </tbody>
+		          	</table>
+		    	</section>
     		
-    		<br>
-    		
-    		<div align="center">
-    			<h5><span class="fa fa-clock-o ion-clock float-right"></span>Comments</h5>
-	            <table class="table table-sm table-hover table-striped">
-	                <tbody>                                  
-	                    <c:if test="${comments.size() != 0}">
-							<c:forEach var="i" begin="0" end="${comments.size()-1}" step="1">
+    			<section id="listingLikes" class="tab-panel">
+	   				<table class="table table-sm table-hover table-striped">
+		            	<tbody>                                  
+		                	<c:if test="${likeListings.size() != 0}">
+								<c:forEach var="i" begin="0" end="${likeListings.size()-1}" step="1">
+									<tr>
+				                    	<td>
+				                        	<a href="UserProfile?action=OtherUserProfile&email=${likeListings.get(i).getUser().getEmail()}"> ${likeListings.get(i).getUser().getEmail()} </a> 
+				                        </td>
+				                        <td>
+				                        	${likeListings.get(i).getUser().getFirstName()}
+				                        </td>
+				                        <td>
+				                        	${likeListings.get(i).getUser().getLastName()}
+				                        </td>
+				                        <td>
+				                        	<p> liked listing ${likeListings.get(i).getListing().getTitle()} </p>
+				                   		</td>
+				                    </tr>
+			                   	</c:forEach>
+							</c:if>
+							<c:if test="${likeListings.size() == 0}">
 								<tr>
-			                        <td>
-			                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}&action=OtherUserProfile">${comments.get(i).getUser().getFirstName()}</a>
-			                         	
-			                        </td>
-			                        <td>
-			                        	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
-			                       	</td>
-			                  	</tr>
-		                    </c:forEach>
-						</c:if>
-						<c:if test="${comments.size() == 0}">
-							<tr>
-								<td>
-									<p>No comments yet in your articles</p>
-								</td>
-							</tr>
-						</c:if>
-	           		</tbody>
-	        	</table>
-    		</div>
+									<td>
+										<p>No likes yet in your listings</p>
+									</td>
+								</tr>
+							</c:if>
+		               </tbody>
+		          	</table>
+		    	</section>
+   				 
+   				
+				<section id="articleComments" class="tab-panel">
+	   				<table class="table table-sm table-hover table-striped">
+		                <tbody>                                  
+		                    <c:if test="${comments.size() != 0}">
+								<c:forEach var="i" begin="0" end="${comments.size()-1}" step="1">
+									<tr>
+				                        <td>
+				                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}&action=OtherUserProfile">${comments.get(i).getUser().getFirstName()}</a>
+				                         	
+				                        </td>
+				                        <td>
+				                        	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
+				                       	</td>
+				                  	</tr>
+			                    </c:forEach>
+							</c:if>
+							<c:if test="${comments.size() == 0}">
+								<tr>
+									<td>
+										<p>No comments yet in your articles</p>
+									</td>
+								</tr>
+							</c:if>
+		           		</tbody>
+		        	</table>
+		        </section>
+	    	</div>
+	    </div>
+	</div>
+			
+    <div class="container">			
 			<footer class="pt-4 my-md-5 pt-md-5 border-top">
 		    	<div class="row">
 		          	<div class="col-12 col-md">
