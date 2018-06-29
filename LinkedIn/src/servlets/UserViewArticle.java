@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,56 +14,60 @@ import dao.ArticleDAO;
 import dao.ArticleDAOImpl;
 import dao.CommentDAO;
 import dao.CommentDAOImpl;
-import dao.UserDAO;
-import dao.UserDAOImpl;
+import dao.LikeArticleDAO;
+import dao.LikeArticleDAOImpl;
+import model.Article;
 import model.Comment;
 
 /**
- * Servlet implementation class UserAddPersonalInfo
+ * Servlet implementation class UserViewArticle
  */
-@WebServlet("/UserAddComment")
-public class UserAddComment extends HttpServlet {
-	
+@WebServlet("/UserViewArticle")
+public class UserViewArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		/* TODO: check if alright */
-		String redirect = null;
+		String redirect = "/start_page.jsp";
 		
 		Boolean isUser = (Boolean) session.getAttribute("isUser");
 		String userID = (String) session.getAttribute("userID");
 		
 		if (isUser) {
+			
 			String articleID = request.getParameter("articleID");
-			String newComment = request.getParameter("newComment");
+			String liked = null;
 			
-			System.out.println(newComment + " " + articleID);
 			ArticleDAO articleDAO = new ArticleDAOImpl();
+			LikeArticleDAO likeArticleDAO = new LikeArticleDAOImpl();
 			CommentDAO commentDAO = new CommentDAOImpl();
-			UserDAO userDAO = new UserDAOImpl();
 			
-			Comment comment = new Comment();
+			if ( likeArticleDAO.find(Long.parseLong(userID), Long.parseLong(articleID)) != null )
+				liked = "true";
+			else
+				liked = "false";
 			
-			comment.setArticle(articleDAO.find(Long.parseLong(articleID)));
-			comment.setPubDate(new Date());
-			comment.setText(newComment);
-			comment.setUser(userDAO.find(Long.parseLong(userID)));
 			
-			commentDAO.create(comment);
+			Article article = articleDAO.find(Long.parseLong(articleID));
 			
-			redirect = "UserViewArticle?articleID=" + articleID;
-		}
-		else {
-			/* TODO: check if alright */
+			List<Comment> comments = commentDAO.getArticleComments(Long.parseLong(articleID));
+			
+			request.setAttribute("article", article);
+			request.setAttribute("comments", comments);
+			request.setAttribute("liked", liked);
+			
+			redirect = "/user_view_article.jsp";
+		} else {
+			
 			redirect = "/start_page.jsp";
 			session.setAttribute("errorMsg", "no authorization");
 		}
 
 		request.getRequestDispatcher(redirect).forward(request, response);
+		
 	}
 
 	/**
@@ -73,4 +77,5 @@ public class UserAddComment extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

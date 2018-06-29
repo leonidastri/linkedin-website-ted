@@ -90,7 +90,7 @@
 									<a href="UserAddLikeArticle?add=false&articleID=${recommendedConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">Unlike</a>
 	  							</c:if>
 	  							
-	  							<a href="UserViewArticleComments?articleID=${recommendedConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">Comment</a>
+	  							<a href="UserViewArticle?articleID=${recommendedConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">View Article</a>
 		  					</div>
 		  						  					
 						</div>
@@ -130,13 +130,7 @@
 	  								</c:if>
 	  							</div>
 	  							
-	  							<form action="UserAddComment" method="post">
-		  							<input type="hidden" name="articleID" value="${ recommendedNotConnectedUsersArticles.get(i).getArticleID() }">
-		  							<input type="text" name="newComment" placeholder="Comment" 
-		  							required requireMessage="Please insert comment"
-		  							pattern=".{1,1000}" title="Maximum length is 1000 characters">
-		  							<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add Comment</button>
-		  						</form>
+	  							<a href="UserViewArticle?articleID=${recommendedNotConnectedUsersArticles.get(i).getArticleID()}" class="btn btn-primary">View Article</a>
 		  					</div>
 		  						  					
 						</div>

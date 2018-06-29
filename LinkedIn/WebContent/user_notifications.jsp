@@ -157,7 +157,10 @@
 								<tr>
 			                        <td>
 			                            <a href="UserProfile?email=${comments.get(i).getUser().getEmail()}&action=OtherUserProfile">${comments.get(i).getUser().getFirstName()}</a>
-			                         	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
+			                         	
+			                        </td>
+			                        <td>
+			                        	<p> commented ${comments.get(i).getArticle().getTitle()} </p>
 			                       	</td>
 			                  	</tr>
 		                    </c:forEach>
