@@ -40,12 +40,6 @@
     
     <br>
     
-    <div align="center">
-    	<h3>Change your email or password to secure your account!</h3>
-    </div>
-    
-    <br> <br>
-    
 			<div align="center">
 				<div class="tabset">
  					 <!-- Tab 1 -->
@@ -61,7 +55,6 @@
    				 			<div align="center">
 	   				 			<form id="a_form" action="UserSettings?action=changePassword" method="POST">
 									<div class="form-group">
-										<h3>Change password</h3>
 								    	<br>
 								    	<label>Current password
 								            <input class="form-control" type="password" name="currentPassword" />
@@ -86,7 +79,6 @@
 							<div align="center">
 								<form id="a_form" action="UserSettings?action=changeEmail" method="POST">
 						 			<div class="form-group">
-						 				<h3>Change email</h3>
 						 				<br>
 								    	<label>New email
 								            <input class="form-control" type="email" name="newEmail" />

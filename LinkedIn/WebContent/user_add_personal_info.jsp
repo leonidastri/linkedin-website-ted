@@ -40,12 +40,6 @@
     
     <br>
     
-    <div align="center">
-    	<h3>Add your jobs, your education and your skills and let others know you better!</h3>
-    </div>
-    
-    <br> <br>
-    
 	<div align="center">
 		<div class="tabset">
  			<!-- Tab 1 -->
@@ -63,9 +57,6 @@
   			<div class="tab-panels">
    				<section id="addJob" class="tab-panel">
 					<form id="a_form" action="UserAddPersonalInfo?action=job" method="POST">
-				
-						<br>
-						<h3>Add a job</h3>
 						<div class="form-group">
 			            	<label>Add title
 			            		<input class="form-control" type="text" name="title" id="title"
@@ -95,7 +86,7 @@
 			            	</label>
 			          	</div>
 			          	<div class="form-group">
-			            	<label>Choose if you want this job to be public or private <br>
+			            	<label>Choose to be public or private <br>
 			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
 								<input type="radio" name="isPrivate" value="true"> Private
 			            	</label>
@@ -107,9 +98,6 @@
 				
    				<section id="addEducation" class="tab-panel">
 				 	<form id="a_form" action="UserAddPersonalInfo?action=education" method="POST">
-				
-						<br>
-						<h3>Add an education</h3>
 						<div class="form-group">
 			            	<label>Add title
 			            		<input class="form-control" type="text" name="title" id="title"
@@ -139,7 +127,7 @@
 			            	</label>
 			          	</div>
 			          	<div class="form-group">
-			            	<label>Choose if you want this education to be public or private <br>
+			            	<label>Choose to be public or private <br>
 			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
 								<input type="radio" name="isPrivate" value="true"> Private
 			            	</label>
@@ -152,9 +140,6 @@
    				<section id="addSkill" class="tab-panel">
 		
 					 <form id="a_form" action="UserAddPersonalInfo?action=skill" method="POST">
-					 
-					 	<br>
-					 	<h3>Add a skill</h3>
 			          	<div class="form-group">
 			            	<label>Add description
 			            		<input class="form-control" type="text" name="description" id="description"
@@ -164,7 +149,7 @@
 			            	</label>
 			          	</div>
 			          	<div class="form-group">
-			            	<label>Choose if you want this skill to be public or private <br>
+			            	<label>Choose to be public or private <br>
 			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
 								<input type="radio" name="isPrivate" value="true"> Private
 			            	</label>
