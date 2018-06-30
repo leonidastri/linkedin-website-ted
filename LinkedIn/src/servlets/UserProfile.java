@@ -107,6 +107,7 @@ public class UserProfile extends HttpServlet {
 					for (LikeListing l : likeListings)
 						likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
 			
+				
 				request.setAttribute("jobs", jobs);
 				request.setAttribute("skills", skills);
 				request.setAttribute("education", education);
@@ -116,6 +117,7 @@ public class UserProfile extends HttpServlet {
 				request.setAttribute("likedArticlesDetails", likedArticlesDetails);
 				request.setAttribute("likedListingsDetails", likedListingsDetails);
 				request.setAttribute("email", email);
+				request.setAttribute("userID2", userID2);
 				
 				redirect = "/user_profile.jsp";
 			}
