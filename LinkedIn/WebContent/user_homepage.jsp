@@ -72,10 +72,12 @@
     							
     							<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getPicturePath() }">
 		  							<img class="card-img-bottom" src="${recommendedConnectedUsersArticles.get(i).getPicturePath()}" alt="Article-title-1">
+		  							<br><br>
 		  						</c:if>
 							
 								<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getVideoPath() }">
 									<iframe width="560" height="315" src="${recommendedConnectedUsersArticles.get(i).getVideoPath()}" frameborder="0" allowfullscreen></iframe>
+		  							<br><br>
 		  						</c:if>
 		  					
 		  						<c:if test="${ not empty recommendedConnectedUsersArticles.get(i).getAudioPath() }">

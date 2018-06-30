@@ -60,7 +60,7 @@
 											<c:forEach var="i" begin="0" end="${likedArticlesDetails.size()-1}" step="1">
 												<tr>
 			                                        <td>
-			                                            <strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName} ${likedArticlesDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            <strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName()}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
 			                                        </td>
 			                                    </tr>
 		                                    </c:forEach>

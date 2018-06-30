@@ -59,7 +59,7 @@
 		    <c:if test="${not empty userID2}">
 		    	<br>
 		    	<c:if test="${empty noFriendRequest}">
-		    		<a class="btn btn-primary" href="UserSendFriendRequest?userID2=${userID2}&email=${email}" role="button"> Add to friends </a>
+		    		<a class="btn btn-primary" href="UserSendFriendRequest?userID2=${userID2}&email=${user.getEmail()}" role="button"> Add to friends </a>
 		  		</c:if>
 			</c:if>
 		</div>
@@ -100,7 +100,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=jobs&email=${email}" role="button">Show all jobs</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=jobs&email=${user.getEmail()}" role="button">Show all jobs</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${jobs.size() == 0}">
@@ -139,7 +139,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=education&email=${email}" role="button">Show all education</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=education&email=${user.getEmail()}" role="button">Show all education</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${education.size() == 0}">
@@ -176,7 +176,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=skills&email=${email}" role="button">Show all skills</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=skills&email=${user.getEmail()}" role="button">Show all skills</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${skills.size() == 0}">
@@ -213,7 +213,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=articles&email=${email}" role="button">Show all articles</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=articles&email=${user.getEmail()}" role="button">Show all articles</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${articles.size() == 0}">
@@ -252,7 +252,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=listings&email=${email}" role="button">Show all listings</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=listings&email=${user.getEmail()}" role="button">Show all listings</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${listings.size() == 0}">
@@ -291,7 +291,7 @@
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=comments&email=${email}" role="button">Show all comments</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=comments&email=${user.getEmail()}" role="button">Show all comments</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${comments.size() == 0}">
@@ -314,7 +314,7 @@
 												<c:forEach var="i" begin="0" end="${likedArticlesDetails.size()-1}" step="1">
 													<tr>
 			                                        	<td>
-			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName} ${likedArticlesDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName()}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
 			                                           	</td>
 			                                    	</tr>
 		                                    	</c:forEach>
@@ -323,12 +323,12 @@
 												<c:forEach var="i" begin="0" end="2" step="1">
 													<tr>
 			                                        	<td>
-			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName} ${likedArticlesDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName()}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
 			                                           	</td>
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=liked_articles&email=${email}" role="button">Show all liked articles</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=liked_articles&email=${user.getEmail()}" role="button">Show all liked articles</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${likedArticlesDetails.size() == 0}">
@@ -351,7 +351,7 @@
 												<c:forEach var="i" begin="0" end="${likedListingsDetails.size()-1}" step="1">
 													<tr>
 			                                        	<td>
-			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong>${likedListingsDetails.get(i).getUser().getFirstName} ${likedListingsDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong>${likedListingsDetails.get(i).getUser().getFirstName()} ${likedListingsDetails.get(i).getUser().getLastName()}</strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
 			                                           	</td>
 			                                    	</tr>
 		                                    	</c:forEach>
@@ -360,12 +360,12 @@
 												<c:forEach var="i" begin="0" end="2" step="1">
 													<tr>
 			                                        	<td>
-			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong>${likedListingsDetails.get(i).getUser().getFirstName} ${likedListingsDetails.get(i).getUser().getLastName}</strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong>${likedListingsDetails.get(i).getUser().getFirstName()} ${likedListingsDetails.get(i).getUser().getLastName()}</strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
 			                                           	</td>
 			                                    	</tr>
 		                                    	</c:forEach>
 		                                    	<!-- TODO -->
-		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=liked_listings&email=${email}" role="button">Show all liked listings</a>
+		                                    	<a class="btn btn-primary" href="UserProfileShowAll?action=liked_listings&email=${user.getEmail()}" role="button">Show all liked listings</a>
 	                                    	</c:if>
 										</c:if>
 										<c:if test="${likedListingsDetails.size() == 0}">
