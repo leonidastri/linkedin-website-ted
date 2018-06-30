@@ -23,7 +23,7 @@
 <body>
 
 	<!-- NAVBAR -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow fixed-top">
 		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
@@ -39,15 +39,12 @@
   	
 	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
 
-	<br>
-	
-	<div class="pricing-header px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <a class="btn btn-primary" href="UserListings?action=UserListingsPersonal" role="button">Add a listing or check applications to your current listings</a>
-    </div>
-
-	<br>
-	
 	<div class="container">
+	
+		<div class="pricing-header px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
+	      <a class="btn btn-primary" href="UserListings?action=UserListingsPersonal" role="button">Add a listing or check applications to your current listings</a>
+	    </div>
+    
 		 <div align="center">
 	                    
 	     	<h5><span class="fa fa-clock-o ion-clock float-right"></span> Listings from connected users </h5>

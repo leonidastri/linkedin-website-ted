@@ -33,3 +33,14 @@ html {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+
+.publish-container {
+	width: 300px;
+	margin: 15px auto auto;
+	border: 1px solid #000;
+	padding: 10px;
+}
+
+.form-control{
+	width: 80%;
+}

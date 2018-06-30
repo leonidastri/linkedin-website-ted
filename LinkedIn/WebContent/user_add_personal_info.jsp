@@ -24,7 +24,7 @@
 <body>
 
 	<!-- NAVBAR -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow fixed-top">
 		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
@@ -38,131 +38,129 @@
       	<a class="btn btn-outline-primary" href="UserLogout">Sign out</a>
     </div>
     
-    <br>
-    
-	<div align="center">
-		<div class="tabset">
- 			<!-- Tab 1 -->
-  			<input type="radio" name="tabset" id="tab1" aria-controls="addJob" checked>
-  			<label for="tab1">Add job</label>
-  
-  			<!-- Tab 2 -->
-  			<input type="radio" name="tabset" id="tab2" aria-controls="addEducation">
-  			<label for="tab2">Add Education</label>
-			
-  			<!-- Tab 3 -->
-  			<input type="radio" name="tabset" id="tab3" aria-controls="addSkill">
-  			<label for="tab3">Add skill</label>
-  			
-  			<div class="tab-panels">
-   				<section id="addJob" class="tab-panel">
-					<form id="a_form" action="UserAddPersonalInfo?action=job" method="POST">
-						<div class="form-group">
-			            	<label>Add title
-			            		<input class="form-control" type="text" name="title" id="title"
-			            		placeholder="Title"
-			              		pattern=".{1,60}" title="Maximum length is 60 characters"
-			              		required="true" requiredMessage="Please insert a job title">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>Add description
-			            		<input class="form-control" type="text" name="description" id="description"
-			            		placeholder="Description"
-			              		pattern=".{1,60}" title="Maximum length is 60 characters"
-			              		required="true" requiredMessage="Please insert a job description">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>From
-			            		<input class="form-control" type="date" name="dateFrom"
-			              		required="true" requiredMessage="Please insert a job date from">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>To
-			            		<input class="form-control" type="date" name="dateTo"
-			              		required="true" requiredMessage="Please insert a job date to">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>Choose to be public or private <br>
-			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
-								<input type="radio" name="isPrivate" value="true"> Private
-			            	</label>
-			          	</div>
-						<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add job</button>
-					
-					</form>
-				</section>
+	<div class="container">
+		<div align="center">
+			<div class="tabset">
+	 			<!-- Tab 1 -->
+	  			<input type="radio" name="tabset" id="tab1" aria-controls="addJob" checked>
+	  			<label for="tab1">Add job</label>
+	  
+	  			<!-- Tab 2 -->
+	  			<input type="radio" name="tabset" id="tab2" aria-controls="addEducation">
+	  			<label for="tab2">Add Education</label>
 				
-   				<section id="addEducation" class="tab-panel">
-				 	<form id="a_form" action="UserAddPersonalInfo?action=education" method="POST">
-						<div class="form-group">
-			            	<label>Add title
-			            		<input class="form-control" type="text" name="title" id="title"
-			            		placeholder="Title"
-			              		pattern=".{1,60}" title="Maximum length is 60 characters"
-			              		required="true" requiredMessage="Please insert an education title">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>Add description
-			            		<input class="form-control" type="text" name="description" id="description"
-			            		placeholder="Description"
-			              		pattern=".{1,60}" title="Maximum length is 60 characters"
-			              		required="true" requiredMessage="Please insert an education description">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>From
-			            		<input class="form-control" type="date" name="dateFrom"
-			              		required="true" requiredMessage="Please insert an education date from">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>To
-			            		<input class="form-control" type="date" name="dateTo"
-			              		required="true" requiredMessage="Please insert an education date to">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>Choose to be public or private <br>
-			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
-								<input type="radio" name="isPrivate" value="true"> Private
-			            	</label>
-			          	</div>
-						<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add education</button>
+	  			<!-- Tab 3 -->
+	  			<input type="radio" name="tabset" id="tab3" aria-controls="addSkill">
+	  			<label for="tab3">Add skill</label>
+	  			
+	  			<div class="tab-panels">
+	   				<section id="addJob" class="tab-panel">
+						<form id="a_form" action="UserAddPersonalInfo?action=job" method="POST">
+							<div class="form-group">
+				            	<label>Add title
+				            		<input class="form-control" type="text" name="title" id="title"
+				            		placeholder="Title"
+				              		pattern=".{1,60}" title="Maximum length is 60 characters"
+				              		required="true" requiredMessage="Please insert a job title">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>Add description
+				            		<input class="form-control" type="text" name="description" id="description"
+				            		placeholder="Description"
+				              		pattern=".{1,60}" title="Maximum length is 60 characters"
+				              		required="true" requiredMessage="Please insert a job description">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>From
+				            		<input class="form-control" type="date" name="dateFrom"
+				              		required="true" requiredMessage="Please insert a job date from">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>To
+				            		<input class="form-control" type="date" name="dateTo"
+				              		required="true" requiredMessage="Please insert a job date to">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>Choose to be public or private <br>
+				            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+									<input type="radio" name="isPrivate" value="true"> Private
+				            	</label>
+				          	</div>
+							<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add job</button>
 						
-					</form>
-				</section>
-				
-   				<section id="addSkill" class="tab-panel">
+						</form>
+					</section>
+					
+	   				<section id="addEducation" class="tab-panel">
+					 	<form id="a_form" action="UserAddPersonalInfo?action=education" method="POST">
+							<div class="form-group">
+				            	<label>Add title
+				            		<input class="form-control" type="text" name="title" id="title"
+				            		placeholder="Title"
+				              		pattern=".{1,60}" title="Maximum length is 60 characters"
+				              		required="true" requiredMessage="Please insert an education title">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>Add description
+				            		<input class="form-control" type="text" name="description" id="description"
+				            		placeholder="Description"
+				              		pattern=".{1,60}" title="Maximum length is 60 characters"
+				              		required="true" requiredMessage="Please insert an education description">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>From
+				            		<input class="form-control" type="date" name="dateFrom"
+				              		required="true" requiredMessage="Please insert an education date from">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>To
+				            		<input class="form-control" type="date" name="dateTo"
+				              		required="true" requiredMessage="Please insert an education date to">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>Choose to be public or private <br>
+				            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+									<input type="radio" name="isPrivate" value="true"> Private
+				            	</label>
+				          	</div>
+							<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add education</button>
+							
+						</form>
+					</section>
+					
+	   				<section id="addSkill" class="tab-panel">
+			
+						 <form id="a_form" action="UserAddPersonalInfo?action=skill" method="POST">
+				          	<div class="form-group">
+				            	<label>Add description
+				            		<input class="form-control" type="text" name="description" id="description"
+				            		placeholder="Description"
+				              		pattern=".{1,60}" title="Maximum length is 60 characters"
+				              		required="true" requiredMessage="Please insert a skill description">
+				            	</label>
+				          	</div>
+				          	<div class="form-group">
+				            	<label>Choose to be public or private <br>
+				            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
+									<input type="radio" name="isPrivate" value="true"> Private
+				            	</label>
+				          	</div>
+							<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add skill</button>
 		
-					 <form id="a_form" action="UserAddPersonalInfo?action=skill" method="POST">
-			          	<div class="form-group">
-			            	<label>Add description
-			            		<input class="form-control" type="text" name="description" id="description"
-			            		placeholder="Description"
-			              		pattern=".{1,60}" title="Maximum length is 60 characters"
-			              		required="true" requiredMessage="Please insert a skill description">
-			            	</label>
-			          	</div>
-			          	<div class="form-group">
-			            	<label>Choose to be public or private <br>
-			            		<input type="radio" name="isPrivate" value="false" checked> Public <br>
-								<input type="radio" name="isPrivate" value="true"> Private
-			            	</label>
-			          	</div>
-						<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add skill</button>
-	
-					</form>
-				</section>
+						</form>
+					</section>
+				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="container">
+		
 		<footer class="pt-4 my-md-5 pt-md-5 border-top">
 		   	<div class="row">
 		       	<div class="col-12 col-md">

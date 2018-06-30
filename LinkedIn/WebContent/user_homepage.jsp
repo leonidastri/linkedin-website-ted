@@ -23,7 +23,7 @@
 
 <body>
 	<!-- NAVBAR -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow fixed-top">
 		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
@@ -166,49 +166,47 @@
     	
     		<!-- INSERT NEW ARTICLE -->
     		<div class="col-md-2" align="center">
-    			<h4>Write an article</h4>
-    			
-    			<form action="UserAddArticle" method="post" id="publishForm" enctype = "multipart/form-data">
-    				<div class="form-group">
-			            <label> Title
-			            <input class="form-control" id="article-title" name="article-title"
-			              placeholder="Title" type="text"
-			              pattern=".{1,100}" title="Maximum length is 100 characters"
-			              required="true" requiredMessage="Please insert a title">
-			            </label>
-			        </div>
-			        <div class="form-group">
-			            <label> Text
-			            <input class="form-control" id="article-text" name="article-text"
-			              placeholder="Text" type="text"
-			              pattern=".{1,100}" title="Maximum length is 100 characters"
-			              required="true" requiredMessage="Please insert the text">
-			            </label>
-			        </div>
-			        <div class="form-group">
-			            <label> Audio
-			            <input class="form-control" id="audio" name="audio" type="file"
-			              accept="audio/*" >
-			              <span class="form-control">Choose Audio file</span>
-			            </label>
-			        </div>
-			        <div class="form-group">
-			            <label> Photo
-			            <input class="form-control" id="photo" name="photo" type="file"
-			              accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
-			              <span class="form-control">Choose Photo file</span>
-			            </label>
-			        </div>
-			        <div class="form-group">
-			            <label> Video
-			            <input class="form-control" id="video" name="video" type="file"
-			              accept="video/*" >
-			              <span class="form-control">Choose Video file</span>
-			            </label>
-			        </div>
-			        
-			        <button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Publish</button>
-    			</form>
+    			<div class="publish-container">
+	    			<h4>Publish an article</h4>
+	    			
+	    			<form action="UserAddArticle" method="post" id="publishForm" enctype = "multipart/form-data">
+	    				<div class="form-group">
+				            <input class="form-control" id="article-title" name="article-title"
+				              placeholder="Title" type="text"
+				              pattern=".{1,100}" title="Maximum length is 100 characters"
+				              required="true" requiredMessage="Please insert a title">
+				        </div>
+				        <div class="form-group">
+				            <input class="form-control" id="article-text" name="article-text"
+				              placeholder="Text" type="text"
+				              pattern=".{1,100}" title="Maximum length is 100 characters"
+				              required="true" requiredMessage="Please insert the text">
+				        </div>
+				        <div class="form-group">
+				            <label> Audio
+				            <input class="form-control" id="audio" name="audio" type="file"
+				              accept="audio/*" >
+				              <span class="form-control">Choose Audio file</span>
+				            </label>
+				        </div>
+				        <div class="form-group">
+				            <label> Photo
+				            <input class="form-control" id="photo" name="photo" type="file"
+				              accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" >
+				              <span class="form-control">Choose Photo file</span>
+				            </label>
+				        </div>
+				        <div class="form-group">
+				            <label> Video
+				            <input class="form-control" id="video" name="video" type="file"
+				              accept="video/*" >
+				              <span class="form-control">Choose Video file</span>
+				            </label>
+				        </div>
+				        
+				        <button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Publish</button>
+	    			</form>
+	    		</div>
     		</div>
     	
     	</div>

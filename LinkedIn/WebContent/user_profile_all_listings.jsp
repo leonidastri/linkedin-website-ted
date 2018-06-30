@@ -25,7 +25,7 @@
 </head>
 <body>
 	<!-- NAVBAR -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow fixed-top">
 		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
@@ -39,17 +39,15 @@
       	<a class="btn btn-outline-primary" href="UserLogout">Sign out</a>
     </div>
 
-	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
-
-	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
-    <div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
-    </div>
-	<br>
 
 	<!-- CONTAINER -->
     <div class="container">
-    
+
+		<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
+    	<div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
+      		<h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
+   	 	</div>
+        
     	<div class="row">
 	        <div class="col-lg-8 order-lg-2">
 	            <div class="tab-content py-4">

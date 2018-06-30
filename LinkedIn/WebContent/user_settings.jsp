@@ -24,7 +24,7 @@
 <body>
 
 	<!-- NAVBAR -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow fixed-top">
 		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
@@ -38,7 +38,7 @@
       	<a class="btn btn-outline-primary" href="UserLogout">Sign out</a>
     </div>
     
-    <br>
+  	<div class="container">
     
 			<div align="center">
 				<div class="tabset">
@@ -91,7 +91,7 @@
 					</div>
 	    		</div>
 			</div>
-	<div class="container">
+
 	    <footer class="pt-4 my-md-5 pt-md-5 border-top">
 		    	<div class="row">
 		          	<div class="col-12 col-md">
