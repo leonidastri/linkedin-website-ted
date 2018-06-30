@@ -141,6 +141,7 @@
 											<button type="submit" id="listingApply" name="listingApply" value="true">Like</button>
 											<input type="hidden" name="listingID" value="${recommendedNotConnectedUsersListings.get(i).getListingID()}">
   											<input type="hidden" name="action" value="LikeListing">
+  											<input type="hidden" name="add" value="true">
   										</form>
   									</c:if>
   									<c:if test="${ alreadyLikedNotConListing.get(i) eq true }">

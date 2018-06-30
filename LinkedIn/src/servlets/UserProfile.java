@@ -99,13 +99,12 @@ public class UserProfile extends HttpServlet {
 			
 				List<Article> likedArticlesDetails = new ArrayList<Article>();
 				if( likeArticles != null )
-					for (LikeArticle l : likeArticles)
-						likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
-			
+					for (LikeArticle l : likeArticles)					
+						likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getArticle().getArticleID())));
 				List<Listing> likedListingsDetails = new ArrayList<Listing>();
 				if( likeListings != null)
 					for (LikeListing l : likeListings)
-						likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
+						likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getListing().getListingID())));
 			
 				
 				request.setAttribute("jobs", jobs);
@@ -158,13 +157,14 @@ public class UserProfile extends HttpServlet {
 				
 				List<Article> likedArticlesDetails = new ArrayList<Article>();
 				if( likeArticles != null )
-					for (LikeArticle l : likeArticles)
-						likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getLike_articleID())));
-			
+					for (LikeArticle l : likeArticles) {
+						System.out.println(l.getLike_articleID());
+						likedArticlesDetails.add(articleDAO.find(Long.parseLong(l.getArticle().getArticleID())));
+					}
 				List<Listing> likedListingsDetails = new ArrayList<Listing>();
 				if( likeListings != null)
 					for (LikeListing l : likeListings)
-						likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getLike_listingID())));
+						likedListingsDetails.add(listingDAO.find(Long.parseLong(l.getListing().getListingID())));
 			
 				request.setAttribute("jobs", jobs);
 				request.setAttribute("skills", skills);
