@@ -24,7 +24,7 @@
 </head>
 <body>
 	<!-- NAVBAR -->
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow fixed-top">
 		<h3 class="my-0 mr-md-auto font-weight-normal">LinkedIn</h3>
       	<nav class="my-2 my-md-0 mr-md-3">
         	<a class="p-2 text-dark" href="UserNavigation?action=Homepage">Home-page</a>
@@ -39,13 +39,14 @@
     </div>
 
 	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
-
-	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
-    <div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
-      <h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
-    </div>
     
     <div class="container">
+    
+    	<!-- DISPLAY-HEADER (WHENEVER NEEDED) -->
+    	<div class="px-4 py-4 pt-md-4 pb-md-4 mx-auto text-center">
+      		<h1 class="display-5">${user.getFirstName()} ${user.getLastName()}</h1>
+    	</div>
+    	
     	<div align="center">
 		    <c:if test="${not empty userID2}">
 		    	<br>
@@ -61,11 +62,6 @@
 		  		</c:if>
 			</c:if>
 		</div>
-	</div>
-	<br>
-
-	<!-- CONTAINER -->
-    <div class="container">
     
     	<div class="row">
 	        <div class="col-lg-8 order-lg-2">
@@ -312,7 +308,7 @@
 												<c:forEach var="i" begin="0" end="${likedArticlesDetails.size()-1}" step="1">
 													<tr>
 			                                        	<td>
-			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong>${likedArticlesDetails.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName()}</strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<strong>${likedArticlesDetails.get(i).getTitle()}</strong> published by <strong> <a href="UserProfile?action=OtherUserProfile&email=${likedArticlesDetails.get(i).getUser().getEmail()}">${likedArticlesDetails.get(i).getUser().getFirstName()} ${likedArticlesDetails.get(i).getUser().getLastName()}</a></strong> at <strong><fmt:formatDate value="${likedArticlesDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
 			                                           	</td>
 			                                    	</tr>
 		                                    	</c:forEach>
@@ -349,7 +345,7 @@
 												<c:forEach var="i" begin="0" end="${likedListingsDetails.size()-1}" step="1">
 													<tr>
 			                                        	<td>
-			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong>${likedListingsDetails.get(i).getUser().getFirstName()} ${likedListingsDetails.get(i).getUser().getLastName()}</strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
+			                                            	<strong>${likedListingsDetails.get(i).getTitle()}</strong> published by <strong> <a href="UserProfile?action=OtherUserProfile&email=${likedListingsDetails.get(i).getUser().getEmail()}">${likedListingsDetails.get(i).getUser().getFirstName()} ${likedListingsDetails.get(i).getUser().getLastName()}</a></strong> at <strong><fmt:formatDate value="${likedListingsDetails.get(i).getPubDate()}" pattern="yyyy-MM-dd HH:mm:ss" /></strong>
 			                                           	</td>
 			                                    	</tr>
 		                                    	</c:forEach>
