@@ -9,6 +9,7 @@ import java.util.List;
 //import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -54,6 +55,7 @@ public class Article implements Serializable {
 	private String audioPath;
 
 	//bi-directional many-to-one association to User
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="authorID")
 	private User user;

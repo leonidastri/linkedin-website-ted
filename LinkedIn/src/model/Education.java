@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.util.Date;
 
 
@@ -37,6 +39,7 @@ public class Education implements Serializable {
 	private Boolean priv;
 
 	//bi-directional many-to-one association to User
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="userID")
 	private User user;

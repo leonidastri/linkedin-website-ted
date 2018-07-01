@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -23,6 +24,7 @@ public class Application implements Serializable {
 	private Boolean rejected;
 	
 	//bi-directional many-to-one association to User
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="applicantID")
 	private User user;

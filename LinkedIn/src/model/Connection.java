@@ -5,9 +5,10 @@ import javax.persistence.*;
 
 /* for xml marshalling */
 //import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlElement;
+//import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
+//import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -36,16 +37,18 @@ public class Connection implements Serializable {
 
 	private Boolean rejected;
 
-	@XmlElement(name="user1") // for xml marshalling
-	@XmlIDREF
+//	@XmlElement(name="user1") // for xml marshalling
+//	@XmlIDREF
 	//bi-directional many-to-one association to User
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="userID_1")
 	private User user1;
 
-	@XmlElement(name="user2") // for xml marshalling
-	@XmlIDREF
+//	@XmlElement(name="user2") // for xml marshalling
+//	@XmlIDREF
 	//bi-directional many-to-one association to User
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="userID_2")
 	private User user2;
