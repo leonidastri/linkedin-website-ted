@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
@@ -10,7 +12,9 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 /**
  * The persistent class for the skill database table.
  * 
+ * 
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name="skill")
 @NamedQuery(name="Skill.findAll", query="SELECT s FROM Skill s")
