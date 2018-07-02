@@ -30,7 +30,7 @@ public class Skill implements Serializable {
 	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="userID")
-	@XmlInverseReference(mappedBy="skill")
+	@XmlInverseReference(mappedBy="skills")
 	private User user;
 
 	public Skill() {
