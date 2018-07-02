@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 
 /**
@@ -24,8 +27,10 @@ public class Skill implements Serializable {
 	private Boolean priv;
 
 	//bi-directional many-to-one association to User
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="userID")
+	@XmlInverseReference(mappedBy="skill")
 	private User user;
 
 	public Skill() {

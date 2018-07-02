@@ -97,6 +97,11 @@
 			<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0"> Export Users </button>
 		</form>
 
+		<br><br>
+
+		<footer>
+		</footer>
+
 	</div>
 		
 	<!-- Bootstrap core JavaScript

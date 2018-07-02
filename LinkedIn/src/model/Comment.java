@@ -8,6 +8,7 @@ import java.util.Date;
 //import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -45,6 +46,7 @@ public class Comment implements Serializable {
 	private Article article;
 
 	//bi-directional many-to-one association to User
+	@XmlTransient
 	@ManyToOne
 	@JoinColumn(name="userID")
 	private User user;
