@@ -38,21 +38,30 @@
     </div>
   	
 	<!-- source: https://www.codeply.com/go/5Lu0E8graQ -->
-
-	<br> <br>
 	
 	<div class="container">
 	    <div class="row">
 	      	<div class="col-sm">
 
 				<h3> Add a new listing</h3>
-         		<br>
          		<form id="a_form" action="UserListings?action=AddListing" method="POST">
 
-					Add title: <br>
-					<input type="text" name="title" /> <br>
-					Add description: <br>
-					<input type="text" name="description" /> <br>
+					<div class="form-group">
+		            	<label>Title
+		            		<input class="form-control" id="title" type="text" name="title"
+		              		placeholder="Listing title"
+		              		pattern=".{1,128}" title="Maximum length is 128 characters"
+		              		required="true" requiredMessage="Please give a title">
+		            	</label>
+		          	</div>
+		          	<div class="form-group">
+		            	<label>Description
+		            		<input class="form-control" id="description" type="text" name="description"
+		              		placeholder="Listing description" 
+		              		pattern=".{1,1024}" title="Maximum length is 1024 characters"
+		              		required="true" requiredMessage="Please give a description">
+		            	</label>
+		          	</div>
 						
 					<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add new listing</button>
 				</form>
