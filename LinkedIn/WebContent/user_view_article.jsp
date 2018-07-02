@@ -64,16 +64,19 @@
     							
     					<c:if test="${ not empty article.getPicturePath() }">
 		  					<img class="card-img-bottom" src="${article.getPicturePath()}" alt="Article-title-1">
+		  					<br>
 		  				</c:if>
 							
 						<c:if test="${ not empty article.getVideoPath() }">
-							<iframe width="560" height="315" src="${article.getVideoPath()}" frameborder="0" allowfullscreen></iframe>
+							<iframe width="320" height="240" src="${article.getVideoPath()}" frameborder="0" allowfullscreen></iframe>
+		  					<br>
 		  				</c:if>
 		  					
 		  				<c:if test="${ not empty article.getAudioPath() }">
 		  					<audio controls>
 								<source src="${article.getAudioPath()}" type="audio/ogg">
 							</audio>
+							<br>
 		  				</c:if>
 		  					  					
 	    				<c:if test="${ liked eq false }">
@@ -114,7 +117,7 @@
 		  			<div align="right">
 		  				<form action="UserAddComment" method="post">
 		  					<input type="hidden" name="articleID" value="${ article.getArticleID() }">
-		  					<input type="text" name="newComment" placeholder="Message" 
+		  					<input type="text" name="newComment" placeholder="Comment" 
 		  						required requireMessage="Please insert message"
 		  						pattern=".{1,1000}" title="Maximum length is 1000 characters">
 		  						<button type="submit" class="btn btn btn-outline-success my-2 my-sm-0">Add comment</button>

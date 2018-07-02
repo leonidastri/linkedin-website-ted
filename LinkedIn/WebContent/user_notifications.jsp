@@ -48,7 +48,7 @@
 	  			<input type="radio" name="tabset" id="tab2" aria-controls="articleLikes">
 	  			<label for="tab2">Article Likes</label>
 	  			 <!-- Tab 3 -->
-	  			<input type="radio" name="tabset" id="tab3" aria-controls="listingLikes" checked>
+	  			<input type="radio" name="tabset" id="tab3" aria-controls="listingLikes">
 	  			<label for="tab3">Listing Likes</label>
 	  			<!-- Tab 4 -->
 	  			<input type="radio" name="tabset" id="tab4" aria-controls="articleComments">

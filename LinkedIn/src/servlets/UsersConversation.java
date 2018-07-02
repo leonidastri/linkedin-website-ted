@@ -47,6 +47,7 @@ public class UsersConversation extends HttpServlet {
 			User sender = userDAO.find(Long.parseLong(userID));
 			User receiver = userDAO.find(Long.parseLong(receiverID));
 			
+			System.out.println(userID + " " + receiverID);
 			MessageDAO messageDAO = new MessageDAOImpl();
 			
 			Message newMessage = new Message();
