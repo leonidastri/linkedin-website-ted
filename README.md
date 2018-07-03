@@ -21,7 +21,7 @@ This is a **Web Development** project, developed at the **Spring of 2018** by Ka
 
 -A project created using Java, Html, Css, Javascript, JSTL(for the View in order not have Java code in jsp files):
 
--SSL exists for http, listening to port 8443
+-SSL exists for https, listening to port 8443
 
 ## Password Hashing Details
 
