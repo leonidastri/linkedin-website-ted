@@ -137,7 +137,7 @@ public class RecommendationSystem {
 	
 	/* for a given userID returns a list of the userIDs of his not-connected-with K - Nearest Neighbors */
 	private List<String> getNotConnectedKNearestNeighbors(String userID) {
-List<String> kNearestNeighbors = new ArrayList<>();
+		List<String> kNearestNeighbors = new ArrayList<>();
 		
 		ConnectionDAO connectionDAO = new ConnectionDAOImpl();
 		CommentDAO commentDAO = new CommentDAOImpl();
