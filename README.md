@@ -13,17 +13,17 @@ This is a **Web Development** project, developed at the **Spring of 2018** by Ka
 
 -A linkedin clone created in eclipse.
 
--All requirements of exercise implemented(plus bonus - recommendation system with KNN algorithm)
+-All requirements of exercise implemented(plus bonus - recommendation system with KNN algorithm).
 
 -The project created following the MVC pattern, where the Model and Controller implemented in src directory and View in the WebContent directory.
 
 -All the required libraries are included in the directory libraires of the project.
 
--A project created using Java, Html, Css, Javascript, JSTL(for the View in order not have Java code in jsp files):
+-A project created using Java, Html, Css, Javascript, JSTL(for the View in order not have Java code in jsp files).
 
--Used Tomcat 8
+-Used Tomcat 8.
 
--SSL exists for https, listening to port 8443
+-SSL exists for https, listening to port 8443.
 
 ## Password Hashing Details
 
